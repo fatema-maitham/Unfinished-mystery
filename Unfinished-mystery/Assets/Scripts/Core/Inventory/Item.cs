@@ -13,4 +13,3 @@ namespace InventoryFramework
         public GameObject model;
     }
 }
-

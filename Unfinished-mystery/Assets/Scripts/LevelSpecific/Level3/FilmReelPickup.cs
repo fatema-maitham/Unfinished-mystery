@@ -22,28 +22,34 @@ public class FilmReelPickup : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E pressed while near reel");
-
-            if (pickupHandler == null)
-            {
-                Debug.LogError("ItemPickupHandler not found on Player!");
-                return;
-            }
-
-            if (item == null)
-            {
-                Debug.LogError("FilmReelPickup item is NOT assigned!");
-                return;
-            }
-
-            pickupHandler.PickupItem(item, amount);
-
-            if (interactPrompt != null)
-                interactPrompt.SetActive(false);
-
-            Debug.Log("Film reel picked up and added to inventory!");
-            Destroy(gameObject);
+            PickUpReel();
         }
+    }
+
+    private void PickUpReel()
+    {
+        Debug.Log("E pressed while near reel");
+
+        if (pickupHandler == null)
+        {
+            Debug.LogError("ItemPickupHandler not found on Player!");
+            return;
+        }
+
+        if (item == null)
+        {
+            Debug.LogError("FilmReelPickup item is NOT assigned!");
+            return;
+        }
+
+        pickupHandler.PickupItem(item, amount);
+
+        if (interactPrompt != null)
+            interactPrompt.SetActive(false);
+
+        Debug.Log("Film reel picked up and added to inventory!");
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -53,7 +53,7 @@ public class FilmProjectorUse : MonoBehaviour
             return;
         }
 
-        bool removed = RemoveItem(requiredReel);
+        bool removed = hotbar.RemoveItem(requiredReel, 1);
 
         if (removed)
         {
@@ -64,6 +64,10 @@ public class FilmProjectorUse : MonoBehaviour
             if (interactPrompt != null)
                 interactPrompt.SetActive(false);
 
+            HotbarUI hotbarUI = FindAnyObjectByType<HotbarUI>();
+            if (hotbarUI != null)
+                hotbarUI.RefreshUI();
+
             if (videoPlayer != null)
                 videoPlayer.Play();
             else
@@ -71,30 +75,8 @@ public class FilmProjectorUse : MonoBehaviour
         }
         else
         {
-            Debug.Log("You need the film reel first.");
+            Debug.Log("You need the correct film reel first.");
         }
-    }
-
-    private bool RemoveItem(Item item)
-    {
-        foreach (var slot in hotbar.slots)
-        {
-            if (!slot.IsEmpty && slot.item == item)
-            {
-                slot.count--;
-
-                if (slot.count <= 0)
-                {
-                    slot.item = null;
-                    slot.count = 0;
-                }
-
-                FindAnyObjectByType<HotbarUI>()?.RefreshUI();
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private void OnTriggerEnter(Collider other)
