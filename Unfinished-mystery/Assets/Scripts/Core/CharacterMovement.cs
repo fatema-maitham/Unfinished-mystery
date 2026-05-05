@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public float walkSpeed = 1.5f;
     public float runSpeed = 4f;
     public float jumpHeight = 1f;
-    public float gravity = -9.81f;
+    public float gravity = -20f;
     public float rotationSpeed = 10f;
 
     [Header("Camera")]
@@ -21,7 +21,6 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController controller;
     private Animator animator;
     private float verticalVelocity;
-    private bool isGrounded;
 
     private PlayerControls controls;
     private Vector2 moveInput;
@@ -34,12 +33,9 @@ public class CharacterMovement : MonoBehaviour
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled  += ctx => moveInput = Vector2.zero;
-
         controls.Player.Jump.performed += ctx => jumpPressed = true;
-
-        // If you add a "Run" action (e.g. L3 or R2), wire it here:
-        controls.Player.Run.performed += ctx => isRunning = true;
-        controls.Player.Run.canceled  += ctx => isRunning = false;
+        controls.Player.Run.performed  += ctx => isRunning = true;
+        controls.Player.Run.canceled   += ctx => isRunning = false;
     }
 
     void OnEnable()  => controls.Enable();
@@ -48,36 +44,18 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        animator   = GetComponent<Animator>();
 
-        // Snap to ground reliably
-        if (Physics.Raycast(transform.position + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 20f, groundMask))
-        {
-            // Account for the controller's skin width too
-            transform.position = new Vector3(
-                transform.position.x,
-                hit.point.y + controller.skinWidth,
-                transform.position.z
-            );
-        }
+        // Disable root motion so Mixamo animations don't fight the CharacterController
+        animator.applyRootMotion = false;
     }
 
     void Update()
     {
-        GroundCheck();
         HandleMovement();
         HandleJump();
         ApplyGravity();
-        jumpPressed = false; // reset after processing
-    }
-
-    void GroundCheck()
-    {
-        // Cast from feet level downward
-        Vector3 feetPos = transform.position + Vector3.up * controller.radius;
-        isGrounded = controller.isGrounded ||
-                     Physics.SphereCast(feetPos, controller.radius * 0.9f, Vector3.down, 
-                         out _, 0.2f, groundMask);
+        jumpPressed = false;
     }
 
     void HandleMovement()
@@ -87,7 +65,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 moveDir = (cameraYawRotation * new Vector3(moveInput.x, 0, moveInput.y)).normalized;
 
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
-        float animSpeed = 0f;
+        float animSpeed    = 0f;
 
         if (moveDir.magnitude >= 0.1f)
         {
@@ -96,34 +74,25 @@ public class CharacterMovement : MonoBehaviour
                 rotationSpeed * Time.deltaTime);
             controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
-            // 0.5 = walking, 1.0 = running
             animSpeed = isRunning ? 1f : 0.5f;
         }
 
-        animator.SetFloat("Speed", animSpeed, 0.15f, Time.deltaTime);
+        animator.SetFloat("Speed", animSpeed, 0.1f, Time.deltaTime);
     }
 
     void HandleJump()
     {
-        if (jumpPressed && isGrounded)
+        if (jumpPressed && controller.isGrounded)
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
     void ApplyGravity()
     {
-        if (isGrounded && verticalVelocity < 0f)
-            verticalVelocity = -5f;
+        if (controller.isGrounded && verticalVelocity < 0f)
+            verticalVelocity = -2f;
         else
             verticalVelocity += gravity * Time.deltaTime;
 
         controller.Move(new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        if (controller == null) return;
-        Gizmos.color = Color.red;
-        float rayLength = (controller.height / 2f) + 0.15f;
-        Gizmos.DrawRay(transform.position + controller.center, Vector3.down * rayLength);
     }
 }
