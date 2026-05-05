@@ -5,36 +5,50 @@ using System.Collections;
 public class TVInteraction : MonoBehaviour
 {
     [Header("Message")]
-    [TextArea]
-    public string message = "She drew what I refused to write.";
+    [TextArea(2, 5)]
+    [SerializeField] private string message = "She drew what I refused to write.";
 
     [Header("Objects")]
-    public GameObject tvStatic;
-    public GameObject tvMessage;
-    public TMP_Text messageText;
+    [SerializeField] private GameObject tvStatic;
+    [SerializeField] private GameObject tvMessage;
+    [SerializeField] private TMP_Text messageText;
 
     [Header("Audio")]
-    public AudioSource staticSound;
+    [SerializeField] private AudioSource staticSound;
+
+    [Header("Interaction")]
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
+    [SerializeField] private bool requireKeyPress = true;
 
     [Header("Timing")]
-    public float staticDuration = 1f;
-    public float messageDuration = 3f;
-    public bool playOnlyOncePerLoop = true;
+    [SerializeField] private float staticDuration = 1.5f;
 
-    private bool hasPlayed = false;
-    private bool isPlaying = false;
+    [Header("Behavior")]
+    [SerializeField] private bool playOnlyOnce = true;
+    [SerializeField] private bool stopWhenPlayerLeaves = true;
+
+    private bool playerInside;
+    private bool hasPlayed;
+    private bool isPlaying;
     private Coroutine currentSequence;
 
-    void Start()
+    private void Start()
     {
-        if (tvStatic != null)
-            tvStatic.SetActive(false);
+        ResetTV();
+    }
 
-        if (tvMessage != null)
-            tvMessage.SetActive(false);
+    private void Update()
+    {
+        if (!playerInside)
+            return;
 
-        if (messageText != null)
-            messageText.text = "";
+        if (!requireKeyPress)
+            return;
+
+        if (Input.GetKeyDown(interactKey))
+        {
+            TryPlayTV();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,10 +56,34 @@ public class TVInteraction : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        playerInside = true;
+
+        if (!requireKeyPress)
+        {
+            TryPlayTV();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = false;
+
+        if (stopWhenPlayerLeaves)
+        {
+            StopTVSequence();
+            ResetTV();
+        }
+    }
+
+    private void TryPlayTV()
+    {
         if (isPlaying)
             return;
 
-        if (playOnlyOncePerLoop && hasPlayed)
+        if (playOnlyOnce && hasPlayed)
             return;
 
         currentSequence = StartCoroutine(TVSequence());
@@ -56,55 +94,59 @@ public class TVInteraction : MonoBehaviour
         isPlaying = true;
         hasPlayed = true;
 
+        // Clean old/random text first.
         if (tvMessage != null)
             tvMessage.SetActive(false);
 
         if (messageText != null)
             messageText.text = "";
 
+        // Static starts.
         if (tvStatic != null)
             tvStatic.SetActive(true);
 
         if (staticSound != null)
+        {
+            staticSound.Stop();
+            staticSound.time = 0f;
             staticSound.Play();
+        }
 
         yield return new WaitForSeconds(staticDuration);
 
+        // Static stops.
         if (tvStatic != null)
             tvStatic.SetActive(false);
 
         if (staticSound != null)
             staticSound.Stop();
 
+        // Real message appears and stays until player leaves.
         if (tvMessage != null)
             tvMessage.SetActive(true);
 
         if (messageText != null)
             messageText.text = message;
 
-        yield return new WaitForSeconds(messageDuration);
-
-        if (tvMessage != null)
-            tvMessage.SetActive(false);
-
-        if (messageText != null)
-            messageText.text = "";
-
-        isPlaying = false;
         currentSequence = null;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void StopTVSequence()
     {
-        if (!other.CompareTag("Player"))
-            return;
-
         if (currentSequence != null)
         {
             StopCoroutine(currentSequence);
             currentSequence = null;
         }
 
+        isPlaying = false;
+
+        if (staticSound != null)
+            staticSound.Stop();
+    }
+
+    private void ResetTV()
+    {
         if (tvStatic != null)
             tvStatic.SetActive(false);
 
@@ -113,10 +155,13 @@ public class TVInteraction : MonoBehaviour
 
         if (messageText != null)
             messageText.text = "";
+    }
 
-        if (staticSound != null)
-            staticSound.Stop();
-
+    public void ResetForNewLoop()
+    {
+        hasPlayed = false;
         isPlaying = false;
+        StopTVSequence();
+        ResetTV();
     }
 }
