@@ -12,17 +12,33 @@ namespace InventoryFramework
         public ItemTooltip tooltip;
         public Transform toolsParent;
 
-        public Item drawerKeyItem;
-
-        private List<InventorySlotUI> slotUIs = new();
-        private int selectedIndex = 0;
-
         public RectTransform dragLayer;
         public Canvas rootCanvas;
 
-        void Start()
+        private List<InventorySlotUI> slotUIs = new List<InventorySlotUI>();
+        private int selectedIndex = 0;
+
+        private void Start()
         {
-            slotUIs = new List<InventorySlotUI>();
+            BuildSlots();
+            RefreshUI();
+        }
+
+        private void BuildSlots()
+        {
+            slotUIs.Clear();
+
+            if (slotParent == null)
+            {
+                Debug.LogError("HotbarUI: slotParent is not assigned!");
+                return;
+            }
+
+            if (hotbar == null)
+            {
+                Debug.LogError("HotbarUI: hotbar is not assigned!");
+                return;
+            }
 
             foreach (Transform child in slotParent)
             {
@@ -38,21 +54,15 @@ namespace InventoryFramework
 
             if (slotUIs.Count < hotbar.size)
             {
-                Debug.LogWarning($"HotbarUI: slot count in slotParent = {slotUIs.Count}, but hotbar.size = {hotbar.size}.");
+                Debug.LogWarning("HotbarUI: slot count in slotParent = " + slotUIs.Count + ", but hotbar.size = " + hotbar.size + ".");
             }
-
-            // يحط المفتاح في أول خانة من الهوتبار
-            if (drawerKeyItem != null && hotbar != null && hotbar.slots != null && hotbar.slots.Count > 0)
-            {
-                hotbar.slots[0].item = drawerKeyItem;
-                hotbar.slots[0].count = 1;
-            }
-
-            RefreshUI();
         }
 
-        void Update()
+        private void Update()
         {
+            if (hotbar == null || slotUIs == null || slotUIs.Count == 0)
+                return;
+
             int count = Mathf.Min(hotbar.size, slotUIs.Count);
 
             for (int i = 0; i < count; i++)
@@ -65,6 +75,7 @@ namespace InventoryFramework
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
+
             if (scroll > 0f && count > 0)
             {
                 selectedIndex = (selectedIndex + 1) % count;
@@ -79,35 +90,57 @@ namespace InventoryFramework
 
         public void RefreshUI()
         {
-            int count = Mathf.Min(hotbar.size, slotUIs.Count);
+            if (hotbar == null || hotbar.slots == null)
+                return;
+
+            if (slotUIs == null || slotUIs.Count == 0)
+                return;
+
+            int count = Mathf.Min(hotbar.slots.Count, slotUIs.Count);
 
             for (int i = 0; i < count; i++)
             {
                 slotUIs[i].SetSlot(hotbar.slots[i]);
 
                 Image bg = slotUIs[i].GetBackgroundImage();
+
                 if (bg != null)
                 {
                     bg.color = (i == selectedIndex) ? Color.yellow : Color.white;
                 }
             }
 
-            if (toolsParent == null) return;
-            if (selectedIndex >= count) return;
+            RefreshSelectedTool(count);
+        }
 
-            InventorySlot slot = slotUIs[selectedIndex].GetSlot();
+        private void RefreshSelectedTool(int count)
+        {
+            if (toolsParent == null)
+                return;
 
             for (int x = toolsParent.childCount - 1; x >= 0; x--)
             {
                 Destroy(toolsParent.GetChild(x).gameObject);
             }
 
-            if (slot == null) return;
-            if (slot.IsEmpty) return;
-            if (slot.item == null) return;
-            if (slot.item.model == null) return;
+            if (selectedIndex < 0 || selectedIndex >= count)
+                return;
 
-            Instantiate(slot.item.model, toolsParent);
+            InventorySlot selectedSlot = slotUIs[selectedIndex].GetSlot();
+
+            if (selectedSlot == null)
+                return;
+
+            if (selectedSlot.IsEmpty)
+                return;
+
+            if (selectedSlot.item == null)
+                return;
+
+            if (selectedSlot.item.model == null)
+                return;
+
+            Instantiate(selectedSlot.item.model, toolsParent);
         }
     }
 }
