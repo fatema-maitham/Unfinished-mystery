@@ -6,7 +6,7 @@ public class TVInteraction : MonoBehaviour
 {
     [Header("Message")]
     [TextArea(2, 5)]
-    [SerializeField] private string message = "She drew what I refused to write.";
+    [SerializeField] private string message = "She drew what I refused to write";
 
     [Header("Objects")]
     [SerializeField] private GameObject tvStatic;
@@ -21,7 +21,7 @@ public class TVInteraction : MonoBehaviour
     [SerializeField] private bool requireKeyPress = true;
 
     [Header("Timing")]
-    [SerializeField] private float staticDuration = 1.5f;
+    [SerializeField] private float staticDuration = 3f;
 
     [Header("Behavior")]
     [SerializeField] private bool playOnlyOnce = true;
