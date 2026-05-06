@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,38 +6,28 @@ public class SettingsController : MonoBehaviour
 {
     [Header("UI Elements")]
     public Button fullscreenButton;
-    public TMP_Text fullscreenText;          // ON = click to activate, OFF = click to deactivate
+    public TMP_Text fullscreenText;
+
     public Slider musicSlider;
     public Slider sfxSlider;
-    public TMP_Dropdown resolutionDropdown;
+
     public Button applyButton;
 
     [Header("Audio Sources")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    // Fixed resolution options for the dropdown
-    private readonly Vector2Int[] supportedResolutions =
-    {
-        new Vector2Int(1280, 720),
-        new Vector2Int(1600, 900),
-        new Vector2Int(1920, 1080)
-    };
-
     // Saved/applied settings
     private float savedMusic;
     private float savedSFX;
-    private int savedResolutionIndex;
     private bool savedFullscreen;
 
-    // Current selected settings in UI
-    private int pendingResolutionIndex;
+    // Current selected setting in UI before pressing Apply
     private bool pendingFullscreen;
 
     private void OnEnable()
     {
         SetupSliders();
-        SetupResolutionDropdown();
         LoadSavedSettings();
         RefreshUIFromSaved();
         ApplySavedAudio();
@@ -69,30 +58,12 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    private void SetupResolutionDropdown()
-    {
-        if (resolutionDropdown == null) return;
-
-        resolutionDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-        foreach (Vector2Int res in supportedResolutions)
-        {
-            options.Add($"{res.x} x {res.y}");
-        }
-
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-    }
-
     private void LoadSavedSettings()
     {
         savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
-        savedResolutionIndex = Mathf.Clamp(PlayerPrefs.GetInt("ResolutionIndex", 0), 0, supportedResolutions.Length - 1);
         savedFullscreen = PlayerPrefs.GetInt("Fullscreen", 0) == 1;
 
-        pendingResolutionIndex = savedResolutionIndex;
         pendingFullscreen = savedFullscreen;
     }
 
@@ -100,9 +71,11 @@ public class SettingsController : MonoBehaviour
     {
         RemoveListeners();
 
-        if (musicSlider != null) musicSlider.value = savedMusic;
-        if (sfxSlider != null) sfxSlider.value = savedSFX;
-        if (resolutionDropdown != null) resolutionDropdown.value = pendingResolutionIndex;
+        if (musicSlider != null)
+            musicSlider.value = savedMusic;
+
+        if (sfxSlider != null)
+            sfxSlider.value = savedSFX;
 
         RefreshFullscreenButtonText();
 
@@ -129,12 +102,6 @@ public class SettingsController : MonoBehaviour
             sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         }
 
-        if (resolutionDropdown != null)
-        {
-            resolutionDropdown.onValueChanged.RemoveAllListeners();
-            resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
-        }
-
         if (applyButton != null)
         {
             applyButton.onClick.RemoveAllListeners();
@@ -153,9 +120,6 @@ public class SettingsController : MonoBehaviour
         if (sfxSlider != null)
             sfxSlider.onValueChanged.RemoveAllListeners();
 
-        if (resolutionDropdown != null)
-            resolutionDropdown.onValueChanged.RemoveAllListeners();
-
         if (applyButton != null)
             applyButton.onClick.RemoveAllListeners();
     }
@@ -164,9 +128,8 @@ public class SettingsController : MonoBehaviour
     {
         if (fullscreenText == null) return;
 
-        // Your preferred logic:
-        // if fullscreen is currently selected, button shows OFF
-        // if windowed is currently selected, button shows ON
+        // If fullscreen is currently selected, button shows OFF because clicking it will turn fullscreen off.
+        // If windowed is currently selected, button shows ON because clicking it will turn fullscreen on.
         fullscreenText.text = pendingFullscreen ? "OFF" : "ON";
     }
 
@@ -186,15 +149,10 @@ public class SettingsController : MonoBehaviour
         UpdateApplyButtonState();
     }
 
-    private void OnResolutionChanged(int index)
-    {
-        pendingResolutionIndex = Mathf.Clamp(index, 0, supportedResolutions.Length - 1);
-        UpdateApplyButtonState();
-    }
-
     private void ToggleFullscreenSelection()
     {
         pendingFullscreen = !pendingFullscreen;
+
         RefreshFullscreenButtonText();
         UpdateApplyButtonState();
     }
@@ -210,27 +168,21 @@ public class SettingsController : MonoBehaviour
 
     private void ApplySavedDisplay()
     {
-        ApplyDisplay(savedResolutionIndex, savedFullscreen);
-    }
+        FullScreenMode mode = savedFullscreen
+            ? FullScreenMode.FullScreenWindow
+            : FullScreenMode.Windowed;
 
-    private void ApplyDisplay(int resolutionIndex, bool fullscreen)
-    {
-        resolutionIndex = Mathf.Clamp(resolutionIndex, 0, supportedResolutions.Length - 1);
-
-        Vector2Int res = supportedResolutions[resolutionIndex];
-        FullScreenMode mode = fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
-
-        Screen.SetResolution(res.x, res.y, mode);
+        Screen.fullScreenMode = mode;
+        Screen.fullScreen = savedFullscreen;
     }
 
     private void UpdateApplyButtonState()
     {
-        bool musicChanged = !Mathf.Approximately(musicSlider.value, savedMusic);
-        bool sfxChanged = !Mathf.Approximately(sfxSlider.value, savedSFX);
-        bool resolutionChanged = pendingResolutionIndex != savedResolutionIndex;
+        bool musicChanged = musicSlider != null && !Mathf.Approximately(musicSlider.value, savedMusic);
+        bool sfxChanged = sfxSlider != null && !Mathf.Approximately(sfxSlider.value, savedSFX);
         bool fullscreenChanged = pendingFullscreen != savedFullscreen;
 
-        bool hasChanges = musicChanged || sfxChanged || resolutionChanged || fullscreenChanged;
+        bool hasChanges = musicChanged || sfxChanged || fullscreenChanged;
 
         if (applyButton != null)
             applyButton.interactable = hasChanges;
@@ -238,19 +190,15 @@ public class SettingsController : MonoBehaviour
 
     public void ApplySettings()
     {
-        // Save selected values
-        savedMusic = musicSlider.value;
-        savedSFX = sfxSlider.value;
-        savedResolutionIndex = pendingResolutionIndex;
+        savedMusic = musicSlider != null ? musicSlider.value : savedMusic;
+        savedSFX = sfxSlider != null ? sfxSlider.value : savedSFX;
         savedFullscreen = pendingFullscreen;
 
         PlayerPrefs.SetFloat("MusicVolume", savedMusic);
         PlayerPrefs.SetFloat("SFXVolume", savedSFX);
-        PlayerPrefs.SetInt("ResolutionIndex", savedResolutionIndex);
         PlayerPrefs.SetInt("Fullscreen", savedFullscreen ? 1 : 0);
         PlayerPrefs.Save();
 
-        // Apply them now
         ApplySavedAudio();
         ApplySavedDisplay();
 
@@ -261,21 +209,21 @@ public class SettingsController : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        // Revert UI back to saved/applied values
-        pendingResolutionIndex = savedResolutionIndex;
+        // Revert UI back to saved/applied values if player did not press Apply.
         pendingFullscreen = savedFullscreen;
 
         RemoveListeners();
 
-        if (musicSlider != null) musicSlider.value = savedMusic;
-        if (sfxSlider != null) sfxSlider.value = savedSFX;
-        if (resolutionDropdown != null) resolutionDropdown.value = savedResolutionIndex;
+        if (musicSlider != null)
+            musicSlider.value = savedMusic;
+
+        if (sfxSlider != null)
+            sfxSlider.value = savedSFX;
 
         RefreshFullscreenButtonText();
 
         AddListeners();
 
-        // Re-apply saved values
         ApplySavedAudio();
         ApplySavedDisplay();
 
