@@ -10309,7 +10309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -8.625427
+      value: -8.625488
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12978,7 +12978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 300
+  loopDuration: 90
   maxLoops: 10
   timerText: {fileID: 2097762773}
   redPulseOverlay: {fileID: 962174795}
@@ -41112,7 +41112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468504472226892198, guid: 5adc21ce38db842b392bdaf2f436d157, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
