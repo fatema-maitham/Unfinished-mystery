@@ -1,27 +1,17 @@
 using UnityEngine;
 
-public class KeypadInteractionZone : MonoBehaviour
+public class KeypadCursorInteract : MonoBehaviour
 {
-    [Header("Player Camera")]
-    public Camera playerCamera;
-    public Camera keypadCamera;
-
-    [Header("Prompt UI Optional")]
+    [Header("Optional Prompt")]
     public GameObject pressEText;
 
-    private bool playerNearby = false;
-    private bool keypadMode = false;
+    private bool playerNearby;
+    private bool keypadMode;
 
     void Start()
     {
         if (pressEText != null)
             pressEText.SetActive(false);
-
-        if (keypadCamera != null)
-            keypadCamera.enabled = false;
-
-        if (playerCamera != null)
-            playerCamera.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -47,25 +37,13 @@ public class KeypadInteractionZone : MonoBehaviour
         if (pressEText != null)
             pressEText.SetActive(false);
 
-        if (playerCamera != null)
-            playerCamera.enabled = false;
-
-        if (keypadCamera != null)
-            keypadCamera.enabled = true;
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    public void ExitKeypadMode()
+    void ExitKeypadMode()
     {
         keypadMode = false;
-
-        if (playerCamera != null)
-            playerCamera.enabled = true;
-
-        if (keypadCamera != null)
-            keypadCamera.enabled = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
