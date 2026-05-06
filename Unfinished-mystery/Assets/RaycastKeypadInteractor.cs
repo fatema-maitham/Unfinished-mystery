@@ -5,7 +5,7 @@ public class RaycastKeypadInteractor : MonoBehaviour
 {
     [Header("Raycast Settings")]
     public Camera playerCamera;
-    public float interactDistance = 4f;
+    public float interactDistance = 6f;
 
     [Header("Keypad Settings")]
     public string keypadTag = "Keypad";
@@ -22,12 +22,20 @@ public class RaycastKeypadInteractor : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("RaycastKeypadInteractor STARTED on: " + gameObject.name);
+
         if (messageText != null)
             messageText.text = "";
     }
 
     void Update()
     {
+        if (playerCamera == null)
+        {
+            Debug.LogWarning("Player Camera is NOT assigned!");
+            return;
+        }
+
         if (!enteringCode)
         {
             CheckForKeypad();
@@ -40,13 +48,13 @@ public class RaycastKeypadInteractor : MonoBehaviour
 
     void CheckForKeypad()
     {
-        if (playerCamera == null)
-            return;
-
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactDistance, Color.red);
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
+            Debug.Log("Raycast hit: " + hit.collider.name + " | Tag: " + hit.collider.tag);
+
             if (hit.collider.CompareTag(keypadTag))
             {
                 if (messageText != null)
@@ -65,6 +73,10 @@ public class RaycastKeypadInteractor : MonoBehaviour
 
                 return;
             }
+        }
+        else
+        {
+            Debug.Log("Raycast hit NOTHING.");
         }
 
         if (messageText != null)

@@ -25,6 +25,6 @@ public class LouiseAnimationController : MonoBehaviour
 
         animator.SetFloat("Speed", speed);
 
-        Debug.Log("Speed = " + speed);
+        // Debug.Log("Speed = " + speed);
     }
 }
