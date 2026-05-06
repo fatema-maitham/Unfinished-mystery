@@ -70,37 +70,40 @@ namespace InventoryFramework
         }
 
         public void SetSlot(InventorySlot slot)
+{
+    if (slot == null || slot.IsEmpty || slot.item == null || slot.item.icon == null)
+    {
+        if (icon != null)
         {
-            if (slot == null || slot.IsEmpty || slot.item == null || slot.item.icon == null)
-            {
-                if (icon != null)
-                {
-                    icon.sprite = null;
-                    icon.enabled = false;
-                    icon.color = new Color(1f, 1f, 1f, 0f);
-                }
-
-                if (countText != null)
-                {
-                    countText.text = "";
-                }
-            }
-            else
-            {
-                if (icon != null)
-                {
-                    icon.enabled = true;
-                    icon.sprite = slot.item.icon;
-                    icon.color = Color.white;
-                }
-
-                if (countText != null)
-                {
-                    countText.text = slot.count > 1 ? slot.count.ToString() : "";
-                }
-            }
+            icon.sprite = null;
+            icon.enabled = false;
+            icon.gameObject.SetActive(false);
+            icon.color = new Color(1f, 1f, 1f, 0f);
         }
 
+        if (countText != null)
+        {
+            countText.text = "";
+            countText.gameObject.SetActive(false);
+        }
+    }
+    else
+    {
+        if (icon != null)
+        {
+            icon.gameObject.SetActive(true);
+            icon.enabled = true;
+            icon.sprite = slot.item.icon;
+            icon.color = Color.white;
+        }
+
+        if (countText != null)
+        {
+            countText.gameObject.SetActive(slot.count > 1);
+            countText.text = slot.count > 1 ? slot.count.ToString() : "";
+        }
+    }
+}
         public void OnBeginDrag(PointerEventData eventData)
         {
             var s = GetSlot();
