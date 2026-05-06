@@ -60,6 +60,7 @@ public class CharacterMovement : MonoBehaviour
 
     void HandleMovement()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
         float cameraYaw = cameraFollowTarget.eulerAngles.y;
         Quaternion cameraYawRotation = Quaternion.Euler(0, cameraYaw, 0);
         Vector3 moveDir = (cameraYawRotation * new Vector3(moveInput.x, 0, moveInput.y)).normalized;
