@@ -7833,6 +7833,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758055271}
   m_CullTransparentMesh: 1
+--- !u!1 &758293191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+  m_PrefabInstance: {fileID: 1806591921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &759137185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8905741556569397466, guid: 75f2b4c63b364ca468040cc8f2ae9d0b, type: 3}
@@ -12264,6 +12269,7 @@ GameObject:
   - component: {fileID: 1134993006}
   - component: {fileID: 1134993009}
   - component: {fileID: 1134993010}
+  - component: {fileID: 1134993011}
   m_Layer: 0
   m_Name: Camera_1
   m_TagString: Untagged
@@ -12421,6 +12427,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1134993011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134993004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1515022e7ec4322bcd022eb5b6b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 4
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  interactKey: 101
+  interactionPromptText: {fileID: 1316919763}
 --- !u!1 &1136974212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3492452526356931769, guid: 732bef5d5f763fc4eb8deb436a0715b1, type: 3}
@@ -13800,12 +13824,12 @@ GameObject:
   - component: {fileID: 1230536245}
   - component: {fileID: 1230536244}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: NoteCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1230536243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14594,7 +14618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1336123039
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15288,6 +15312,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
   m_PrefabInstance: {fileID: 1806591921}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1379776064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758293191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483d9339fea2f451495ab5b670026f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeKey: 120
+  noteCanvas: {fileID: 1230536242}
+  noteTextAreaUI: {fileID: 1597705000}
+  noteText: 'I hid the truth in the things I could not throw away.
+
+'
+  promptText: Press E to read
+  openEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  behavioursToDisableWhenOpen: []
+--- !u!65 &1379776065
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758293191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22275,6 +22346,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 652107916}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.33040679
@@ -22327,6 +22402,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.x
       value: 24.591034
@@ -22351,14 +22430,28 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.027588
       objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_Name
       value: FirstNote
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1379776065}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1379776064}
   m_SourcePrefab: {fileID: 100100000, guid: fb414797eadc844ccb178b6e41652485, type: 3}
 --- !u!1001 &1808315884
 PrefabInstance:

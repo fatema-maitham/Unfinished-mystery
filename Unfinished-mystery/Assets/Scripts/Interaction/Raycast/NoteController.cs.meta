@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 483d9339fea2f451495ab5b670026f1d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - noteCanvas: {fileID: 3500254954463257008, guid: 105840b01df93c848b96501da8b92472, type: 3}
+  - noteTextAreaUI: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

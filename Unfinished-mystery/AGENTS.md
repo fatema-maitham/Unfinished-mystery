@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Water, UI, Interactable
 - Active game object:
-  - Name: NoteCanvas
+  - Name: FirstNote
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
