@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI
 - Active game object:
-  - Name: Canvas
+  - Name: StarBlink (2)
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
