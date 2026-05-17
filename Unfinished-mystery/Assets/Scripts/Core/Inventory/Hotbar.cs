@@ -8,43 +8,73 @@ namespace InventoryFramework
         public int size = 9;
         public List<InventorySlot> slots;
 
-        void Awake()
+        private void Awake()
         {
-            slots = new List<InventorySlot>(new InventorySlot[size]);
+            slots = new List<InventorySlot>();
 
             for (int i = 0; i < size; i++)
             {
-                slots[i] = new InventorySlot();
+                slots.Add(new InventorySlot());
             }
         }
 
         public InventorySlot GetSlot(int index)
         {
-            if (index < 0 || index >= size) return null;
+            if (index < 0 || index >= slots.Count)
+                return null;
+
             return slots[index];
         }
 
         public bool AddItem(Item newItem, int amount = 1)
         {
-            foreach (var slot in slots)
+            if (newItem == null)
             {
-                if (!slot.IsEmpty && slot.item == newItem && slot.count < newItem.maxStack)
-                {
-                    int space = newItem.maxStack - slot.count;
-                    int add = Mathf.Min(space, amount);
-                    slot.count += add;
-                    amount -= add;
+                Debug.LogError("Hotbar: Cannot add null item.");
+                return false;
+            }
 
-                    if (amount <= 0) return true;
+            // Always add the picked item to the first empty slot.
+            // This means:
+            // First pickup -> Slot 1
+            // Second pickup -> Slot 2
+            // Third pickup -> Slot 3
+            for (int i = 0; i < slots.Count; i++)
+            {
+                if (slots[i].IsEmpty)
+                {
+                    slots[i].item = newItem;
+                    slots[i].count = amount;
+
+                    Debug.Log(newItem.name + " added to hotbar slot " + (i + 1));
+                    return true;
                 }
             }
 
-            foreach (var slot in slots)
+            Debug.LogWarning("Hotbar is full. Could not add: " + newItem.name);
+            return false;
+        }
+
+        public bool RemoveItem(Item itemToRemove, int amount = 1)
+        {
+            if (itemToRemove == null)
+                return false;
+
+            for (int i = 0; i < slots.Count; i++)
             {
-                if (slot.IsEmpty)
+                InventorySlot slot = slots[i];
+
+                if (!slot.IsEmpty && slot.item == itemToRemove)
                 {
-                    slot.item = newItem;
-                    slot.count = amount;
+                    slot.count -= amount;
+
+                    if (slot.count <= 0)
+                    {
+                        slot.item = null;
+                        slot.count = 0;
+                    }
+
+                    Debug.Log(itemToRemove.name + " removed from hotbar slot " + (i + 1));
                     return true;
                 }
             }
