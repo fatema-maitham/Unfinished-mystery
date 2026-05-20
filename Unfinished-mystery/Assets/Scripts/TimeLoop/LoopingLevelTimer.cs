@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+
 public class LoopingLevelTimer : MonoBehaviour
 {
     public float loopDuration = 300f;
@@ -64,6 +65,8 @@ public class LoopingLevelTimer : MonoBehaviour
 
         UpdateTimerUI();
         UpdateLoopCounterUI();
+
+        ApplyLoopChange();
     }
 
     void Update()
@@ -87,14 +90,7 @@ public class LoopingLevelTimer : MonoBehaviour
             }
             else
             {
-               currentLoop++;
-
-                LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
-                if (loopChangeSystem != null)
-                {
-                    loopChangeSystem.SetLoop(currentLoop);
-                }
-
+                currentLoop++;
                 StartCoroutine(ShowLoopEnded());
             }
         }
@@ -218,6 +214,8 @@ public class LoopingLevelTimer : MonoBehaviour
 
         yield return new WaitForSeconds(loopStay);
 
+        ResetLoop();
+
         t = 0f;
 
         while (t < loopFadeOut)
@@ -232,7 +230,6 @@ public class LoopingLevelTimer : MonoBehaviour
         if (loopEndedPanel != null)
             loopEndedPanel.SetActive(false);
 
-        ResetLoop();
         isBusy = false;
     }
 
@@ -262,33 +259,39 @@ public class LoopingLevelTimer : MonoBehaviour
         }
     }
 
-void ResetLoop()
-{
-    timeLeft = loopDuration;
-    hasShaken = false;
-
-    timerText.color = Color.white;
-    timerText.transform.localPosition = originalPos;
-
-    ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-        .OfType<ILoopResettable>()
-        .ToArray();
-
-    foreach (ILoopResettable resettable in resettableObjects)
+    void ResetLoop()
     {
-        resettable.ResetState();
+        timeLeft = loopDuration;
+        hasShaken = false;
+
+        timerText.color = Color.white;
+        timerText.transform.localPosition = originalPos;
+
+        ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+            .OfType<ILoopResettable>()
+            .ToArray();
+
+        foreach (ILoopResettable resettable in resettableObjects)
+        {
+            resettable.ResetState();
+        }
+
+        ApplyLoopChange();
+
+        UpdateTimerUI();
+        UpdateLoopCounterUI();
     }
 
-    LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
-
-    if (loopChangeSystem != null)
+    void ApplyLoopChange()
     {
-        loopChangeSystem.SetLoop(currentLoop);
+        LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
+
+        if (loopChangeSystem != null)
+        {
+            loopChangeSystem.SetLoop(currentLoop);
+        }
     }
 
-    UpdateTimerUI();
-    UpdateLoopCounterUI();
-}
     void ExitGame()
     {
         SceneManager.LoadScene("LevelsBook");
