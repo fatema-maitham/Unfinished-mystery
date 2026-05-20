@@ -4,11 +4,11 @@
 - Active scene:
   - Name: Level2
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: floor_small (7)
-  - Tag: Untagged
-  - Layer: Ground
+  - Name: Louise
+  - Tag: Player
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -6694,7 +6694,7 @@ MonoBehaviour:
   walkSpeed: 1.5
   runSpeed: 4
   jumpHeight: 1
-  gravity: -2
+  gravity: 0
   rotationSpeed: 10
   cameraFollowTarget: {fileID: 2037600202}
   groundMask:
@@ -23588,7 +23588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b783f2acaba114725867f7195adba35f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.91
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b783f2acaba114725867f7195adba35f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23927,13 +23927,13 @@ PrefabInstance:
       addedObject: {fileID: 603546218}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 603546220}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 603546222}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 603546221}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 603546220}
   m_SourcePrefab: {fileID: 100100000, guid: b783f2acaba114725867f7195adba35f, type: 3}
 --- !u!1 &1716205606 stripped
 GameObject:
