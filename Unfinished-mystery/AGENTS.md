@@ -13,7 +13,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI, Interactable
 - Active game object:
-  - Name: book_5 (7)
+  - Name: bookshelf (1)
   - Tag: Untagged
   - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
