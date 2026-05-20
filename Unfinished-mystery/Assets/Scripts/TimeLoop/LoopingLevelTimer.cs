@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
-
 public class LoopingLevelTimer : MonoBehaviour
 {
     public float loopDuration = 300f;
@@ -65,8 +64,6 @@ public class LoopingLevelTimer : MonoBehaviour
 
         UpdateTimerUI();
         UpdateLoopCounterUI();
-
-        ApplyLoopChange();
     }
 
     void Update()
@@ -214,8 +211,6 @@ public class LoopingLevelTimer : MonoBehaviour
 
         yield return new WaitForSeconds(loopStay);
 
-        ResetLoop();
-
         t = 0f;
 
         while (t < loopFadeOut)
@@ -230,6 +225,7 @@ public class LoopingLevelTimer : MonoBehaviour
         if (loopEndedPanel != null)
             loopEndedPanel.SetActive(false);
 
+        ResetLoop();
         isBusy = false;
     }
 
@@ -261,37 +257,24 @@ public class LoopingLevelTimer : MonoBehaviour
 
     void ResetLoop()
     {
-        timeLeft = loopDuration;
-        hasShaken = false;
+    timeLeft = loopDuration;
+    hasShaken = false;
 
-        timerText.color = Color.white;
-        timerText.transform.localPosition = originalPos;
+    timerText.color = Color.white;
+    timerText.transform.localPosition = originalPos;
 
-        ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-            .OfType<ILoopResettable>()
-            .ToArray();
+    UpdateTimerUI();
+    UpdateLoopCounterUI();
 
-        foreach (ILoopResettable resettable in resettableObjects)
-        {
-            resettable.ResetState();
-        }
+    ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+        .OfType<ILoopResettable>()
+        .ToArray();
 
-        ApplyLoopChange();
-
-        UpdateTimerUI();
-        UpdateLoopCounterUI();
-    }
-
-    void ApplyLoopChange()
+    foreach (ILoopResettable resettable in resettableObjects)
     {
-        LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
-
-        if (loopChangeSystem != null)
-        {
-            loopChangeSystem.SetLoop(currentLoop);
-        }
+        resettable.ResetState();
     }
-
+    }
     void ExitGame()
     {
         SceneManager.LoadScene("LevelsBook");
