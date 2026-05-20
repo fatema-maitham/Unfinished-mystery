@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: e348a33c5fada436588fafc004adf14d
+guid: 3df29dc1d20d74934885b177b67ea2d9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - interactPrompt: {instanceID: 0}
-  - item: {instanceID: 0}
+  - promptPanel: {fileID: 2380403323826639052, guid: 95d919c54e52a4946a91b9886411ca85, type: 3}
+  - keyText: {instanceID: 0}
+  - actionText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
