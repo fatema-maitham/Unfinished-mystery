@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class LoopingLevelTimer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class LoopingLevelTimer : MonoBehaviour
     public int maxLoops = 10;
 
     public TMP_Text timerText;
+    public TMP_Text loopCounterText;
+
     public CanvasGroup redPulseOverlay;
 
     public GameObject loopEndedPanel;
@@ -32,7 +35,7 @@ public class LoopingLevelTimer : MonoBehaviour
     public float shakeStrength = 5f;
 
     float timeLeft;
-    int currentLoop = 0;
+    int currentLoop = 1;
 
     bool hasShaken = false;
     bool isBusy = false;
@@ -59,6 +62,11 @@ public class LoopingLevelTimer : MonoBehaviour
 
         if (exitButton != null)
             exitButton.onClick.AddListener(ExitGame);
+
+        UpdateTimerUI();
+        UpdateLoopCounterUI();
+
+        ApplyLoopChange();
     }
 
     void Update()
@@ -76,12 +84,15 @@ public class LoopingLevelTimer : MonoBehaviour
 
         if (timeLeft <= 0f)
         {
-            currentLoop++;
-
             if (currentLoop >= maxLoops)
+            {
                 StartCoroutine(ShowGameOver());
+            }
             else
+            {
+                currentLoop++;
                 StartCoroutine(ShowLoopEnded());
+            }
         }
     }
 
@@ -90,6 +101,12 @@ public class LoopingLevelTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeLeft / 60f);
         int seconds = Mathf.FloorToInt(timeLeft % 60f);
         timerText.text = minutes + ":" + seconds.ToString("00");
+    }
+
+    void UpdateLoopCounterUI()
+    {
+        if (loopCounterText != null)
+            loopCounterText.text = currentLoop.ToString();
     }
 
     void HandleEffects()
@@ -197,6 +214,8 @@ public class LoopingLevelTimer : MonoBehaviour
 
         yield return new WaitForSeconds(loopStay);
 
+        ResetLoop();
+
         t = 0f;
 
         while (t < loopFadeOut)
@@ -211,7 +230,6 @@ public class LoopingLevelTimer : MonoBehaviour
         if (loopEndedPanel != null)
             loopEndedPanel.SetActive(false);
 
-        ResetLoop();
         isBusy = false;
     }
 
@@ -245,6 +263,33 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         timeLeft = loopDuration;
         hasShaken = false;
+
+        timerText.color = Color.white;
+        timerText.transform.localPosition = originalPos;
+
+        ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+            .OfType<ILoopResettable>()
+            .ToArray();
+
+        foreach (ILoopResettable resettable in resettableObjects)
+        {
+            resettable.ResetState();
+        }
+
+        ApplyLoopChange();
+
+        UpdateTimerUI();
+        UpdateLoopCounterUI();
+    }
+
+    void ApplyLoopChange()
+    {
+        LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
+
+        if (loopChangeSystem != null)
+        {
+            loopChangeSystem.SetLoop(currentLoop);
+        }
     }
 
     void ExitGame()

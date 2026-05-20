@@ -10,26 +10,39 @@ public class ThirdPersonCamera : MonoBehaviour
     public float maxVerticalAngle = 60f;
 
     [Header("References")]
-    public Transform cameraFollowTarget; // The CameraFollow empty child object
+    public Transform cameraFollowTarget;
 
     private float _xRotation = 0f;
     private float _yRotation = 0f;
 
+    // Static so other scripts (UI buttons) can call it easily
+    public static ThirdPersonCamera Instance { get; private set; }
+
+    private bool _uiMode = false;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
-        // Lock and hide the cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LockCursor();
     }
 
     void Update()
     {
-        HandleCameraRotation();
+        if (!_uiMode)
+            HandleCameraRotation();
+
         HandleCursorToggle();
     }
 
     void HandleCameraRotation()
     {
+        // Don't rotate camera if cursor is unlocked (notebook open, etc.)
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+
         float mouseX = Input.GetAxis("Mouse X") * horizontalSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * verticalSensitivity * Time.deltaTime;
 
@@ -37,17 +50,36 @@ public class ThirdPersonCamera : MonoBehaviour
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, minVerticalAngle, maxVerticalAngle);
 
-        // Rotate the follow target — Cinemachine reads from this
         cameraFollowTarget.rotation = Quaternion.Euler(_xRotation, _yRotation, 0f);
     }
-
     void HandleCursorToggle()
     {
-        // Press Escape to unlock cursor (useful during development)
+        // Press Escape to toggle UI mode
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            if (_uiMode)
+                ExitUIMode();
+            else
+                EnterUIMode();
         }
+    }
+
+    public void EnterUIMode()
+    {
+        _uiMode = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void ExitUIMode()
+    {
+        _uiMode = false;
+        LockCursor();
+    }
+
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

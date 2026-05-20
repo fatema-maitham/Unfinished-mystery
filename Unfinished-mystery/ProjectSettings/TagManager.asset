@@ -4,15 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Keypad
   - Interactable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
