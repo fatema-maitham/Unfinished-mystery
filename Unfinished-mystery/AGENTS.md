@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI, Interactable
 - Active game object:
-  - Name: FirstNote
+  - Name: GameManager
   - Tag: Untagged
-  - Layer: Interactable
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

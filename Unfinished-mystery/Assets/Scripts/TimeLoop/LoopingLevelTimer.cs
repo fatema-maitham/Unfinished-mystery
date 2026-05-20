@@ -255,13 +255,20 @@ public class LoopingLevelTimer : MonoBehaviour
         }
     }
 
-    void ResetLoop()
-    {
+void ResetLoop()
+{
     timeLeft = loopDuration;
     hasShaken = false;
 
     timerText.color = Color.white;
     timerText.transform.localPosition = originalPos;
+
+    LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
+
+    if (loopChangeSystem != null)
+    {
+        loopChangeSystem.SetLoop(currentLoop);
+    }
 
     UpdateTimerUI();
     UpdateLoopCounterUI();
@@ -274,7 +281,7 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         resettable.ResetState();
     }
-    }
+}
     void ExitGame()
     {
         SceneManager.LoadScene("LevelsBook");
