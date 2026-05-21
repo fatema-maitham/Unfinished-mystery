@@ -55,7 +55,7 @@ public class NoteReader : MonoBehaviour
         {
             playerInRange = true;
             if (!noteOpen && interactPrompt != null)
-                interactPrompt.ShowPrompt("Read");
+                interactPrompt.ShowPrompt("Read Clue");
         }
 
         if (!nearNote && playerInRange)
