@@ -9,55 +9,81 @@ public class KeypadZoomInteract : MonoBehaviour
 
     public CinemachineCamera keypadCamera;
     public CinemachineCamera playerCamera;
+    public Camera mainCamera;
 
-    public float interactDistance = 3f;
+    public float interactDistance = 20f;
+    public float clickDistance = 100f;
 
     private bool isZoomed = false;
 
     void Update()
     {
-        Debug.Log("KeypadZoomInteract running");
-
-        if (player == null)
-        {
-            Debug.LogError("Player is missing");
+        if (player == null || keypadCamera == null || playerCamera == null || mainCamera == null)
             return;
-        }
-
-        if (keypadCamera == null)
-        {
-            Debug.LogError("Keypad Camera is missing");
-            return;
-        }
-
-        if (playerCamera == null)
-        {
-            Debug.LogError("Player Camera is missing");
-            return;
-        }
 
         float distance = Vector3.Distance(player.position, transform.position);
-        Debug.Log("Distance to keypad = " + distance);
 
-        if (distance <= interactDistance)
+        if (distance <= interactDistance && Keyboard.current.zKey.wasPressedThisFrame)
         {
-            Debug.Log("Player is near keypad");
+            isZoomed = !isZoomed;
 
-            if (Keyboard.current.zKey.wasPressedThisFrame)
+            keypadCamera.Priority = isZoomed ? 100 : 0;
+            playerCamera.Priority = isZoomed ? 0 : 10;
+
+            if (playerMovementScript != null)
+                playerMovementScript.enabled = !isZoomed;
+
+            if (isZoomed)
             {
-                Debug.Log("Z pressed. Switching camera.");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
 
-                isZoomed = !isZoomed;
+            Debug.Log("Zoom mode = " + isZoomed);
+        }
 
-                keypadCamera.Priority = isZoomed ? 20 : 0;
-                playerCamera.Priority = isZoomed ? 0 : 10;
+        if (isZoomed && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            ClickKeypadButton();
+        }
+    }
 
-                if (playerMovementScript != null)
-                {
-                    playerMovementScript.enabled = !isZoomed;
-                    Debug.Log("Player movement enabled = " + playerMovementScript.enabled);
-                }
+    void ClickKeypadButton()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, clickDistance, ~0, QueryTriggerInteraction.Collide);
+
+        if (hits.Length == 0)
+        {
+            Debug.Log("Raycast hit nothing");
+            return;
+        }
+
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+        foreach (RaycastHit hit in hits)
+        {
+            Debug.Log("Raycast hit: " + hit.collider.name);
+
+            NavKeypad.KeypadButton button = hit.collider.GetComponent<NavKeypad.KeypadButton>();
+
+            if (button == null)
+                button = hit.collider.GetComponentInParent<NavKeypad.KeypadButton>();
+
+            if (button != null)
+            {
+                Debug.Log("Pressed keypad button: " + button.name);
+                button.PressButton();
+                return;
             }
         }
+
+        Debug.Log("No KeypadButton found in raycast hits");
     }
 }
