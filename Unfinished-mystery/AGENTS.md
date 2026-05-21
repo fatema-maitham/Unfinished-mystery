@@ -11,8 +11,4 @@
   - Name: Louise
   - Tag: Player
   - Layer: Default
-  - Name: Canvas
-  - Name: OldKey1
-  - Tag: Untagged
-  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
