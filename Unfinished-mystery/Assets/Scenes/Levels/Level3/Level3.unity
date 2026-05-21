@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e348a33c5fada436588fafc004adf14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptUI: {fileID: 0}
+  promptUI: {fileID: 4949383007491793565}
   promptText: Pick up reel
   item: {fileID: 11400000, guid: 343ad05e313b5401ca4f6e116afaada6, type: 2}
   amount: 1
@@ -23065,7 +23065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptUI: {fileID: 4949383007491793565}
   promptText: Pick up reel
-  item: {fileID: 11400000, guid: 74ff7fefa9b654dce9428938a030ff34, type: 2}
+  item: {fileID: 11400000, guid: 4db8355747931446fb8c27420880d7f4, type: 2}
   amount: 1
   destroyAfterPickup: 1
 --- !u!65 &1149546719
