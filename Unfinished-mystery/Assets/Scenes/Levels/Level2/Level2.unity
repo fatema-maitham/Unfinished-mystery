@@ -6810,7 +6810,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6837,7 +6837,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &527015840
 RectTransform:
@@ -13126,7 +13126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptUI: {fileID: 533129714}
   promptText: Pick up item
-  item: {fileID: 11400000, guid: 74ff7fefa9b654dce9428938a030ff34, type: 2}
+  item: {fileID: 11400000, guid: b9aac43ee29d04c6b905f1248dfad038, type: 2}
   amount: 1
   destroyAfterPickup: 1
 --- !u!65 &937835223
@@ -21801,7 +21801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1486969187
 Transform:
   m_ObjectHideFlags: 0
@@ -30436,7 +30436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -8.62561
+      value: -8.625732
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -34042,7 +34042,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 2013410475}
   - {fileID: 1087289396}
-  - {fileID: 527015840}
   - {fileID: 1914111623}
   - {fileID: 1662073406}
   - {fileID: 1769720388}
@@ -34059,3 +34058,4 @@ SceneRoots:
   - {fileID: 1422144506}
   - {fileID: 843170283}
   - {fileID: 186740621}
+  - {fileID: 527015840}
