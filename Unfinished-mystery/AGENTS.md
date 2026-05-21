@@ -8,6 +8,9 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
+  - Name: Louise
+  - Tag: Player
+  - Layer: Default
   - Name: Canvas
   - Name: OldKey1
   - Tag: Untagged
