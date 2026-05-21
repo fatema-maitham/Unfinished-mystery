@@ -14404,7 +14404,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &679044108
+--- !u!114 &679044115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14416,8 +14416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e348a33c5fada436588fafc004adf14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactPrompt: {fileID: 1560449273}
-  item: {fileID: 11400000, guid: 5df797b1ce679524cb549e0db05dd10a, type: 2}
+  interactPrompt: {fileID: 305010238}
+  item: {fileID: 11400000, guid: 74ff7fefa9b654dce9428938a030ff34, type: 2}
   amount: 1
 --- !u!1001 &680196717
 PrefabInstance:
@@ -43806,10 +43806,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 679044108}
+      addedObject: {fileID: 679044107}
     - targetCorrespondingSourceObject: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 679044107}
+      addedObject: {fileID: 679044115}
   m_SourcePrefab: {fileID: 100100000, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
 --- !u!1001 &5256421019026051792
 PrefabInstance:
