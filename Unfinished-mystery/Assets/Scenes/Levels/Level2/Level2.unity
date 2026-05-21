@@ -9720,7 +9720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740186, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0159
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740186, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9740,11 +9740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740186, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0022
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740186, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0033
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740188, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_text
@@ -9752,11 +9752,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740188, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_fontSize
-      value: 0.02
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740188, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 0.02
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: 2303921292967740188, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -9768,7 +9768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303921294220554594, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.002
+      value: -0.0077
       objectReference: {fileID: 0}
     - target: {fileID: 2303921294220554594, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -9776,7 +9776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303921294220554594, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.057
+      value: 0.059
       objectReference: {fileID: 0}
     - target: {fileID: 2303921294396319333, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       propertyPath: m_LocalScale.x
