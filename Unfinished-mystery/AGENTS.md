@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: Camera_1
+  - Name: KeypadCloseUpCamera
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
