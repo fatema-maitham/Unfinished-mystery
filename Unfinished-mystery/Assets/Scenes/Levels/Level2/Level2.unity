@@ -7261,8 +7261,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 1.6
   m_Radius: 0.25
-  m_SlopeLimit: 45
-  m_StepOffset: 0.18
+  m_SlopeLimit: 60
+  m_StepOffset: 0.55
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -7296,7 +7296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67dfb49dec827d642b602df1f74e6e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSensitivity: 25
+  horizontalSensitivity: 200
   verticalSensitivity: 15
   minVerticalAngle: -30
   maxVerticalAngle: 60
@@ -7313,11 +7313,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d498888cdbcae449b93c61651b5ab29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1.5
-  runSpeed: 4
+  walkSpeed: 3.5
+  runSpeed: 7
   jumpHeight: 1
   gravity: 0
-  rotationSpeed: 10
+  rotationSpeed: 18
   cameraFollowTarget: {fileID: 2037600202}
   groundMask:
     serializedVersion: 2
