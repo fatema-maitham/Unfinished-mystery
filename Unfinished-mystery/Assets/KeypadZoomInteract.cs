@@ -5,54 +5,59 @@ using Unity.Cinemachine;
 public class KeypadZoomInteract : MonoBehaviour
 {
     public Transform player;
-    public float interactDistance = 2f;
+    public MonoBehaviour playerMovementScript;
 
     public CinemachineCamera keypadCamera;
     public CinemachineCamera playerCamera;
 
-    public GameObject promptText;
+    public float interactDistance = 3f;
 
     private bool isZoomed = false;
 
     void Update()
     {
-        if (player == null) return;
+        Debug.Log("KeypadZoomInteract running");
+
+        if (player == null)
+        {
+            Debug.LogError("Player is missing");
+            return;
+        }
+
+        if (keypadCamera == null)
+        {
+            Debug.LogError("Keypad Camera is missing");
+            return;
+        }
+
+        if (playerCamera == null)
+        {
+            Debug.LogError("Player Camera is missing");
+            return;
+        }
 
         float distance = Vector3.Distance(player.position, transform.position);
-        bool near = distance <= interactDistance;
+        Debug.Log("Distance to keypad = " + distance);
 
-        if (promptText != null)
-            promptText.SetActive(near && !isZoomed);
+        if (distance <= interactDistance)
+        {
+            Debug.Log("Player is near keypad");
 
-        if (near && !isZoomed)
-            EnterKeypadView();
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+            {
+                Debug.Log("Z pressed. Switching camera.");
 
-        if (!near && isZoomed)
-            ExitKeypadView();
+                isZoomed = !isZoomed;
 
-        if (isZoomed && Keyboard.current.escapeKey.wasPressedThisFrame)
-            ExitKeypadView();
-    }
+                keypadCamera.Priority = isZoomed ? 20 : 0;
+                playerCamera.Priority = isZoomed ? 0 : 10;
 
-    void EnterKeypadView()
-    {
-        isZoomed = true;
-
-        keypadCamera.Priority = 20;
-        playerCamera.Priority = 10;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    void ExitKeypadView()
-    {
-        isZoomed = false;
-
-        keypadCamera.Priority = 0;
-        playerCamera.Priority = 20;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+                if (playerMovementScript != null)
+                {
+                    playerMovementScript.enabled = !isZoomed;
+                    Debug.Log("Player movement enabled = " + playerMovementScript.enabled);
+                }
+            }
+        }
     }
 }
