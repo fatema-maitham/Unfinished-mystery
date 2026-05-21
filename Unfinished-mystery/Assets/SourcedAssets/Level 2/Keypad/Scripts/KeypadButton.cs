@@ -9,7 +9,7 @@ namespace NavKeypad
         [SerializeField] private string value;
         [Header("Button Animation Settings")]
         [SerializeField] private float bttnspeed = 0.1f;
-        [SerializeField] private float moveDist = 0.0025f;
+        [SerializeField] private float moveDist = -0.0025f;
         [SerializeField] private float buttonPressedTime = 0.1f;
         [Header("Component References")]
         [SerializeField] private Keypad keypad;
