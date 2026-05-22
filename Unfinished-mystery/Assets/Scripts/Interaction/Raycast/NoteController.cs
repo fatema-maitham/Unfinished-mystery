@@ -1,85 +1,87 @@
 using TMPro;
 using UnityEngine;
 
-public class NoteController : MonoBehaviour, IInteractable
+public class NoteController : MonoBehaviour
 {
-    public static bool IsAnyNoteOpen { get; private set; }
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    [SerializeField] private float interactDistance = 2.5f;
+    [SerializeField] private MonoBehaviour playerMovement;
 
     [Header("UI")]
     [SerializeField] private GameObject noteCanvas;
     [SerializeField] private TMP_Text noteTextAreaUI;
+    [SerializeField] private GameObject promptPanel;
+    [SerializeField] private TMP_Text promptTextUI;
 
-    [Header("Note Content")]
+    [Header("Note")]
     [TextArea(3, 10)]
     [SerializeField] private string noteText =
-        "I hid the truth in the things I could not throw away.";
+        "I hid the truth in the things\nI could not throw away.";
 
-    [Header("Prompt")]
-    [SerializeField] private string promptText = "PRESS E TO READ";
-
-    [Header("Disable While Reading")]
-    [SerializeField] private MonoBehaviour playerMovement;
-
-    private bool isOpen;
+    private bool noteOpen;
 
     private void Start()
     {
+        noteOpen = false;
+
         if (noteCanvas != null)
             noteCanvas.SetActive(false);
 
-        isOpen = false;
-        IsAnyNoteOpen = false;
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (isOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
+        if (player == null)
+            return;
+
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool nearNote = distance <= interactDistance;
+
+        if (!noteOpen)
+        {
+            promptPanel.SetActive(nearNote);
+
+            if (nearNote)
+                promptTextUI.text = "PRESS E TO READ";
+        }
+
+        if (nearNote && !noteOpen && Input.GetKeyDown(KeyCode.E))
+        {
+            OpenNote();
+        }
+
+        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
         {
             CloseNote();
         }
     }
 
-    public string GetPromptText()
-    {
-        return promptText;
-    }
-
-    public void Interact()
-    {
-        OpenNote();
-    }
-
     private void OpenNote()
     {
-        if (noteCanvas == null || noteTextAreaUI == null)
-        {
-            Debug.LogWarning("NoteController: Canvas or text is missing.");
-            return;
-        }
+        noteOpen = true;
 
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
+        promptPanel.SetActive(false);
 
         if (playerMovement != null)
             playerMovement.enabled = false;
-
-        isOpen = true;
-        IsAnyNoteOpen = true;
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void CloseNote()
+    public void CloseNote()
     {
-        if (noteCanvas != null)
-            noteCanvas.SetActive(false);
+        noteOpen = false;
+
+        noteCanvas.SetActive(false);
 
         if (playerMovement != null)
             playerMovement.enabled = true;
-
-        isOpen = false;
-        IsAnyNoteOpen = false;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
