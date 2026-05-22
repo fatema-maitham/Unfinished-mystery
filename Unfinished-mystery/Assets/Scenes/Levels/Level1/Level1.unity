@@ -13385,6 +13385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pages
       objectReference: {fileID: 0}
+    - target: {fileID: 195324717624486639, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 195324717624486643, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -13462,12 +13466,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: Read
+  label: Read Exam Paper
   subLabel: 
-  displayMode: 0
+  displayMode: 1
   signText: Enter your text here.
   speakerName: 
-  revealImage: {fileID: 0}
+  revealImage: {fileID: 21300000, guid: eb6bfe1e2815c844c997fee7b517dade, type: 3}
   activationRadius: 1.5
 --- !u!1001 &806970662
 PrefabInstance:
@@ -37546,6 +37550,22 @@ PrefabInstance:
     - target: {fileID: 893322731995811095, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661710671201546493, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661710671201546493, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661710671201546493, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661710671201546493, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4184193489942777066, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
       propertyPath: m_Name
