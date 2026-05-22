@@ -3,107 +3,87 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour
 {
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    [SerializeField] private float interactDistance = 2.5f;
+    [SerializeField] private MonoBehaviour playerMovement;
+
     [Header("UI")]
     [SerializeField] private GameObject noteCanvas;
     [SerializeField] private TMP_Text noteTextAreaUI;
+    [SerializeField] private GameObject promptPanel;
     [SerializeField] private TMP_Text promptTextUI;
 
-    [Header("Note Content")]
+    [Header("Note")]
     [TextArea(3, 10)]
     [SerializeField] private string noteText =
         "I hid the truth in the things\nI could not throw away.";
 
-    [Header("Prompt")]
-    [SerializeField] private string promptMessage = "PRESS E TO READ";
-
-    [Header("Player")]
-    [SerializeField] private MonoBehaviour playerMovement;
-
-    private bool playerInside;
     private bool noteOpen;
 
     private void Start()
     {
+        noteOpen = false;
+
         if (noteCanvas != null)
             noteCanvas.SetActive(false);
 
-        HidePrompt();
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (playerInside && !noteOpen && Input.GetKeyDown(KeyCode.E))
-            OpenNote();
-
-        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
-            CloseNote();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player"))
+        if (player == null)
             return;
 
-        playerInside = true;
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool nearNote = distance <= interactDistance;
 
         if (!noteOpen)
-            ShowPrompt();
-    }
+        {
+            promptPanel.SetActive(nearNote);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("Player"))
-            return;
+            if (nearNote)
+                promptTextUI.text = "PRESS E TO READ";
+        }
 
-        playerInside = false;
-        HidePrompt();
+        if (nearNote && !noteOpen && Input.GetKeyDown(KeyCode.E))
+        {
+            OpenNote();
+        }
+
+        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
+        {
+            CloseNote();
+        }
     }
 
     private void OpenNote()
     {
+        noteOpen = true;
+
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
-        HidePrompt();
+        promptPanel.SetActive(false);
 
         if (playerMovement != null)
             playerMovement.enabled = false;
 
-        noteOpen = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void CloseNote()
+    public void CloseNote()
     {
+        noteOpen = false;
+
         noteCanvas.SetActive(false);
 
         if (playerMovement != null)
             playerMovement.enabled = true;
 
-        noteOpen = false;
-
-        if (playerInside)
-            ShowPrompt();
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void ShowPrompt()
-    {
-        if (promptTextUI == null)
-            return;
-
-        promptTextUI.text = promptMessage;
-        promptTextUI.gameObject.SetActive(true);
-    }
-
-    private void HidePrompt()
-    {
-        if (promptTextUI == null)
-            return;
-
-        promptTextUI.text = "";
-        promptTextUI.gameObject.SetActive(false);
     }
 }
