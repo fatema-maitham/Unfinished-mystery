@@ -14,6 +14,10 @@ public class ItemPickup : MonoBehaviour
     [Header("Pickup Settings")]
     [SerializeField] private bool destroyAfterPickup = true;
 
+    [Header("Optional Level 3 Events")]
+    [SerializeField] private L3ExitFlickerGuide flickerToStopOnPickup;
+    [SerializeField] private L3ExitInspect inspectToDisableOnPickup;
+
     private bool playerInRange = false;
     private ItemPickupHandler pickupHandler;
 
@@ -42,47 +46,41 @@ public class ItemPickup : MonoBehaviour
         pickupHandler.PickupItem(item, amount);
 
         if (promptUI != null)
-        {
             promptUI.HidePrompt();
-        }
+
+        if (flickerToStopOnPickup != null)
+            flickerToStopOnPickup.StopFlickerPermanently();
+
+        if (inspectToDisableOnPickup != null)
+            inspectToDisableOnPickup.PauseInspectBriefly(0.6f);
 
         Debug.Log(item.name + " picked up and added to inventory.");
 
         if (destroyAfterPickup)
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             return;
-        }
 
         playerInRange = true;
         pickupHandler = other.GetComponent<ItemPickupHandler>();
 
         if (promptUI != null)
-        {
             promptUI.ShowPrompt(promptText);
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             return;
-        }
 
         playerInRange = false;
         pickupHandler = null;
 
         if (promptUI != null)
-        {
             promptUI.HidePrompt();
-        }
     }
 }
