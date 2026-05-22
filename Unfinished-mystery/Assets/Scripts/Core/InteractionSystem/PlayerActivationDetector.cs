@@ -40,7 +40,7 @@ public class PlayerActivationDetector : MonoBehaviour
     {
         int count = Physics.OverlapSphereNonAlloc(
             transform.position,
-            interactionRadius,
+            interactionRadius,   // still used as the max possible radius
             _overlapResults,
             interactableLayer
         );
@@ -54,6 +54,10 @@ public class PlayerActivationDetector : MonoBehaviour
             if (activatable == null || !activatable.CanActivate) continue;
 
             float dist = Vector3.Distance(transform.position, _overlapResults[i].transform.position);
+
+            // ← each object uses its own radius
+            if (dist > activatable.ActivationRadius) continue;
+
             if (dist < closestDist)
             {
                 closestDist = dist;
