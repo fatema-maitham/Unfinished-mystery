@@ -1,123 +1,89 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class NoteController : MonoBehaviour, IInteractable
+public class NoteController : MonoBehaviour
 {
-    public static bool IsAnyNoteOpen { get; private set; }
-
-    [Header("Input")]
-    [SerializeField] private KeyCode closeKey = KeyCode.X;
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    [SerializeField] private float interactDistance = 2.5f;
+    [SerializeField] private MonoBehaviour playerMovement;
 
     [Header("UI")]
     [SerializeField] private GameObject noteCanvas;
     [SerializeField] private TMP_Text noteTextAreaUI;
+    [SerializeField] private GameObject promptPanel;
+    [SerializeField] private TMP_Text promptTextUI;
 
-    [Header("Note Content")]
+    [Header("Note")]
     [TextArea(3, 10)]
-    [SerializeField] private string noteText;
+    [SerializeField] private string noteText =
+        "I hid the truth in the things\nI could not throw away.";
 
-    [Header("Prompt")]
-    [SerializeField] private string promptText = "Press E to read";
-
-    [Header("Optional Events")]
-    [SerializeField] private UnityEvent openEvent;
-    [SerializeField] private UnityEvent closeEvent;
-
-    [Header("Optional Disable While Reading")]
-    [SerializeField] private MonoBehaviour[] behavioursToDisableWhenOpen;
-
-    private bool isOpen;
+    private bool noteOpen;
 
     private void Start()
     {
-        if (noteCanvas != null)
-        {
-            noteCanvas.SetActive(false);
-        }
+        noteOpen = false;
 
-        isOpen = false;
-        IsAnyNoteOpen = false;
+        if (noteCanvas != null)
+            noteCanvas.SetActive(false);
+
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (!isOpen)
+        if (player == null)
             return;
 
-        if (Input.GetKeyDown(closeKey) || Input.GetKeyDown(KeyCode.Escape))
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool nearNote = distance <= interactDistance;
+
+        if (!noteOpen)
+        {
+            promptPanel.SetActive(nearNote);
+
+            if (nearNote)
+                promptTextUI.text = "PRESS E TO READ";
+        }
+
+        if (nearNote && !noteOpen && Input.GetKeyDown(KeyCode.E))
+        {
+            OpenNote();
+        }
+
+        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
         {
             CloseNote();
         }
     }
 
-    public string GetPromptText()
+    private void OpenNote()
     {
-        return promptText;
-    }
-
-    public void Interact()
-    {
-        ShowNote();
-    }
-
-    public void ShowNote()
-    {
-        if (noteCanvas == null)
-        {
-            Debug.LogWarning("[NoteController] Note Canvas is not assigned.");
-            return;
-        }
-
-        if (noteTextAreaUI == null)
-        {
-            Debug.LogWarning("[NoteController] Note Text Area UI is not assigned.");
-            return;
-        }
+        noteOpen = true;
 
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
+        promptPanel.SetActive(false);
 
-        SetPlayerControl(false);
+        if (playerMovement != null)
+            playerMovement.enabled = false;
 
-        isOpen = true;
-        IsAnyNoteOpen = true;
-
-        openEvent?.Invoke();
-
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void CloseNote()
     {
-        if (noteCanvas != null)
-        {
-            noteCanvas.SetActive(false);
-        }
+        noteOpen = false;
 
-        SetPlayerControl(true);
+        noteCanvas.SetActive(false);
 
-        isOpen = false;
-        IsAnyNoteOpen = false;
+        if (playerMovement != null)
+            playerMovement.enabled = true;
 
-        closeEvent?.Invoke();
-
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    private void SetPlayerControl(bool enabled)
-    {
-        if (behavioursToDisableWhenOpen == null)
-            return;
-
-        foreach (MonoBehaviour behaviour in behavioursToDisableWhenOpen)
-        {
-            if (behaviour != null)
-            {
-                behaviour.enabled = enabled;
-            }
-        }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
