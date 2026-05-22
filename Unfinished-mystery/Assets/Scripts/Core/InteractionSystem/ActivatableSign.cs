@@ -7,15 +7,16 @@ public class ActivatableSign : MonoBehaviour, IActivatable
     [TextArea(3, 8)]
     [SerializeField] private string signText = "Enter your text here.";
 
-    public string ActivationLabel => label;
-    public string ActivationHint  => subLabel;
-    public bool   CanActivate     => true;
+    [Header("Detection")]
+    [Tooltip("How close the player must be to see the prompt. Overrides the global radius.")]
+    [SerializeField] private float activationRadius = 1.5f;
 
-    public void OnActivate(GameObject source)
-    {
-        ActivationDialogUI.ShowText(signText);
-    }
+    public string ActivationLabel  => label;
+    public string ActivationHint   => subLabel;
+    public bool   CanActivate      => true;
+    public float  ActivationRadius => activationRadius;
 
+    public void OnActivate(GameObject source)       => ActivationDialogUI.ShowText(signText);
     public void OnActivatableFocus()  { }
     public void OnActivatableBlur()   { }
 }
