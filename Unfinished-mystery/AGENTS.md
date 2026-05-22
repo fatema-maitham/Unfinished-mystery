@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: FirstNote
+  - Name: floor_big (2)
   - Tag: Untagged
-  - Layer: 6
+  - Layer: Ground
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
