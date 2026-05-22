@@ -4905,7 +4905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &355813394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7550,7 +7550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1.5
   runSpeed: 3
-  jumpHeight: 1
+  jumpHeight: 0.5
   gravity: -10
   rotationSpeed: 10
   cameraFollowTarget: {fileID: 2037600202}
@@ -16775,7 +16775,7 @@ GameObject:
   - component: {fileID: 1134993011}
   - component: {fileID: 1134993012}
   - component: {fileID: 1134993013}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera_1
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -16944,7 +16944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1515022e7ec4322bcd022eb5b6b86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 4
+  interactDistance: 8
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -18761,7 +18761,7 @@ GameObject:
   - component: {fileID: 1230536245}
   - component: {fileID: 1230536244}
   m_Layer: 0
-  m_Name: NoteCanvas
+  m_Name: FirstNoteCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19579,10 +19579,10 @@ RectTransform:
   - {fileID: 448840490}
   m_Father: {fileID: 1230536243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1980, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336123040
 MonoBehaviour:
@@ -20284,8 +20284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 1100}
+  m_AnchoredPosition: {x: 0, y: 78}
+  m_SizeDelta: {x: 1100, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1360720146
 MonoBehaviour:
@@ -20467,32 +20467,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
   m_PrefabInstance: {fileID: 1806591921}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1379776064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758293191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483d9339fea2f451495ab5b670026f1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  closeKey: 120
-  noteCanvas: {fileID: 1230536242}
-  noteTextAreaUI: {fileID: 1597705000}
-  noteText: 'I hid the truth in the things I could not throw away.
-
-'
-  promptText: Press E to read
-  openEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  closeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  behavioursToDisableWhenOpen: []
 --- !u!65 &1379776065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20508,12 +20482,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.35, y: 0.18240382, z: 0.30000004}
-  m_Center: {x: -0.017596731, y: -0.20656942, z: -0.049702626}
+  m_Size: {x: 0.35, y: 0.1824038, z: 0.30000004}
+  m_Center: {x: -0.017596725, y: -0.20656942, z: -0.049702626}
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21480,6 +21454,7 @@ GameObject:
   - component: {fileID: 1424239126}
   - component: {fileID: 1424239125}
   - component: {fileID: 1424239124}
+  - component: {fileID: 1424239127}
   m_Layer: 0
   m_Name: IP_FirstNote
   m_TagString: Untagged
@@ -21514,11 +21489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff662bcdb91c64c1d83abfd64f86367d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteUI: {fileID: 1486969188}
-  noteMessage: I hid the truth in the things I could not throw away.
-  interactKey: 101
-  promptMessage: Press E to read
-  showDebugLogs: 1
 --- !u!54 &1424239125
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21567,6 +21537,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2.5, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1424239127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424239122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483d9339fea2f451495ab5b670026f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noteCanvas: {fileID: 1230536242}
+  noteTextAreaUI: {fileID: 1597705000}
+  noteText: I hid the truth in the things I could not throw away.
+  promptText: Press E to read
+  playerMovement: {fileID: 0}
 --- !u!1 &1443142321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8905741556569397466, guid: 75f2b4c63b364ca468040cc8f2ae9d0b, type: 3}
@@ -24620,7 +24607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248, y: 443}
+  m_AnchoredPosition: {x: -224, y: 182.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597705000
@@ -24670,19 +24657,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 41
+  m_fontSizeBase: 41
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 60
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -25321,8 +25308,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
+  m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25346,8 +25333,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -25387,7 +25374,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1636458085
@@ -28383,27 +28370,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.36099753
+      value: 0.4871072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.36099753
+      value: 0.4871072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.36099753
+      value: 0.4871072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.761
+      value: -0.688
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1841
+      value: -0.776
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.784
+      value: 0.848
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28437,6 +28424,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalScale.x
       value: 24.591034
@@ -28465,6 +28456,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_Name
       value: FirstNote
@@ -28476,14 +28471,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+    - {fileID: 65702495048144492, guid: fb414797eadc844ccb178b6e41652485, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1379776065}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1379776064}
   m_SourcePrefab: {fileID: 100100000, guid: fb414797eadc844ccb178b6e41652485, type: 3}
 --- !u!1001 &1808315884
 PrefabInstance:

@@ -1,13 +1,9 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class NoteController : MonoBehaviour, IInteractable
 {
     public static bool IsAnyNoteOpen { get; private set; }
-
-    [Header("Input")]
-    [SerializeField] private KeyCode closeKey = KeyCode.X;
 
     [Header("UI")]
     [SerializeField] private GameObject noteCanvas;
@@ -15,26 +11,21 @@ public class NoteController : MonoBehaviour, IInteractable
 
     [Header("Note Content")]
     [TextArea(3, 10)]
-    [SerializeField] private string noteText;
+    [SerializeField] private string noteText =
+        "I hid the truth in the things I could not throw away.";
 
     [Header("Prompt")]
-    [SerializeField] private string promptText = "Press E to read";
+    [SerializeField] private string promptText = "PRESS E TO READ";
 
-    [Header("Optional Events")]
-    [SerializeField] private UnityEvent openEvent;
-    [SerializeField] private UnityEvent closeEvent;
-
-    [Header("Optional Disable While Reading")]
-    [SerializeField] private MonoBehaviour[] behavioursToDisableWhenOpen;
+    [Header("Disable While Reading")]
+    [SerializeField] private MonoBehaviour playerMovement;
 
     private bool isOpen;
 
     private void Start()
     {
         if (noteCanvas != null)
-        {
             noteCanvas.SetActive(false);
-        }
 
         isOpen = false;
         IsAnyNoteOpen = false;
@@ -42,10 +33,7 @@ public class NoteController : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if (!isOpen)
-            return;
-
-        if (Input.GetKeyDown(closeKey) || Input.GetKeyDown(KeyCode.Escape))
+        if (isOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
         {
             CloseNote();
         }
@@ -58,66 +46,42 @@ public class NoteController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        ShowNote();
+        OpenNote();
     }
 
-    public void ShowNote()
+    private void OpenNote()
     {
-        if (noteCanvas == null)
+        if (noteCanvas == null || noteTextAreaUI == null)
         {
-            Debug.LogWarning("[NoteController] Note Canvas is not assigned.");
-            return;
-        }
-
-        if (noteTextAreaUI == null)
-        {
-            Debug.LogWarning("[NoteController] Note Text Area UI is not assigned.");
+            Debug.LogWarning("NoteController: Canvas or text is missing.");
             return;
         }
 
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
 
-        SetPlayerControl(false);
+        if (playerMovement != null)
+            playerMovement.enabled = false;
 
         isOpen = true;
         IsAnyNoteOpen = true;
 
-        openEvent?.Invoke();
-
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    public void CloseNote()
+    private void CloseNote()
     {
         if (noteCanvas != null)
-        {
             noteCanvas.SetActive(false);
-        }
 
-        SetPlayerControl(true);
+        if (playerMovement != null)
+            playerMovement.enabled = true;
 
         isOpen = false;
         IsAnyNoteOpen = false;
 
-        closeEvent?.Invoke();
-
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    private void SetPlayerControl(bool enabled)
-    {
-        if (behavioursToDisableWhenOpen == null)
-            return;
-
-        foreach (MonoBehaviour behaviour in behavioursToDisableWhenOpen)
-        {
-            if (behaviour != null)
-            {
-                behaviour.enabled = enabled;
-            }
-        }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
