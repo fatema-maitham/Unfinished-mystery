@@ -4,7 +4,7 @@ using UnityEngine;
 public class RaycastInteractor : MonoBehaviour
 {
     [Header("Raycast Settings")]
-    [SerializeField] private float interactDistance = 4f;
+    [SerializeField] private float interactDistance = 8f;
     [SerializeField] private LayerMask interactableLayer = ~0;
 
     [Header("Input")]
@@ -52,7 +52,7 @@ public class RaycastInteractor : MonoBehaviour
     {
         currentInteractable = null;
 
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactableLayer))
         {
@@ -90,16 +90,5 @@ public class RaycastInteractor : MonoBehaviour
 
         interactionPromptText.text = "";
         interactionPromptText.gameObject.SetActive(false);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Camera cam = GetComponent<Camera>();
-
-        if (cam == null)
-            return;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(cam.transform.position, cam.transform.forward * interactDistance);
     }
 }
