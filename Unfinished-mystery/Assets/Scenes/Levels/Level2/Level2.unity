@@ -23847,12 +23847,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256fc8fde808048c0a45d7ade119be41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 603546215}
   interactDistance: 2.5
-  playerMovement: {fileID: 0}
-  bookCanvas: {fileID: 0}
-  promptPanel: {fileID: 0}
-  promptTextUI: {fileID: 0}
+  playerMovement: {fileID: 603546222}
+  bookCanvas: {fileID: 112096708}
+  promptPanel: {fileID: 533129713}
+  promptTextUI: {fileID: 1898956824}
   bookPageText: {fileID: 0}
   pageNumberText: {fileID: 0}
   nextButton: {fileID: 0}
