@@ -17,6 +17,8 @@ public class ItemPickup : MonoBehaviour
     [Header("Optional Level 3 Events")]
     [SerializeField] private L3ExitFlickerGuide flickerToStopOnPickup;
     [SerializeField] private L3ExitInspect inspectToDisableOnPickup;
+    [SerializeField] private FilmProjectorUse projectorToNotify;
+    [SerializeField] private int collectedReelNumber = 0;
 
     private bool playerInRange = false;
     private ItemPickupHandler pickupHandler;
@@ -47,6 +49,9 @@ public class ItemPickup : MonoBehaviour
 
         if (promptUI != null)
             promptUI.HidePrompt();
+
+        if (projectorToNotify != null && collectedReelNumber > 0)
+            projectorToNotify.NotifyReelCollected(collectedReelNumber);
 
         if (flickerToStopOnPickup != null)
             flickerToStopOnPickup.StopFlickerPermanently();
