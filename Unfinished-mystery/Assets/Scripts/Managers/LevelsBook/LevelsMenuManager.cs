@@ -88,4 +88,9 @@ public class LevelsMenuManager : MonoBehaviour
 
         SceneManager.LoadScene($"Level{index + 1}");
     }
+    
+    public void OnBackButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
