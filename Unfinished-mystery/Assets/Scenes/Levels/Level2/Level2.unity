@@ -6055,7 +6055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 791, y: 467}
+  m_AnchoredPosition: {x: -420.4, y: 467}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448840491
@@ -16944,12 +16944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1515022e7ec4322bcd022eb5b6b86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 8
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  interactKey: 101
-  interactionPromptText: {fileID: 1898956824}
 --- !u!114 &1134993012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20486,8 +20480,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.35, y: 0.1824038, z: 0.30000004}
-  m_Center: {x: -0.017596725, y: -0.20656942, z: -0.049702626}
+  m_Size: {x: 0.75936234, y: 0.41559243, z: 0.8515047}
+  m_Center: {x: -0.10489504, y: -0.08997519, z: 0.02069732}
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21453,7 +21447,6 @@ GameObject:
   - component: {fileID: 1424239123}
   - component: {fileID: 1424239126}
   - component: {fileID: 1424239125}
-  - component: {fileID: 1424239124}
   - component: {fileID: 1424239127}
   m_Layer: 0
   m_Name: IP_FirstNote
@@ -21471,24 +21464,12 @@ Transform:
   m_GameObject: {fileID: 1424239122}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.101, y: -0.2601, z: 3.0089202}
+  m_LocalPosition: {x: -1.18, y: -1.12, z: 0.555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 652107916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1424239124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424239122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff662bcdb91c64c1d83abfd64f86367d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1424239125
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21535,7 +21516,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.5, z: 2}
+  m_Size: {x: 4, y: 3, z: 4}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1424239127
 MonoBehaviour:
@@ -21551,9 +21532,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteCanvas: {fileID: 1230536242}
   noteTextAreaUI: {fileID: 1597705000}
+  promptTextUI: {fileID: 1316919763}
   noteText: I hid the truth in the things I could not throw away.
-  promptText: Press E to read
-  playerMovement: {fileID: 0}
+  promptMessage: PRESS E TO READ
+  playerMovement: {fileID: 603546222}
 --- !u!1 &1443142321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8905741556569397466, guid: 75f2b4c63b364ca468040cc8f2ae9d0b, type: 3}
@@ -21862,8 +21844,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.5504577, y: 2, z: 1}
+  m_Center: {x: 0.22477114, y: 0.5, z: 0}
 --- !u!114 &1463760292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25283,8 +25265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -437.75, y: 0}
+  m_SizeDelta: {x: 777.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636458084
 MonoBehaviour:
@@ -30008,7 +29990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Read clue
+  m_text: PRESS E TO READ
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}
   m_sharedMaterial: {fileID: 3129420092240168762, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}

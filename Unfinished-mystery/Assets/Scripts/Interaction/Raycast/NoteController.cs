@@ -1,87 +1,109 @@
 using TMPro;
 using UnityEngine;
 
-public class NoteController : MonoBehaviour, IInteractable
+public class NoteController : MonoBehaviour
 {
-    public static bool IsAnyNoteOpen { get; private set; }
-
     [Header("UI")]
     [SerializeField] private GameObject noteCanvas;
     [SerializeField] private TMP_Text noteTextAreaUI;
+    [SerializeField] private TMP_Text promptTextUI;
 
     [Header("Note Content")]
     [TextArea(3, 10)]
     [SerializeField] private string noteText =
-        "I hid the truth in the things I could not throw away.";
+        "I hid the truth in the things\nI could not throw away.";
 
     [Header("Prompt")]
-    [SerializeField] private string promptText = "PRESS E TO READ";
+    [SerializeField] private string promptMessage = "PRESS E TO READ";
 
-    [Header("Disable While Reading")]
+    [Header("Player")]
     [SerializeField] private MonoBehaviour playerMovement;
 
-    private bool isOpen;
+    private bool playerInside;
+    private bool noteOpen;
 
     private void Start()
     {
         if (noteCanvas != null)
             noteCanvas.SetActive(false);
 
-        isOpen = false;
-        IsAnyNoteOpen = false;
+        HidePrompt();
     }
 
     private void Update()
     {
-        if (isOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
-        {
+        if (playerInside && !noteOpen && Input.GetKeyDown(KeyCode.E))
+            OpenNote();
+
+        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
             CloseNote();
-        }
     }
 
-    public string GetPromptText()
+    private void OnTriggerEnter(Collider other)
     {
-        return promptText;
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = true;
+
+        if (!noteOpen)
+            ShowPrompt();
     }
 
-    public void Interact()
+    private void OnTriggerExit(Collider other)
     {
-        OpenNote();
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = false;
+        HidePrompt();
     }
 
     private void OpenNote()
     {
-        if (noteCanvas == null || noteTextAreaUI == null)
-        {
-            Debug.LogWarning("NoteController: Canvas or text is missing.");
-            return;
-        }
-
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
+        HidePrompt();
 
         if (playerMovement != null)
             playerMovement.enabled = false;
 
-        isOpen = true;
-        IsAnyNoteOpen = true;
-
+        noteOpen = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     private void CloseNote()
     {
-        if (noteCanvas != null)
-            noteCanvas.SetActive(false);
+        noteCanvas.SetActive(false);
 
         if (playerMovement != null)
             playerMovement.enabled = true;
 
-        isOpen = false;
-        IsAnyNoteOpen = false;
+        noteOpen = false;
+
+        if (playerInside)
+            ShowPrompt();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void ShowPrompt()
+    {
+        if (promptTextUI == null)
+            return;
+
+        promptTextUI.text = promptMessage;
+        promptTextUI.gameObject.SetActive(true);
+    }
+
+    private void HidePrompt()
+    {
+        if (promptTextUI == null)
+            return;
+
+        promptTextUI.text = "";
+        promptTextUI.gameObject.SetActive(false);
     }
 }
