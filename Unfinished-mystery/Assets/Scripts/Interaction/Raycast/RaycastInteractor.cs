@@ -21,9 +21,7 @@ public class RaycastInteractor : MonoBehaviour
         playerCamera = GetComponent<Camera>();
 
         if (playerCamera == null)
-        {
             playerCamera = Camera.main;
-        }
     }
 
     private void Start()
@@ -59,9 +57,7 @@ public class RaycastInteractor : MonoBehaviour
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
             if (interactable == null)
-            {
                 interactable = hit.collider.GetComponentInParent<IInteractable>();
-            }
 
             if (interactable != null)
             {
