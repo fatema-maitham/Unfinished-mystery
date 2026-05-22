@@ -17,6 +17,7 @@ public class ItemPickup : MonoBehaviour
     [Header("Optional Level 3 Events")]
     [SerializeField] private L3ExitFlickerGuide flickerToStopOnPickup;
     [SerializeField] private L3ExitInspect inspectToDisableOnPickup;
+    [SerializeField] private TVStaticSoundController tvStaticToStopOnPickup;
     [SerializeField] private FilmProjectorUse projectorToNotify;
     [SerializeField] private int collectedReelNumber = 0;
 
@@ -55,6 +56,9 @@ public class ItemPickup : MonoBehaviour
 
         if (flickerToStopOnPickup != null)
             flickerToStopOnPickup.StopFlickerPermanently();
+
+        if (tvStaticToStopOnPickup != null)
+            tvStaticToStopOnPickup.StopStaticPermanently();
 
         if (inspectToDisableOnPickup != null)
             inspectToDisableOnPickup.PauseInspectBriefly(0.6f);
