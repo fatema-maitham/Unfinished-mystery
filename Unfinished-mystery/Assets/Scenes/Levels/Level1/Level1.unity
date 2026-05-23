@@ -12962,7 +12962,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270303602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
   m_Name: 
@@ -15679,7 +15679,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6716582389844258154, guid: 583ce32320cd9304d86f7fef3a05a0c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1523402668}
   m_SourcePrefab: {fileID: 100100000, guid: 583ce32320cd9304d86f7fef3a05a0c6, type: 3}
 --- !u!4 &981051931 stripped
 Transform:
@@ -25172,6 +25175,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1218278519844454269, guid: 68e7e7693d584a342ba10a27b109a1d0, type: 3}
   m_PrefabInstance: {fileID: 1520262950}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1523402667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6716582389844258154, guid: 583ce32320cd9304d86f7fef3a05a0c6, type: 3}
+  m_PrefabInstance: {fileID: 981051930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1523402668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523402667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3806356925b9724691a16aeb52c0d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Examine
+  subLabel: Coffee Mug
+  activationRadius: 1.5
+  tornPaperImage: {fileID: 0}
+  revealText: "Moving the mug reveals a torn piece of paper underneath.\n\"Prof.
+    F \u2014 I know what the sequence means. I found the pattern in your own thesis.
+    You hid it in plain sight. \u2014 L\""
+  tornPaperObject: {fileID: 0}
 --- !u!1001 &1532583715
 PrefabInstance:
   m_ObjectHideFlags: 0
