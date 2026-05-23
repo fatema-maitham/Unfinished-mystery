@@ -402,10 +402,10 @@ private void UpdatePrompt()
     }
 
     if (IsReelWatched(reelAction))
-        interactPrompt.ShowPrompt("Replay Reel " + reelAction);
-    else
-        interactPrompt.ShowPrompt("Load Reel " + reelAction);
-}
+    interactPrompt.ShowPrompt("REPLAY", "Reel " + reelAction);
+   else
+        interactPrompt.ShowPrompt("LOAD", "Reel " + reelAction);
+        }
 
 private bool IsReelWatched(int reelNumber)
 {
