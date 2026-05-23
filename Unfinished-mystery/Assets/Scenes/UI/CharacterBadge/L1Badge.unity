@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 216146569}
   - component: {fileID: 216146568}
   m_Layer: 5
-  m_Name: LevelSummaryManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 843e7355fd7304da4bf9e82d8cd219ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce2e7f6ee44b14c949f3dd52f1e3fea9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 579240860}
   - component: {fileID: 579240861}
   m_Layer: 5
-  m_Name: LevelSummaryPanel
+  m_Name: Pnl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1520,7 +1520,7 @@ GameObject:
   - component: {fileID: 1968583314}
   - component: {fileID: 1968583313}
   m_Layer: 5
-  m_Name: LevelSummaryCanvas
+  m_Name: Cnvs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
