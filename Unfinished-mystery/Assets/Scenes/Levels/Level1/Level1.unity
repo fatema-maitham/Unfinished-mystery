@@ -12948,32 +12948,34 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 195324717624486639, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 806198313}
+      addedObject: {fileID: 806198314}
   m_SourcePrefab: {fileID: 100100000, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
 --- !u!4 &806198309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 195324717624486643, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
   m_PrefabInstance: {fileID: 806198308}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &806198313
+--- !u!114 &806198314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270303602}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
+  m_Script: {fileID: 11500000, guid: ee8728212a798104aa9c0a151a0794e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: Read Exam Paper
-  subLabel: 
-  displayMode: 1
-  signText: Enter your text here.
-  speakerName: 
-  revealImage: {fileID: 21300000, guid: eb6bfe1e2815c844c997fee7b517dade, type: 3}
+  label: Read
+  subLabel: Graded Exam
   activationRadius: 1.5
+  examFrontImage: {fileID: 21300000, guid: eb6bfe1e2815c844c997fee7b517dade, type: 3}
+  frontText: "Lynnette's exam. Perfect score \u2014 but Voss crossed it out and wrote
+    \"SEE ME\" in red ink."
+  examBackImage: {fileID: 0}
+  backText: "On the back, written in tiny pencil:\n\n\"Fibonacci starts with love,
+    not logic. 1, 1, 2, 3 \u2014 but what comes after fear?\""
 --- !u!1001 &806970662
 PrefabInstance:
   m_ObjectHideFlags: 0
