@@ -1001,14 +1001,14 @@ RectTransform:
   m_GameObject: {fileID: 61941907}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.82852244, y: 0.9640299, z: 1.0089189}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 514780182}
+  m_Father: {fileID: 712025662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 188, y: 0}
+  m_AnchoredPosition: {x: -3.7000122, y: 53.85}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61941909
@@ -1040,8 +1040,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1657,6 +1657,8 @@ GameObject:
   - component: {fileID: 112096712}
   - component: {fileID: 112096711}
   - component: {fileID: 112096710}
+  - component: {fileID: 112096714}
+  - component: {fileID: 112096713}
   m_Layer: 0
   m_Name: BookCanvas
   m_TagString: Untagged
@@ -1747,6 +1749,203 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!82 &112096713
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112096708}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 92dd874338a2c48c0a56660c696946f5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &112096714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112096708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e9ee25870034bd0a12ab35b59f0e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bookCanvas: {fileID: 112096708}
+  bookPanel: {fileID: 514780182}
+  leftImage: {fileID: 1735409457}
+  leftText: {fileID: 1409267244}
+  rightText: {fileID: 2144096044}
+  turningPage: {fileID: 712025662}
+  turningText: {fileID: 61941909}
+  nextButton: {fileID: 1832908003}
+  closeButton: {fileID: 198532586}
+  audioSource: {fileID: 112096713}
+  pageTurnSound: {fileID: 8300000, guid: 92dd874338a2c48c0a56660c696946f5, type: 3}
+  spreads:
+  - leftImage: {fileID: 21300000, guid: 1bd89f2b455b94127ba94e38b047f3f3, type: 3}
+    leftText: 'I used to think memories protected people.
+
+      Now I think they
+      only teach us how to hide.
+
+      Isla Thompson'
+    rightText: "I found this after she disappeared.\nTwo windows.\nFive books.\nNine
+      red marks around the door.\nI spent years looking at it.\nI still don\u2019t
+      know how I missed it.\n"
+    bigText: 0
+  - leftImage: {fileID: 21300000, guid: b779aafe280de4413bed8c91bf0f12cb, type: 3}
+    leftText: "Isla Thompson \u2014 Age 6\nShe smiled in every photograph.\nThat
+      is the cruelest part of all this."
+    rightText: 'Children remember things adults try to erase.
+
+      The silence.
+
+      The
+      smell.
+
+      The sound of shoes outside the door.
+
+      The uniform.'
+    bigText: 0
+  - leftImage: {fileID: 0}
+    leftText: 'I checked every witness statement.
+
+      Every report.
+
+      Every
+      recording.
+
+      His name was always missing.'
+    rightText: 'He never left the scene.
+
+      He stayed in uniform.'
+    bigText: 0
+  - leftImage: {fileID: 21300000, guid: 7ee8205f8542d4682b0b322662f2adec, type: 3}
+    leftText: 'Badge 259
+
+      The drawing was never random.
+
+      She was trying
+      to tell us who he was.'
+    rightText: 'The department called it procedural error.
+
+      Missing evidence.
+
+      Corrupted
+      recordings.
+
+      But none of it was accidental.'
+    bigText: 0
+  - leftImage: {fileID: 0}
+    leftText: 'I found proof.
+
+      And then I understood why everyone stayed quiet.
+
+      Some
+      truths destroy everything around them.'
+    rightText: 'I told myself hiding the evidence would protect someone.
+
+      Maybe
+      I only wanted to protect myself.'
+    bigText: 0
+  - leftImage: {fileID: 0}
+    leftText: "If you found this book\u2026\nThen the room already knows you\u2019re
+      listening."
+    rightText: 'I hid the truth because I was afraid.
+
+      Now the room is giving
+      it back.'
+    bigText: 0
+  openAnimationTime: 0.2
+  pageTurnTime: 0.45
 --- !u!1 &113518148 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
@@ -2735,7 +2934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 493, y: 428}
+  m_AnchoredPosition: {x: 754.7, y: 428}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198532586
@@ -6532,7 +6731,6 @@ RectTransform:
   - {fileID: 1735409456}
   - {fileID: 1409267243}
   - {fileID: 2144096043}
-  - {fileID: 61941908}
   - {fileID: 712025662}
   - {fileID: 1832908002}
   - {fileID: 198532585}
@@ -6540,8 +6738,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1200, y: 700}
+  m_AnchoredPosition: {x: 0, y: 68.4}
+  m_SizeDelta: {x: 1400, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &514780183
 MonoBehaviour:
@@ -9188,13 +9386,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2069678, y: 1.0373123, z: 0.99116}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 61941908}
   m_Father: {fileID: 514780182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -46, y: 6}
-  m_SizeDelta: {x: 500, y: 600}
+  m_SizeDelta: {x: 580, y: 686.6}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &712025663
 MonoBehaviour:
@@ -19965,7 +20164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: -120}
+  m_AnchoredPosition: {x: -356, y: -150}
   m_SizeDelta: {x: 350, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409267244
@@ -19997,8 +20196,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -20077,7 +20276,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4354207764525239740, guid: b166b712d873b26459cbc94f94d473b6, type: 3}
       propertyPath: m_Name
-      value: book_2 (3)
+      value: cluebook_2 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 9162966512111866043, guid: b166b712d873b26459cbc94f94d473b6, type: 3}
       propertyPath: m_RootOrder
@@ -21603,9 +21802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: mm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
@@ -24285,7 +24482,6 @@ GameObject:
   - component: {fileID: 1620906955}
   - component: {fileID: 1620906954}
   - component: {fileID: 1620906953}
-  - component: {fileID: 1620906952}
   - component: {fileID: 1620906956}
   m_Layer: 0
   m_Name: IP_Book
@@ -24294,20 +24490,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1620906952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620906951}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811fb2d31f5374b809d6f958bf59b080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bookUI: {fileID: 0}
-  interactKey: 101
 --- !u!54 &1620906953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24380,55 +24562,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1620906951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 256fc8fde808048c0a45d7ade119be41, type: 3}
+  m_Script: {fileID: 11500000, guid: ca97c18d92eed468e970efc958c6f879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
   interactDistance: 2.5
   playerMovement: {fileID: 603546222}
-  bookCanvas: {fileID: 112096708}
+  bookCanvasController: {fileID: 112096714}
   promptPanel: {fileID: 533129713}
   promptTextUI: {fileID: 1898956824}
-  bookPageText: {fileID: 0}
-  pageNumberText: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  closeButton: {fileID: 0}
-  pages:
-  - 'PAGE 1
-
-
-    Investigation Note
-
-
-    He never left the scene.
-
-    He stayed
-    in uniform.'
-  - 'PAGE 2
-
-
-    The child remembered a number:
-
-
-    259
-
-
-    Two windows. Five
-    books. Nine marks.'
-  - 'PAGE 3
-
-
-    Officer Photograph
-
-
-    Badge Number: 259
-
-
-    The drawing was
-    not random.
-
-    It was a memory.'
+  promptMessage: PRESS E TO TAKE BOOK
 --- !u!1 &1622401472
 GameObject:
   m_ObjectHideFlags: 0
@@ -27079,8 +27222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 120}
-  m_SizeDelta: {x: 300, y: 220}
+  m_AnchoredPosition: {x: -352.7, y: 164.7}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735409457
 MonoBehaviour:
@@ -28160,7 +28303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 493, y: 258}
+  m_AnchoredPosition: {x: 588.2, y: 323.1}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832908003
@@ -33522,8 +33665,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
