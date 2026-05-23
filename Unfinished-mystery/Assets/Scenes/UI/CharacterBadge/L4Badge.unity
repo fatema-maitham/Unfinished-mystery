@@ -387,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OMAR NASSER
+  m_text: Ali mohamed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
   m_sharedMaterial: {fileID: -7342831934551118139, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 843e7355fd7304da4bf9e82d8cd219ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0b91851818ea4aef95c356050bddebb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Omar Nasser worked inside a quiet university archive, surrounded by photographs,
+  m_text: 'Ali Mohamed worked inside a quiet university archive, surrounded by photographs,
     documents, and old records.
 
     At first, everything looks organized.
