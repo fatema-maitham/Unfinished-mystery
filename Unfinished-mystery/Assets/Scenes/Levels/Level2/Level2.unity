@@ -12505,6 +12505,98 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2855118, y: 0.45090103, z: 0.28551185}
   m_Center: {x: -0.0000011622906, y: 0.22544937, z: -0.0000022649765}
+--- !u!1 &853961719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 853961720}
+  - component: {fileID: 853961721}
+  m_Layer: 0
+  m_Name: Level2PuzzleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &853961720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853961719}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1769720388}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &853961721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853961719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53aeeba1da3a0485baf6164fcd57b45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstNoteRead: 0
+  _tvMessageSeen: 0
+  _childDrawingFound: 0
+  _bookshelfClueFound: 0
+  _gramophonePlayed: 0
+  _brassKeyFound: 0
+  _evidenceBagOpened: 0
+  _phoneNumberFound: 0
+  _phoneMessageHeard: 0
+  _clockCodeFound: 0
+  _doorUnlocked: 0
+  _levelComplete: 0
+  onFirstNoteRead:
+    m_PersistentCalls:
+      m_Calls: []
+  onTVMessageSeen:
+    m_PersistentCalls:
+      m_Calls: []
+  onChildDrawingFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onBookshelfClueFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onGramophonePlayed:
+    m_PersistentCalls:
+      m_Calls: []
+  onBrassKeyFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onEvidenceBagOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  onPhoneNumberFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onPhoneMessageHeard:
+    m_PersistentCalls:
+      m_Calls: []
+  onClockCodeFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onDoorUnlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onLevelComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &857058546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14130,7 +14222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &981324185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20662,9 +20754,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1423912016}
-  - component: {fileID: 1423912019}
   - component: {fileID: 1423912018}
   - component: {fileID: 1423912017}
+  - component: {fileID: 1423912020}
+  - component: {fileID: 1423912019}
   m_Layer: 0
   m_Name: IP_Gramophone
   m_TagString: Untagged
@@ -20735,7 +20828,104 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 2, z: 1.8}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1423912019
+--- !u!82 &1423912019
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423912015}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1423912020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20744,20 +20934,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423912015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811e48af8524f4edb9cdb5cfab7aab30, type: 3}
+  m_Script: {fileID: 11500000, guid: b1b355f035f4e40958f61878c4d1bcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gramophoneAudio: {fileID: 3315813323909784079}
-  noteUI: {fileID: 1486969188}
-  message: 'If you found his number, then you are closer to the truth than I ever
-    wanted you to be.
-
-
-    The next truth only appears where the light is strongest.'
-  interactKey: 101
-  playOnlyOnce: 1
-  showTextMessage: 1
-  stopWhenPlayerLeaves: 0
+  player: {fileID: 603546215}
+  interactDistance: 2.5
+  playKey: 112
+  promptPanel: {fileID: 533129713}
+  promptTextUI: {fileID: 1898956824}
+  audioSource: {fileID: 1423912019}
+  gramophoneMessage: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
+  playPrompt: PRESS P TO PLAY
 --- !u!1 &1423923729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4130218664092095341, guid: 84f186186acadc941a2e59ce12ace979, type: 3}
@@ -27763,6 +27950,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 603546215}
+  - {fileID: 853961720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1770774935 stripped
@@ -33756,8 +33944,8 @@ Transform:
   m_GameObject: {fileID: 919132148884768640}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 6.15, y: 0.366, z: 7.96}
-  m_LocalScale: {x: 22.163952, y: 22.163952, z: 22.163952}
+  m_LocalPosition: {x: 6.508, y: 0.307, z: 8.886}
+  m_LocalScale: {x: 4.703129, y: 4.703129, z: 4.703129}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

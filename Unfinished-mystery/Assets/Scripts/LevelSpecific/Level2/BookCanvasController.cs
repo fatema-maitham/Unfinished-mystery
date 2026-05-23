@@ -8,6 +8,7 @@ using UnityEngine.UI;
 // Controls the visual book UI.
 // Shows left/right page content, handles the real page-flip animation,
 // plays page-turn audio, and closes the book canvas.
+// When the player reaches the final spread, the bookshelf clue becomes complete.
 // Attach this script to: BookCanvas
 // ═══════════════════════════════════════════════════════════════════════════════
 public class BookCanvasController : MonoBehaviour
@@ -67,6 +68,7 @@ public class BookCanvasController : MonoBehaviour
 
     private int currentSpreadIndex = 0;
     private bool isAnimating = false;
+    private bool bookshelfClueReported = false;
 
     private void Start()
     {
@@ -90,6 +92,7 @@ public class BookCanvasController : MonoBehaviour
     public void OpenBook()
     {
         currentSpreadIndex = 0;
+        bookshelfClueReported = false;
 
         bookCanvas.SetActive(true);
         turningPage.gameObject.SetActive(false);
@@ -129,6 +132,7 @@ public class BookCanvasController : MonoBehaviour
     // ───────────────────────────────────────────────────────────────────────────
     // Updates the visible text and image for the current spread.
     // If no image is assigned, LeftImage is hidden automatically.
+    // When the final spread is reached, it reports the bookshelf clue as found.
     // ───────────────────────────────────────────────────────────────────────────
     private void UpdatePages()
     {
@@ -154,6 +158,12 @@ public class BookCanvasController : MonoBehaviour
         rightText.fontSize = spread.bigText ? 46 : 30;
 
         nextButton.gameObject.SetActive(currentSpreadIndex < spreads.Length - 1);
+
+        if (currentSpreadIndex == spreads.Length - 1 && !bookshelfClueReported)
+        {
+            bookshelfClueReported = true;
+            Level2PuzzleSystem.Instance?.FindBookshelfClue();
+        }
     }
 
     // ───────────────────────────────────────────────────────────────────────────
