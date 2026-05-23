@@ -3,18 +3,36 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// LEVEL 2 — CLUE BOOK CANVAS CONTROLLER
+// Controls the visual book UI.
+// Shows left/right page content, handles the real page-flip animation,
+// plays page-turn audio, and closes the book canvas.
+// Attach this script to: BookCanvas
+// ═══════════════════════════════════════════════════════════════════════════════
 public class BookCanvasController : MonoBehaviour
 {
+    // ───────────────────────────────────────────────────────────────────────────
+    // BOOK SPREAD DATA
+    // One spread = left page + right page.
+    // Example: Spread 1 contains Page 1 on the left and Page 2 on the right.
+    // ───────────────────────────────────────────────────────────────────────────
     [System.Serializable]
     public class BookSpread
     {
+        [Header("Left Page Image")]
         public Sprite leftImage;
 
+        [Header("Left Page Text")]
         [TextArea(3, 10)]
         public string leftText;
 
+        [Header("Right Page Text")]
         [TextArea(3, 10)]
         public string rightText;
+
+        [Header("Style")]
+        public bool bigText;
     }
 
     [Header("Main UI")]
@@ -28,7 +46,7 @@ public class BookCanvasController : MonoBehaviour
     [Header("Right Page")]
     [SerializeField] private TMP_Text rightText;
 
-    [Header("Turning Page")]
+    [Header("Turning Page Animation")]
     [SerializeField] private RectTransform turningPage;
     [SerializeField] private TMP_Text turningText;
 
@@ -43,25 +61,36 @@ public class BookCanvasController : MonoBehaviour
     [Header("Book Pages")]
     [SerializeField] private BookSpread[] spreads;
 
-    [Header("Animation")]
+    [Header("Animation Settings")]
     [SerializeField] private float openAnimationTime = 0.2f;
     [SerializeField] private float pageTurnTime = 0.45f;
 
-    private int currentSpreadIndex;
-    private bool isAnimating;
+    private int currentSpreadIndex = 0;
+    private bool isAnimating = false;
 
     private void Start()
     {
-        bookCanvas.SetActive(false);
-        turningPage.gameObject.SetActive(false);
+        if (bookCanvas != null)
+            bookCanvas.SetActive(false);
 
-        nextButton.onClick.AddListener(NextSpread);
-        closeButton.onClick.AddListener(CloseBook);
+        if (turningPage != null)
+            turningPage.gameObject.SetActive(false);
+
+        if (nextButton != null)
+            nextButton.onClick.AddListener(NextSpread);
+
+        if (closeButton != null)
+            closeButton.onClick.AddListener(CloseBook);
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Opens the book from the first spread.
+    // Called by BookInteract when the player presses E near the bookshelf book.
+    // ───────────────────────────────────────────────────────────────────────────
     public void OpenBook()
     {
         currentSpreadIndex = 0;
+
         bookCanvas.SetActive(true);
         turningPage.gameObject.SetActive(false);
 
@@ -69,12 +98,23 @@ public class BookCanvasController : MonoBehaviour
         StartCoroutine(OpenAnimation());
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Closes the book canvas only.
+    // Player movement is restored from BookInteract.CloseBook().
+    // ───────────────────────────────────────────────────────────────────────────
     public void CloseBook()
     {
-        bookCanvas.SetActive(false);
-        turningPage.gameObject.SetActive(false);
+        if (bookCanvas != null)
+            bookCanvas.SetActive(false);
+
+        if (turningPage != null)
+            turningPage.gameObject.SetActive(false);
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Moves to the next spread using the page flip animation.
+    // If the player is already on the final spread, nothing happens.
+    // ───────────────────────────────────────────────────────────────────────────
     public void NextSpread()
     {
         if (isAnimating)
@@ -86,8 +126,15 @@ public class BookCanvasController : MonoBehaviour
         StartCoroutine(PageFlipAnimation());
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Updates the visible text and image for the current spread.
+    // If no image is assigned, LeftImage is hidden automatically.
+    // ───────────────────────────────────────────────────────────────────────────
     private void UpdatePages()
     {
+        if (spreads == null || spreads.Length == 0)
+            return;
+
         BookSpread spread = spreads[currentSpreadIndex];
 
         if (spread.leftImage != null)
@@ -103,9 +150,15 @@ public class BookCanvasController : MonoBehaviour
         leftText.text = spread.leftText;
         rightText.text = spread.rightText;
 
+        leftText.fontSize = spread.bigText ? 46 : 28;
+        rightText.fontSize = spread.bigText ? 46 : 30;
+
         nextButton.gameObject.SetActive(currentSpreadIndex < spreads.Length - 1);
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Small opening animation when the book appears.
+    // ───────────────────────────────────────────────────────────────────────────
     private IEnumerator OpenAnimation()
     {
         isAnimating = true;
@@ -118,7 +171,13 @@ public class BookCanvasController : MonoBehaviour
         {
             timer += Time.unscaledDeltaTime;
             float t = timer / openAnimationTime;
-            bookPanel.localScale = Vector3.Lerp(new Vector3(0.85f, 0.85f, 1f), Vector3.one, t);
+
+            bookPanel.localScale = Vector3.Lerp(
+                new Vector3(0.85f, 0.85f, 1f),
+                Vector3.one,
+                t
+            );
+
             yield return null;
         }
 
@@ -126,6 +185,14 @@ public class BookCanvasController : MonoBehaviour
         isAnimating = false;
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Real page flip effect:
+    // 1. Shows TurningPage above the right page.
+    // 2. Copies the current right page text onto TurningPage.
+    // 3. Rotates TurningPage around its left pivot.
+    // 4. Updates to the next spread.
+    // 5. Hides TurningPage.
+    // ───────────────────────────────────────────────────────────────────────────
     private IEnumerator PageFlipAnimation()
     {
         isAnimating = true;
@@ -135,8 +202,7 @@ public class BookCanvasController : MonoBehaviour
 
         turningPage.gameObject.SetActive(true);
         turningText.text = rightText.text;
-
-        turningPage.localRotation = Quaternion.Euler(0, 0, 0);
+        turningPage.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
         float timer = 0f;
 
@@ -146,7 +212,7 @@ public class BookCanvasController : MonoBehaviour
             float t = timer / pageTurnTime;
 
             float angle = Mathf.Lerp(0f, 180f, t);
-            turningPage.localRotation = Quaternion.Euler(0, angle, 0);
+            turningPage.localRotation = Quaternion.Euler(0f, angle, 0f);
 
             yield return null;
         }
@@ -154,7 +220,7 @@ public class BookCanvasController : MonoBehaviour
         currentSpreadIndex++;
         UpdatePages();
 
-        turningPage.localRotation = Quaternion.Euler(0, 0, 0);
+        turningPage.localRotation = Quaternion.Euler(0f, 0f, 0f);
         turningPage.gameObject.SetActive(false);
 
         isAnimating = false;

@@ -1,19 +1,30 @@
 using TMPro;
 using UnityEngine;
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// LEVEL 2 — BOOK INTERACTION
+// Opens the clue book, freezes player/camera controls while reading,
+// then restores everything when closing with X or CloseButton.
+// Attach to: IP_BookshelfBook
+// ═══════════════════════════════════════════════════════════════════════════════
 public class BookInteract : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] private Transform player;
     [SerializeField] private float interactDistance = 2.5f;
-    [SerializeField] private MonoBehaviour playerMovement;
 
-    [Header("Book")]
+    [Header("Disable While Book Is Open")]
+    [SerializeField] private MonoBehaviour[] behavioursToDisable;
+
+    [Header("Book UI")]
     [SerializeField] private BookCanvasController bookCanvasController;
 
-    [Header("Prompt")]
+    [Header("Prompt UI")]
     [SerializeField] private GameObject promptPanel;
     [SerializeField] private TMP_Text promptTextUI;
+
+    [Header("Prompt Text")]
+    [SerializeField] private string promptMessage = "PRESS E TO TAKE BOOK";
 
     private bool bookOpen;
 
@@ -25,18 +36,19 @@ public class BookInteract : MonoBehaviour
 
     private void Update()
     {
-        if (player == null)
+        if (player == null || bookCanvasController == null)
             return;
 
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearBook = distance <= interactDistance;
 
-        if (!bookOpen && promptPanel != null)
+        if (!bookOpen)
         {
-            promptPanel.SetActive(nearBook);
+            if (promptPanel != null)
+                promptPanel.SetActive(nearBook);
 
             if (nearBook && promptTextUI != null)
-                promptTextUI.text = "PRESS E TO TAKE BOOK";
+                promptTextUI.text = promptMessage;
         }
 
         if (nearBook && !bookOpen && Input.GetKeyDown(KeyCode.E))
@@ -59,8 +71,7 @@ public class BookInteract : MonoBehaviour
 
         bookCanvasController.OpenBook();
 
-        if (playerMovement != null)
-            playerMovement.enabled = false;
+        SetPlayerControls(false);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -72,10 +83,18 @@ public class BookInteract : MonoBehaviour
 
         bookCanvasController.CloseBook();
 
-        if (playerMovement != null)
-            playerMovement.enabled = true;
+        SetPlayerControls(true);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void SetPlayerControls(bool enabled)
+    {
+        foreach (MonoBehaviour behaviour in behavioursToDisable)
+        {
+            if (behaviour != null)
+                behaviour.enabled = enabled;
+        }
     }
 }
