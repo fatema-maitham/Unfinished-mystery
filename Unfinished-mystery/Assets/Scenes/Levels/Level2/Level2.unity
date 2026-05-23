@@ -12353,7 +12353,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44637fad698e45b2ba3f3d41be10a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: LevelSummary
+  summarySceneName: LevelSummary
+  title: LEVEL COMPLETE
+  levelName: LEVEL 2
+  characterName: Detective Lana Cole
+  role: Homicide Detective, Missing Persons Unit
+  loopCounterText: {fileID: 236464974}
+  maxLoops: 5
+  textShowsLoopsLeft: 0
+  fallbackLoopsUsed: 1
+  resultMessage: Lana finally faced the truth she was too afraid to reveal.
+  portrait: {fileID: 21300000, guid: 752327fcd3a5b4663b84e92d182faea7, type: 3}
+  nextSceneName: L3Badge
+  replaySceneName: Level2
 --- !u!65 &856020249
 BoxCollider:
   m_ObjectHideFlags: 0
