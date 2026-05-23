@@ -9,76 +9,87 @@ using UnityEngine.UI;
 // Uses a simple 3-digit UI panel driven by ActivationDialogUI's image panel
 // swapped for a custom code-entry panel.
 // ═══════════════════════════════════════════════════════════════════════════════
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
+/// <summary>
+/// Puzzle 3 — Locked Desk Drawer
+/// Two gate checks: desk phase AND bookshelf phase must both be complete.
+/// Player enters 3-digit code 433 via a UI panel.
+/// Code logic: first words on pages 12, 31, 53 of the book are WHEN (4), YOU (3), LIE (3).
+/// On success: reveals USB drive + Lynnette's sticky note inside.
+/// Re-interacting after unlock just shows the drawer contents.
+/// Close the code panel with Escape without submitting.
+/// </summary>
 public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
 {
     [Header("Prompt")]
-    [SerializeField] private string label         = "Examine";
-    [SerializeField] private string subLabel      = "Locked Drawer";
+    [SerializeField] private string label            = "Examine Lock";
+    [SerializeField] private string subLabel         = "Locked Drawer";
     [SerializeField] private float  activationRadius = 1.5f;
 
     [Header("Blocked Messages")]
-    [SerializeField] private string blockedEarlyMessage =
-        "A locked drawer. You need to figure out the combination first.";
     [SerializeField] private string blockedNoDeskMessage =
         "You can't open it yet. Examine the desk first.";
+    [SerializeField] private string blockedNoBookshelfMessage =
+        "A locked drawer. You need to figure out the combination first.";
 
     [Header("Code Entry UI")]
-    [Tooltip("Assign the DrawerCodePanel prefab (separate Canvas panel, starts disabled)")]
-    [SerializeField] private GameObject codeEntryPanel;
+    [Tooltip("A panel under HUD_Canvas — needs InputField, Button (Submit), and TMP_Text (feedback)")]
+    [SerializeField] private GameObject     codeEntryPanel;
     [SerializeField] private TMP_InputField codeInputField;
-    [SerializeField] private Button submitButton;
-    [SerializeField] private TMP_Text feedbackText;
-
-    [Header("On Success")]
-    [SerializeField] private Sprite drawerContentsImage; // USB + sticky note image
-    [TextArea(2, 5)]
-    [SerializeField] private string successText =
-        "The drawer clicks open.\n\nInside: A USB drive labeled \"N.O. — Final Submission\"\n" +
-        "A sticky note in Lynnette's handwriting:\n\"It's all on the drive. Everything you told me to delete. I didn't.\"";
+    [SerializeField] private Button         submitButton;
+    [SerializeField] private TMP_Text       feedbackText;
 
     [Header("Correct Code")]
     [SerializeField] private string correctCode = "433";
 
+    [Header("On Success")]
+    [Tooltip("Optional image of the open drawer — USB and sticky note inside")]
+    [SerializeField] private Sprite drawerContentsImage;
+    [TextArea(2, 5)]
+    [SerializeField] private string successText =
+        "The drawer clicks open.\n\n" +
+        "Inside: A USB drive labeled \"N.O. — Final Submission\"\n\n" +
+        "A sticky note in Lynnette's handwriting:\n" +
+        "\"It's all on the drive. Everything you told me to delete. I didn't.\"";
+
+    // ── State ─────────────────────────────────────────────────────────────────
     private bool _unlocked = false;
 
-    public string ActivationLabel  => _unlocked ? "Open" : "Examine Lock";
+    // ── IActivatable ──────────────────────────────────────────────────────────
+    public string ActivationLabel  => _unlocked ? "Open" : label;
     public string ActivationHint   => subLabel;
     public bool   CanActivate      => true;
     public float  ActivationRadius => activationRadius;
 
     private void Start()
     {
-        if (submitButton != null)
-            submitButton.onClick.AddListener(OnSubmitCode);
-
-        if (codeEntryPanel != null)
-            codeEntryPanel.SetActive(false);
+        if (submitButton    != null) submitButton.onClick.AddListener(OnSubmitCode);
+        if (codeEntryPanel  != null) codeEntryPanel.SetActive(false);
     }
 
     public void OnActivate(GameObject source)
     {
-        // Already unlocked — just show contents
         if (_unlocked)
         {
             ShowDrawerContents();
             return;
         }
 
-        // Gate: desk must be done first
         if (!Level1PuzzleSystem.Instance.DeskPhaseComplete)
         {
             Level1PuzzleSystem.ShowBlocked(blockedNoDeskMessage);
             return;
         }
 
-        // Gate: bookshelf must be done to get the combination
         if (!Level1PuzzleSystem.Instance.BookshelfPhaseComplete)
         {
-            Level1PuzzleSystem.ShowBlocked(blockedEarlyMessage);
+            Level1PuzzleSystem.ShowBlocked(blockedNoBookshelfMessage);
             return;
         }
 
-        // Open code entry panel
         OpenCodeEntry();
     }
 
@@ -88,14 +99,14 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
         {
             codeEntryPanel.SetActive(true);
             Time.timeScale = 0f;
-            if (feedbackText != null) feedbackText.text = "";
+            if (feedbackText  != null) feedbackText.text  = "";
             if (codeInputField != null) codeInputField.text = "";
         }
         else
         {
-            // Fallback if no UI panel assigned — prompt via dialog
+            // Fallback if no panel assigned
             ActivationDialogUI.ShowText(
-                "Enter the 3-digit combination.\nHint: Count the letters in WHEN, YOU, LIE.",
+                "Enter the 3-digit combination.\n\nHint: Count the letters in WHEN, YOU, LIE.",
                 "Locked Drawer");
         }
     }
@@ -135,16 +146,11 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
             ActivationDialogUI.ShowText(successText, "Desk Drawer");
     }
 
-    // Allow closing panel with E key
     private void Update()
     {
         if (codeEntryPanel != null && codeEntryPanel.activeSelf)
-        {
             if (Input.GetKeyDown(KeyCode.Escape))
-            {
                 CloseCodeEntry();
-            }
-        }
     }
 
     public void OnActivatableFocus() { }
