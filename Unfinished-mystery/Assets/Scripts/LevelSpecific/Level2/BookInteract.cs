@@ -19,23 +19,19 @@ public class BookInteract : MonoBehaviour
 
     private void Start()
     {
-        if (promptPanel != null)
-            promptPanel.SetActive(false);
+        promptPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (player == null)
-            return;
-
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearBook = distance <= interactDistance;
 
-        if (!bookOpen && promptPanel != null)
+        if (!bookOpen)
         {
             promptPanel.SetActive(nearBook);
 
-            if (nearBook && promptTextUI != null)
+            if (nearBook)
                 promptTextUI.text = "PRESS E TO TAKE BOOK";
         }
 
@@ -53,9 +49,7 @@ public class BookInteract : MonoBehaviour
     private void OpenBook()
     {
         bookOpen = true;
-
-        if (promptPanel != null)
-            promptPanel.SetActive(false);
+        promptPanel.SetActive(false);
 
         bookCanvasController.OpenBook();
 

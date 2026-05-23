@@ -1,144 +1,138 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BookController : MonoBehaviour
+public class BookCanvasController : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Transform player;
-    [SerializeField] private float interactDistance = 2.5f;
-    [SerializeField] private MonoBehaviour playerMovement;
+    [System.Serializable]
+    public class BookSpread
+    {
+        public Sprite leftImage;
 
-    [Header("UI")]
+        [TextArea(3, 10)]
+        public string leftText;
+
+        [TextArea(3, 10)]
+        public string rightText;
+
+        public bool bigText;
+    }
+
+    [Header("Main UI")]
     [SerializeField] private GameObject bookCanvas;
-    [SerializeField] private GameObject promptPanel;
-    [SerializeField] private TMP_Text promptTextUI;
-    [SerializeField] private TMP_Text bookPageText;
-    [SerializeField] private TMP_Text pageNumberText;
+    [SerializeField] private RectTransform bookPanel;
+
+    [Header("Content")]
+    [SerializeField] private Image leftImage;
+    [SerializeField] private TMP_Text leftText;
+    [SerializeField] private TMP_Text rightText;
+
+    [Header("Turning Page")]
+    [SerializeField] private RectTransform turningPage;
+    [SerializeField] private TMP_Text turningText;
 
     [Header("Buttons")]
     [SerializeField] private Button nextButton;
-    [SerializeField] private Button prevButton;
     [SerializeField] private Button closeButton;
 
-    [Header("Book Pages")]
-    [TextArea(4, 10)]
-    [SerializeField] private string[] pages =
-    {
-        "PAGE 1\n\nInvestigation Note\n\nHe never left the scene.\nHe stayed in uniform.",
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip pageTurnSound;
 
-        "PAGE 2\n\nThe child remembered a number:\n\n259\n\nTwo windows. Five books. Nine marks.",
+    [Header("Pages")]
+    [SerializeField] private BookSpread[] spreads;
 
-        "PAGE 3\n\nOfficer Photograph\n\nBadge Number: 259\n\nThe drawing was not random.\nIt was a memory."
-    };
+    [Header("Animation")]
+    [SerializeField] private float pageTurnTime = 0.45f;
 
-    private int currentPage;
-    private bool bookOpen;
+    private int currentIndex;
+    private bool isAnimating;
 
     private void Start()
     {
         bookCanvas.SetActive(false);
-        promptPanel.SetActive(false);
+        turningPage.gameObject.SetActive(false);
 
-        nextButton.onClick.AddListener(NextPage);
-        prevButton.onClick.AddListener(PreviousPage);
-        closeButton.onClick.AddListener(CloseBook);
+        nextButton.onClick.AddListener(NextSpread);
     }
 
-    private void Update()
+    public void OpenBook()
     {
-        float distance = Vector3.Distance(player.position, transform.position);
-        bool nearBook = distance <= interactDistance;
-
-        if (!bookOpen)
-        {
-            promptPanel.SetActive(nearBook);
-
-            if (nearBook)
-                promptTextUI.text = "PRESS E TO TAKE BOOK";
-        }
-
-        if (nearBook && !bookOpen && Input.GetKeyDown(KeyCode.E))
-        {
-            OpenBook();
-        }
-
-        if (bookOpen && Input.GetKeyDown(KeyCode.X))
-        {
-            CloseBook();
-        }
-
-        if (bookOpen && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            NextPage();
-        }
-
-        if (bookOpen && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            PreviousPage();
-        }
-    }
-
-    private void OpenBook()
-    {
-        bookOpen = true;
-        currentPage = 0;
-
+        currentIndex = 0;
         bookCanvas.SetActive(true);
-        promptPanel.SetActive(false);
-
-        if (playerMovement != null)
-            playerMovement.enabled = false;
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
+        turningPage.gameObject.SetActive(false);
         UpdatePage();
     }
 
-    private void CloseBook()
+    public void CloseBook()
     {
-        bookOpen = false;
-
         bookCanvas.SetActive(false);
-
-        if (playerMovement != null)
-            playerMovement.enabled = true;
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        turningPage.gameObject.SetActive(false);
     }
 
-    private void NextPage()
+    public void NextSpread()
     {
-        if (!bookOpen)
-            return;
+        if (isAnimating) return;
+        if (currentIndex >= spreads.Length - 1) return;
 
-        if (currentPage < pages.Length - 1)
-        {
-            currentPage++;
-            UpdatePage();
-        }
-    }
-
-    private void PreviousPage()
-    {
-        if (!bookOpen)
-            return;
-
-        if (currentPage > 0)
-        {
-            currentPage--;
-            UpdatePage();
-        }
+        StartCoroutine(PageFlip());
     }
 
     private void UpdatePage()
     {
-        bookPageText.text = pages[currentPage];
-        pageNumberText.text = "Page " + (currentPage + 1) + " / " + pages.Length;
+        BookSpread spread = spreads[currentIndex];
 
-        prevButton.gameObject.SetActive(currentPage > 0);
-        nextButton.gameObject.SetActive(currentPage < pages.Length - 1);
+        if (spread.leftImage != null)
+        {
+            leftImage.gameObject.SetActive(true);
+            leftImage.sprite = spread.leftImage;
+        }
+        else
+        {
+            leftImage.gameObject.SetActive(false);
+        }
+
+        leftText.text = spread.leftText;
+        rightText.text = spread.rightText;
+
+        int size = spread.bigText ? 46 : 30;
+        leftText.fontSize = size;
+        rightText.fontSize = size;
+
+        nextButton.gameObject.SetActive(currentIndex < spreads.Length - 1);
+    }
+
+    private IEnumerator PageFlip()
+    {
+        isAnimating = true;
+
+        if (audioSource != null && pageTurnSound != null)
+            audioSource.PlayOneShot(pageTurnSound);
+
+        turningPage.gameObject.SetActive(true);
+        turningText.text = rightText.text;
+        turningPage.localRotation = Quaternion.Euler(0, 0, 0);
+
+        float timer = 0f;
+
+        while (timer < pageTurnTime)
+        {
+            timer += Time.unscaledDeltaTime;
+            float t = timer / pageTurnTime;
+
+            float angle = Mathf.Lerp(0f, 180f, t);
+            turningPage.localRotation = Quaternion.Euler(0, angle, 0);
+
+            yield return null;
+        }
+
+        currentIndex++;
+        UpdatePage();
+
+        turningPage.localRotation = Quaternion.Euler(0, 0, 0);
+        turningPage.gameObject.SetActive(false);
+
+        isAnimating = false;
     }
 }
