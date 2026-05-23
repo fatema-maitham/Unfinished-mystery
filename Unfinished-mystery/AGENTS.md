@@ -9,6 +9,7 @@
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
   - Name: BookCanvas
+  - Name: HUD_Canvas
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
