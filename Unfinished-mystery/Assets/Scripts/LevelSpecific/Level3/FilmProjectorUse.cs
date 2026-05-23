@@ -43,7 +43,12 @@ public TVStaticSoundController tvStaticController;
 public AudioSource glitchSound;
 
 
+[Header("Final Code Reveal")]
+[SerializeField] private Texture finalCodeTexture; // Screen_FinalCode_0427
+[SerializeField] private float glitchDelay = 0.6f;
 
+[TextArea(2, 3)]
+[SerializeField] private string finalCodeMessage = "The final frame reveals a code.";
 
 
 
@@ -72,6 +77,31 @@ private void Start()
 
     ShowIdleScreen();
 }
+
+
+private IEnumerator RevealFinalCodeSequence()
+{
+    yield return null;
+
+    if (videoPlayer != null)
+    {
+        videoPlayer.Stop();
+        videoPlayer.clip = null;
+    }
+
+    if (screenRenderer != null && finalCodeTexture != null)
+    {
+        screenRenderer.material.mainTexture = finalCodeTexture;
+        screenRenderer.material.SetTexture("_BaseMap", finalCodeTexture);
+    }
+
+    if (exitRedWarningLight != null)
+    {
+        exitRedWarningLight.StartFlicker();
+    }
+}
+
+
 
 public void NotifyReelCollected(int reelNumber)
 {
@@ -199,7 +229,7 @@ private void PlayReel(int reelNumber)
 
     if (videoPlayer == null)
         return;
-
+    videoPlayer.enabled = true;
     videoPlayer.Stop();
     videoPlayer.time = 0;
     videoPlayer.clip = GetReelClip(reelNumber);
@@ -211,13 +241,22 @@ private void OnVideoFinished(VideoPlayer vp)
     videoPlaying = false;
 
     vp.Stop();
-    ShowIdleScreen();
+
+    if (currentReelNumber != 3)
+    {
+        ShowIdleScreen();
+    }
 
     if (isReplay)
-    {
-        UpdatePrompt();
-        return;
-    }
+        {
+            if (currentReelNumber == 3)
+            {
+                StartCoroutine(RevealFinalCodeSequence());
+            }
+
+            UpdatePrompt();
+            return;
+        }
 
     if (currentReelNumber == 1 && !reel1Watched)
     {
@@ -251,21 +290,22 @@ private void OnVideoFinished(VideoPlayer vp)
             "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
         ));
     }
-    else if (currentReelNumber == 3 && !reel3Watched)
-    {
-        reel3Watched = true;
+        else if (currentReelNumber == 3 && !reel3Watched)
+        {
+            reel3Watched = true;
 
-        if (tvStaticController != null)
-            tvStaticController.StopStaticPermanently();
+            if (tvStaticController != null)
+                tvStaticController.StopStaticPermanently();
 
-        StartCoroutine(ShowDiscoveryThenPrompt(
-            "Final reel discovered: Maya never escaped."
-        ));
-    }
-    else
-    {
-        UpdatePrompt();
-    }
+            StartCoroutine(ShowDiscoveryThenPrompt(
+                "Final reel discovered: Maya never escaped."));
+
+            StartCoroutine(RevealFinalCodeSequence());
+        }
+        else
+        {
+            UpdatePrompt();
+        }
 }
 
 private IEnumerator ShowDiscoveryThenPrompt(string message)
