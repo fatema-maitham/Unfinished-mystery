@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: TMP SubMeshUI [DS-DIGIB SDF Material + LiberationSans SDF Atlas]
+  - Name: Point Light
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

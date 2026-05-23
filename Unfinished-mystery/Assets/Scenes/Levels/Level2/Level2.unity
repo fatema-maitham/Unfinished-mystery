@@ -5099,7 +5099,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -8382,7 +8382,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -10888,7 +10888,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -11089,6 +11089,7 @@ GameObject:
   - component: {fileID: 781426644}
   - component: {fileID: 781426643}
   - component: {fileID: 781426645}
+  - component: {fileID: 781426646}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -11173,7 +11174,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -11211,6 +11212,23 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &781426646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781426641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a307320ececa4927a82538e4780c159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneLight: {fileID: 0}
+  minTimeBetweenFlickers: 3
+  maxTimeBetweenFlickers: 10
+  flickerDuration: 0.1
+  currentLoop: 1
 --- !u!1 &781517742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8077967208893431752, guid: b3770a25f84a3274ca3848a0e16463a1, type: 3}
@@ -11982,6 +12000,7 @@ GameObject:
   - component: {fileID: 833053906}
   - component: {fileID: 833053905}
   - component: {fileID: 833053907}
+  - component: {fileID: 833053908}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -12104,6 +12123,23 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &833053908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833053903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a307320ececa4927a82538e4780c159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneLight: {fileID: 833053906}
+  minTimeBetweenFlickers: 5
+  maxTimeBetweenFlickers: 11
+  flickerDuration: 0.06
+  currentLoop: 1
 --- !u!1 &838939301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5374360715843893824, guid: 7bdde7ff3b8673e4dabf168f11f76755, type: 3}
@@ -14499,7 +14535,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -16335,7 +16371,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -17271,7 +17307,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -19874,7 +19910,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -23232,7 +23268,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -23416,7 +23452,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -26129,7 +26165,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -27519,7 +27555,7 @@ Transform:
   m_GameObject: {fileID: 1760054016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7075182, z: -0, w: -0.70669514}
-  m_LocalPosition: {x: -0.683, y: 0.25982735, z: 0.037}
+  m_LocalPosition: {x: -0.708, y: 0.25982735, z: 0.03}
   m_LocalScale: {x: 1.1583205, y: 1.1583204, z: 1.1583205}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27587,7 +27623,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
