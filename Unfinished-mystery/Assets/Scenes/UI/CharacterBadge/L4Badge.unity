@@ -251,8 +251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"A student left you something before they disappeared. Find it. Read it.
-    Understand what you did."'
+  m_text: "\u201CSome records were changed.\nFind the originals. Prove what was erased.\u201D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
@@ -388,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: kyryll Flins
+  m_text: OMAR NASSER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
   m_sharedMaterial: {fileID: -7342831934551118139, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
@@ -861,7 +860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mathematics professor
+  m_text: ARCHIVE PHOTOGRAPHER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}
   m_sharedMaterial: {fileID: 3129420092240168762, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}
@@ -1074,9 +1073,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Three days ago, your most gifted student Lynnette vanished without a trace.
-    The university says she dropped out. You know that's not true you were the last
-    person to see her.
+  m_text: 'Omar Nasser worked inside a quiet university archive, surrounded by photographs,
+    documents, and old records.
+
+    At first, everything looks organized.
+
+    But
+    the deeper he searches, the clearer it becomes that someone altered the evidence
+    and removed the truth from history.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
