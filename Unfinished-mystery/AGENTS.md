@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: rumGlass (1)
+  - Name: HUD_Canvas
   - Tag: Untagged
-  - Layer: Interactable
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
