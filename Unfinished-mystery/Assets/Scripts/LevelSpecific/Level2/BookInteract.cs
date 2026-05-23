@@ -1,6 +1,13 @@
 using TMPro;
 using UnityEngine;
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// LEVEL 2 — BOOK INTERACTION
+// Lets the player take/open the clue book near the bookshelf.
+// Shows the prompt, opens the BookCanvas, freezes player movement,
+// and restores movement when the book closes.
+// Attach this script to: IP_BookshelfBook
+// ═══════════════════════════════════════════════════════════════════════════════
 public class BookInteract : MonoBehaviour
 {
     [Header("Player")]
@@ -8,31 +15,39 @@ public class BookInteract : MonoBehaviour
     [SerializeField] private float interactDistance = 2.5f;
     [SerializeField] private MonoBehaviour playerMovement;
 
-    [Header("Book")]
+    [Header("Book UI")]
     [SerializeField] private BookCanvasController bookCanvasController;
 
-    [Header("Prompt")]
+    [Header("Prompt UI")]
     [SerializeField] private GameObject promptPanel;
     [SerializeField] private TMP_Text promptTextUI;
 
-    private bool bookOpen;
+    [Header("Prompt Text")]
+    [SerializeField] private string promptMessage = "PRESS E TO TAKE BOOK";
+
+    private bool bookOpen = false;
 
     private void Start()
     {
-        promptPanel.SetActive(false);
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
     }
 
     private void Update()
     {
+        if (player == null)
+            return;
+
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearBook = distance <= interactDistance;
 
         if (!bookOpen)
         {
-            promptPanel.SetActive(nearBook);
+            if (promptPanel != null)
+                promptPanel.SetActive(nearBook);
 
-            if (nearBook)
-                promptTextUI.text = "PRESS E TO TAKE BOOK";
+            if (nearBook && promptTextUI != null)
+                promptTextUI.text = promptMessage;
         }
 
         if (nearBook && !bookOpen && Input.GetKeyDown(KeyCode.E))
@@ -46,12 +61,18 @@ public class BookInteract : MonoBehaviour
         }
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Opens the book and disables player movement while reading.
+    // ───────────────────────────────────────────────────────────────────────────
     private void OpenBook()
     {
         bookOpen = true;
-        promptPanel.SetActive(false);
 
-        bookCanvasController.OpenBook();
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
+
+        if (bookCanvasController != null)
+            bookCanvasController.OpenBook();
 
         if (playerMovement != null)
             playerMovement.enabled = false;
@@ -60,11 +81,16 @@ public class BookInteract : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    // ───────────────────────────────────────────────────────────────────────────
+    // Closes the book and restores player movement.
+    // This can be called by X/Escape or by the CloseButton OnClick.
+    // ───────────────────────────────────────────────────────────────────────────
     public void CloseBook()
     {
         bookOpen = false;
 
-        bookCanvasController.CloseBook();
+        if (bookCanvasController != null)
+            bookCanvasController.CloseBook();
 
         if (playerMovement != null)
             playerMovement.enabled = true;
