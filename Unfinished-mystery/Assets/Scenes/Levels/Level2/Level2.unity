@@ -1908,7 +1908,7 @@ MonoBehaviour:
 
       He stayed in uniform.'
     bigText: 0
-  - leftImage: {fileID: 21300000, guid: 7ee8205f8542d4682b0b322662f2adec, type: 3}
+  - leftImage: {fileID: 21300000, guid: 7ea040732721644f9b644b8ea9e14734, type: 3}
     leftText: 'Badge 259
 
       The drawing was never random.
@@ -2980,7 +2980,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 198532587}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1620906956}
+        m_TargetAssemblyTypeName: BookInteract, Assembly-CSharp
+        m_MethodName: CloseBook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &198532587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24484,7 +24496,7 @@ GameObject:
   - component: {fileID: 1620906953}
   - component: {fileID: 1620906956}
   m_Layer: 0
-  m_Name: IP_Book
+  m_Name: IP_BookshelfBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24567,7 +24579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
   interactDistance: 2.5
-  playerMovement: {fileID: 603546222}
+  behavioursToDisable: []
   bookCanvasController: {fileID: 112096714}
   promptPanel: {fileID: 533129713}
   promptTextUI: {fileID: 1898956824}
