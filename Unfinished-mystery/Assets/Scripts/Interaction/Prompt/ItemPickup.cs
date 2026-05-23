@@ -5,7 +5,8 @@ public class ItemPickup : MonoBehaviour
 {
     [Header("Prompt")]
     [SerializeField] private InteractionPromptUI promptUI;
-    [SerializeField] private string promptText = "Pick up item";
+    [SerializeField] private string promptText = "PICK UP";
+    [SerializeField] private string promptSubLabel = "Item";
 
     [Header("Inventory Item")]
     [SerializeField] private Item item;
@@ -78,7 +79,7 @@ public class ItemPickup : MonoBehaviour
         pickupHandler = other.GetComponent<ItemPickupHandler>();
 
         if (promptUI != null)
-            promptUI.ShowPrompt(promptText);
+            promptUI.ShowPrompt(promptText, promptSubLabel);
     }
 
     private void OnTriggerExit(Collider other)
