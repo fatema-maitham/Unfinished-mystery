@@ -4400,6 +4400,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2317834264836139833, guid: c911534bde778374082f8aa8468dca94, type: 3}
   m_PrefabInstance: {fileID: 268979662}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &270303602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 195324717624486639, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
+  m_PrefabInstance: {fileID: 806198308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &273776406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11833,6 +11838,10 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 5df797b1ce679524cb549e0db05dd10a, type: 2}
   amount: 1
   destroyAfterPickup: 1
+  flickerToStopOnPickup: {fileID: 0}
+  inspectToDisableOnPickup: {fileID: 0}
+  projectorToNotify: {fileID: 0}
+  collectedReelNumber: 0
 --- !u!1001 &680196717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13431,13 +13440,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 195324717624486639, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 806198313}
   m_SourcePrefab: {fileID: 100100000, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
 --- !u!4 &806198309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 195324717624486643, guid: d19a283fb471f084c856369e8ffff06f, type: 3}
   m_PrefabInstance: {fileID: 806198308}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &806198313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270303602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Read
+  subLabel: 
+  displayMode: 0
+  signText: Enter your text here.
+  speakerName: 
+  revealImage: {fileID: 0}
+  activationRadius: 1.5
 --- !u!1001 &806970662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30471,7 +30502,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Read
   subLabel: notice board
+  displayMode: 0
   signText: 'Danger: dont enter'
+  speakerName: 
+  revealImage: {fileID: 0}
   activationRadius: 1.5
 --- !u!1001 &1811925783
 PrefabInstance:
