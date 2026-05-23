@@ -387,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ali mohamed
+  m_text: Daniel Pierce
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
   m_sharedMaterial: {fileID: -7342831934551118139, guid: 765fcdde1956f4f2ab0169f10bcc6503, type: 2}
@@ -1073,8 +1073,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ali Mohamed worked inside a quiet university archive, surrounded by photographs,
-    documents, and old records.
+  m_text: 'Daniel Pierce worked inside a quiet university archive, surrounded by
+    photographs, documents, and old records.
 
     At first, everything looks organized.
 
