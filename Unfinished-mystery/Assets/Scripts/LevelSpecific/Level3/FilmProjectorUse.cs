@@ -239,21 +239,29 @@ private void OnVideoFinished(VideoPlayer vp)
     {
         reel2Watched = true;
 
+        if (tvStaticController != null)
+        {
+            if (!reel3Collected && !reel3Watched)
+                tvStaticController.StartStatic();
+            else
+                tvStaticController.StopStaticPermanently();
+        }
+
         StartCoroutine(ShowDiscoveryThenPrompt(
             "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
         ));
     }
-   else if (currentReelNumber == 3 && !reel3Watched)
-{
-    reel3Watched = true;
+    else if (currentReelNumber == 3 && !reel3Watched)
+    {
+        reel3Watched = true;
 
-    if (tvStaticController != null)
-        tvStaticController.StopStaticPermanently();
+        if (tvStaticController != null)
+            tvStaticController.StopStaticPermanently();
 
-    StartCoroutine(ShowDiscoveryThenPrompt(
-        "Final reel discovered: Maya never escaped."
-    ));
-}
+        StartCoroutine(ShowDiscoveryThenPrompt(
+            "Final reel discovered: Maya never escaped."
+        ));
+    }
     else
     {
         UpdatePrompt();
