@@ -55,8 +55,8 @@ public class NoteReader : MonoBehaviour
         {
             playerInRange = true;
             if (!noteOpen && interactPrompt != null)
-                interactPrompt.ShowPrompt("Read Clue");
-        }
+                interactPrompt.ShowPrompt("READ", "Clue"); 
+                      }
 
         if (!nearNote && playerInRange)
         {
@@ -81,7 +81,7 @@ public class NoteReader : MonoBehaviour
             notePanel.SetActive(true);
 
         if (noteText != null)
-            noteText.text = message;
+    noteText.text = "The last ticket was sold at 8:10 PM.\nShe entered alone.";
 
         if (interactPrompt != null)
             interactPrompt.HidePrompt();
@@ -95,6 +95,6 @@ public class NoteReader : MonoBehaviour
             notePanel.SetActive(false);
 
         if (playerInRange && interactPrompt != null)
-            interactPrompt.ShowPrompt("Read");
-    }
+        interactPrompt.ShowPrompt("READ", "Clue"); 
+           }
 }
