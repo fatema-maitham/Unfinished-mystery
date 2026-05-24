@@ -1,12 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LEVEL 2 — GRAMOPHONE MESSAGE
-// Before the bookshelf clue is complete, the gramophone shows no prompt.
 // After the final book spread is reached, the gramophone becomes playable.
-// Attach this script to: IP_Gramophone
-// ═══════════════════════════════════════════════════════════════════════════════
 public class GramophoneInteract : MonoBehaviour
 {
     [Header("Player")]
@@ -15,26 +10,21 @@ public class GramophoneInteract : MonoBehaviour
     [SerializeField] private KeyCode playKey = KeyCode.P;
 
     [Header("Prompt UI")]
-    [SerializeField] private GameObject promptPanel;
-    [SerializeField] private TMP_Text promptTextUI;
+    [SerializeField] private ActivationPromptUI promptUI;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip gramophoneMessage;
 
-    [Header("Prompt Messages")]
-    [SerializeField] private string playPrompt = "PRESS P TO PLAY";
+    [Header("Prompt")]
+    [SerializeField] private string label = "Play";
+    [SerializeField] private string subLabel = "Gramophone";
 
     private bool messagePlayed = false;
 
-    private void Start()
-    {
-        HidePrompt();
-    }
-
     private void Update()
     {
-        if (player == null)
+        if (player == null || promptUI == null)
             return;
 
         bool nearGramophone = Vector3.Distance(player.position, transform.position) <= interactDistance;
@@ -44,11 +34,11 @@ public class GramophoneInteract : MonoBehaviour
 
         if (!nearGramophone || !bookshelfDone || messagePlayed)
         {
-            HidePrompt();
+            promptUI.HidePrompt();
             return;
         }
 
-        ShowPrompt(playPrompt);
+        promptUI.ShowPrompt(label, subLabel);
 
         if (Input.GetKeyDown(playKey))
             PlayMessage();
@@ -57,26 +47,11 @@ public class GramophoneInteract : MonoBehaviour
     private void PlayMessage()
     {
         messagePlayed = true;
-        HidePrompt();
+        promptUI.HidePrompt();
 
         if (audioSource != null && gramophoneMessage != null)
             audioSource.PlayOneShot(gramophoneMessage);
 
         Level2PuzzleSystem.Instance?.PlayGramophone();
-    }
-
-    private void ShowPrompt(string message)
-    {
-        if (promptPanel == null || promptTextUI == null)
-            return;
-
-        promptPanel.SetActive(true);
-        promptTextUI.text = message;
-    }
-
-    private void HidePrompt()
-    {
-        if (promptPanel != null)
-            promptPanel.SetActive(false);
     }
 }
