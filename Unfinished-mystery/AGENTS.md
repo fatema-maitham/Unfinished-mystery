@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: ClueBookCanvas
+  - Name: Text (TMP)
   - Tag: Untagged
   - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

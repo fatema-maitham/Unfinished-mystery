@@ -68,11 +68,8 @@ public class BookCanvasController : MonoBehaviour
     private bool isAnimating = false;
     private bool bookshelfClueReported = false;
 
-  private void Start()
+private void Start()
 {
-if (bookPanel != null)
-    bookPanel.gameObject.SetActive(false);
-
     if (bookPanel != null)
         bookPanel.gameObject.SetActive(false);
 
@@ -94,7 +91,14 @@ public void OpenBook()
     currentSpreadIndex = 0;
     bookshelfClueReported = false;
 
-    bookPanel.gameObject.SetActive(true);
+    if (bookPanel != null)
+    {
+        bookPanel.gameObject.SetActive(true);
+        bookPanel.SetAsLastSibling();
+        bookPanel.anchoredPosition = new Vector2(0f, 80f);
+        bookPanel.sizeDelta = new Vector2(1055f, 623f);
+        bookPanel.localScale = Vector3.one;
+    }
 
     UpdatePages();
     StartCoroutine(OpenAnimation());
@@ -106,7 +110,8 @@ public void OpenBook()
     // ───────────────────────────────────────────────────────────────────────────
 public void CloseBook()
 {
-    bookPanel.gameObject.SetActive(false);
+    if (bookPanel != null)
+        bookPanel.gameObject.SetActive(false);
 }
 
     // ───────────────────────────────────────────────────────────────────────────
