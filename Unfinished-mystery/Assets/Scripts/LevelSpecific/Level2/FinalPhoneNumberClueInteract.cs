@@ -7,10 +7,9 @@ using UnityEngine.UI;
 // Flow:
 // 1) Player approaches painting_3.
 // 2) Prompt appears.
-// 3) Press E → small front paper image appears.
-// 4) Press E → flips to back paper image.
-// 5) Press E → black DialogRoot appears with the phone number text.
-// 6) Press E → closes everything.
+// 3) Press E → small torn paper image with the phone number appears.
+// 4) Press E again → image hides and DialogRoot black text panel appears.
+// 5) Press E again → closes everything.
 // Attach this script to: painting_3
 // ═══════════════════════════════════════════════════════════════════════════════
 public class FinalPhoneNumberClueInteract : MonoBehaviour
@@ -25,20 +24,22 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
     [SerializeField] private string promptLabel = "Inspect";
     [SerializeField] private string promptSubLabel = "Wall Frame";
 
-    [Header("Small Paper Image UI")]
-    [SerializeField] private GameObject imagePanel;
-    [SerializeField] private Image displayImage;
-    [SerializeField] private Sprite frontPaperImage;
-    [SerializeField] private Sprite backPaperImage;
-
-    [Header("Dialog UI")]
+    [Header("DialogRoot UI")]
     [SerializeField] private GameObject dialogRoot;
+    [SerializeField] private GameObject textPanel;
+    [SerializeField] private GameObject imagePanel;
+
+    [Header("Image UI")]
+    [SerializeField] private Image displayImage;
+    [SerializeField] private Sprite phoneNumberPaperImage;
+
+    [Header("Text UI")]
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogBodyText;
     [SerializeField] private TMP_Text continueHintText;
 
     [Header("Dialog Text")]
-    [SerializeField] private string dialogTitle = "TORN PAPER — BACK";
+    [SerializeField] private string dialogTitle = "Torn paper - BACK";
 
     [TextArea(4, 10)]
     [SerializeField] private string dialogBody =
@@ -49,9 +50,8 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
     private enum ClueState
     {
         Closed,
-        ShowingFront,
-        ShowingBack,
-        ShowingDialog
+        ShowingImage,
+        ShowingText
     }
 
     private ClueState state = ClueState.Closed;
@@ -59,11 +59,7 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
 
     private void Start()
     {
-        if (imagePanel != null)
-            imagePanel.SetActive(false);
-
-        if (dialogRoot != null)
-            dialogRoot.SetActive(false);
+        HideAll();
     }
 
     private void Update()
@@ -90,64 +86,53 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
         promptUI.ShowPrompt(promptLabel, promptSubLabel);
 
         if (Input.GetKeyDown(interactKey))
-            OpenFrontImage();
+            ShowPhoneNumberImage();
     }
 
-    private void OpenFrontImage()
+    private void ShowPhoneNumberImage()
     {
-        state = ClueState.ShowingFront;
+        state = ClueState.ShowingImage;
         promptUI.HidePrompt();
+
+        if (dialogRoot != null)
+            dialogRoot.SetActive(true);
+
+        if (textPanel != null)
+            textPanel.SetActive(false);
 
         if (imagePanel != null)
             imagePanel.SetActive(true);
 
-        if (displayImage != null && frontPaperImage != null)
-            displayImage.sprite = frontPaperImage;
-
-        if (continueHintText != null)
-            continueHintText.text = "E Flip Over";
-    }
-
-    private void ContinueClue()
-    {
-        if (state == ClueState.ShowingFront)
-        {
-            ShowBackImage();
-            return;
-        }
-
-        if (state == ClueState.ShowingBack)
-        {
-            ShowDialog();
-            return;
-        }
-
-        if (state == ClueState.ShowingDialog)
-        {
-            CloseClue();
-        }
-    }
-
-    private void ShowBackImage()
-    {
-        state = ClueState.ShowingBack;
-
-        if (displayImage != null && backPaperImage != null)
-            displayImage.sprite = backPaperImage;
+        if (displayImage != null && phoneNumberPaperImage != null)
+            displayImage.sprite = phoneNumberPaperImage;
 
         if (continueHintText != null)
             continueHintText.text = "E Continue";
     }
 
-    private void ShowDialog()
+    private void ContinueClue()
     {
-        state = ClueState.ShowingDialog;
+        if (state == ClueState.ShowingImage)
+        {
+            ShowBlackDialogText();
+            return;
+        }
+
+        if (state == ClueState.ShowingText)
+        {
+            CloseClue();
+        }
+    }
+
+    private void ShowBlackDialogText()
+    {
+        state = ClueState.ShowingText;
 
         if (imagePanel != null)
             imagePanel.SetActive(false);
 
-        if (dialogRoot != null)
-            dialogRoot.SetActive(true);
+        if (textPanel != null)
+            textPanel.SetActive(true);
 
         if (speakerNameText != null)
             speakerNameText.text = dialogTitle;
@@ -168,11 +153,18 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
     private void CloseClue()
     {
         state = ClueState.Closed;
+        HideAll();
+    }
+
+    private void HideAll()
+    {
+        if (dialogRoot != null)
+            dialogRoot.SetActive(false);
+
+        if (textPanel != null)
+            textPanel.SetActive(false);
 
         if (imagePanel != null)
             imagePanel.SetActive(false);
-
-        if (dialogRoot != null)
-            dialogRoot.SetActive(false);
     }
 }
