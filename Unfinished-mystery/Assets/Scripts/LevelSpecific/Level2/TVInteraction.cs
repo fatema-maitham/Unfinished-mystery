@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class TVInteractionStandalone : MonoBehaviour
+public class TVInteraction : MonoBehaviour
 {
     [Header("Prompt UI")]
     [SerializeField] private ActivationPromptUI promptUI;
@@ -80,11 +80,14 @@ public class TVInteractionStandalone : MonoBehaviour
         if (tvMessage != null) tvMessage.SetActive(false);
         if (messageText != null) messageText.text = "";
 
-        if (staticSound != null)
-        {
-            staticSound.Stop();
-            staticSound.Play();
-        }
+        // Do not restart the static sound here.
+        // The static sound already starts after the first note.
+
+        // if (staticSound != null)
+        // {
+        //     staticSound.Stop();
+        //     staticSound.Play();
+        // }
 
         yield return new WaitForSeconds(staticDuration);
 
@@ -102,5 +105,7 @@ public class TVInteractionStandalone : MonoBehaviour
         Level2PuzzleSystem.Instance.SeeTVMessage();
 
         isPlaying = false;
+
+        if (staticSound != null) staticSound.Stop();
     }
 }
