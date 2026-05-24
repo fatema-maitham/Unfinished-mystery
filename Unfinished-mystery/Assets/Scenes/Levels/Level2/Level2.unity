@@ -884,6 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce79578997f340fcae13c2ff952ecb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiresFinalReel: 1
+  keypadUnlocked: 0
   player: {fileID: 603546215}
   playerMovementScript: {fileID: 603546222}
   keypadCamera: {fileID: 1974804225}
@@ -891,6 +893,9 @@ MonoBehaviour:
   mainCamera: {fileID: 1134993007}
   interactDistance: 20
   clickDistance: 10
+  interactPrompt: {fileID: 0}
+  promptAction: ENTER
+  promptSubLabel: Keypad
 --- !u!114 &58495716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,13 +2076,13 @@ GameObject:
   - component: {fileID: 146972430}
   - component: {fileID: 146972432}
   - component: {fileID: 146972431}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TVMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &146972430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2094,7 +2099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.257, y: 0.449}
+  m_AnchoredPosition: {x: -0.257, y: 0.51}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146972431
@@ -2248,6 +2253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tv
       objectReference: {fileID: 0}
+    - target: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5318310806012582442, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2308,10 +2317,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7487244357921330417, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1738213815}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7487244357921330417, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1931054070}
+      addedObject: {fileID: 2102495571}
+    m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1931054073}
@@ -4081,13 +4090,13 @@ GameObject:
   - component: {fileID: 287308173}
   - component: {fileID: 287308175}
   - component: {fileID: 287308174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TVStatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &287308173
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7161,37 +7170,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
   m_PrefabInstance: {fileID: 1302997524}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &616313109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 616313110}
-  m_Layer: 0
-  m_Name: PUZZLES
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &616313110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616313109}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.88099, y: 0.96216, z: 4.83008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619364886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
@@ -16435,6 +16413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140133399}
+  - component: {fileID: 1140133400}
   m_Layer: 0
   m_Name: Level2PuzzleSystem
   m_TagString: Untagged
@@ -16460,6 +16439,78 @@ Transform:
   - {fileID: 1424239123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1140133400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140133398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53aeeba1da3a0485baf6164fcd57b45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstNoteRead: 0
+  _tvMessageSeen: 0
+  _childDrawingFound: 0
+  _bookshelfClueFound: 0
+  _gramophonePlayed: 0
+  _brassKeyFound: 0
+  _evidenceBagOpened: 0
+  _phoneNumberFound: 0
+  _phoneMessageHeard: 0
+  _clockCodeFound: 0
+  _doorUnlocked: 0
+  _levelComplete: 0
+  onFirstNoteRead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1738213816}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTVMessageSeen:
+    m_PersistentCalls:
+      m_Calls: []
+  onChildDrawingFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onBookshelfClueFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onGramophonePlayed:
+    m_PersistentCalls:
+      m_Calls: []
+  onBrassKeyFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onEvidenceBagOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  onPhoneNumberFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onPhoneMessageHeard:
+    m_PersistentCalls:
+      m_Calls: []
+  onClockCodeFound:
+    m_PersistentCalls:
+      m_Calls: []
+  onDoorUnlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onLevelComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1142261756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3517315428751493412, guid: d6368354ea574fc44857319ed6b69786, type: 3}
@@ -19216,6 +19267,20 @@ MonoBehaviour:
   signText: Enter your text here.
   speakerName: 
   revealImage: {fileID: 21300000, guid: 9bac912c2d6ab4233aba3a1124fe8c73, type: 3}
+  activationRadius: 1.8
+--- !u!114 &1379776068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758293191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ca4ce94e22c4af39ff44785f265159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: 101
   activationRadius: 1.8
 --- !u!1001 &1382118624
 PrefabInstance:
@@ -26561,7 +26626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1738213815}
   - component: {fileID: 1738213816}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TVStaticAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26596,7 +26661,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9bd352262b5444617ad2b95bdae3073a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27159,6 +27224,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1379776066}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1379776068}
   m_SourcePrefab: {fileID: 100100000, guid: fb414797eadc844ccb178b6e41652485, type: 3}
 --- !u!1001 &1808315884
 PrefabInstance:
@@ -29546,42 +29614,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931054066}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a67ad089552914c85a3ad59ea02d2618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: She drew what I refused to write
+  promptUI: {fileID: 0}
+  label: Examine
+  subLabel: Television
   tvStatic: {fileID: 287308172}
   tvMessage: {fileID: 146972429}
   messageText: {fileID: 146972431}
   staticSound: {fileID: 1738213816}
+  message: She drew what I refused to write
   interactKey: 101
-  requireKeyPress: 1
   staticDuration: 3
-  playOnlyOnce: 1
-  stopWhenPlayerLeaves: 1
---- !u!65 &1931054070
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931054066}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2, y: 1, z: 1.2}
-  m_Center: {x: -0.0016361028, y: 0.35342833, z: 0.5}
+  typingSpeed: 0.05
 --- !u!65 &1931054073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29599,9 +29647,9 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.6696775, y: 0.70685667, z: 0.5557949}
+  m_Size: {x: 4, y: 3, z: 4}
   m_Center: {x: -0.0016361028, y: 0.35342833, z: -0.010211527}
 --- !u!1 &1937462322 stripped
 GameObject:
@@ -32316,6 +32364,83 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5380808721245990964, guid: 3adc8ae31a0b08e4289c37f375d86646, type: 3}
+--- !u!1 &2102495570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2102495571}
+  - component: {fileID: 2102495573}
+  - component: {fileID: 2102495572}
+  m_Layer: 0
+  m_Name: IP_Television
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2102495571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102495570}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 147235852}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2102495572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102495570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67ad089552914c85a3ad59ea02d2618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptUI: {fileID: 503856320}
+  label: Examine
+  subLabel: Television
+  tvStatic: {fileID: 287308172}
+  tvMessage: {fileID: 146972429}
+  messageText: {fileID: 146972431}
+  staticSound: {fileID: 1738213816}
+  message: She drew what I refused to write.
+  interactKey: 101
+  staticDuration: 1.2
+  typingSpeed: 0.05
+--- !u!65 &2102495573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102495570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2108309549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8905741556569397466, guid: 75f2b4c63b364ca468040cc8f2ae9d0b, type: 3}
@@ -33677,7 +33802,6 @@ SceneRoots:
   - {fileID: 1716034192}
   - {fileID: 2013410475}
   - {fileID: 1914111623}
-  - {fileID: 616313110}
   - {fileID: 1422144506}
   - {fileID: 843170283}
   - {fileID: 1974804226}
