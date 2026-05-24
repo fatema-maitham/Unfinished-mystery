@@ -48,7 +48,7 @@ public class BookInteract : MonoBehaviour
             OpenBook();
         }
 
-        if (bookOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
+        if (bookOpen && Input.GetKeyDown(KeyCode.E))
         {
             CloseBook();
         }

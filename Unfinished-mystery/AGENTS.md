@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: BackButton
+  - Name: IP_HiddenBook
   - Tag: Untagged
-  - Layer: Interactable
+  - Layer: 6
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
