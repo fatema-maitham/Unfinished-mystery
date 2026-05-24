@@ -8,6 +8,7 @@
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
   - Name: HintBook
+  - Name: Level2PuzzleSystem
   - Tag: Untagged
   - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
