@@ -5,7 +5,8 @@ public class ItemPickup : MonoBehaviour
 {
     [Header("Prompt")]
     [SerializeField] private InteractionPromptUI promptUI;
-    [SerializeField] private string promptText = "Pick up item";
+    [SerializeField] private string promptText = "PICK UP";
+    [SerializeField] private string promptSubLabel = "Item";
 
     [Header("Inventory Item")]
     [SerializeField] private Item item;
@@ -17,6 +18,7 @@ public class ItemPickup : MonoBehaviour
     [Header("Optional Level 3 Events")]
     [SerializeField] private L3ExitFlickerGuide flickerToStopOnPickup;
     [SerializeField] private L3ExitInspect inspectToDisableOnPickup;
+    [SerializeField] private TVStaticSoundController tvStaticToStopOnPickup;
     [SerializeField] private FilmProjectorUse projectorToNotify;
     [SerializeField] private int collectedReelNumber = 0;
 
@@ -56,6 +58,9 @@ public class ItemPickup : MonoBehaviour
         if (flickerToStopOnPickup != null)
             flickerToStopOnPickup.StopFlickerPermanently();
 
+        if (tvStaticToStopOnPickup != null)
+            tvStaticToStopOnPickup.StopStaticPermanently();
+
         if (inspectToDisableOnPickup != null)
             inspectToDisableOnPickup.PauseInspectBriefly(0.6f);
 
@@ -74,7 +79,7 @@ public class ItemPickup : MonoBehaviour
         pickupHandler = other.GetComponent<ItemPickupHandler>();
 
         if (promptUI != null)
-            promptUI.ShowPrompt(promptText);
+            promptUI.ShowPrompt(promptText, promptSubLabel);
     }
 
     private void OnTriggerExit(Collider other)

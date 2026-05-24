@@ -16,8 +16,8 @@ public class NoteController : MonoBehaviour
 
     [Header("Note")]
     [TextArea(3, 10)]
-    [SerializeField] private string noteText =
-        "I hid the truth in the things\nI could not throw away.";
+   [SerializeField] private string noteText =
+    "The last ticket was sold at 8:10 PM.\nShe entered alone.";
 
     private bool noteOpen;
 
@@ -53,8 +53,7 @@ public class NoteController : MonoBehaviour
             OpenNote();
         }
 
-        if (noteOpen && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
-        {
+        if (noteOpen && Input.GetKeyDown(KeyCode.E))        {
             CloseNote();
         }
     }

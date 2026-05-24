@@ -6,7 +6,8 @@ public class L3ExitInspect : MonoBehaviour
 {
     [Header("Prompt UI")]
     public InteractionPromptUI interactPrompt;
-    public string promptText = "Inspect exit";
+    public string promptText = "INSPECT";
+    public string promptSubLabel = "Exit Door";
 
     [Header("Inspect Message")]
     public RectTransform messagePanel;
@@ -97,7 +98,7 @@ public class L3ExitInspect : MonoBehaviour
         messageShowing = false;
 
         if (playerInRange && interactPrompt != null)
-            interactPrompt.ShowPrompt(promptText);
+            interactPrompt.ShowPrompt(promptText, promptSubLabel);
     }
 
     public void PauseInspectBriefly(float seconds)
@@ -115,7 +116,7 @@ public class L3ExitInspect : MonoBehaviour
             playerInRange = true;
 
             if (interactPrompt != null && !messageShowing)
-                interactPrompt.ShowPrompt(promptText);
+                interactPrompt.ShowPrompt(promptText, promptSubLabel);
         }
     }
 

@@ -35,8 +35,8 @@ public class NotebookToggle : MonoBehaviour
         else if (!overIcon && _cursorFreedForIcon)
         {
             _cursorFreedForIcon = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 

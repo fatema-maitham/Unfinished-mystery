@@ -2,6 +2,11 @@ using System.Collections;using System.Reflection;using TMPro;using UnityEngine;u
 
 public class FilmProjectorUse : MonoBehaviour{[Header("Watched Progress")]public bool reel1Watched = false;public bool reel2Watched = false;public bool reel3Watched = false;
 
+
+[Header("Final Door Prompt")]
+[SerializeField] private L3ExitInspect exitInspectToDisable;
+
+
 [Header("Collected Progress")]
 public bool reel1Collected = false;
 public bool reel2Collected = false;
@@ -43,7 +48,13 @@ public TVStaticSoundController tvStaticController;
 public AudioSource glitchSound;
 
 
+[Header("Final Code Reveal")]
+[SerializeField] private KeypadZoomInteract finalKeypadPrompt;
+[SerializeField] private Texture finalCodeTexture; // Screen_FinalCode_0427
+[SerializeField] private float glitchDelay = 0.6f;
 
+[TextArea(2, 3)]
+[SerializeField] private string finalCodeMessage = "The final frame reveals a code.";
 
 
 
@@ -70,8 +81,64 @@ private void Start()
     if (exitRedWarningLight != null)
         exitRedWarningLight.ForceOff();
 
+
+        if (finalKeypadPrompt != null)
+{
+    finalKeypadPrompt.UnlockKeypadPrompt();
+}
+
     ShowIdleScreen();
 }
+
+
+private IEnumerator RevealFinalCodeSequence()
+{
+    yield return new WaitForEndOfFrame();
+
+    if (videoPlayer != null)
+    {
+        videoPlayer.Stop();
+        videoPlayer.clip = null;
+    }
+
+    if (screenRenderer != null && finalCodeTexture != null)
+    {
+        screenRenderer.material.mainTexture = finalCodeTexture;
+        screenRenderer.material.SetTexture("_BaseMap", finalCodeTexture);
+    }
+
+    if (exitRedWarningLight != null)
+    {
+        exitRedWarningLight.StartFlicker();
+    }
+
+
+    if (exitInspectToDisable != null)
+{
+    exitInspectToDisable.enabled = false;
+}
+
+    if (finalKeypadPrompt != null)
+{
+    finalKeypadPrompt.enabled = true;
+    finalKeypadPrompt.UnlockKeypadPrompt();
+}
+}
+
+
+private IEnumerator FinalReelEndingSequence()
+{
+    yield return StartCoroutine(ShowMessage(
+        "Final reel discovered: Maya never escaped.",
+        messageStayTime
+    ));
+
+    yield return StartCoroutine(RevealFinalCodeSequence());
+
+    UpdatePrompt();
+}
+
+
 
 public void NotifyReelCollected(int reelNumber)
 {
@@ -199,7 +266,7 @@ private void PlayReel(int reelNumber)
 
     if (videoPlayer == null)
         return;
-
+    videoPlayer.enabled = true;
     videoPlayer.Stop();
     videoPlayer.time = 0;
     videoPlayer.clip = GetReelClip(reelNumber);
@@ -211,13 +278,22 @@ private void OnVideoFinished(VideoPlayer vp)
     videoPlaying = false;
 
     vp.Stop();
-    ShowIdleScreen();
+
+    if (currentReelNumber != 3)
+    {
+        ShowIdleScreen();
+    }
 
     if (isReplay)
-    {
-        UpdatePrompt();
-        return;
-    }
+        {
+            if (currentReelNumber == 3)
+            {
+                StartCoroutine(RevealFinalCodeSequence());
+            }
+
+            UpdatePrompt();
+            return;
+        }
 
     if (currentReelNumber == 1 && !reel1Watched)
     {
@@ -239,25 +315,31 @@ private void OnVideoFinished(VideoPlayer vp)
     {
         reel2Watched = true;
 
+        if (tvStaticController != null)
+        {
+            if (!reel3Collected && !reel3Watched)
+                tvStaticController.StartStatic();
+            else
+                tvStaticController.StopStaticPermanently();
+        }
+
         StartCoroutine(ShowDiscoveryThenPrompt(
             "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
         ));
     }
-   else if (currentReelNumber == 3 && !reel3Watched)
+       else if (currentReelNumber == 3 && !reel3Watched)
 {
     reel3Watched = true;
 
     if (tvStaticController != null)
         tvStaticController.StopStaticPermanently();
 
-    StartCoroutine(ShowDiscoveryThenPrompt(
-        "Final reel discovered: Maya never escaped."
-    ));
+    StartCoroutine(FinalReelEndingSequence());
 }
-    else
-    {
-        UpdatePrompt();
-    }
+        else
+        {
+            UpdatePrompt();
+        }
 }
 
 private IEnumerator ShowDiscoveryThenPrompt(string message)
@@ -354,10 +436,10 @@ private void UpdatePrompt()
     }
 
     if (IsReelWatched(reelAction))
-        interactPrompt.ShowPrompt("Replay Reel " + reelAction);
-    else
-        interactPrompt.ShowPrompt("Load Reel " + reelAction);
-}
+    interactPrompt.ShowPrompt("REPLAY", "Reel " + reelAction);
+   else
+        interactPrompt.ShowPrompt("LOAD", "Reel " + reelAction);
+        }
 
 private bool IsReelWatched(int reelNumber)
 {
