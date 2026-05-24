@@ -11,6 +11,11 @@ public class L3DoorOpen : MonoBehaviour
     public GameObject exitWhiteGlowPanel;
     public Light exitWhiteLight;
     public float exitLightIntensity = 15f;
+    
+    [Header("Door Open Sound")]
+    public AudioSource doorAudioSource;
+    public AudioClip doorOpenClip;
+
 
     private bool isOpening = false;
     private Quaternion closedRotation;
@@ -44,16 +49,22 @@ public class L3DoorOpen : MonoBehaviour
     }
 
     public void OpenDoor()
+{
+    if (isOpening)
+        return;
+
+    isOpening = true;
+
+    if (doorAudioSource != null && doorOpenClip != null)
+        doorAudioSource.PlayOneShot(doorOpenClip);
+
+    if (exitWhiteGlowPanel != null)
+        exitWhiteGlowPanel.SetActive(true);
+
+    if (exitWhiteLight != null)
     {
-        isOpening = true;
-
-        if (exitWhiteGlowPanel != null)
-            exitWhiteGlowPanel.SetActive(true);
-
-        if (exitWhiteLight != null)
-        {
-            exitWhiteLight.enabled = true;
-            exitWhiteLight.intensity = exitLightIntensity;
-        }
+        exitWhiteLight.enabled = true;
+        exitWhiteLight.intensity = exitLightIntensity;
     }
+}
 }
