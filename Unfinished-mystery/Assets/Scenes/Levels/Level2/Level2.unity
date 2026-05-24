@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 61941908}
   - component: {fileID: 61941910}
   - component: {fileID: 61941909}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurningText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,13 +1604,13 @@ GameObject:
   - component: {fileID: 112096710}
   - component: {fileID: 112096714}
   - component: {fileID: 112096713}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ClueBookCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &112096709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1618,8 +1618,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112096708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.35184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1628,7 +1628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.4335098, y: 0.21671999}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &112096710
@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e9ee25870034bd0a12ab35b59f0e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bookCanvas: {fileID: 112096708}
+  bookCanvas: {fileID: 514780181}
   bookPanel: {fileID: 514780182}
   leftImage: {fileID: 1735409457}
   leftText: {fileID: 1409267244}
@@ -2161,7 +2161,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2320,13 +2320,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7487244357921330417, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2102495571}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1931054073}
-    - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1931054069}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
 --- !u!4 &147235852 stripped
 Transform:
@@ -2882,7 +2876,7 @@ GameObject:
   - component: {fileID: 198532588}
   - component: {fileID: 198532587}
   - component: {fileID: 198532586}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6376,13 +6370,13 @@ GameObject:
   - component: {fileID: 514780182}
   - component: {fileID: 514780184}
   - component: {fileID: 514780183}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BookPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &514780182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8963,7 +8957,7 @@ GameObject:
   - component: {fileID: 712025662}
   - component: {fileID: 712025664}
   - component: {fileID: 712025663}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurningPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11077,7 +11071,7 @@ GameObject:
   - component: {fileID: 800006369}
   - component: {fileID: 800006371}
   - component: {fileID: 800006370}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19837,7 +19831,7 @@ GameObject:
   - component: {fileID: 1409267243}
   - component: {fileID: 1409267245}
   - component: {fileID: 1409267244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19885,8 +19879,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
-  m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}
+  m_sharedMaterial: {fileID: 3129420092240168762, guid: 18b854d48bb89430fb216d3fc11c878a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19916,7 +19910,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -21469,7 +21463,7 @@ GameObject:
   - component: {fileID: 1481758124}
   - component: {fileID: 1481758126}
   - component: {fileID: 1481758125}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24139,8 +24133,8 @@ GameObject:
   - component: {fileID: 1620906954}
   - component: {fileID: 1620906953}
   - component: {fileID: 1620906956}
-  m_Layer: 0
-  m_Name: IP_BookshelfBook
+  m_Layer: 6
+  m_Name: IP_HiddenBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24222,12 +24216,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
-  interactDistance: 2.5
+  interactDistance: 3
   behavioursToDisable: []
   bookCanvasController: {fileID: 112096714}
-  promptPanel: {fileID: 533129713}
-  promptTextUI: {fileID: 1898956824}
-  promptMessage: PRESS E TO TAKE BOOK
+  promptUI: {fileID: 503856320}
+  label: Read
+  subLabel: Hidden Book
 --- !u!1 &1621384230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2500267644599931297, guid: 6bb59c4cbd133c34f891c94bc19d4cea, type: 3}
@@ -26552,7 +26546,7 @@ GameObject:
   - component: {fileID: 1735409456}
   - component: {fileID: 1735409458}
   - component: {fileID: 1735409457}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26576,7 +26570,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -352.7, y: 164.7}
-  m_SizeDelta: {x: 400, y: 300}
+  m_SizeDelta: {x: 360, y: 230}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735409457
 MonoBehaviour:
@@ -27656,7 +27650,7 @@ GameObject:
   - component: {fileID: 1832908005}
   - component: {fileID: 1832908004}
   - component: {fileID: 1832908003}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29602,55 +29596,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928111717}
   m_CullTransparentMesh: 1
---- !u!1 &1931054066 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
-  m_PrefabInstance: {fileID: 147235851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1931054069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931054066}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a67ad089552914c85a3ad59ea02d2618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  promptUI: {fileID: 0}
-  label: Examine
-  subLabel: Television
-  tvStatic: {fileID: 287308172}
-  tvMessage: {fileID: 146972429}
-  messageText: {fileID: 146972431}
-  staticSound: {fileID: 1738213816}
-  message: She drew what I refused to write
-  interactKey: 101
-  staticDuration: 3
-  typingSpeed: 0.05
---- !u!65 &1931054073
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931054066}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 4, y: 3, z: 4}
-  m_Center: {x: -0.0016361028, y: 0.35342833, z: -0.010211527}
 --- !u!1 &1937462322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2087043323968248916, guid: 4f854f68bcd4c274d8a58286422d116c, type: 3}
@@ -33053,7 +32998,7 @@ GameObject:
   - component: {fileID: 2144096043}
   - component: {fileID: 2144096045}
   - component: {fileID: 2144096044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
