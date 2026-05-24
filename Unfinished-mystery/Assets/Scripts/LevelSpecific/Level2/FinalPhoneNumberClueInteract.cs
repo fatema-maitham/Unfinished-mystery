@@ -89,26 +89,49 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
             ShowPhoneNumberImage();
     }
 
-    private void ShowPhoneNumberImage()
+private void ShowPhoneNumberImage()
+{
+    state = ClueState.ShowingImage;
+    promptUI.HidePrompt();
+
+    if (dialogRoot != null)
     {
-        state = ClueState.ShowingImage;
-        promptUI.HidePrompt();
+        dialogRoot.SetActive(true);
+        dialogRoot.transform.SetAsLastSibling();
 
-        if (dialogRoot != null)
-            dialogRoot.SetActive(true);
-
-        if (textPanel != null)
-            textPanel.SetActive(false);
-
-        if (imagePanel != null)
-            imagePanel.SetActive(true);
-
-        if (displayImage != null && phoneNumberPaperImage != null)
-            displayImage.sprite = phoneNumberPaperImage;
-
-        if (continueHintText != null)
-            continueHintText.text = "E Continue";
+        CanvasGroup cg = dialogRoot.GetComponent<CanvasGroup>();
+        if (cg != null)
+        {
+            cg.alpha = 1f;
+            cg.interactable = true;
+            cg.blocksRaycasts = true;
+        }
     }
+
+    if (textPanel != null)
+        textPanel.SetActive(false);
+
+    if (imagePanel != null)
+    {
+        imagePanel.SetActive(true);
+        imagePanel.transform.SetAsLastSibling();
+    }
+
+    if (displayImage != null)
+    {
+        displayImage.gameObject.SetActive(true);
+        displayImage.enabled = true;
+        displayImage.color = Color.white;
+
+        if (phoneNumberPaperImage != null)
+            displayImage.sprite = phoneNumberPaperImage;
+    }
+
+    if (continueHintText != null)
+        continueHintText.text = "E Continue";
+
+    Debug.Log("[FinalPhoneNumberClue] Showing phone number image.");
+}
 
     private void ContinueClue()
     {
@@ -124,31 +147,42 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
         }
     }
 
-    private void ShowBlackDialogText()
+private void ShowBlackDialogText()
+{
+    state = ClueState.ShowingText;
+
+    if (dialogRoot != null)
     {
-        state = ClueState.ShowingText;
-
-        if (imagePanel != null)
-            imagePanel.SetActive(false);
-
-        if (textPanel != null)
-            textPanel.SetActive(true);
-
-        if (speakerNameText != null)
-            speakerNameText.text = dialogTitle;
-
-        if (dialogBodyText != null)
-            dialogBodyText.text = dialogBody;
-
-        if (continueHintText != null)
-            continueHintText.text = "E Close";
-
-        if (!clueFound)
-        {
-            clueFound = true;
-            Level2PuzzleSystem.Instance?.FindPhoneNumber();
-        }
+        dialogRoot.SetActive(true);
+        dialogRoot.transform.SetAsLastSibling();
     }
+
+    if (imagePanel != null)
+        imagePanel.SetActive(false);
+
+    if (textPanel != null)
+    {
+        textPanel.SetActive(true);
+        textPanel.transform.SetAsLastSibling();
+    }
+
+    if (speakerNameText != null)
+        speakerNameText.text = dialogTitle;
+
+    if (dialogBodyText != null)
+        dialogBodyText.text = dialogBody;
+
+    if (continueHintText != null)
+        continueHintText.text = "E Close";
+
+    if (!clueFound)
+    {
+        clueFound = true;
+        Level2PuzzleSystem.Instance?.FindPhoneNumber();
+    }
+
+    Debug.Log("[FinalPhoneNumberClue] Showing dialog text.");
+}
 
     private void CloseClue()
     {
