@@ -17,6 +17,10 @@ public class L3DoorOpen : MonoBehaviour
     public AudioClip doorOpenClip;
 
 
+    [Header("Exit Summary Trigger")]
+    public L3ExitToSummary exitToSummaryTrigger;
+
+
     private bool isOpening = false;
     private Quaternion closedRotation;
     private Quaternion targetRotation;
@@ -66,5 +70,8 @@ public class L3DoorOpen : MonoBehaviour
         exitWhiteLight.enabled = true;
         exitWhiteLight.intensity = exitLightIntensity;
     }
+
+    if (exitToSummaryTrigger != null)
+    exitToSummaryTrigger.UnlockExitSummary();
 }
 }

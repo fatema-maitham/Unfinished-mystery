@@ -3870,7 +3870,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: ebf1d1e987b0e2a44ab7a755cdba2b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1268054104}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: ebf1d1e987b0e2a44ab7a755cdba2b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1144776498}
   m_SourcePrefab: {fileID: 100100000, guid: ebf1d1e987b0e2a44ab7a755cdba2b47, type: 3}
 --- !u!4 &263544467 stripped
 Transform:
@@ -7322,6 +7328,7 @@ MonoBehaviour:
   exitLightIntensity: 15
   doorAudioSource: {fileID: 528832043}
   doorOpenClip: {fileID: 8300000, guid: cbfe86947ad824e98aced740d3eef4f0, type: 3}
+  exitToSummaryTrigger: {fileID: 1924398304}
 --- !u!82 &528832043
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17906,6 +17913,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.57, y: 2.5, z: 0.3}
   m_Center: {x: -0.03, y: 0.2, z: 0}
+--- !u!1 &1144776493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: ebf1d1e987b0e2a44ab7a755cdba2b47, type: 3}
+  m_PrefabInstance: {fileID: 263544466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1144776498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144776493}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45, y: 1.875416, z: 0.076693}
+  m_Center: {x: -0.23047051, y: -0.707034, z: 0.009453501}
 --- !u!65 &1145816185
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20662,6 +20695,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!1 &1268054099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: ebf1d1e987b0e2a44ab7a755cdba2b47, type: 3}
+  m_PrefabInstance: {fileID: 263544466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1268054104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268054099}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.454121, y: 1.875416, z: 0.076693}
+  m_Center: {x: -0.23047051, y: -0.707034, z: 0.009453501}
 --- !u!1 &1269418248
 GameObject:
   m_ObjectHideFlags: 8
@@ -32980,6 +33039,82 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!1 &1924398301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924398302}
+  - component: {fileID: 1924398303}
+  - component: {fileID: 1924398304}
+  m_Layer: 0
+  m_Name: L3_ExitToSummaryTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1924398302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924398301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0003119113, y: -0.69922674, z: 0.00030507313, w: 0.71489984}
+  m_LocalPosition: {x: 10.45, y: -4.02, z: 10.21}
+  m_LocalScale: {x: 1.98, y: 2.08, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0.05, y: -88.73, z: 0}
+--- !u!65 &1924398303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924398301}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1924398304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924398301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635b1387b975941258b244a3f74a0dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  summarySceneName: LevelSummary
+  replaySceneName: Level3
+  nextSceneName: Level4
+  levelTitle: LEVEL COMPLETE
+  levelName: LEVEL 3
+  characterName: Detective Ethan Cole
+  role: Cinema Detective
+  loopsUsed: 1
+  level3Portrait: {fileID: 21300000, guid: 434847cbfe59a4d78bac2fc93bf2b346, type: 3}
+  resultMessage: "The final reel revealed Maya\u2019s fate."
 --- !u!1 &1925359999
 GameObject:
   m_ObjectHideFlags: 0
@@ -70110,3 +70245,4 @@ SceneRoots:
   - {fileID: 681824530}
   - {fileID: 801891091}
   - {fileID: 465680138}
+  - {fileID: 1924398302}
