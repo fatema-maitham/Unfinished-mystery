@@ -89,11 +89,12 @@ if (bookPanel != null)
     // ───────────────────────────────────────────────────────────────────────────
 public void OpenBook()
 {
+    Debug.Log("[BookCanvasController] OpenBook called");
+
     currentSpreadIndex = 0;
     bookshelfClueReported = false;
 
-    if (bookPanel != null)
-        bookPanel.gameObject.SetActive(true);
+    bookPanel.gameObject.SetActive(true);
 
     UpdatePages();
     StartCoroutine(OpenAnimation());
@@ -105,8 +106,7 @@ public void OpenBook()
     // ───────────────────────────────────────────────────────────────────────────
 public void CloseBook()
 {
-    if (bookPanel != null)
-        bookPanel.gameObject.SetActive(false);
+    bookPanel.gameObject.SetActive(false);
 }
 
     // ───────────────────────────────────────────────────────────────────────────
