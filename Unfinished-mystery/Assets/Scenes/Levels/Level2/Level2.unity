@@ -6713,6 +6713,7 @@ MonoBehaviour:
   promptPanel: {fileID: 533129713}
   keyText: {fileID: 1538546754}
   actionText: {fileID: 1898956824}
+  subLabelText: {fileID: 0}
   interactionKey: E
 --- !u!114 &533129715
 MonoBehaviour:
@@ -13085,6 +13086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptUI: {fileID: 533129714}
   promptText: Pick up item
+  promptSubLabel: Item
   item: {fileID: 11400000, guid: b9aac43ee29d04c6b905f1248dfad038, type: 2}
   amount: 1
   destroyAfterPickup: 1
