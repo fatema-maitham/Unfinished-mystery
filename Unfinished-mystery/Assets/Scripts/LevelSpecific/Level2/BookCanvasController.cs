@@ -68,43 +68,46 @@ public class BookCanvasController : MonoBehaviour
     private bool isAnimating = false;
     private bool bookshelfClueReported = false;
 
-    private void Start()
-    {
-        if (bookCanvas != null)
-            bookCanvas.SetActive(false);
+  private void Start()
+{
+if (bookPanel != null)
+    bookPanel.gameObject.SetActive(false);
 
-        if (nextButton != null)
-            nextButton.onClick.AddListener(NextSpread);
+    if (bookPanel != null)
+        bookPanel.gameObject.SetActive(false);
 
-        if (backButton != null)
-            backButton.onClick.AddListener(PreviousSpread);
-    }
+    if (nextButton != null)
+        nextButton.onClick.AddListener(NextSpread);
+
+    if (backButton != null)
+        backButton.onClick.AddListener(PreviousSpread);
+}
 
     // ───────────────────────────────────────────────────────────────────────────
     // Opens the book from the first spread.
     // Called by BookInteract when the player presses E near the bookshelf book.
     // ───────────────────────────────────────────────────────────────────────────
-    public void OpenBook()
-    {
-        currentSpreadIndex = 0;
-        bookshelfClueReported = false;
+public void OpenBook()
+{
+    currentSpreadIndex = 0;
+    bookshelfClueReported = false;
 
-        if (bookCanvas != null)
-            bookCanvas.SetActive(true);
+    if (bookPanel != null)
+        bookPanel.gameObject.SetActive(true);
 
-        UpdatePages();
-        StartCoroutine(OpenAnimation());
-    }
+    UpdatePages();
+    StartCoroutine(OpenAnimation());
+}
 
     // ───────────────────────────────────────────────────────────────────────────
     // Closes the book canvas only.
     // Player movement is restored from BookInteract.CloseBook().
     // ───────────────────────────────────────────────────────────────────────────
-    public void CloseBook()
-    {
-        if (bookCanvas != null)
-            bookCanvas.SetActive(false);
-    }
+public void CloseBook()
+{
+    if (bookPanel != null)
+        bookPanel.gameObject.SetActive(false);
+}
 
     // ───────────────────────────────────────────────────────────────────────────
     // Moves to the next spread.
