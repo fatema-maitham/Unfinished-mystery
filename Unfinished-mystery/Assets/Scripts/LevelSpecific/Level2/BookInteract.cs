@@ -23,36 +23,41 @@ public class BookInteract : MonoBehaviour
     private bool bookOpen;
     private bool playerNear;
 
-    private void Update()
+private void Update()
+{
+    if (player == null || bookCanvasController == null || promptUI == null)
+        return;
+
+    float distance = Vector3.Distance(player.position, transform.position);
+    bool nearBook = distance <= interactDistance;
+
+    if (bookOpen)
     {
-        if (player == null || bookCanvasController == null || promptUI == null)
-            return;
-
-        float distance = Vector3.Distance(player.position, transform.position);
-        bool nearBook = distance <= interactDistance;
-
-        if (nearBook && !playerNear && !bookOpen)
-        {
-            playerNear = true;
-            promptUI.ShowPrompt(label, subLabel);
-        }
-
-        if (!nearBook && playerNear)
-        {
-            playerNear = false;
-            promptUI.HidePrompt();
-        }
-
-        if (nearBook && !bookOpen && Input.GetKeyDown(KeyCode.E))
-        {
-            OpenBook();
-        }
-
-        if (bookOpen && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape))
         {
             CloseBook();
         }
+
+        return;
     }
+
+    if (nearBook && !playerNear)
+    {
+        playerNear = true;
+        promptUI.ShowPrompt(label, subLabel);
+    }
+
+    if (!nearBook && playerNear)
+    {
+        playerNear = false;
+        promptUI.HidePrompt();
+    }
+
+    if (nearBook && Input.GetKeyDown(KeyCode.E))
+    {
+        OpenBook();
+    }
+}
 
     private void OpenBook()
     {
@@ -75,6 +80,9 @@ public class BookInteract : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (playerNear)
+            promptUI.ShowPrompt(label, subLabel);
     }
 
     private void SetPlayerControls(bool enabled)
