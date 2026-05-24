@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.8f;
     public float rotationSpeed = 10f;
 
+    [Header("Footstep Sound")]
+    public AudioSource footstepAudioSource;
+
     private CharacterController controller;
     private Vector3 velocity;
     private Animator animator;
@@ -36,11 +39,20 @@ public class PlayerMovement : MonoBehaviour
 
             if (animator != null)
                 animator.SetBool("isWalking", true);
+
+
+            if (footstepAudioSource != null && !footstepAudioSource.isPlaying)
+    footstepAudioSource.Play();
         }
+
+        
         else
         {
             if (animator != null)
                 animator.SetBool("isWalking", false);
+
+            if (footstepAudioSource != null && footstepAudioSource.isPlaying)
+                footstepAudioSource.Stop();
         }
 
         if (controller.isGrounded && velocity.y < 0)
