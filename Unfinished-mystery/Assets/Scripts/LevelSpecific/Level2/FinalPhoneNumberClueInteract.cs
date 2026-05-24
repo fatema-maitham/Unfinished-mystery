@@ -2,15 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LEVEL 2 — FINAL PHONE NUMBER CLUE
-// Attach this script to: painting_3
-// Flow:
-// Near painting_3 → prompt appears
-// Press E → phone number image appears
-// Press E → black dialog text appears
-// Press E → close
-// ═══════════════════════════════════════════════════════════════════════════════
 public class FinalPhoneNumberClueInteract : MonoBehaviour
 {
     [Header("Player")]
@@ -49,20 +40,29 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
     [Header("Input Safety")]
     [SerializeField] private float inputDelay = 0.35f;
 
-    private enum ClueState
-    {
-        Closed,
-        ShowingImage,
-        ShowingText
-    }
+    private enum ClueState { Closed, ShowingImage, ShowingText }
 
     private ClueState state = ClueState.Closed;
-    private float nextInputTime = 0f;
-    private bool clueFound = false;
+    private float nextInputTime;
+    private bool clueFound;
+    private bool promptShown;
+
+    private void Awake()
+    {
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+                player = foundPlayer.transform;
+        }
+
+        if (promptUI == null)
+            promptUI = FindFirstObjectByType<ActivationPromptUI>();
+    }
 
     private void Start()
     {
-        CloseEverything();
+        HideDialogOnly();
     }
 
     private void Update()
@@ -89,79 +89,77 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearFrame = distance <= interactDistance;
 
-        if (!nearFrame)
+        if (nearFrame)
         {
-            promptUI.HidePrompt();
-            return;
+            if (!promptShown)
+            {
+                promptShown = true;
+                promptUI.ShowPrompt(promptLabel, promptSubLabel);
+            }
+
+            if (Input.GetKeyDown(interactKey))
+                ShowImagePanel();
         }
-
-        promptUI.ShowPrompt(promptLabel, promptSubLabel);
-
-        if (Input.GetKeyDown(interactKey))
-            ShowImagePanel();
+        else
+        {
+            if (promptShown)
+            {
+                promptShown = false;
+                promptUI.HidePrompt();
+            }
+        }
     }
 
-    private void ShowImagePanel()
-    {
-        state = ClueState.ShowingImage;
-        nextInputTime = Time.unscaledTime + inputDelay;
+private void ShowImagePanel()
+{
+    state = ClueState.ShowingImage;
+    nextInputTime = Time.unscaledTime + inputDelay;
 
-        promptUI.HidePrompt();
+    promptShown = false;
+    promptUI.HidePrompt();
 
-        if (dialogRoot != null)
-        {
-            dialogRoot.SetActive(true);
-            dialogRoot.transform.SetAsLastSibling();
-        }
+    dialogRoot.SetActive(true);
+    textPanel.SetActive(false);
+    imagePanel.SetActive(true);
 
-        if (textPanel != null)
-            textPanel.SetActive(false);
+    dialogRoot.transform.SetAsLastSibling();
+    imagePanel.transform.SetAsLastSibling();
 
-        if (imagePanel != null)
-        {
-            imagePanel.SetActive(true);
-            imagePanel.transform.SetAsLastSibling();
-        }
+    displayImage.gameObject.SetActive(true);
+    displayImage.enabled = true;
+    displayImage.sprite = phoneNumberPaperImage;
+    displayImage.color = Color.white;
+    displayImage.preserveAspect = true;
+    displayImage.transform.SetParent(dialogRoot.transform, false);
+    displayImage.transform.SetAsLastSibling();
 
-        if (displayImage != null)
-        {
-            displayImage.gameObject.SetActive(true);
-            displayImage.enabled = true;
-            displayImage.color = Color.white;
-            displayImage.sprite = phoneNumberPaperImage;
-        }
+    RectTransform img = displayImage.GetComponent<RectTransform>();
+    img.anchorMin = new Vector2(0.5f, 0.5f);
+    img.anchorMax = new Vector2(0.5f, 0.5f);
+    img.pivot = new Vector2(0.5f, 0.5f);
+    img.anchoredPosition = Vector2.zero;
+    img.sizeDelta = new Vector2(650f, 450f);
+    img.localScale = Vector3.one;
 
-        Debug.Log("[FinalPhoneNumberClue] Image shown.");
-    }
+    Debug.Log("[FinalPhoneNumberClue] Image shown CENTER.");
+}
 
     private void ShowTextPanel()
     {
         state = ClueState.ShowingText;
         nextInputTime = Time.unscaledTime + inputDelay;
 
-        if (imagePanel != null)
-            imagePanel.SetActive(false);
+        imagePanel.SetActive(false);
 
-        if (dialogRoot != null)
-        {
-            dialogRoot.SetActive(true);
-            dialogRoot.transform.SetAsLastSibling();
-        }
+        dialogRoot.SetActive(true);
+        dialogRoot.transform.SetAsLastSibling();
 
-        if (textPanel != null)
-        {
-            textPanel.SetActive(true);
-            textPanel.transform.SetAsLastSibling();
-        }
+        textPanel.SetActive(true);
+        textPanel.transform.SetAsLastSibling();
 
-        if (speakerNameText != null)
-            speakerNameText.text = dialogTitle;
-
-        if (dialogBodyText != null)
-            dialogBodyText.text = dialogBody;
-
-        if (continueHintText != null)
-            continueHintText.text = "E Close";
+        speakerNameText.text = dialogTitle;
+        dialogBodyText.text = dialogBody;
+        continueHintText.text = "Press E to close";
 
         if (!clueFound)
         {
@@ -175,7 +173,12 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
     private void CloseEverything()
     {
         state = ClueState.Closed;
+        HideDialogOnly();
+        Debug.Log("[FinalPhoneNumberClue] Closed.");
+    }
 
+    private void HideDialogOnly()
+    {
         if (dialogRoot != null)
             dialogRoot.SetActive(false);
 
@@ -184,7 +187,5 @@ public class FinalPhoneNumberClueInteract : MonoBehaviour
 
         if (textPanel != null)
             textPanel.SetActive(false);
-
-        Debug.Log("[FinalPhoneNumberClue] Closed.");
     }
 }

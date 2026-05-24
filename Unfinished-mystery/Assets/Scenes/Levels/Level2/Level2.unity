@@ -2652,6 +2652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: painting_3
       objectReference: {fileID: 0}
+    - target: {fileID: 7403720872247367779, guid: ea88dc0a7713e9540a836889b3a01625, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2659,6 +2663,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7403720872247367779, guid: ea88dc0a7713e9540a836889b3a01625, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1466180802}
+    - targetCorrespondingSourceObject: {fileID: 7403720872247367779, guid: ea88dc0a7713e9540a836889b3a01625, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1466180805}
   m_SourcePrefab: {fileID: 100100000, guid: ea88dc0a7713e9540a836889b3a01625, type: 3}
 --- !u!1001 &185929234
 PrefabInstance:
@@ -20607,7 +20614,7 @@ MonoBehaviour:
   speakerNameText: {fileID: 447765467}
   dialogBodyText: {fileID: 891140823}
   continueHintText: {fileID: 1443679643}
-  dialogTitle: "TORN PAPER \u2014 BACK"
+  dialogTitle: Torn paper - BACK
   dialogBody: 'On the back, written in tiny pencil:
 
 
@@ -20616,7 +20623,28 @@ MonoBehaviour:
 
     "Isla''s
     number. Lana kept it hidden for years."'
-  inputDelay: 0.25
+  inputDelay: 0.35
+--- !u!65 &1466180805
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211325299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.97988343, y: 0.73768514, z: 0.10576942}
+  m_Center: {x: 0.00068771857, y: 0.000574246, z: 0.044765722}
 --- !u!1001 &1468183688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22250,7 +22278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2705738428975688189, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4184193489942777066, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
       propertyPath: m_Name
