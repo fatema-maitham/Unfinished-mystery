@@ -16,7 +16,6 @@ public class L3ExitFlickerGuide : MonoBehaviour
 
     private Coroutine flickerRoutine;
     private bool isFlickering = false;
-    private bool permanentlyStopped = false;
 
     private void Awake()
     {
@@ -33,9 +32,6 @@ public class L3ExitFlickerGuide : MonoBehaviour
 
     public void StartFlicker()
     {
-        if (permanentlyStopped)
-            return;
-
         if (redLight == null)
             return;
 
@@ -48,7 +44,6 @@ public class L3ExitFlickerGuide : MonoBehaviour
 
     public void StopFlickerPermanently()
     {
-        permanentlyStopped = true;
         ForceOff();
     }
 
@@ -71,13 +66,13 @@ public class L3ExitFlickerGuide : MonoBehaviour
 
     private IEnumerator FlickerLoop()
     {
-        while (isFlickering && !permanentlyStopped)
+        while (isFlickering)
         {
             int blinkCount = Random.Range(1, 4);
 
             for (int i = 0; i < blinkCount; i++)
             {
-                if (!isFlickering || permanentlyStopped)
+                if (!isFlickering)
                     yield break;
 
                 redLight.enabled = true;
