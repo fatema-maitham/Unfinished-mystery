@@ -1,6 +1,12 @@
-using TMPro;
 using UnityEngine;
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// LEVEL 2 — GRAMOPHONE INTERACTION
+// The gramophone becomes available only after the hidden book clue is completed.
+// It shows the prompt only when the player is close to the gramophone.
+// It does not hide or affect other prompts before the book clue is complete.
+// Attach this script to: IP_Gramophone
+// ═══════════════════════════════════════════════════════════════════════════════
 public class GramophoneInteract : MonoBehaviour
 {
     [Header("Player")]
@@ -26,19 +32,21 @@ public class GramophoneInteract : MonoBehaviour
         if (player == null || promptUI == null)
             return;
 
-        bool nearGramophone = Vector3.Distance(player.position, transform.position) <= interactDistance;
-
         bool bookshelfDone = Level2PuzzleSystem.Instance != null &&
                              Level2PuzzleSystem.Instance.BookshelfClueFound;
 
+        // Before the book clue is complete, do nothing.
+        // This prevents the gramophone from hiding prompts for other objects.
         if (!bookshelfDone || messagePlayed)
-    return;
+            return;
 
-if (!nearGramophone)
-{
-    promptUI.HidePrompt();
-    return;
-}
+        bool nearGramophone = Vector3.Distance(player.position, transform.position) <= interactDistance;
+
+        if (!nearGramophone)
+        {
+            promptUI.HidePrompt();
+            return;
+        }
 
         promptUI.ShowPrompt(label, subLabel);
 
