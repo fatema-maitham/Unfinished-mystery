@@ -4,7 +4,7 @@ using UnityEngine;
 // LEVEL 2 — GRAMOPHONE INTERACTION
 // The gramophone becomes available only after the hidden book clue is completed.
 // It shows the prompt only when the player is close to the gramophone.
-// It does not hide or affect other prompts before the book clue is complete.
+// It does not show the prompt while the book panel is open.
 // Attach this script to: IP_Gramophone
 // ═══════════════════════════════════════════════════════════════════════════════
 public class GramophoneInteract : MonoBehaviour
@@ -12,10 +12,13 @@ public class GramophoneInteract : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Transform player;
     [SerializeField] private float interactDistance = 2.5f;
-    [SerializeField] private KeyCode playKey = KeyCode.P;
+    [SerializeField] private KeyCode playKey = KeyCode.E;
 
     [Header("Prompt UI")]
     [SerializeField] private ActivationPromptUI promptUI;
+
+    [Header("Book Check")]
+    [SerializeField] private GameObject bookPanel;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -32,11 +35,17 @@ public class GramophoneInteract : MonoBehaviour
         if (player == null || promptUI == null)
             return;
 
+        // Do not show the gramophone prompt while the book is open.
+        if (bookPanel != null && bookPanel.activeInHierarchy)
+        {
+            promptUI.HidePrompt();
+            return;
+        }
+
         bool bookshelfDone = Level2PuzzleSystem.Instance != null &&
                              Level2PuzzleSystem.Instance.BookshelfClueFound;
 
         // Before the book clue is complete, do nothing.
-        // This prevents the gramophone from hiding prompts for other objects.
         if (!bookshelfDone || messagePlayed)
             return;
 
