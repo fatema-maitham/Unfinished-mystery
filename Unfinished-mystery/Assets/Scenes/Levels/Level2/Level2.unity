@@ -6241,7 +6241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &514780182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20179,11 +20179,11 @@ MonoBehaviour:
   player: {fileID: 603546215}
   interactDistance: 2.5
   playKey: 112
-  promptPanel: {fileID: 533129713}
-  promptTextUI: {fileID: 1898956824}
+  promptUI: {fileID: 503856320}
   audioSource: {fileID: 1423912019}
   gramophoneMessage: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
-  playPrompt: PRESS P TO PLAY
+  label: Play
+  subLabel: Gramophone
 --- !u!1 &1423923729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4130218664092095341, guid: 84f186186acadc941a2e59ce12ace979, type: 3}

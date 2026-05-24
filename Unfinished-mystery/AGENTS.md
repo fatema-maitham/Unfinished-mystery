@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: IP_Gramophone
+  - Name: UI
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

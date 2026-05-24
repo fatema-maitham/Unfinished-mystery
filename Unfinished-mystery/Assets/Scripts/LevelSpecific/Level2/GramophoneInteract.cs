@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 
-// After the final book spread is reached, the gramophone becomes playable.
 public class GramophoneInteract : MonoBehaviour
 {
     [Header("Player")]
@@ -32,11 +31,14 @@ public class GramophoneInteract : MonoBehaviour
         bool bookshelfDone = Level2PuzzleSystem.Instance != null &&
                              Level2PuzzleSystem.Instance.BookshelfClueFound;
 
-        if (!nearGramophone || !bookshelfDone || messagePlayed)
-        {
-            promptUI.HidePrompt();
-            return;
-        }
+        if (!bookshelfDone || messagePlayed)
+    return;
+
+if (!nearGramophone)
+{
+    promptUI.HidePrompt();
+    return;
+}
 
         promptUI.ShowPrompt(label, subLabel);
 
