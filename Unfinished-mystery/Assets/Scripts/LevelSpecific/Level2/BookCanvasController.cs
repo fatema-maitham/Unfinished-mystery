@@ -91,6 +91,23 @@ public void OpenBook()
     currentSpreadIndex = 0;
     bookshelfClueReported = false;
 
+    // Force canvas visible
+    Canvas canvas = GetComponent<Canvas>();
+    if (canvas != null)
+    {
+        canvas.enabled = true;
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999;
+    }
+
+    CanvasGroup group = GetComponent<CanvasGroup>();
+    if (group != null)
+    {
+        group.alpha = 1f;
+        group.interactable = true;
+        group.blocksRaycasts = true;
+    }
+
     if (bookPanel != null)
     {
         bookPanel.gameObject.SetActive(true);
@@ -98,6 +115,10 @@ public void OpenBook()
         bookPanel.anchoredPosition = new Vector2(0f, 80f);
         bookPanel.sizeDelta = new Vector2(1055f, 623f);
         bookPanel.localScale = Vector3.one;
+
+        // Force children ON
+        for (int i = 0; i < bookPanel.childCount; i++)
+            bookPanel.GetChild(i).gameObject.SetActive(true);
     }
 
     UpdatePages();
