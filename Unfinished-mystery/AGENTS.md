@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: Directional Light Sun
+  - Name: TVMessage
   - Tag: Untagged
-  - Layer: 9
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
