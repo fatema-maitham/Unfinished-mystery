@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: ChildDrawing_Image
+  - Name: Walls
   - Tag: Untagged
-  - Layer: 6
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -3,23 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LEVEL 2 — CLUE BOOK CANVAS CONTROLLER
-// Controls the visual book UI.
-// Shows left/right page content.
-// Handles Next and Back page navigation.
-// Plays page-turn audio.
-// Uses a small bounce animation instead of a real TurningPage object.
-// When the player reaches the final spread, the bookshelf clue becomes complete.
-// Attach this script to: ClueBookCanvas
-// ═══════════════════════════════════════════════════════════════════════════════
+/// <summary>
+/// Controls the Level 2 clue book UI.
+/// Shows book pages, handles next/back buttons, page sounds, and reports
+/// the bookshelf clue only after the player closes the book on the final spread.
+/// </summary>
 public class BookCanvasController : MonoBehaviour
 {
-    // ───────────────────────────────────────────────────────────────────────────
-    // BOOK SPREAD DATA
-    // One spread = left page + right page.
-    // Example: Spread 1 contains Page 1 on the left and Page 2 on the right.
-    // ───────────────────────────────────────────────────────────────────────────
     [System.Serializable]
     public class BookSpread
     {
@@ -64,81 +54,74 @@ public class BookCanvasController : MonoBehaviour
     [SerializeField] private float openAnimationTime = 0.2f;
     [SerializeField] private float pageBounceTime = 0.18f;
 
-    private int currentSpreadIndex = 0;
-    private bool isAnimating = false;
-    private bool bookshelfClueReported = false;
+    private int currentSpreadIndex;
+    private bool isAnimating;
+    private bool reachedFinalSpread;
+    private bool bookshelfClueReported;
 
-private void Start()
-{
-    if (bookPanel != null)
-        bookPanel.gameObject.SetActive(false);
-
-    if (nextButton != null)
-        nextButton.onClick.AddListener(NextSpread);
-
-    if (backButton != null)
-        backButton.onClick.AddListener(PreviousSpread);
-}
-
-    // ───────────────────────────────────────────────────────────────────────────
-    // Opens the book from the first spread.
-    // Called by BookInteract when the player presses E near the bookshelf book.
-    // ───────────────────────────────────────────────────────────────────────────
-public void OpenBook()
-{
-    Debug.Log("[BookCanvasController] OpenBook called");
-
-    currentSpreadIndex = 0;
-    bookshelfClueReported = false;
-
-    // Force canvas visible
-    Canvas canvas = GetComponent<Canvas>();
-    if (canvas != null)
+    private void Start()
     {
-        canvas.enabled = true;
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 999;
+        if (bookPanel != null)
+            bookPanel.gameObject.SetActive(false);
+
+        if (nextButton != null)
+            nextButton.onClick.AddListener(NextSpread);
+
+        if (backButton != null)
+            backButton.onClick.AddListener(PreviousSpread);
     }
 
-    CanvasGroup group = GetComponent<CanvasGroup>();
-    if (group != null)
+    public void OpenBook()
     {
-        group.alpha = 1f;
-        group.interactable = true;
-        group.blocksRaycasts = true;
+        Debug.Log("[BookCanvasController] OpenBook called");
+
+        currentSpreadIndex = 0;
+        reachedFinalSpread = false;
+
+        Canvas canvas = GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.enabled = true;
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 999;
+        }
+
+        CanvasGroup group = GetComponent<CanvasGroup>();
+        if (group != null)
+        {
+            group.alpha = 1f;
+            group.interactable = true;
+            group.blocksRaycasts = true;
+        }
+
+        if (bookPanel != null)
+        {
+            bookPanel.gameObject.SetActive(true);
+            bookPanel.SetAsLastSibling();
+            bookPanel.anchoredPosition = new Vector2(0f, 80f);
+            bookPanel.sizeDelta = new Vector2(1055f, 623f);
+            bookPanel.localScale = Vector3.one;
+
+            for (int i = 0; i < bookPanel.childCount; i++)
+                bookPanel.GetChild(i).gameObject.SetActive(true);
+        }
+
+        UpdatePages();
+        StartCoroutine(OpenAnimation());
     }
 
-    if (bookPanel != null)
+    public void CloseBook()
     {
-        bookPanel.gameObject.SetActive(true);
-        bookPanel.SetAsLastSibling();
-        bookPanel.anchoredPosition = new Vector2(0f, 80f);
-        bookPanel.sizeDelta = new Vector2(1055f, 623f);
-        bookPanel.localScale = Vector3.one;
+        if (bookPanel != null)
+            bookPanel.gameObject.SetActive(false);
 
-        // Force children ON
-        for (int i = 0; i < bookPanel.childCount; i++)
-            bookPanel.GetChild(i).gameObject.SetActive(true);
+        if (reachedFinalSpread && !bookshelfClueReported)
+        {
+            bookshelfClueReported = true;
+            Level2PuzzleSystem.Instance?.FindBookshelfClue();
+        }
     }
 
-    UpdatePages();
-    StartCoroutine(OpenAnimation());
-}
-
-    // ───────────────────────────────────────────────────────────────────────────
-    // Closes the book canvas only.
-    // Player movement is restored from BookInteract.CloseBook().
-    // ───────────────────────────────────────────────────────────────────────────
-public void CloseBook()
-{
-    if (bookPanel != null)
-        bookPanel.gameObject.SetActive(false);
-}
-
-    // ───────────────────────────────────────────────────────────────────────────
-    // Moves to the next spread.
-    // Plays page flip sound and a small book bounce animation.
-    // ───────────────────────────────────────────────────────────────────────────
     public void NextSpread()
     {
         if (isAnimating)
@@ -151,10 +134,6 @@ public void CloseBook()
         StartCoroutine(PageChangeAnimation());
     }
 
-    // ───────────────────────────────────────────────────────────────────────────
-    // Moves to the previous spread.
-    // Lets the player go back and reread earlier clues.
-    // ───────────────────────────────────────────────────────────────────────────
     public void PreviousSpread()
     {
         if (isAnimating)
@@ -167,11 +146,6 @@ public void CloseBook()
         StartCoroutine(PageChangeAnimation());
     }
 
-    // ───────────────────────────────────────────────────────────────────────────
-    // Updates the visible text and image for the current spread.
-    // If no image is assigned, LeftImage is hidden automatically.
-    // When the final spread is reached, it reports the bookshelf clue as found.
-    // ───────────────────────────────────────────────────────────────────────────
     private void UpdatePages()
     {
         if (spreads == null || spreads.Length == 0)
@@ -193,16 +167,16 @@ public void CloseBook()
         }
 
         if (leftText != null)
+        {
             leftText.text = spread.leftText;
-
-        if (rightText != null)
-            rightText.text = spread.rightText;
-
-        if (leftText != null)
             leftText.fontSize = spread.bigText ? 46 : 28;
+        }
 
         if (rightText != null)
+        {
+            rightText.text = spread.rightText;
             rightText.fontSize = spread.bigText ? 46 : 30;
+        }
 
         if (nextButton != null)
             nextButton.gameObject.SetActive(currentSpreadIndex < spreads.Length - 1);
@@ -210,16 +184,10 @@ public void CloseBook()
         if (backButton != null)
             backButton.gameObject.SetActive(currentSpreadIndex > 0);
 
-        if (currentSpreadIndex == spreads.Length - 1 && !bookshelfClueReported)
-        {
-            bookshelfClueReported = true;
-            Level2PuzzleSystem.Instance?.FindBookshelfClue();
-        }
+        if (currentSpreadIndex == spreads.Length - 1)
+            reachedFinalSpread = true;
     }
 
-    // ───────────────────────────────────────────────────────────────────────────
-    // Small opening animation when the book appears.
-    // ───────────────────────────────────────────────────────────────────────────
     private IEnumerator OpenAnimation()
     {
         isAnimating = true;
@@ -235,13 +203,7 @@ public void CloseBook()
             float t = timer / openAnimationTime;
 
             if (bookPanel != null)
-            {
-                bookPanel.localScale = Vector3.Lerp(
-                    new Vector3(0.85f, 0.85f, 1f),
-                    Vector3.one,
-                    t
-                );
-            }
+                bookPanel.localScale = Vector3.Lerp(new Vector3(0.85f, 0.85f, 1f), Vector3.one, t);
 
             yield return null;
         }
@@ -252,12 +214,6 @@ public void CloseBook()
         isAnimating = false;
     }
 
-    // ───────────────────────────────────────────────────────────────────────────
-    // Simple page change animation.
-    // This replaces the real TurningPage object to keep setup easy.
-    // It plays page-turn audio, slightly shrinks the book, updates the pages,
-    // then returns the book to normal size.
-    // ───────────────────────────────────────────────────────────────────────────
     private IEnumerator PageChangeAnimation()
     {
         isAnimating = true;

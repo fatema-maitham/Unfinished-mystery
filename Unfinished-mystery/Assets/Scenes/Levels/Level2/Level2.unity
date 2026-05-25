@@ -4433,6 +4433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: painting_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1198399453231254847, guid: 20588b3052123cc46ac2afc3a26650f9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8179452044975401897, guid: 20588b3052123cc46ac2afc3a26650f9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -10860,7 +10864,7 @@ GameObject:
   - component: {fileID: 818912288}
   - component: {fileID: 818912287}
   - component: {fileID: 818912286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ChildDrawing_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10876,7 +10880,7 @@ Transform:
   m_GameObject: {fileID: 818912284}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.004023827, y: -0.010089053, z: 0.07062352}
+  m_LocalPosition: {x: -0.0040239496, y: -0.010089053, z: 0.07062352}
   m_LocalScale: {x: 0.8931559, y: 0.6172695, z: 0.8573191}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15013,11 +15017,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.97988343, y: 0.7376852, z: 0.10576942}
+  m_Size: {x: 1.2, y: 1, z: 0.3}
   m_Center: {x: 0.0006880762, y: 0.00057436526, z: 0.044765364}
 --- !u!1 &1061325033 stripped
 GameObject:
@@ -16099,7 +16103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstNoteRead: 0
   _tvMessageSeen: 0
-  _childDrawingFound: 0
   _bookshelfClueFound: 0
   _gramophonePlayed: 0
   _brassKeyFound: 0
@@ -16125,9 +16128,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onTVMessageSeen:
-    m_PersistentCalls:
-      m_Calls: []
-  onChildDrawingFound:
     m_PersistentCalls:
       m_Calls: []
   onBookshelfClueFound:
@@ -16632,7 +16632,7 @@ GameObject:
   - component: {fileID: 1169808987}
   - component: {fileID: 1169808986}
   - component: {fileID: 1169808988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18893,7 +18893,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 0.25, y: 0.2, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1379776066
 MonoBehaviour:
@@ -18913,7 +18913,7 @@ MonoBehaviour:
   signText: Enter your text here.
   speakerName: 
   revealImage: {fileID: 21300000, guid: 9bac912c2d6ab4233aba3a1124fe8c73, type: 3}
-  activationRadius: 1.8
+  activationRadius: 1
 --- !u!114 &1379776068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18927,7 +18927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
-  activationRadius: 1.8
+  activationRadius: 1
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20065,7 +20065,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8, y: 2, z: 1.08}
+  m_Size: {x: 0.7, y: 1.2, z: 0.7}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &1423912019
 AudioSource:
@@ -20177,10 +20177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
-  interactDistance: 2.5
+  interactDistance: 1.2
   playKey: 101
   promptUI: {fileID: 503856320}
-  bookPanel: {fileID: 0}
   audioSource: {fileID: 1423912019}
   gramophoneMessage: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
   label: Play
