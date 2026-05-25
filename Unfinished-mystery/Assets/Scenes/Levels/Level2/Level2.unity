@@ -20013,7 +20013,7 @@ Transform:
   m_GameObject: {fileID: 1423912015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5386398, z: -0, w: 0.84253615}
-  m_LocalPosition: {x: -4.2149343, y: -2.7910001, z: -3.856412}
+  m_LocalPosition: {x: -4.618, y: -2.7910001, z: -3.856412}
   m_LocalScale: {x: 0.9000001, y: 0.9, z: 0.9000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20065,7 +20065,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 2, z: 1.8}
+  m_Size: {x: 0.8, y: 2, z: 1.08}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &1423912019
 AudioSource:
@@ -20178,8 +20178,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
   interactDistance: 2.5
-  playKey: 112
+  playKey: 101
   promptUI: {fileID: 503856320}
+  bookPanel: {fileID: 0}
   audioSource: {fileID: 1423912019}
   gramophoneMessage: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
   label: Play
@@ -23842,7 +23843,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4165282, y: 2.447465, z: 0.89494216}
+  m_Size: {x: 0.83, y: 2.28, z: 0.78}
   m_Center: {x: 0.04173535, y: -0.45491135, z: 0.006155938}
 --- !u!4 &1620906955
 Transform:
@@ -23853,7 +23854,7 @@ Transform:
   m_GameObject: {fileID: 1620906951}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99920046, z: -0, w: -0.039980847}
-  m_LocalPosition: {x: -4.807, y: -1.108, z: -1.9246216}
+  m_LocalPosition: {x: -4.937, y: -1.108, z: -1.863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
