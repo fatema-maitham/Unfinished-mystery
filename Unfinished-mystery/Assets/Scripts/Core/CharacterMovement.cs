@@ -18,6 +18,10 @@ public class CharacterMovement : MonoBehaviour
     [Header("Ground Detection")]
     public LayerMask groundMask;
 
+
+    [Header("Footstep Sound")]
+    public AudioSource footstepAudioSource;
+
     private CharacterController controller;
     private Animator animator;
     private float verticalVelocity;
@@ -60,22 +64,38 @@ public class CharacterMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        if (Cursor.lockState != CursorLockMode.Locked) return;
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            StopFootsteps();
+            return;
+        }
+
         float cameraYaw = cameraFollowTarget.eulerAngles.y;
         Quaternion cameraYawRotation = Quaternion.Euler(0, cameraYaw, 0);
         Vector3 moveDir = (cameraYawRotation * new Vector3(moveInput.x, 0, moveInput.y)).normalized;
 
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
-        float animSpeed    = 0f;
+        float animSpeed = 0f;
 
-        if (moveDir.magnitude >= 0.1f)
+        if (moveDir.magnitude >= 0.1f && controller.isGrounded)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-                rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+
             controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
             animSpeed = isRunning ? 1f : 0.5f;
+
+            if (footstepAudioSource != null && !footstepAudioSource.isPlaying)
+                footstepAudioSource.Play();
+        }
+        else
+        {
+            StopFootsteps();
         }
 
         animator.SetFloat("Speed", animSpeed, 0.1f, Time.deltaTime);
@@ -96,4 +116,12 @@ public class CharacterMovement : MonoBehaviour
 
         controller.Move(new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
     }
+
+
+    void StopFootsteps()
+    {
+        if (footstepAudioSource != null && footstepAudioSource.isPlaying)
+            footstepAudioSource.Stop();
+    }
+
 }

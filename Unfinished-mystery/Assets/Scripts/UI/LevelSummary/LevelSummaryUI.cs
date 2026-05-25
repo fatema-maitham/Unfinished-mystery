@@ -39,6 +39,11 @@ public class LevelSummaryUI : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        
         ApplyDefaultIfNeeded();
 
         Sprite portraitToUse = LevelResultData.portrait != null

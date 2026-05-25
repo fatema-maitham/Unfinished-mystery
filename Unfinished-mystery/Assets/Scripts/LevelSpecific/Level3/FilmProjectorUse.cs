@@ -48,6 +48,11 @@ public TVStaticSoundController tvStaticController;
 public AudioSource glitchSound;
 
 
+[Header("Projector Reel Load Sound")]
+public AudioSource projectorAudioSource;
+public AudioClip reelLoadClip;
+
+
 [Header("Final Code Reveal")]
 [SerializeField] private KeypadZoomInteract finalKeypadPrompt;
 [SerializeField] private Texture finalCodeTexture; // Screen_FinalCode_0427
@@ -82,11 +87,6 @@ private void Start()
         exitRedWarningLight.ForceOff();
 
 
-        if (finalKeypadPrompt != null)
-{
-    finalKeypadPrompt.UnlockKeypadPrompt();
-}
-
     ShowIdleScreen();
 }
 
@@ -112,13 +112,11 @@ private IEnumerator RevealFinalCodeSequence()
         exitRedWarningLight.StartFlicker();
     }
 
-
-    if (exitInspectToDisable != null)
+if (exitInspectToDisable != null)
 {
-    exitInspectToDisable.enabled = false;
+    exitInspectToDisable.DisableInspectPermanently();
 }
-
-    if (finalKeypadPrompt != null)
+if (finalKeypadPrompt != null)
 {
     finalKeypadPrompt.enabled = true;
     finalKeypadPrompt.UnlockKeypadPrompt();
@@ -128,12 +126,12 @@ private IEnumerator RevealFinalCodeSequence()
 
 private IEnumerator FinalReelEndingSequence()
 {
+    yield return StartCoroutine(RevealFinalCodeSequence());
+
     yield return StartCoroutine(ShowMessage(
         "Final reel discovered: Maya never escaped.",
         messageStayTime
     ));
-
-    yield return StartCoroutine(RevealFinalCodeSequence());
 
     UpdatePrompt();
 }
@@ -261,6 +259,13 @@ private void PlayReel(int reelNumber)
     currentReelNumber = reelNumber;
     videoPlaying = true;
 
+
+    if (projectorAudioSource != null &&
+    reelLoadClip != null)
+{
+    projectorAudioSource.PlayOneShot(reelLoadClip);
+}
+
     if (interactPrompt != null)
         interactPrompt.HidePrompt();
 
@@ -279,10 +284,10 @@ private void OnVideoFinished(VideoPlayer vp)
 
     vp.Stop();
 
-    if (currentReelNumber != 3)
-    {
-        ShowIdleScreen();
-    }
+    if (currentReelNumber != 3 || isReplay)
+{
+    ShowIdleScreen();
+}
 
     if (isReplay)
         {
@@ -355,6 +360,10 @@ private IEnumerator ShowErrorMessage(string message)
 
     ShowIdleScreen();
     yield return StartCoroutine(ShowMessage(message, errorStayTime));
+
+    if (glitchSound != null)
+    glitchSound.Stop();
+    
     UpdatePrompt();
 }
 

@@ -6,7 +6,11 @@ public class TVStaticClue : MonoBehaviour
 {
     [Header("Prompt")]
     public InteractionPromptUI interactPrompt;
-    public string promptText = "Listen";
+    public string promptText = "LISTEN";
+    public string promptSubLabel = "Static";
+
+    [Header("Sound")]
+    public TVStaticSoundController staticSoundController;
 
     [Header("Message UI")]
     public RectTransform messagePanel;
@@ -30,79 +34,42 @@ public class TVStaticClue : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange &&
-            !messageShowing &&
-            Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && !messageShowing && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(ShowMessage());
         }
     }
 
-    private IEnumerator ShowMessage()
+   private IEnumerator ShowMessage()
+{
+    messageShowing = true;
+
+    if (interactPrompt != null)
+        interactPrompt.HidePrompt();
+
+    if (staticSoundController != null &&
+        staticSoundController.staticAudioSource != null)
     {
-        messageShowing = true;
+staticSoundController.staticAudioSource.PlayOneShot(
+    staticSoundController.staticAudioSource.clip
+);    }
 
-        if (interactPrompt != null)
-            interactPrompt.HidePrompt();
+    if (messageText != null)
+        messageText.text = clueMessage;
 
-        if (messageText != null)
-            messageText.text = clueMessage;
+    if (messagePanel != null)
+        messagePanel.gameObject.SetActive(true);
 
-        if (messagePanel != null)
-        {
-            messagePanel.gameObject.SetActive(true);
+    yield return new WaitForSeconds(messageStayTime);
 
-            Vector2 shownPos = messagePanel.anchoredPosition;
-            Vector2 hiddenPos = shownPos + new Vector2(700f, 0f);
+    if (messagePanel != null)
+        messagePanel.gameObject.SetActive(false);
 
-            messagePanel.anchoredPosition = hiddenPos;
+    messageShowing = false;
 
-            if (messageCanvasGroup != null)
-                messageCanvasGroup.alpha = 0f;
-
-            float t = 0f;
-
-            while (t < 1f)
-            {
-                t += Time.deltaTime * 3f;
-
-                messagePanel.anchoredPosition =
-                    Vector2.Lerp(hiddenPos, shownPos, t);
-
-                if (messageCanvasGroup != null)
-                    messageCanvasGroup.alpha =
-                        Mathf.Lerp(0f, 1f, t);
-
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(messageStayTime);
-
-            t = 0f;
-
-            while (t < 1f)
-            {
-                t += Time.deltaTime * 3f;
-
-                messagePanel.anchoredPosition =
-                    Vector2.Lerp(shownPos, hiddenPos, t);
-
-                if (messageCanvasGroup != null)
-                    messageCanvasGroup.alpha =
-                        Mathf.Lerp(1f, 0f, t);
-
-                yield return null;
-            }
-
-            messagePanel.anchoredPosition = shownPos;
-            messagePanel.gameObject.SetActive(false);
-        }
-
-        messageShowing = false;
-
-        if (playerInRange && interactPrompt != null)
-            interactPrompt.ShowPrompt(promptText);
-    }
+    if (playerInRange && interactPrompt != null)
+        interactPrompt.ShowPrompt(promptText, promptSubLabel);
+}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -111,7 +78,7 @@ public class TVStaticClue : MonoBehaviour
             playerInRange = true;
 
             if (interactPrompt != null)
-                interactPrompt.ShowPrompt(promptText);
+                interactPrompt.ShowPrompt(promptText, promptSubLabel);
         }
     }
 
