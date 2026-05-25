@@ -35,6 +35,12 @@ public class L3SmartLoopHints : MonoBehaviour
     private Coroutine glitchRoutine;
 
 
+    [Header("Loop Tension Hum")]
+    [SerializeField] private AudioSource loopTensionHum;
+    [SerializeField] private float loop4HumVolume = 0.08f;
+    [SerializeField] private float loop5HumVolume = 0.14f;
+
+
     
 
     private void Start()
@@ -94,7 +100,29 @@ public class L3SmartLoopHints : MonoBehaviour
         if (loopLightFlicker != null)
         {
             loopLightFlicker.SetCurrentLoop(currentLoop);
-            loopLightFlicker.ApplyLoopFlicker();
+        }
+
+
+                if (loopTensionHum != null)
+        {
+            if (currentLoop >= 5)
+            {
+                if (!loopTensionHum.isPlaying)
+                    loopTensionHum.Play();
+
+                loopTensionHum.volume = loop5HumVolume;
+            }
+            else if (currentLoop >= 4)
+            {
+                if (!loopTensionHum.isPlaying)
+                    loopTensionHum.Play();
+
+                loopTensionHum.volume = loop4HumVolume;
+            }
+            else
+            {
+                loopTensionHum.Stop();
+            }
         }
 
     }
