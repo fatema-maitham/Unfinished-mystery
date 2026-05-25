@@ -1813,7 +1813,7 @@ MonoBehaviour:
   audioSource: {fileID: 112096713}
   pageTurnSound: {fileID: 8300000, guid: 92dd874338a2c48c0a56660c696946f5, type: 3}
   spreads:
-  - leftImage: {fileID: 21300000, guid: 1bd89f2b455b94127ba94e38b047f3f3, type: 3}
+  - leftImage: {fileID: 0}
     leftText: 'I used to think memories protected people.
 
       Now I think they
@@ -1851,7 +1851,7 @@ MonoBehaviour:
 
       He stayed in uniform.'
     bigText: 0
-  - leftImage: {fileID: 21300000, guid: 7ea040732721644f9b644b8ea9e14734, type: 3}
+  - leftImage: {fileID: 0}
     leftText: 'Badge 259
 
       The drawing was never random.
@@ -13601,8 +13601,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7408314, y: 2.3517723, z: 0.64039516}
-  m_Center: {x: 0.018383175, y: 1.1758862, z: 0.051459}
+  m_Size: {x: 1.2, y: 2, z: 0.35}
+  m_Center: {x: 0.018383175, y: 1, z: 0.051459}
 --- !u!1001 &988871105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15604,13 +15604,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115725144}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.544, z: 0}
+  m_LocalRotation: {x: -0.00092867995, y: -0.00013678399, z: 0.000741101, w: 0.9999993}
+  m_LocalPosition: {x: -0.000000059604645, y: 0.54400015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1989198953}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.106, y: -0.016, z: 0.085}
 --- !u!114 &1115725146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19700,8 +19700,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.34261802, y: 0.40294075, z: 0.08665421}
-  m_Center: {x: -0.00000023841858, y: 0.20123577, z: 0.0000009536743}
+  m_Size: {x: 0.35, y: 0.45, z: 0.12}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1415595151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23873,7 +23873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
-  interactDistance: 3
+  interactDistance: 1.8
   behavioursToDisable:
   - {fileID: 603546222}
   bookCanvasController: {fileID: 112096714}
