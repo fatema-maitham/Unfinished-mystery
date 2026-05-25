@@ -7020,7 +7020,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxColliders: 8
+  maxColliders: 3
   interactKey: 101
   promptUI: {fileID: 503856320}
 --- !u!1 &605063764 stripped
