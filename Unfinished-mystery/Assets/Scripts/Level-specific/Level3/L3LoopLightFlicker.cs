@@ -9,32 +9,38 @@ public class L3LoopLightFlicker : MonoBehaviour
     [Header("Loop Settings")]
     [SerializeField] private int currentLoop = 1;
 
-    [Header("Loop 4 Flicker")]
-    [SerializeField] private float loop4MinIntensity = 1.2f;
-    [SerializeField] private float loop4MaxIntensity = 2f;
-    [SerializeField] private float loop4Speed = 0.08f;
-
-    [Header("Loop 5 Flicker")]
-    [SerializeField] private float loop5MinIntensity = 0.8f;
-    [SerializeField] private float loop5MaxIntensity = 2.5f;
-    [SerializeField] private float loop5Speed = 0.04f;
+    [Header("Flicker Timing")]
+    [SerializeField] private float loop4OffTime = 0.18f;
+    [SerializeField] private float loop4OnTime = 0.35f;
+    [SerializeField] private float loop5OffTime = 0.12f;
+    [SerializeField] private float loop5OnTime = 0.18f;
 
     private Coroutine flickerRoutine;
+    private int lastLoop = -1;
 
     private void Start()
     {
         ApplyLoopFlicker();
     }
 
+    private void Update()
+    {
+        if (lastLoop != currentLoop)
+        {
+            ApplyLoopFlicker();
+        }
+    }
+
     public void SetCurrentLoop(int loop)
     {
         currentLoop = loop;
-        Debug.Log("LIGHT FLICKER LOOP SET TO: " + currentLoop);
         ApplyLoopFlicker();
     }
 
     public void ApplyLoopFlicker()
     {
+        lastLoop = currentLoop;
+
         if (flickerRoutine != null)
         {
             StopCoroutine(flickerRoutine);
@@ -54,37 +60,25 @@ public class L3LoopLightFlicker : MonoBehaviour
     private IEnumerator FlickerRoutine()
     {
         while (true)
-        Debug.Log("LIGHT FLICKER RUNNING | Loop = " + currentLoop);
         {
-            float minIntensity;
-            float maxIntensity;
-            float speed;
-
-            if (currentLoop >= 5)
-            {
-                minIntensity = loop5MinIntensity;
-                maxIntensity = loop5MaxIntensity;
-                speed = loop5Speed;
-            }
-            else
-            {
-                minIntensity = loop4MinIntensity;
-                maxIntensity = loop4MaxIntensity;
-                speed = loop4Speed;
-            }
+            float offTime = currentLoop >= 5 ? loop5OffTime : loop4OffTime;
+            float onTime = currentLoop >= 5 ? loop5OnTime : loop4OnTime;
 
             foreach (Light lightObj in flickerLights)
             {
                 if (lightObj != null)
-                {
-                    lightObj.intensity =
-                        Random.Range(minIntensity, maxIntensity);
-                }
+                    lightObj.enabled = false;
             }
 
-            
+            yield return new WaitForSeconds(offTime);
 
-            yield return new WaitForSeconds(speed);
+            foreach (Light lightObj in flickerLights)
+            {
+                if (lightObj != null)
+                    lightObj.enabled = true;
+            }
+
+            yield return new WaitForSeconds(onTime);
         }
     }
 
@@ -93,9 +87,7 @@ public class L3LoopLightFlicker : MonoBehaviour
         foreach (Light lightObj in flickerLights)
         {
             if (lightObj != null)
-            {
-                lightObj.intensity = 2f;
-            }
+                lightObj.enabled = true;
         }
     }
 }
