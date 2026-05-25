@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: CM_Leonard_ThirdPerson
+  - Name: ChildDrawing_Image
   - Tag: Untagged
-  - Layer: Default
+  - Layer: 6
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
