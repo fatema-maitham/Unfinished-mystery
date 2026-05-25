@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: Directional Light Sun
+  - Name: wall_corner_double
   - Tag: Untagged
-  - Layer: 9
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
