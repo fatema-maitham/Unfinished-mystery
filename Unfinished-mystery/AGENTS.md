@@ -11,4 +11,14 @@
   - Name: DrawingBook
   - Tag: Untagged
   - Layer: Default
+  - Name: Level23
+  - Tags:
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
+  - Layers:
+    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+- Active game object:
+  - Name: Global Volume
+  - Name: Panel
+  - Tag: Untagged
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
