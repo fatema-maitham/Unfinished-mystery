@@ -59,28 +59,28 @@ public class PauseMenuController : MonoBehaviour
 
     
     public void PauseGame()
-    {
-        if (pauseCanvas != null)
-            pauseCanvas.SetActive(true);
+{
+    if (pauseCanvas != null)
+        pauseCanvas.SetActive(true);
 
-        isPaused = true;
-        Time.timeScale = 0f;
+    isPaused = true;
+    Time.timeScale = 0f;
 
-        if (backgroundMusicSource != null && !musicMuted)
-            backgroundMusicSource.Pause();
-    }
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+}
 
-    public void ResumeGame()
-    {
-        if (pauseCanvas != null)
-            pauseCanvas.SetActive(false);
+public void ResumeGame()
+{
+    if (pauseCanvas != null)
+        pauseCanvas.SetActive(false);
 
-        isPaused = false;
-        Time.timeScale = 1f;
+    isPaused = false;
+    Time.timeScale = 1f;
 
-        if (backgroundMusicSource != null && !musicMuted)
-            backgroundMusicSource.UnPause();
-    }
+    Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
+}
 
    
     public void RestartLevel()
