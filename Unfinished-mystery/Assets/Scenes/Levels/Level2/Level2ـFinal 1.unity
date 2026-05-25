@@ -1819,7 +1819,7 @@ MonoBehaviour:
   audioSource: {fileID: 112096713}
   pageTurnSound: {fileID: 8300000, guid: 92dd874338a2c48c0a56660c696946f5, type: 3}
   spreads:
-  - leftImage: {fileID: 21300000, guid: 1bd89f2b455b94127ba94e38b047f3f3, type: 3}
+  - leftImage: {fileID: 0}
     leftText: 'I used to think memories protected people.
 
       Now I think they
@@ -1857,7 +1857,7 @@ MonoBehaviour:
 
       He stayed in uniform.'
     bigText: 0
-  - leftImage: {fileID: 21300000, guid: 7ea040732721644f9b644b8ea9e14734, type: 3}
+  - leftImage: {fileID: 0}
     leftText: 'Badge 259
 
       The drawing was never random.
@@ -4510,6 +4510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: painting_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1198399453231254847, guid: 20588b3052123cc46ac2afc3a26650f9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8179452044975401897, guid: 20588b3052123cc46ac2afc3a26650f9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5535,6 +5539,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4232834961669785442, guid: bd9b2ceaf0a16854b8dd2a39e315f9cb, type: 3}
   m_PrefabInstance: {fileID: 419314874}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &427216895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+  m_PrefabInstance: {fileID: 1851365448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &427216896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1795657601353268991, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+  m_PrefabInstance: {fileID: 1851365448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &427216899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427216895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7974f3d0ac541398f859f67f93d15d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptUI: {fileID: 533129714}
+  promptText: OPEN
+  promptSubLabel: Drawer
+  interactKey: 101
+  player: {fileID: 0}
+  interactDistance: 2.5
+  drawerToMove: {fileID: 427216896}
+  openSpeed: 2.5
+  keyObject: {fileID: 919132148884768640}
+--- !u!65 &427216900
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427216895}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 0.8, z: -1}
+--- !u!54 &427216901
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427216895}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &435022741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3925076271668386098, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
@@ -7319,8 +7402,13 @@ MonoBehaviour:
   interactionRadius: 10
   interactableLayer:
     serializedVersion: 2
+<<<<<<< HEAD:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2ـFinal 1.unity
+    m_Bits: 64
+  maxColliders: 3
+=======
     m_Bits: 8
   maxColliders: 32
+>>>>>>> master:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2.unity
   interactKey: 101
   promptUI: {fileID: 503856320}
 --- !u!1 &605063764 stripped
@@ -10197,7 +10285,6 @@ Transform:
   - {fileID: 1466180801}
   - {fileID: 1405800866}
   - {fileID: 1896437517}
-  - {fileID: 543450652804341050}
   - {fileID: 340354168}
   - {fileID: 1379776063}
   - {fileID: 58495719}
@@ -11108,7 +11195,7 @@ GameObject:
   - component: {fileID: 818912288}
   - component: {fileID: 818912287}
   - component: {fileID: 818912286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ChildDrawing_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11124,7 +11211,7 @@ Transform:
   m_GameObject: {fileID: 818912284}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.004023827, y: -0.010089053, z: 0.07062352}
+  m_LocalPosition: {x: -0.0040239496, y: -0.010089053, z: 0.07062352}
   m_LocalScale: {x: 0.8931559, y: 0.6172695, z: 0.8573191}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13004,6 +13091,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5374360715843893824, guid: 7bdde7ff3b8673e4dabf168f11f76755, type: 3}
   m_PrefabInstance: {fileID: 2131388308}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2ـFinal 1.unity
+=======
 --- !u!114 &937835219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13029,6 +13118,7 @@ MonoBehaviour:
   tvStaticToStopOnPickup: {fileID: 0}
   projectorToNotify: {fileID: 0}
   collectedReelNumber: 0
+>>>>>>> master:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2.unity
 --- !u!65 &937835223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13862,8 +13952,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7408314, y: 2.3517723, z: 0.64039516}
-  m_Center: {x: 0.018383175, y: 1.1758862, z: 0.051459}
+  m_Size: {x: 1.2, y: 2, z: 0.35}
+  m_Center: {x: 0.018383175, y: 1, z: 0.051459}
 --- !u!1001 &988871105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15274,11 +15364,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.97988343, y: 0.7376852, z: 0.10576942}
+  m_Size: {x: 1.2, y: 1, z: 0.3}
   m_Center: {x: 0.0006880762, y: 0.00057436526, z: 0.044765364}
 --- !u!1 &1061325033 stripped
 GameObject:
@@ -15865,13 +15955,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115725144}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.544, z: 0}
+  m_LocalRotation: {x: -0.00092867995, y: -0.00013678399, z: 0.000741101, w: 0.9999993}
+  m_LocalPosition: {x: -0.000000059604645, y: 0.54400015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1989198953}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.106, y: -0.016, z: 0.085}
 --- !u!114 &1115725146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16359,9 +16449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstNoteRead: 0
   _tvMessageSeen: 0
-  _childDrawingFound: 0
   _bookshelfClueFound: 0
-  _gramophonePlayed: 0
+  _gramophonePlayed: 1
   _brassKeyFound: 0
   _evidenceBagOpened: 0
   _phoneNumberFound: 0
@@ -16385,9 +16474,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onTVMessageSeen:
-    m_PersistentCalls:
-      m_Calls: []
-  onChildDrawingFound:
     m_PersistentCalls:
       m_Calls: []
   onBookshelfClueFound:
@@ -16807,7 +16893,7 @@ GameObject:
   - component: {fileID: 1169808987}
   - component: {fileID: 1169808986}
   - component: {fileID: 1169808988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19120,7 +19206,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 0.25, y: 0.2, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1379776066
 MonoBehaviour:
@@ -19140,7 +19226,7 @@ MonoBehaviour:
   signText: Enter your text here.
   speakerName: 
   revealImage: {fileID: 21300000, guid: 9bac912c2d6ab4233aba3a1124fe8c73, type: 3}
-  activationRadius: 1.8
+  activationRadius: 1
 --- !u!114 &1379776068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19154,7 +19240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
-  activationRadius: 1.8
+  activationRadius: 1
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19927,8 +20013,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.34261802, y: 0.40294075, z: 0.08665421}
-  m_Center: {x: -0.00000023841858, y: 0.20123577, z: 0.0000009536743}
+  m_Size: {x: 0.35, y: 0.45, z: 0.12}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1415595151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20240,7 +20326,7 @@ Transform:
   m_GameObject: {fileID: 1423912015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5386398, z: -0, w: 0.84253615}
-  m_LocalPosition: {x: -4.2149343, y: -2.7910001, z: -3.856412}
+  m_LocalPosition: {x: -4.618, y: -2.7910001, z: -3.856412}
   m_LocalScale: {x: 0.9000001, y: 0.9, z: 0.9000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20292,7 +20378,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 2, z: 1.8}
+  m_Size: {x: 0.7, y: 1.2, z: 0.7}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &1423912019
 AudioSource:
@@ -20305,7 +20391,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
+  m_Resource: {fileID: 8300000, guid: f5d1b4066544b407aa3cdeeec32107c4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -20404,12 +20490,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
+<<<<<<< HEAD:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2ـFinal 1.unity
+  interactDistance: 1.2
+  playKey: 101
+  promptUI: {fileID: 503856320}
+  audioSource: {fileID: 3315813323909784079}
+  gramophoneMessage: {fileID: 8300000, guid: f5d1b4066544b407aa3cdeeec32107c4, type: 3}
+=======
   interactDistance: 2.5
   playKey: 101
   promptUI: {fileID: 503856320}
   bookPanel: {fileID: 514780181}
   audioSource: {fileID: 1423912019}
   gramophoneMessage: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
+>>>>>>> master:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2.unity
   label: Play
   subLabel: Gramophone
 --- !u!1 &1423923729 stripped
@@ -24086,7 +24180,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4165282, y: 2.447465, z: 0.89494216}
+  m_Size: {x: 0.83, y: 2.28, z: 0.78}
   m_Center: {x: 0.04173535, y: -0.45491135, z: 0.006155938}
 --- !u!4 &1620906955
 Transform:
@@ -24097,7 +24191,7 @@ Transform:
   m_GameObject: {fileID: 1620906951}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99920046, z: -0, w: -0.039980847}
-  m_LocalPosition: {x: -4.807, y: -1.108, z: -1.9246216}
+  m_LocalPosition: {x: -4.937, y: -1.108, z: -1.863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24116,7 +24210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
-  interactDistance: 3
+  interactDistance: 1.8
   behavioursToDisable:
   - {fileID: 603546222}
   bookCanvasController: {fileID: 112096714}
@@ -28238,6 +28332,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 1110258241900690937, guid: 8f63222d4f53c52429bb9baef8380ab7, type: 3}
+    - target: {fileID: 1795657601353268991, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.397
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795657601353268991, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.233
+      objectReference: {fileID: 0}
     - target: {fileID: 4012554937262254441, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -28286,13 +28388,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: photo_frame_desk
       objectReference: {fileID: 0}
+    - target: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1795657601353268991, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 543450652804341050}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6266855924382385277, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1851365450}
+    - targetCorrespondingSourceObject: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 427216899}
+    - targetCorrespondingSourceObject: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 427216900}
+    - targetCorrespondingSourceObject: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 427216901}
   m_SourcePrefab: {fileID: 100100000, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
 --- !u!4 &1851365449 stripped
 Transform:
@@ -33397,12 +33515,18 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148884768640}
   serializedVersion: 2
+<<<<<<< HEAD:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2ـFinal 1.unity
+  m_LocalRotation: {x: -0.7071053, y: 0.70710534, z: 0.0011727213, w: 0.0016780791}
+  m_LocalPosition: {x: -0.0181261, y: -0.018237948, z: -0.05406168}
+  m_LocalScale: {x: 4.70313, y: 4.703129, z: 4.70313}
+=======
   m_LocalRotation: {x: -0.50091934, y: 0.49890393, z: -0.49907824, w: 0.50109446}
   m_LocalPosition: {x: 1.02, y: -1.5557, z: 3.571}
   m_LocalScale: {x: 4.7031293, y: 4.703129, z: 4.7031293}
+>>>>>>> master:Unfinished-mystery/Assets/Scenes/Levels/Level2/Level2.unity
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 762060379}
+  m_Father: {fileID: 427216896}
   m_LocalEulerAnglesHint: {x: -0.231, y: 89.98, z: -90}
 --- !u!4 &613325573682246442 stripped
 Transform:
@@ -33509,9 +33633,9 @@ GameObject:
   - component: {fileID: 543450652804341050}
   - component: {fileID: 3469287836787954335}
   - component: {fileID: 1711813855946253909}
-  - component: {fileID: 937835219}
   - component: {fileID: 937835223}
-  m_Layer: 0
+  - component: {fileID: 3469287836787954336}
+  m_Layer: 3
   m_Name: old_key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33692,7 +33816,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 2feedaf690dbd44aeb430d06cf58ebc3, type: 3}
+  m_Resource: {fileID: 8300000, guid: f5d1b4066544b407aa3cdeeec32107c4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
@@ -33786,6 +33910,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148884768640}
   m_Mesh: {fileID: -6782559155277803469, guid: 2d86f4698ff6d455b91014bf1f2e69b7, type: 3}
+--- !u!114 &3469287836787954336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148884768640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df348eee8b63d42dfa3dec3f32ad90e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptUI: {fileID: 0}
+  promptText: PICK UP
+  promptSubLabel: Brass Key
+  item: {fileID: 11400000, guid: b9aac43ee29d04c6b905f1248dfad038, type: 2}
+  amount: 1
+  destroyAfterPickup: 1
 --- !u!4 &3942222006352660778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3190709242951684149, guid: 6c99f9347e8e63d4096fd68e28ac7f0b, type: 3}

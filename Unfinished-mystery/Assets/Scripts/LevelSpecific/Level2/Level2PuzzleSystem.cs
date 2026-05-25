@@ -1,36 +1,32 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LEVEL 2 PUZZLE SYSTEM — The Detective
-// Central state manager for Level 2.
-// Tracks the story flow from the first note to the final locked door.
-// Attach this script to an empty GameObject called "Level2PuzzleSystem".
-// ═══════════════════════════════════════════════════════════════════════════════
+/// <summary>
+/// Central puzzle manager for Level 2.
+/// Tracks the main story progress from the first note until the final door unlock.
+/// </summary>
 public class Level2PuzzleSystem : MonoBehaviour
 {
     public static Level2PuzzleSystem Instance { get; private set; }
 
-    // ── Story / Puzzle State Flags ────────────────────────────────────────────
+    // Main puzzle progress flags.
     [Header("Puzzle State")]
-    [SerializeField] private bool _firstNoteRead         = false;
-    [SerializeField] private bool _tvMessageSeen         = false;
-    [SerializeField] private bool _childDrawingFound     = false;
-    [SerializeField] private bool _bookshelfClueFound    = false;
-    [SerializeField] private bool _gramophonePlayed      = false;
-    [SerializeField] private bool _brassKeyFound         = false;
-    [SerializeField] private bool _evidenceBagOpened     = false;
-    [SerializeField] private bool _phoneNumberFound      = false;
-    [SerializeField] private bool _phoneMessageHeard     = false;
-    [SerializeField] private bool _clockCodeFound        = false;
-    [SerializeField] private bool _doorUnlocked          = false;
-    [SerializeField] private bool _levelComplete         = false;
+    [SerializeField] private bool _firstNoteRead = false;
+    [SerializeField] private bool _tvMessageSeen = false;
+    [SerializeField] private bool _bookshelfClueFound = false;
+    [SerializeField] private bool _gramophonePlayed = false;
+    [SerializeField] private bool _brassKeyFound = false;
+    [SerializeField] private bool _evidenceBagOpened = false;
+    [SerializeField] private bool _phoneNumberFound = false;
+    [SerializeField] private bool _phoneMessageHeard = false;
+    [SerializeField] private bool _clockCodeFound = false;
+    [SerializeField] private bool _doorUnlocked = false;
+    [SerializeField] private bool _levelComplete = false;
 
-    // ── Events ────────────────────────────────────────────────────────────────
+    // UnityEvents allow sounds, UI, VFX, and animations to be connected from the Inspector.
     [Header("Events")]
     public UnityEvent onFirstNoteRead;
     public UnityEvent onTVMessageSeen;
-    public UnityEvent onChildDrawingFound;
     public UnityEvent onBookshelfClueFound;
     public UnityEvent onGramophonePlayed;
     public UnityEvent onBrassKeyFound;
@@ -41,23 +37,22 @@ public class Level2PuzzleSystem : MonoBehaviour
     public UnityEvent onDoorUnlocked;
     public UnityEvent onLevelComplete;
 
-    // ── Public Readers ────────────────────────────────────────────────────────
-    public bool FirstNoteRead      => _firstNoteRead;
-    public bool TVMessageSeen      => _tvMessageSeen;
-    public bool ChildDrawingFound  => _childDrawingFound;
+    // Public read-only access for other scripts.
+    public bool FirstNoteRead => _firstNoteRead;
+    public bool TVMessageSeen => _tvMessageSeen;
     public bool BookshelfClueFound => _bookshelfClueFound;
-    public bool GramophonePlayed   => _gramophonePlayed;
-    public bool BrassKeyFound      => _brassKeyFound;
-    public bool EvidenceBagOpened  => _evidenceBagOpened;
-    public bool PhoneNumberFound   => _phoneNumberFound;
-    public bool PhoneMessageHeard  => _phoneMessageHeard;
-    public bool ClockCodeFound     => _clockCodeFound;
-    public bool DoorUnlocked       => _doorUnlocked;
-    public bool LevelComplete      => _levelComplete;
+    public bool GramophonePlayed => _gramophonePlayed;
+    public bool BrassKeyFound => _brassKeyFound;
+    public bool EvidenceBagOpened => _evidenceBagOpened;
+    public bool PhoneNumberFound => _phoneNumberFound;
+    public bool PhoneMessageHeard => _phoneMessageHeard;
+    public bool ClockCodeFound => _clockCodeFound;
+    public bool DoorUnlocked => _doorUnlocked;
+    public bool LevelComplete => _levelComplete;
 
-    // ── Unity ─────────────────────────────────────────────────────────────────
     private void Awake()
     {
+        // Keeps only one Level2PuzzleSystem active in the scene.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -67,10 +62,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         Instance = this;
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 0 — FIRST NOTE
-    // The player reads: "I hid the truth in the things I could not throw away."
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the player reads the first note.
     public void ReadFirstNote()
     {
         if (_firstNoteRead) return;
@@ -80,10 +72,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         onFirstNoteRead?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 1A — TV MESSAGE
-    // TV shows: "She drew what I refused to write."
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the player sees the TV message.
     public void SeeTVMessage()
     {
         if (_tvMessageSeen) return;
@@ -93,24 +82,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         onTVMessageSeen?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 1B — CHILD DRAWING
-    // The drawing reveals 2 windows, 5 books, 9 red marks = 259.
-    // ═══════════════════════════════════════════════════════════════════════════
-    public void FindChildDrawing()
-    {
-        if (_childDrawingFound) return;
-
-        _childDrawingFound = true;
-        Debug.Log("[Level2PuzzleSystem] Child drawing found. Code clue: 259.");
-        onChildDrawingFound?.Invoke();
-    }
-
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 1C — BOOKSHELF CLUE
-    // The book confirms: "He never left the scene. He stayed in uniform."
-    // Badge number 259 connects the drawing to the police officer.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the bookshelf clue confirms the badge number.
     public void FindBookshelfClue()
     {
         if (_bookshelfClueFound) return;
@@ -120,11 +92,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onBookshelfClueFound?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 2A — GRAMOPHONE MESSAGE
-    // Can be played after the bookshelf clue is found.
-    // Message points the player toward the strongest light.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the gramophone message plays.
+    // Requires the bookshelf clue first.
     public void PlayGramophone()
     {
         if (!_bookshelfClueFound)
@@ -140,10 +109,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onGramophonePlayed?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 2B — KEY UNDER LIGHT
-    // The player finds the brass key under the strongest light.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the player finds the brass key under the strongest light.
+    // Requires the gramophone clue first.
     public void FindBrassKey()
     {
         if (!_gramophonePlayed)
@@ -159,11 +126,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onBrassKeyFound?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 3 — EVIDENCE BAG
-    // Requires the brass key.
-    // Contains case file, police photo, newspaper clipping, and torn note.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the player opens the evidence bag.
+    // Requires the brass key first.
     public void OpenEvidenceBag()
     {
         if (!_brassKeyFound)
@@ -179,10 +143,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onEvidenceBagOpened?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 4A — PHONE NUMBER
-    // Hidden behind the framed picture: 916-2847.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the hidden phone number is found behind the wall frame.
+    // Requires the evidence bag first.
     public void FindPhoneNumber()
     {
         if (!_evidenceBagOpened)
@@ -198,10 +160,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         onPhoneNumberFound?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 4B — PHONE CALL / ISLA MESSAGE
-    // Requires phone number 916-2847.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called after the player enters the phone number and hears Isla's message.
     public void HearPhoneMessage()
     {
         if (!_phoneNumberFound)
@@ -217,10 +176,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onPhoneMessageHeard?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 5A — CLOCK CODE
-    // After Isla's message, the clock reveals the final code: 1143.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the clock reveals the final code.
+    // Requires the phone message first.
     public void FindClockCode()
     {
         if (!_phoneMessageHeard)
@@ -236,10 +193,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onClockCodeFound?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ACT 5B — LOCKED DOOR
-    // Door unlocks only after the final clock code is discovered.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the final door unlocks.
+    // Requires the clock code first.
     public void UnlockDoor()
     {
         if (!_clockCodeFound)
@@ -255,10 +210,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         onDoorUnlocked?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // LEVEL COMPLETE
-    // Called when Lana exits the room.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Called when the player exits the room.
     public void CompleteLevel()
     {
         if (!_doorUnlocked)
@@ -274,11 +226,8 @@ public class Level2PuzzleSystem : MonoBehaviour
         onLevelComplete?.Invoke();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // BLOCKED MESSAGE HELPER
-    // Use this when the player tries to interact with something too early.
-    // Replace Debug.Log with your UI message system later if needed.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Shows a blocked interaction message in the Console.
+    // Later, this can be connected to the level UI message system.
     public static void ShowBlocked(string hint = "")
     {
         string message = string.IsNullOrEmpty(hint)
