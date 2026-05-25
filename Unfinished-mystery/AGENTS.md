@@ -2,18 +2,13 @@
 - Project name: Unfinished-mystery
 - Unity version: Unity 6000.1.13f1
 - Active scene:
-  - Name: Level2
+  - Name: Level4
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Interactable
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Ground
 - Active game object:
-  - Name: StarBlink (2)
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
-  - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI, Interactable
-- Active game object:
-  - Name: bookshelf (1)
+  - Name: AudioButtonsRow
   - Tag: Untagged
-  - Layer: Interactable
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
