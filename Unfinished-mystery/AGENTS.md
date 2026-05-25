@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: floor_big (5)
+  - Name: wall_corner_double
   - Tag: Untagged
-  - Layer: 7
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

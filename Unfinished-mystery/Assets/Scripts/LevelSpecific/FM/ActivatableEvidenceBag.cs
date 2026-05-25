@@ -1,25 +1,29 @@
 using UnityEngine;
 
-public class ActivatableEvidenceBag : MonoBehaviour
+public class ActivatableEvidenceBag : MonoBehaviour, IActivatable
 {
-    [Header("Prompt UI")]
-    [SerializeField] private InteractionPromptUI promptUI;
-    [SerializeField] private string lockedPromptText = "LOCKED";
-    [SerializeField] private string lockedSubLabel = "You need the key to unlock this bag.";
-    [SerializeField] private string openPromptText = "UNLOCK";
-    [SerializeField] private string openSubLabel = "Evidence Bag";
+    [Header("Prompt")]
+    [SerializeField] private string lockedLabel = "Unlock";
+    [SerializeField] private string subLabel = "Evidence Bag";
+    [SerializeField] private float activationRadius = 1.5f;
 
     [Header("Input")]
     [SerializeField] private KeyCode selectKeySlot = KeyCode.Alpha1;
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Bag Objects")]
     [SerializeField] private GameObject closedBag;
     [SerializeField] private GameObject openBag;
 
-    private bool playerInside;
+    [Header("Blocked Message")]
+    [SerializeField] private string noKeyMessage = "You need the key to unlock this bag.";
+
     private bool keySelected;
     private bool opened;
+
+    public string ActivationLabel => opened ? "Opened" : lockedLabel;
+    public string ActivationHint => subLabel;
+    public bool CanActivate => !opened;
+    public float ActivationRadius => activationRadius;
 
     private void Start()
     {
@@ -32,33 +36,27 @@ public class ActivatableEvidenceBag : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(selectKeySlot))
+            keySelected = true;
+    }
+
+    public void OnActivate(GameObject source)
+    {
         if (opened)
             return;
 
-        if (Input.GetKeyDown(selectKeySlot))
-            keySelected = true;
-
-        if (!playerInside)
-            return;
-
-        if (promptUI != null)
+        if (!keySelected)
         {
-            if (keySelected)
-                promptUI.ShowPrompt(openPromptText, openSubLabel);
-            else
-                promptUI.ShowPrompt(lockedPromptText, lockedSubLabel);
+            ActivationDialogUI.ShowText(noKeyMessage, "Locked Bag");
+            return;
         }
 
-        if (keySelected && Input.GetKeyDown(interactKey))
-            OpenBag();
+        OpenBag();
     }
 
     private void OpenBag()
     {
         opened = true;
-
-        if (promptUI != null)
-            promptUI.HidePrompt();
 
         if (closedBag != null)
             closedBag.SetActive(false);
@@ -71,22 +69,7 @@ public class ActivatableEvidenceBag : MonoBehaviour
         Debug.Log("[ActivatableEvidenceBag] Evidence bag opened.");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player") || opened)
-            return;
+    public void OnActivatableFocus() { }
 
-        playerInside = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("Player"))
-            return;
-
-        playerInside = false;
-
-        if (promptUI != null)
-            promptUI.HidePrompt();
-    }
+    public void OnActivatableBlur() { }
 }
