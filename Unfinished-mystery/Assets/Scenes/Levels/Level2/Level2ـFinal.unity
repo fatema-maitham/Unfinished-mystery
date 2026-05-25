@@ -1509,6 +1509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101513986}
   - component: {fileID: 101513987}
+  - component: {fileID: 101513988}
   m_Layer: 0
   m_Name: OpenBag_EvidenceInteract
   m_TagString: Untagged
@@ -1552,6 +1553,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &101513988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101513985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6399a803ffb9147f68958db0f5284f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Read
+  subLabel: Evidence
+  activationRadius: 1.8
+  newspaperImage: {fileID: 21300000, guid: 3bd72eff7540a42fc92526e138dfed62, type: 3}
+  phoneNumberImage: {fileID: 21300000, guid: d93531c7fc2664d55bab051662f88a62, type: 3}
 --- !u!1 &106304166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5799758390958411673, guid: e615122bb5348c64cb2acfeb537bf738, type: 3}
@@ -5943,12 +5961,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7974f3d0ac541398f859f67f93d15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptUI: {fileID: 533129714}
+  promptUI: {fileID: 0}
   promptText: OPEN
   promptSubLabel: Drawer
   interactKey: 101
   player: {fileID: 0}
-  interactDistance: 2.5
+  interactDistance: 3.5
   drawerToMove: {fileID: 427216896}
   openSpeed: 2.5
   keyObject: {fileID: 919132148884768640}
@@ -18158,7 +18176,7 @@ MonoBehaviour:
   _firstNoteRead: 0
   _tvMessageSeen: 0
   _bookshelfClueFound: 0
-  _gramophonePlayed: 1
+  _gramophonePlayed: 0
   _brassKeyFound: 0
   _evidenceBagOpened: 0
   _phoneNumberFound: 0
@@ -19818,7 +19836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7f03c6d9fc11343519a8b008519b47fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4306643203051859313, guid: 7f03c6d9fc11343519a8b008519b47fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19932,15 +19950,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780af67b55d804e58b510dd67bf497ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptUI: {fileID: 533129714}
-  lockedPromptText: LOCKED
-  lockedSubLabel: You need the key to unlock this bag.
-  openPromptText: UNLOCK
-  openSubLabel: Evidence Bag
+  lockedLabel: Unlock
+  subLabel: Evidence Bag
+  activationRadius: 1.8
   selectKeySlot: 49
-  interactKey: 101
   closedBag: {fileID: 1278620685}
   openBag: {fileID: 569445290}
+  noKeyMessage: You need the key to unlock this bag.
 --- !u!4 &1278620690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f03c6d9fc11343519a8b008519b47fa, type: 3}
@@ -21123,7 +21139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7f03c6d9fc11343519a8b008519b47fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6745302439343835087, guid: 7f03c6d9fc11343519a8b008519b47fa, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -22631,7 +22647,7 @@ MonoBehaviour:
   playKey: 101
   promptUI: {fileID: 503856320}
   audioSource: {fileID: 3315813323909784079}
-  gramophoneMessage: {fileID: 8300000, guid: f5d1b4066544b407aa3cdeeec32107c4, type: 3}
+  gramophoneMessage: {fileID: 8300000, guid: 3daf6f2fdf6534fbcbb64b1c92d48c89, type: 3}
   label: Play
   subLabel: Gramophone
 --- !u!1 &1423923729 stripped
