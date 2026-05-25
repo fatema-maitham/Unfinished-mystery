@@ -3,61 +3,47 @@ using UnityEngine;
 
 public class ActivatableDrawer : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Transform player;
-    [SerializeField] private float interactDistance = 1.2f;
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
-
     [Header("Prompt UI")]
     [SerializeField] private InteractionPromptUI promptUI;
     [SerializeField] private string promptText = "OPEN";
     [SerializeField] private string promptSubLabel = "Drawer";
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Drawer Movement")]
     [SerializeField] private Transform drawerToMove;
-    [SerializeField] private Vector3 openOffset = new Vector3(0f, 0f, 0.65f);
-    [SerializeField] private float openSpeed = 2.5f;
+    [SerializeField] private float openDistance = 0.28f;
+    [SerializeField] private float openSpeed = 3f;
 
-    [Header("Optional")]
+    [Header("Key")]
     [SerializeField] private GameObject keyObject;
 
+    private bool playerInside;
     private bool isOpen;
-    private bool playerNear;
-    private Vector3 closedPosition;
-    private Vector3 openPosition;
+
+    private Vector3 closedLocalPosition;
+    private Vector3 openLocalPosition;
 
     private void Start()
     {
         if (drawerToMove == null)
             drawerToMove = transform;
 
-        closedPosition = drawerToMove.localPosition;
-        openPosition = closedPosition + openOffset;
+        closedLocalPosition = drawerToMove.localPosition;
 
+        // Move the drawer forward using its LOCAL Z axis.
+        // If it opens the wrong way, change +openDistance to -openDistance below.
+openLocalPosition = closedLocalPosition + new Vector3(0f, 0f, 0.18f);
         if (keyObject != null)
             keyObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (player == null || isOpen)
+        if (!playerInside || isOpen)
             return;
 
-        playerNear = Vector3.Distance(player.position, transform.position) <= interactDistance;
-
-        if (playerNear)
-        {
-            if (promptUI != null)
-                promptUI.ShowPrompt(promptText, promptSubLabel);
-
-            if (Input.GetKeyDown(interactKey))
-                OpenDrawer();
-        }
-        else
-        {
-            if (promptUI != null)
-                promptUI.HidePrompt();
-        }
+        if (Input.GetKeyDown(interactKey))
+            OpenDrawer();
     }
 
     private void OpenDrawer()
@@ -67,25 +53,47 @@ public class ActivatableDrawer : MonoBehaviour
         if (promptUI != null)
             promptUI.HidePrompt();
 
-        if (keyObject != null)
-            keyObject.SetActive(true);
-
         StartCoroutine(OpenRoutine());
     }
 
     private IEnumerator OpenRoutine()
     {
-        while (Vector3.Distance(drawerToMove.localPosition, openPosition) > 0.01f)
+        while (Vector3.Distance(drawerToMove.localPosition, openLocalPosition) > 0.01f)
         {
             drawerToMove.localPosition = Vector3.Lerp(
                 drawerToMove.localPosition,
-                openPosition,
+                openLocalPosition,
                 Time.deltaTime * openSpeed
             );
 
             yield return null;
         }
 
-        drawerToMove.localPosition = openPosition;
+        drawerToMove.localPosition = openLocalPosition;
+
+        if (keyObject != null)
+            keyObject.SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player") || isOpen)
+            return;
+
+        playerInside = true;
+
+        if (promptUI != null)
+            promptUI.ShowPrompt(promptText, promptSubLabel);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = false;
+
+        if (promptUI != null)
+            promptUI.HidePrompt();
     }
 }
