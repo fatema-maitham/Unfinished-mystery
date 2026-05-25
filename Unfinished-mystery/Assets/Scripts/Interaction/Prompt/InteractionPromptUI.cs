@@ -14,24 +14,26 @@ public class InteractionPromptUI : MonoBehaviour
 
     private void Awake()
     {
-        if (keyText != null)
-            keyText.text = interactionKey;
-
         HidePrompt();
     }
 
     public void ShowPrompt(string action)
     {
-        ShowPrompt(action, "");
+        ShowPrompt(action, "", interactionKey);
     }
 
     public void ShowPrompt(string action, string subLabel)
+    {
+        ShowPrompt(action, subLabel, interactionKey);
+    }
+
+    public void ShowPrompt(string action, string subLabel, string key)
     {
         if (promptPanel != null)
             promptPanel.SetActive(true);
 
         if (keyText != null)
-            keyText.text = interactionKey;
+            keyText.text = key;
 
         if (actionText != null)
             actionText.text = action;

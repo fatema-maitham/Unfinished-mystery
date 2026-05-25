@@ -15,6 +15,12 @@ public class NoteReader : MonoBehaviour
     [SerializeField] private GameObject notePanel;
     [SerializeField] private TMP_Text noteText;
 
+
+    [Header("Read Sound")]
+    [SerializeField] private AudioSource readAudioSource;
+    [SerializeField] private AudioClip readClip;
+
+
     [Header("Note Content")]
     [TextArea(3, 8)]
     [SerializeField] private string message;
@@ -77,6 +83,9 @@ public class NoteReader : MonoBehaviour
     {
         noteOpen = true;
 
+
+        if (readAudioSource != null && readClip != null)
+        readAudioSource.PlayOneShot(readClip);
         if (notePanel != null)
             notePanel.SetActive(true);
 

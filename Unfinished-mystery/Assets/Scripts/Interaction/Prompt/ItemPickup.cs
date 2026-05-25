@@ -15,6 +15,11 @@ public class ItemPickup : MonoBehaviour
     [Header("Pickup Settings")]
     [SerializeField] private bool destroyAfterPickup = true;
 
+    [Header("Pickup Sound")]
+    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private float pickupSoundVolume = 0.7f;
+    
+
     [Header("Optional Level 3 Events")]
     [SerializeField] private L3ExitFlickerGuide flickerToStopOnPickup;
     [SerializeField] private L3ExitInspect inspectToDisableOnPickup;
@@ -48,6 +53,15 @@ public class ItemPickup : MonoBehaviour
         }
 
         pickupHandler.PickupItem(item, amount);
+
+        if (pickupSound != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                pickupSound,
+                transform.position,
+                pickupSoundVolume
+            );
+        }
 
         if (promptUI != null)
             promptUI.HidePrompt();
