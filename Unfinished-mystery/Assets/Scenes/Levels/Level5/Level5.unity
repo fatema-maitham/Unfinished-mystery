@@ -3146,7 +3146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e708000526a8ab94789839d56fcd33af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.032
+      value: 0.033
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e708000526a8ab94789839d56fcd33af, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3193,13 +3193,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e708000526a8ab94789839d56fcd33af, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1546910982}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e708000526a8ab94789839d56fcd33af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1546910981}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e708000526a8ab94789839d56fcd33af, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1546910980}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e708000526a8ab94789839d56fcd33af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1546910979}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e708000526a8ab94789839d56fcd33af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1546910978}
@@ -5694,7 +5691,7 @@ Transform:
   m_GameObject: {fileID: 1230677065}
   serializedVersion: 2
   m_LocalRotation: {x: 0.012377565, y: -0.015822155, z: 0.00019587929, w: 0.9997982}
-  m_LocalPosition: {x: 2.06, y: 1.732, z: -13.4279995}
+  m_LocalPosition: {x: 2.06, y: 1.733, z: -13.4279995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5855,10 +5852,8 @@ MonoBehaviour:
   leftImage: {fileID: 2112035436}
   leftText: {fileID: 1898750486}
   rightText: {fileID: 1790114468}
-  turningPage: {fileID: 1097927599}
-  turningText: {fileID: 2095977920}
   nextButton: {fileID: 494981298}
-  closeButton: {fileID: 1203721136}
+  backButton: {fileID: 0}
   audioSource: {fileID: 1235016141}
   pageTurnSound: {fileID: 8300000, guid: 92dd874338a2c48c0a56660c696946f5, type: 3}
   spreads:
@@ -5937,7 +5932,7 @@ MonoBehaviour:
       it back.'
     bigText: 0
   openAnimationTime: 0.2
-  pageTurnTime: 0.45
+  pageBounceTime: 0.18
 --- !u!114 &1235016143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7703,31 +7698,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1546910976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b04950d15108ef64984ae50f9b18603f, type: 3}
+  m_Script: {fileID: 11500000, guid: 67dfb49dec827d642b602df1f74e6e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 2.2
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxColliders: 8
-  interactKey: 101
-  promptUI: {fileID: 0}
+  horizontalSensitivity: 200
+  verticalSensitivity: 150
+  minVerticalAngle: -30
+  maxVerticalAngle: 60
+  cameraFollowTarget: {fileID: 514040661}
 --- !u!114 &1546910978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546910976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfae059287b5f6440b8f542694152503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hotbar: {fileID: 0}
-  inventory: {fileID: 0}
---- !u!114 &1546910980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7743,12 +7722,13 @@ MonoBehaviour:
   runSpeed: 4
   jumpHeight: 1
   gravity: -20
-  rotationSpeed: 1
+  rotationSpeed: 10
   cameraFollowTarget: {fileID: 514040661}
   groundMask:
     serializedVersion: 2
     m_Bits: 128
---- !u!95 &1546910981
+  footstepAudioSource: {fileID: 0}
+--- !u!95 &1546910979
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -7757,8 +7737,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546910976}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b783f2acaba114725867f7195adba35f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 75f42fb9faac64a758e732082c0c372e, type: 2}
+  m_Avatar: {fileID: 9000000, guid: e708000526a8ab94789839d56fcd33af, type: 3}
+  m_Controller: {fileID: 9100000, guid: e12103529097a954f9bce4bf8b2eb5ef, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7770,7 +7750,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!143 &1546910982
+--- !u!143 &1546910980
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7788,13 +7768,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.35
-  m_SlopeLimit: 45.68
-  m_StepOffset: 0.3
+  m_Height: 1.9
+  m_Radius: 0.4
+  m_SlopeLimit: 45
+  m_StepOffset: 0.15
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.95, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1554586725
 GameObject:
   m_ObjectHideFlags: 0
@@ -8677,7 +8657,7 @@ Transform:
   m_GameObject: {fileID: 1678437655}
   serializedVersion: 2
   m_LocalRotation: {x: 0.012377565, y: -0.015822155, z: 0.00019587929, w: 0.9997982}
-  m_LocalPosition: {x: 2.06, y: 1.732, z: -13.4279995}
+  m_LocalPosition: {x: 2.06, y: 1.733, z: -13.4279995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
