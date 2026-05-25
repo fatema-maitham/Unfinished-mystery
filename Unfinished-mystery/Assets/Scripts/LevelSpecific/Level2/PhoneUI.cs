@@ -35,6 +35,7 @@ public class PhoneUI : MonoBehaviour
     [SerializeField] private AudioClip islaMessageClip;
     [SerializeField] private AudioClip wrongNumberClip;
     [SerializeField] private AudioClip tickClip;
+    [SerializeField] private AudioClip buttonClickClip;
 
     [Header("After Call")]
     [SerializeField] private GameObject clockLight;
@@ -74,14 +75,18 @@ public class PhoneUI : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void AddDigit(string digit)
-    {
-        if (callFinished) return;
-        if (currentNumber.Length >= 7) return;
+private void AddDigit(string digit)
+{
+    if (callFinished) return;
+    if (currentNumber.Length >= 7) return;
 
-        currentNumber += digit;
-        UpdateDisplay();
-    }
+    currentNumber += digit;
+
+    if (audioSource != null && buttonClickClip != null)
+        audioSource.PlayOneShot(buttonClickClip);
+
+    UpdateDisplay();
+}
 
     private void ClearNumber()
     {
