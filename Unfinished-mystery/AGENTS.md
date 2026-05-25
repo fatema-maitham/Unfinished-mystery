@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: AudioManager
+  - Name: floor_big (5)
   - Tag: Untagged
-  - Layer: Default
+  - Layer: 7
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
