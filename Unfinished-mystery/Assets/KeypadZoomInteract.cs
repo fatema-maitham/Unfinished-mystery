@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
-
+using TMPro;
 public class KeypadZoomInteract : MonoBehaviour
 {
 
@@ -26,7 +26,7 @@ public bool keypadUnlocked = false;
     public InteractionPromptUI interactPrompt;
     public string promptAction = "ENTER";
     public string promptSubLabel = "Keypad";
-
+    public TMP_Text keypadKeyText;
     private bool isZoomed = false;
     private bool keypadPromptShowing = false;
 private void Start()
@@ -52,10 +52,14 @@ private void Start()
             if (canInteract)
             {
                 if (interactPrompt != null)
-                {
-                    interactPrompt.ShowPrompt(promptAction, promptSubLabel);
-                    keypadPromptShowing = true;
-                }
+{
+    interactPrompt.ShowPrompt(promptAction, promptSubLabel);
+
+    if (keypadKeyText != null)
+        keypadKeyText.text = "Z";
+
+    keypadPromptShowing = true;
+}
             }
             else
             {

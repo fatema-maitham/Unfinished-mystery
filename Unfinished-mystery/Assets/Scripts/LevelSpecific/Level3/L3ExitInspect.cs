@@ -22,7 +22,7 @@ public class L3ExitInspect : MonoBehaviour
 
     private bool playerInRange = false;
     private bool messageShowing = false;
-    private float blockInspectUntil = 0f;
+    private bool inspectDisabled = false;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class L3ExitInspect : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time < blockInspectUntil)
+        if (inspectDisabled)
             return;
 
         if (playerInRange && !messageShowing && Input.GetKeyDown(KeyCode.E))
@@ -97,20 +97,28 @@ public class L3ExitInspect : MonoBehaviour
 
         messageShowing = false;
 
-        if (playerInRange && interactPrompt != null)
+        if (!inspectDisabled && playerInRange && interactPrompt != null)
             interactPrompt.ShowPrompt(promptText, promptSubLabel);
     }
 
-    public void PauseInspectBriefly(float seconds)
-    {
-        blockInspectUntil = Time.time + seconds;
+    public void DisableInspectPermanently()
+{
+    inspectDisabled = true;
+    playerInRange = false;
 
-        if (interactPrompt != null)
-            interactPrompt.HidePrompt();
-    }
+    if (interactPrompt != null)
+        interactPrompt.HidePrompt();
+
+    Collider col = GetComponent<Collider>();
+    if (col != null)
+        col.enabled = false;
+}
 
     private void OnTriggerEnter(Collider other)
     {
+        if (inspectDisabled)
+            return;
+
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
@@ -130,4 +138,15 @@ public class L3ExitInspect : MonoBehaviour
                 interactPrompt.HidePrompt();
         }
     }
+
+
+
+    public void PauseInspectBriefly(float seconds)
+{
+    if (inspectDisabled)
+        return;
+
+    if (interactPrompt != null)
+        interactPrompt.HidePrompt();
+}
 }
