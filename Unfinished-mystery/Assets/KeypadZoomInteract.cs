@@ -32,7 +32,7 @@ public bool keypadUnlocked = false;
 private void Start()
 {
     requiresFinalReel = true;
-    keypadUnlocked = false;
+    keypadUnlocked = true;
     keypadPromptShowing = false;
 }
 

@@ -219,7 +219,7 @@ MonoBehaviour:
   bookCanvasController: {fileID: 1235016142}
   promptUI: {fileID: 666507107}
   label: Read
-  subLabel: '    Lab Journal'
+  subLabel: '             Lab Journal'
 --- !u!1 &134023312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1488,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6037947208741623184, guid: 830516183610efd47ac9ec00f817fbd9, type: 3}
       insertIndex: 7
+      addedObject: {fileID: 1445420933}
+    - targetCorrespondingSourceObject: {fileID: 6037947208741623184, guid: 830516183610efd47ac9ec00f817fbd9, type: 3}
+      insertIndex: 8
       addedObject: {fileID: 523398907}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8961422636659672069, guid: 830516183610efd47ac9ec00f817fbd9, type: 3}
@@ -3028,10 +3031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2303921294396319333, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1445420933}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2303921294396319335, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       insertIndex: -1
@@ -3084,7 +3084,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1230677072}
   interactDistance: 21.7
   clickDistance: 10
-  interactPrompt: {fileID: 1798688762}
+  interactPrompt: {fileID: 0}
   promptAction: ENTER
   promptSubLabel: Keypad
   keypadKeyText: {fileID: 0}
@@ -7628,12 +7628,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445420931}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.619}
-  m_LocalScale: {x: 0.75357944, y: 0.7535795, z: 0.75357944}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.819, y: 1.701, z: 41.723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 523398907}
+  m_Father: {fileID: 174874515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462729617
 GameObject:
@@ -9590,8 +9590,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 10
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
