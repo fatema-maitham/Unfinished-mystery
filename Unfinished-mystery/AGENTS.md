@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: Ch31_nonPBR
-  - Tag: Player
-  - Layer: Default
+  - Name: laptop
+  - Tag: Untagged
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

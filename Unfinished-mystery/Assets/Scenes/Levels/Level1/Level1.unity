@@ -3612,11 +3612,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Read
   subLabel: University Memo
-  activationRadius: 1.5
+  activationRadius: 5
   memoImage: {fileID: 0}
   memoText: "Lynnette has been formally withdrawn from the University.\nSigned: Professor
     K. Flins \u2014 March 5th.\n\nLooking closely, a faint number is watermarked
     into the paper: **144**"
+--- !u!65 &226259623
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226259620}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &230506110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11320,54 +11341,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1218278519844454269, guid: 68e7e7693d584a342ba10a27b109a1d0, type: 3}
   m_PrefabInstance: {fileID: 675301525}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &679044100 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-  m_PrefabInstance: {fileID: 469883802932353272}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &679044107
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679044100}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9, y: 9, z: 9}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &679044115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679044100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ff0a544c7964d429b62cd35d98f8a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: Pull Out
-  subLabel: Number Theory and Cryptography
-  activationRadius: 1.5
-  bookNoteImage: {fileID: 0}
-  noteText: "A folded note falls out \u2014 Fragment 2 of Lynnette's message:\n\n\"Your
-    cipher uses prime positions. I mapped them. Pages 12, 31, 53, 97. First word
-    on each page. I hid the last piece where you always leave your secrets.\"\n\nThe
-    book spine reads: \"For the 7 students who believed in me.\""
-  blockedMessage: You notice the book is slightly out of place, but you're not ready
-    to investigate the bookshelf yet.
 --- !u!1001 &680196717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13567,7 +13540,7 @@ PrefabInstance:
       objectReference: {fileID: -1789128400318772391, guid: d466e2eae95ed804f85f00b0924ee018, type: 3}
     - target: {fileID: 919132149155446097, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
       propertyPath: m_Name
-      value: uploads_files_6472815_CGtreyder_optimized_MacBookPro
+      value: laptop
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
       propertyPath: m_Layer
@@ -13608,6 +13581,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
       insertIndex: -1
       addedObject: {fileID: 827163780}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 827163782}
   m_SourcePrefab: {fileID: 100100000, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
 --- !u!1 &827163779 stripped
 GameObject:
@@ -13628,7 +13604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Examine
   subLabel: Laptop
-  activationRadius: 1.5
+  activationRadius: 1.2
   laptopLockedImage: {fileID: 0}
   laptopBootedImage: {fileID: 0}
   bootedText: "The laptop boots. A single folder opens:\n\"Kyrell_Flins_Plagiarism_Evidence\"\n\nOne
@@ -13642,6 +13618,27 @@ MonoBehaviour:
   blockedNoUSB: The laptop won't turn on. It needs something to boot from.
   blockedNoDrawer: You can't do anything with it yet. You haven't found what makes
     it work.
+--- !u!65 &827163782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827163779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &833919031
 GameObject:
   m_ObjectHideFlags: 0
@@ -15057,6 +15054,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_LocalScale.x
       value: 15
@@ -15071,15 +15072,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.714
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.593
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.685
+      value: -1.225
       objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -15088,6 +15089,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       propertyPath: m_Name
       value: UniversityMemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -15098,6 +15103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 226259621}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 226259623}
   m_SourcePrefab: {fileID: 100100000, guid: b91aa42eef3b61d4f9b619d8d9f5fac7, type: 3}
 --- !u!1001 &935743799
 PrefabInstance:
@@ -26920,7 +26928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasFilmReel: 0
-  filmReelIcon: {fileID: 679044100}
+  filmReelIcon: {fileID: 0}
 --- !u!114 &1660319123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31209,7 +31217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.892
+      value: 3.618
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31261,7 +31269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
       propertyPath: m_Name
-      value: uploads_files_3002555_board
+      value: whiteBoard
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
       propertyPath: m_Layer
@@ -31272,7 +31280,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6219128565894610660, guid: bf8926203580e3b4aa9929ce9ef42dc1, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8391222552659086748, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e7ae441c0e1025418cf4b2ad142d97e, type: 3}
@@ -35901,85 +35910,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4845945667462297740, guid: 86651cef184b52e4690b9914da5c4ca4, type: 3}
   m_PrefabInstance: {fileID: 2144026151}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &469883802932353272
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 270217173527383232, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: maxScale
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 270217173527383232, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: minScale
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_Name
-      value: StarBlink
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3801649408894060831, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.3171
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.626
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.011
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.89567757
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.44470403
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 52.809
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 679044107}
-    - targetCorrespondingSourceObject: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 679044115}
-  m_SourcePrefab: {fileID: 100100000, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
 --- !u!1001 &1133221002512015345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36268,7 +36198,6 @@ SceneRoots:
   - {fileID: 1353227683}
   - {fileID: 5256421019026051792}
   - {fileID: 661229192}
-  - {fileID: 469883802932353272}
   - {fileID: 9161330874990421894}
   - {fileID: 112552964}
   - {fileID: 1141863525}
