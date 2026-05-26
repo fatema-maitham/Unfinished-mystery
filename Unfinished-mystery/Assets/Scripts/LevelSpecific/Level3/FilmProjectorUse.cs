@@ -82,6 +82,13 @@ public class FilmProjectorUse : MonoBehaviour
     [Header("Smart Loop Hints")]
     [SerializeField] private L3SmartLoopHints smartLoopHints;
 
+
+    [Header("Memory Echo")]
+    [SerializeField] private L3Reel1Echo reel1Echo;
+    [SerializeField] private L3Reel2Echo reel2Echo;
+
+    [SerializeField] private L3Reel3Echo reel3Echo;
+
     [TextArea(2, 3)]
     [SerializeField] private string finalCodeMessage = "The final frame reveals a code.";
 
@@ -358,9 +365,12 @@ public class FilmProjectorUse : MonoBehaviour
         {
             reel1Watched = true;
 
-
             if (smartLoopHints != null)
             smartLoopHints.ApplyLoopHints();
+
+
+            if (reel1Echo != null)
+            reel1Echo.PlayEcho();
 
             // if (exitRedWarningLight != null)
             // {
@@ -396,6 +406,10 @@ public class FilmProjectorUse : MonoBehaviour
                 smartLoopHints.ApplyLoopHints();
 
 
+            if (reel2Echo != null)
+                reel2Echo.PlayEcho();
+
+
             StartCoroutine(ShowDiscoveryThenPrompt(
                 "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
             ));
@@ -410,13 +424,27 @@ public class FilmProjectorUse : MonoBehaviour
             if (mirrorHintLight != null)
                 mirrorHintLight.SetActive(false);
 
-            StartCoroutine(FinalReelEndingSequence());
-        }
+
+            if (reel3Echo != null)
+                reel3Echo.PlayEcho();
+
+                StartCoroutine(Reel3EchoThenFinalSequence());        }
         else
         {
             UpdatePrompt();
         }
     }
+
+
+    private IEnumerator Reel3EchoThenFinalSequence()
+{
+    if (reel3Echo != null)
+        reel3Echo.PlayEcho();
+
+    yield return new WaitForSeconds(2f);
+
+    yield return StartCoroutine(FinalReelEndingSequence());
+}
 
     private IEnumerator ShowDiscoveryThenPrompt(string message)
     {
