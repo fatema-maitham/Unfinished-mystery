@@ -12610,7 +12610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Ask for Hint
   subLabel: Hint
-  activationRadius: 2
+  activationRadius: 1
   speakerName: Magical Grimoire
   hint_Start: "You wake up slumped at your desk. Something feels wrong. Look around
     \u2014 the desk holds more than it seems."
