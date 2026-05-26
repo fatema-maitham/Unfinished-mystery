@@ -8646,6 +8646,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5560905291789515636, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
   m_PrefabInstance: {fileID: 1427320451}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &673595712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3032176635680216034, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
+  m_PrefabInstance: {fileID: 1427320451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &673595713
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8657,7 +8662,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: a3eaeee8da1274da1b140e35afb1512a, type: 3}
+  m_Resource: {fileID: 8300000, guid: 746d2d47cbf5f4c119d008e0a0af4706, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8755,13 +8760,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2763fda93fd437597996006c34bce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptUI: {fileID: 0}
-  promptText: USE
-  promptSubLabel: Phone
-  ringtoneAudioSource: {fileID: 673595713}
-  phoneMessageAudioSource: {fileID: 673595713}
+  player: {fileID: 603546215}
+  interactDistance: 2.5
+  useKey: 101
+  promptUI: {fileID: 503856320}
+  audioSource: {fileID: 673595713}
+  ringtoneClip: {fileID: 8300000, guid: 16430867915ea484bb878bc4bd856c56, type: 3}
+  phoneMessageClip: {fileID: 8300000, guid: 746d2d47cbf5f4c119d008e0a0af4706, type: 3}
   ringtoneDuration: 7
   simCardInventoryIconToHide: {fileID: 132257662}
+  label: Use
+  subLabel: Phone
 --- !u!65 &673595715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8781,7 +8790,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1, z: 1.5}
+  m_Size: {x: 1.2, y: 1.81, z: 1.52}
   m_Center: {x: 0, y: -2.8403885e-13, z: -0.00047165272}
 --- !u!1 &676328744
 GameObject:
@@ -9847,6 +9856,7 @@ Transform:
   - {fileID: 1725267933}
   - {fileID: 967534819}
   - {fileID: 762060379}
+  - {fileID: 673595712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &749725623
@@ -16463,10 +16473,8 @@ MonoBehaviour:
   _firstNoteRead: 0
   _tvMessageSeen: 0
   _bookshelfClueFound: 0
-  _gramophonePlayed: 1
-  _brassKeyFound: 0
-  _evidenceBagOpened: 0
-  _phoneNumberFound: 0
+  _gramophonePlayed: 0
+  _simCardFound: 0
   _phoneMessageHeard: 0
   _clockCodeFound: 0
   _doorUnlocked: 0
@@ -16495,13 +16503,7 @@ MonoBehaviour:
   onGramophonePlayed:
     m_PersistentCalls:
       m_Calls: []
-  onBrassKeyFound:
-    m_PersistentCalls:
-      m_Calls: []
-  onEvidenceBagOpened:
-    m_PersistentCalls:
-      m_Calls: []
-  onPhoneNumberFound:
+  onSimCardFound:
     m_PersistentCalls:
       m_Calls: []
   onPhoneMessageHeard:
@@ -20545,19 +20547,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 747268833}
     m_Modifications:
     - target: {fileID: 3032176635680216034, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.18
+      value: 2.2140098
       objectReference: {fileID: 0}
     - target: {fileID: 3032176635680216034, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9292
+      value: -0.40516
       objectReference: {fileID: 0}
     - target: {fileID: 3032176635680216034, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.8665
+      value: 3.8720198
       objectReference: {fileID: 0}
     - target: {fileID: 3032176635680216034, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33808,4 +33810,3 @@ SceneRoots:
   - {fileID: 1974804226}
   - {fileID: 875616561}
   - {fileID: 1140133399}
-  - {fileID: 1427320451}
