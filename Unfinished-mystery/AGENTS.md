@@ -4,11 +4,11 @@
 - Active scene:
   - Name: Level1
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: StarBlink
+  - Name: CloseButton
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
