@@ -2623,6 +2623,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4306321744449786820, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
   m_PrefabInstance: {fileID: 168528520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &170774418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 979666060354429399, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+  m_PrefabInstance: {fileID: 173702666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &172540456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2775,6 +2780,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: book (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 979666060354429399, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281814253939229477, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4306321744449786820, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -2821,14 +2834,66 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4306321744449786820, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 552191835}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 979666060354429399, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173702669}
+    - targetCorrespondingSourceObject: {fileID: 979666060354429399, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173702668}
   m_SourcePrefab: {fileID: 100100000, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
 --- !u!4 &173702667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4306321744449786820, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
   m_PrefabInstance: {fileID: 173702666}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &173702668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170774418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ff0a544c7964d429b62cd35d98f8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Pull Out
+  subLabel: Number Theory and Cryptography
+  activationRadius: 1.5
+  bookNoteImage: {fileID: 0}
+  noteText: "A folded note falls out \u2014 Fragment 2 of Lynnette's message:\n\n\"Your
+    cipher uses prime positions. I mapped them. Pages 12, 31, 53, 97. First word
+    on each page. I hid the last piece where you always leave your secrets.\"\n\nThe
+    book spine reads: \"For the 7 students who believed in me.\""
+  blockedMessage: You notice the book is slightly out of place, but you're not ready
+    to investigate the bookshelf yet.
+--- !u!65 &173702669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170774418}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &174580876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6208,6 +6273,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1218278519844454269, guid: 68e7e7693d584a342ba10a27b109a1d0, type: 3}
   m_PrefabInstance: {fileID: 384437789}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &384897939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 173702667}
+    m_Modifications:
+    - target: {fileID: 270217173527383232, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 270217173527383232, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: maxScale
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171272103658744256, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_Name
+      value: StarBlink
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.89567757
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.44470403
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 52.809
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
 --- !u!1001 &385880775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9434,6 +9564,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4306321744449786820, guid: 0f87d91fef8da2445875a48cd89d15f2, type: 3}
   m_PrefabInstance: {fileID: 551517991}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &552191835 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7289339694236992081, guid: a624a712f27fac0439ba73af44f1c341, type: 3}
+  m_PrefabInstance: {fileID: 384897939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &554610489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12631,7 +12766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Ask for Hint
   subLabel: Hint
-  activationRadius: 1
+  activationRadius: 1.3
   speakerName: Magical Grimoire
   hint_Start: "You wake up slumped at your desk. Something feels wrong. Look around
     \u2014 the desk holds more than it seems."
