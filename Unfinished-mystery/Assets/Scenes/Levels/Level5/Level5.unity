@@ -175,8 +175,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   bookCanvasController: {fileID: 1235016142}
   promptUI: {fileID: 666507107}
   label: Read
-  subLabel: Lab Journal
+  subLabel: '    Lab Journal'
 --- !u!1 &134023312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &872825348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5257,7 +5257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1097927599
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6111,8 +6111,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 55
+  far clip plane: 943.4
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 10
@@ -6139,7 +6139,7 @@ Transform:
   m_GameObject: {fileID: 1230677065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3749897, y: 1.67273, z: -7.772335}
+  m_LocalPosition: {x: 2.3799999, y: 1.788, z: -13.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6165,7 +6165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1235016140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6173,8 +6173,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235016139}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.35184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6183,7 +6183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.4335098, y: 0.21671999}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!82 &1235016141
@@ -6297,9 +6297,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookCanvas: {fileID: 1235016139}
   bookPanel: {fileID: 872825348}
-  leftImage: {fileID: 2112035436}
-  leftText: {fileID: 1898750486}
-  rightText: {fileID: 1790114468}
+  leftImage: {fileID: 0}
+  leftText: {fileID: 0}
+  rightText: {fileID: 0}
   nextButton: {fileID: 494981298}
   backButton: {fileID: 0}
   audioSource: {fileID: 1235016141}
@@ -7605,6 +7605,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2025676795351666682, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705738428975688189, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777635683436403421, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813687828619805558, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4184193489942777066, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
       propertyPath: m_Name
       value: HUD_Canvas
@@ -8548,8 +8564,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603995449}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.18192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8559,7 +8575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -5.3145, y: -0.74544}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1603995451
@@ -9049,7 +9065,7 @@ Transform:
   m_GameObject: {fileID: 1638114611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.39188, y: 0.93846, z: -9.09002}
+  m_LocalPosition: {x: -6.39188, y: 1.095, z: -9.09002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9073,7 +9089,7 @@ MonoBehaviour:
   promptUI: {fileID: 1408911371}
   label: Unlock
   subLabel: Safe
-  clueCheckPanel: {fileID: 0}
+  clueCheckPanel: {fileID: 872825347}
   successAudio: {fileID: 0}
   rewardObject: {fileID: 0}
 --- !u!54 &1638114614
@@ -9098,8 +9114,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -9122,7 +9138,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.73, y: 0.25, z: 0.73}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1641008380
 GameObject:
@@ -9574,7 +9590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1790114467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10371,7 +10387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1898750485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11257,7 +11273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2112035435
 RectTransform:
   m_ObjectHideFlags: 0
