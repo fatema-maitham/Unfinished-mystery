@@ -10,11 +10,16 @@ public class LevelExitTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        if (Level2PuzzleSystem.Instance != null)
+        if (Level2PuzzleSystem.Instance == null)
+            return;
+
+        if (!Level2PuzzleSystem.Instance.DoorUnlocked)
         {
-            Level2PuzzleSystem.Instance.CompleteLevel();
+            Level2PuzzleSystem.ShowBlocked("The exit is locked. Finish the clues first.");
+            return;
         }
 
+        Level2PuzzleSystem.Instance.CompleteLevel();
         SceneManager.LoadScene(nextSceneName);
     }
 }

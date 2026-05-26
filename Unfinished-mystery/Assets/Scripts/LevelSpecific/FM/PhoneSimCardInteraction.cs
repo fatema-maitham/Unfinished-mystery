@@ -5,10 +5,7 @@ public class PhoneSimCardInteraction : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] private Transform player;
-    [SerializeField] private float interactDistance = 3f;
-
-    [Header("Prompt UI")]
-    [SerializeField] private ActivationPromptUI promptUI;
+    [SerializeField] private float interactDistance = 1.2f;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -19,27 +16,16 @@ public class PhoneSimCardInteraction : MonoBehaviour
     [SerializeField] private GameObject simCardInventoryIconToHide;
 
     private bool phoneUsed;
-    private bool showingMyPrompt;
 
     private void Update()
     {
-        if (player == null || promptUI == null)
+        if (player == null)
             return;
 
         bool nearPhone = Vector3.Distance(player.position, transform.position) <= interactDistance;
 
         if (!SimCardPickup.HasSimCard || phoneUsed || !nearPhone)
-        {
-            if (showingMyPrompt)
-            {
-                promptUI.HidePrompt();
-                showingMyPrompt = false;
-            }
-
             return;
-        }
-
-        promptUI.ShowPrompt("Press 0", "Use SIM Card");
 
         if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Keypad0))
         {
@@ -51,34 +37,28 @@ public class PhoneSimCardInteraction : MonoBehaviour
     {
         phoneUsed = true;
 
-        if (showingMyPrompt)
-        {
-            promptUI.HidePrompt();
-            showingMyPrompt = false;
-        }
-
         if (simCardInventoryIconToHide != null)
             simCardInventoryIconToHide.SetActive(false);
 
         StartCoroutine(PhoneSequence());
     }
 
-private IEnumerator PhoneSequence()
-{
-    if (audioSource != null && ringtoneClip != null)
-        audioSource.PlayOneShot(ringtoneClip);
-
-    yield return new WaitForSeconds(7f);
-
-    if (audioSource != null && phoneMessageClip != null)
+    private IEnumerator PhoneSequence()
     {
-        audioSource.PlayOneShot(phoneMessageClip);
-        yield return new WaitForSeconds(phoneMessageClip.length);
-    }
+        if (audioSource != null && ringtoneClip != null)
+            audioSource.PlayOneShot(ringtoneClip);
 
-    if (Level2PuzzleSystem.Instance != null)
-    {
-        Level2PuzzleSystem.Instance.HearPhoneMessage();
+        yield return new WaitForSeconds(7f);
+
+        if (audioSource != null && phoneMessageClip != null)
+        {
+            audioSource.PlayOneShot(phoneMessageClip);
+            yield return new WaitForSeconds(phoneMessageClip.length);
+        }
+
+        if (Level2PuzzleSystem.Instance != null)
+        {
+            Level2PuzzleSystem.Instance.HearPhoneMessage();
+        }
     }
-}
 }
