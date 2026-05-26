@@ -437,7 +437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7786210361931344337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -838,6 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884f554fe1e80467d8cb5216a73d4895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueSceneName: LevelsBook
+  replaySceneName: Level1
 --- !u!1 &8712271584870446498
 GameObject:
   m_ObjectHideFlags: 0
