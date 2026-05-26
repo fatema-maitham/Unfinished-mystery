@@ -89,6 +89,8 @@ public class FilmProjectorUse : MonoBehaviour
 
     [SerializeField] private L3Reel3Echo reel3Echo;
 
+    [SerializeField] private L3ProjectorBreakdown projectorBreakdown;
+
     [TextArea(2, 3)]
     [SerializeField] private string finalCodeMessage = "The final frame reveals a code.";
 
@@ -96,6 +98,8 @@ public class FilmProjectorUse : MonoBehaviour
     private bool videoPlaying = false;
     private bool isReplay = false;
     private int currentReelNumber = 0;
+
+    private bool finalCodeShowing = false;
 
     private void Start()
     {
@@ -134,6 +138,7 @@ public class FilmProjectorUse : MonoBehaviour
         {
             screenRenderer.material.mainTexture = finalCodeTexture;
             screenRenderer.material.SetTexture("_BaseMap", finalCodeTexture);
+            finalCodeShowing = true;
         }
 
         if (exitRedWarningLight != null)
@@ -443,6 +448,9 @@ public class FilmProjectorUse : MonoBehaviour
 
     yield return new WaitForSeconds(2f);
 
+    if (projectorBreakdown != null)
+    projectorBreakdown.PlayBreakdown();
+
     yield return StartCoroutine(FinalReelEndingSequence());
 }
 
@@ -532,6 +540,12 @@ public class FilmProjectorUse : MonoBehaviour
 
 public IEnumerator ShowLoopGlitch(float duration){
     Debug.Log("ShowLoopGlitch called");
+
+    Debug.Log("ShowLoopGlitch called");
+
+    if (finalCodeShowing)
+        yield break;
+
 
     if (screenRenderer == null || glitchScreenTexture == null)
     {
