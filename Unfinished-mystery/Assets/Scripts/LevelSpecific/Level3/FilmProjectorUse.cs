@@ -210,10 +210,10 @@ public class FilmProjectorUse : MonoBehaviour
 
 
 
-        if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
-        {
-            HandleProjectorUse();
-        }
+        // if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     HandleProjectorUse();
+        // }
     }
 
     private void HandleProjectorUse()
