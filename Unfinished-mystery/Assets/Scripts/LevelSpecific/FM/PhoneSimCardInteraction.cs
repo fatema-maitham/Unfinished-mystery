@@ -5,8 +5,7 @@ public class PhoneSimCardInteraction : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] private Transform player;
-    [SerializeField] private float interactDistance = 1.2f;
-    [SerializeField] private KeyCode useKey = KeyCode.E;
+    [SerializeField] private float interactDistance = 3f;
 
     [Header("Prompt UI")]
     [SerializeField] private ActivationPromptUI promptUI;
@@ -15,14 +14,9 @@ public class PhoneSimCardInteraction : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip ringtoneClip;
     [SerializeField] private AudioClip phoneMessageClip;
-    [SerializeField] private float ringtoneDuration = 7f;
 
-    [Header("Inventory Icon")]
+    [Header("Inventory Icon To Hide")]
     [SerializeField] private GameObject simCardInventoryIconToHide;
-
-    [Header("Prompt Text")]
-    [SerializeField] private string label = "Use";
-    [SerializeField] private string subLabel = "Phone";
 
     private bool phoneUsed;
     private bool showingMyPrompt;
@@ -32,10 +26,9 @@ public class PhoneSimCardInteraction : MonoBehaviour
         if (player == null || promptUI == null)
             return;
 
-        bool hasSimCard = SimCardPickup.HasSimCard;
         bool nearPhone = Vector3.Distance(player.position, transform.position) <= interactDistance;
 
-        if (!hasSimCard || phoneUsed || !nearPhone)
+        if (!SimCardPickup.HasSimCard || phoneUsed || !nearPhone)
         {
             if (showingMyPrompt)
             {
@@ -46,11 +39,12 @@ public class PhoneSimCardInteraction : MonoBehaviour
             return;
         }
 
-        promptUI.ShowPrompt(label, subLabel);
-        showingMyPrompt = true;
+        promptUI.ShowPrompt("Press 0", "Use SIM Card");
 
-        if (Input.GetKeyDown(useKey))
+        if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Keypad0))
+        {
             UsePhone();
+        }
     }
 
     private void UsePhone()
@@ -74,7 +68,7 @@ public class PhoneSimCardInteraction : MonoBehaviour
         if (audioSource != null && ringtoneClip != null)
             audioSource.PlayOneShot(ringtoneClip);
 
-        yield return new WaitForSeconds(ringtoneDuration);
+        yield return new WaitForSeconds(7f);
 
         if (audioSource != null && phoneMessageClip != null)
             audioSource.PlayOneShot(phoneMessageClip);
