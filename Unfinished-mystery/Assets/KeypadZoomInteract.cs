@@ -30,6 +30,10 @@ public bool keypadUnlocked = false;
     public TMP_Text keypadKeyText;
     private bool isZoomed = false;
     private bool keypadPromptShowing = false;
+
+    [SerializeField] private L3EvidenceBoardUI evidenceBoardUI;
+    private bool pendingEvidenceBoard = false;
+
 private void Start()
 {
     requiresFinalReel = true;
@@ -228,7 +232,15 @@ private void ToggleZoom()
 
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+
+                if (pendingEvidenceBoard && evidenceBoardUI != null)
+                {
+                    pendingEvidenceBoard = false;
+                    evidenceBoardUI.ShowEvidenceBoard();
+                }
+                
             }
+            
 }
 
     private void ClickKeypadButton()
@@ -255,9 +267,14 @@ private void ToggleZoom()
             }
         }
     }
-public void UnlockKeypadPrompt()
-{
-    keypadUnlocked = true;
-    Debug.Log("Keypad prompt unlocked after Reel 3.");
-}
+        public void UnlockKeypadPrompt()
+        {
+            keypadUnlocked = true;
+            Debug.Log("Keypad prompt unlocked after Reel 3.");
+        }
+
+        public void TriggerEvidenceBoard()
+        {
+            pendingEvidenceBoard = true;
+        }
 }
