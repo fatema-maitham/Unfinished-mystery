@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 146972430}
   - component: {fileID: 146972432}
   - component: {fileID: 146972431}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TVMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2492,7 +2492,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7487244357921330417, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2102495571}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 860534049}
+    - targetCorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 860534048}
   m_SourcePrefab: {fileID: 100100000, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
 --- !u!4 &147235852 stripped
 Transform:
@@ -4233,7 +4239,7 @@ GameObject:
   - component: {fileID: 287308173}
   - component: {fileID: 287308175}
   - component: {fileID: 287308174}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TVStatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7792,7 +7798,7 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 2037600202}
   groundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
   footstepAudioSource: {fileID: 0}
 --- !u!114 &603546225
 MonoBehaviour:
@@ -7824,9 +7830,10 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
-  maxColliders: 3
+  maxColliders: 32
   interactKey: 101
   promptUI: {fileID: 503856320}
+  showDebugLogs: 1
 --- !u!1 &605063764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
@@ -13097,6 +13104,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4881229693674444770, guid: 3f29ba4dd45abe542b88e37da5ee26a9, type: 3}
   m_PrefabInstance: {fileID: 857058546}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &860534045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3622243103439998288, guid: 42a7acd56b9b4c44f91e4d393ed2adc8, type: 3}
+  m_PrefabInstance: {fileID: 147235851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &860534048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860534045}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Watch
+  subLabel: TV
+  displayMode: 0
+  signText: She drew what I refused to write
+  speakerName: 
+  revealImage: {fileID: 0}
+  activationRadius: 2.5
+--- !u!65 &860534049
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860534045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6696775, y: 0.70685667, z: 0.5557949}
+  m_Center: {x: -0.0016361028, y: 0.35342833, z: -0.0102110505}
 --- !u!1 &866685625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1786487529727756827, guid: 6130c0222f26e7c4986fbe2ddac13dcc, type: 3}
@@ -20826,7 +20878,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758293191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e072fce2a87b7c845a4f1dff58d157b8, type: 3}
   m_Name: 
@@ -20838,6 +20890,25 @@ MonoBehaviour:
   speakerName: 
   revealImage: {fileID: 21300000, guid: 9bac912c2d6ab4233aba3a1124fe8c73, type: 3}
   activationRadius: 2.5
+--- !u!114 &1379776067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758293191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cefa0db68b9e4f1ca027d4686a2ddce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 603546215}
+  promptUI: {fileID: 503856320}
+  label: Read
+  subLabel: First Note
+  interactKey: 101
+  noteImage: {fileID: 21300000, guid: 9bac912c2d6ab4233aba3a1124fe8c73, type: 3}
+  interactDistance: 2.5
 --- !u!1001 &1382118624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28945,7 +29016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1738213815}
   - component: {fileID: 1738213816}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TVStaticAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28980,7 +29051,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9bd352262b5444617ad2b95bdae3073a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -29615,15 +29686,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.6180096
+      value: -4.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.68284
+      value: -1.686
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.041
+      value: -0.467
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29713,6 +29784,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1379776066}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1379776067}
   m_SourcePrefab: {fileID: 100100000, guid: fb414797eadc844ccb178b6e41652485, type: 3}
 --- !u!1001 &1808315884
 PrefabInstance:
@@ -30861,7 +30935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9200772773521962106, guid: df114a6a4ea6ca445811300a207cc559, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32297,7 +32371,7 @@ GameObject:
   - component: {fileID: 1946332295}
   - component: {fileID: 1946332294}
   - component: {fileID: 1946332293}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PhoneTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35337,8 +35411,8 @@ GameObject:
   - component: {fileID: 2102495571}
   - component: {fileID: 2102495573}
   - component: {fileID: 2102495572}
-  m_Layer: 0
-  m_Name: IP_Television
+  m_Layer: 3
+  m_Name: IP_Tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35401,8 +35475,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4, y: 3, z: 4}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2108309549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8905741556569397466, guid: 75f2b4c63b364ca468040cc8f2ae9d0b, type: 3}
@@ -35968,7 +36042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5560905291789515636, guid: 4b658ae02ca4e154f80cea2d74db1ef1, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36649,7 +36723,7 @@ GameObject:
   - component: {fileID: 1711813855946253909}
   - component: {fileID: 937835223}
   - component: {fileID: 3469287836787954336}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: old_key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
