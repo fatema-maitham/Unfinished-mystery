@@ -2,13 +2,13 @@
 - Project name: Unfinished-mystery
 - Unity version: Unity 6000.1.13f1
 - Active scene:
-  - Name: Level2ـFinal
+  - Name: Level1
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: wall_corner_double
+  - Name: HintBook
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
