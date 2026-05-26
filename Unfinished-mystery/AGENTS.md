@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: wall_corner 1 (1)
-  - Tag: Untagged
-  - Layer: Default
+  - Name: Main Camera
+  - Tag: MainCamera
+  - Layer: 6
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
