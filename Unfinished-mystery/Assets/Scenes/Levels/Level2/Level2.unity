@@ -1573,6 +1573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3877179342609465310, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 400412069}
+    - targetCorrespondingSourceObject: {fileID: 3877179342609465310, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 400412079}
     - targetCorrespondingSourceObject: {fileID: 4130833257251837314, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1654010310}
@@ -5148,6 +5151,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8472228789259425259, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
   m_PrefabInstance: {fileID: 111171688}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &400412079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400412065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fee377a32c647bdaa0c9795588412c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  interactDistance: 2
+  interactKey: 101
+  doorOpenSimple: {fileID: 0}
 --- !u!1 &403551871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4927999958042579405, guid: e615122bb5348c64cb2acfeb537bf738, type: 3}
@@ -8757,7 +8776,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
   interactDistance: 2.5
-  promptUI: {fileID: 503856320}
   audioSource: {fileID: 673595713}
   ringtoneClip: {fileID: 8300000, guid: 16430867915ea484bb878bc4bd856c56, type: 3}
   phoneMessageClip: {fileID: 8300000, guid: 746d2d47cbf5f4c119d008e0a0af4706, type: 3}
