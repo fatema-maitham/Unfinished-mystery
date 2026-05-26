@@ -39,6 +39,11 @@ public class SimCardPickup : MonoBehaviour
 
         HasSimCard = true;
 
+        if (Level2PuzzleSystem.Instance != null)
+        {
+            Level2PuzzleSystem.Instance.FindSimCard();
+        }
+
         Debug.Log("[SimCardPickup] SIM Card picked up.");
 
         if (destroyAfterPickup)

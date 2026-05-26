@@ -157,20 +157,20 @@ public class Level2PuzzleSystem : MonoBehaviour
 
     // Called when the final door unlocks.
     // Requires the clock code first.
-    public void UnlockDoor()
+public void UnlockDoor()
+{
+    if (!_phoneMessageHeard)
     {
-        if (!_clockCodeFound)
-        {
-            ShowBlocked("You still do not know the final code.");
-            return;
-        }
-
-        if (_doorUnlocked) return;
-
-        _doorUnlocked = true;
-        Debug.Log("[Level2PuzzleSystem] Door unlocked.");
-        onDoorUnlocked?.Invoke();
+        ShowBlocked("You need to hear the phone message first.");
+        return;
     }
+
+    if (_doorUnlocked) return;
+
+    _doorUnlocked = true;
+    Debug.Log("[Level2PuzzleSystem] Door unlocked.");
+    onDoorUnlocked?.Invoke();
+}
 
     // Called when the player exits the room.
     public void CompleteLevel()

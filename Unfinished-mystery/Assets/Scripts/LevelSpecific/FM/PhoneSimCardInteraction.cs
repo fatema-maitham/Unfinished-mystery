@@ -63,14 +63,22 @@ public class PhoneSimCardInteraction : MonoBehaviour
         StartCoroutine(PhoneSequence());
     }
 
-    private IEnumerator PhoneSequence()
+private IEnumerator PhoneSequence()
+{
+    if (audioSource != null && ringtoneClip != null)
+        audioSource.PlayOneShot(ringtoneClip);
+
+    yield return new WaitForSeconds(7f);
+
+    if (audioSource != null && phoneMessageClip != null)
     {
-        if (audioSource != null && ringtoneClip != null)
-            audioSource.PlayOneShot(ringtoneClip);
-
-        yield return new WaitForSeconds(7f);
-
-        if (audioSource != null && phoneMessageClip != null)
-            audioSource.PlayOneShot(phoneMessageClip);
+        audioSource.PlayOneShot(phoneMessageClip);
+        yield return new WaitForSeconds(phoneMessageClip.length);
     }
+
+    if (Level2PuzzleSystem.Instance != null)
+    {
+        Level2PuzzleSystem.Instance.HearPhoneMessage();
+    }
+}
 }

@@ -31,8 +31,8 @@ public bool keypadUnlocked = false;
     private bool keypadPromptShowing = false;
 private void Start()
 {
-    requiresFinalReel = true;
-    keypadUnlocked = false;
+    requiresFinalReel = false;
+    keypadUnlocked = true;
     keypadPromptShowing = false;
 }
 
