@@ -4,6 +4,8 @@ using UnityEngine.Events;
 /// <summary>
 /// Central puzzle manager for Level 2.
 /// Tracks the main story progress from the first note until the final door unlock.
+/// Updated flow:
+/// First Note → TV → Bookshelf → Gramophone → SIM Card → Phone Message → Clock Code → Door → Complete.
 /// </summary>
 public class Level2PuzzleSystem : MonoBehaviour
 {
@@ -15,9 +17,7 @@ public class Level2PuzzleSystem : MonoBehaviour
     [SerializeField] private bool _tvMessageSeen = false;
     [SerializeField] private bool _bookshelfClueFound = false;
     [SerializeField] private bool _gramophonePlayed = false;
-    [SerializeField] private bool _brassKeyFound = false;
-    [SerializeField] private bool _evidenceBagOpened = false;
-    [SerializeField] private bool _phoneNumberFound = false;
+    [SerializeField] private bool _simCardFound = false;
     [SerializeField] private bool _phoneMessageHeard = false;
     [SerializeField] private bool _clockCodeFound = false;
     [SerializeField] private bool _doorUnlocked = false;
@@ -29,9 +29,7 @@ public class Level2PuzzleSystem : MonoBehaviour
     public UnityEvent onTVMessageSeen;
     public UnityEvent onBookshelfClueFound;
     public UnityEvent onGramophonePlayed;
-    public UnityEvent onBrassKeyFound;
-    public UnityEvent onEvidenceBagOpened;
-    public UnityEvent onPhoneNumberFound;
+    public UnityEvent onSimCardFound;
     public UnityEvent onPhoneMessageHeard;
     public UnityEvent onClockCodeFound;
     public UnityEvent onDoorUnlocked;
@@ -42,9 +40,7 @@ public class Level2PuzzleSystem : MonoBehaviour
     public bool TVMessageSeen => _tvMessageSeen;
     public bool BookshelfClueFound => _bookshelfClueFound;
     public bool GramophonePlayed => _gramophonePlayed;
-    public bool BrassKeyFound => _brassKeyFound;
-    public bool EvidenceBagOpened => _evidenceBagOpened;
-    public bool PhoneNumberFound => _phoneNumberFound;
+    public bool SimCardFound => _simCardFound;
     public bool PhoneMessageHeard => _phoneMessageHeard;
     public bool ClockCodeFound => _clockCodeFound;
     public bool DoorUnlocked => _doorUnlocked;
@@ -82,13 +78,13 @@ public class Level2PuzzleSystem : MonoBehaviour
         onTVMessageSeen?.Invoke();
     }
 
-    // Called when the bookshelf clue confirms the badge number.
+    // Called when the bookshelf clue is found.
     public void FindBookshelfClue()
     {
         if (_bookshelfClueFound) return;
 
         _bookshelfClueFound = true;
-        Debug.Log("[Level2PuzzleSystem] Bookshelf clue found. Badge 259 confirmed.");
+        Debug.Log("[Level2PuzzleSystem] Bookshelf clue found.");
         onBookshelfClueFound?.Invoke();
     }
 
@@ -98,7 +94,7 @@ public class Level2PuzzleSystem : MonoBehaviour
     {
         if (!_bookshelfClueFound)
         {
-            ShowBlocked("You need to understand the badge number first.");
+            ShowBlocked("You need to find the bookshelf clue first.");
             return;
         }
 
@@ -109,70 +105,36 @@ public class Level2PuzzleSystem : MonoBehaviour
         onGramophonePlayed?.Invoke();
     }
 
-    // Called when the player finds the brass key under the strongest light.
+    // Called when the player finds the SIM card inside the closed drawer.
     // Requires the gramophone clue first.
-    public void FindBrassKey()
+    public void FindSimCard()
     {
         if (!_gramophonePlayed)
         {
-            ShowBlocked("The next truth only appears where light is strongest.");
+            ShowBlocked("You need to hear the gramophone clue first.");
             return;
         }
 
-        if (_brassKeyFound) return;
+        if (_simCardFound) return;
 
-        _brassKeyFound = true;
-        Debug.Log("[Level2PuzzleSystem] Brass key found.");
-        onBrassKeyFound?.Invoke();
+        _simCardFound = true;
+        Debug.Log("[Level2PuzzleSystem] SIM card found.");
+        onSimCardFound?.Invoke();
     }
 
-    // Called when the player opens the evidence bag.
-    // Requires the brass key first.
-    public void OpenEvidenceBag()
-    {
-        if (!_brassKeyFound)
-        {
-            ShowBlocked("The bag is locked. You need a key.");
-            return;
-        }
-
-        if (_evidenceBagOpened) return;
-
-        _evidenceBagOpened = true;
-        Debug.Log("[Level2PuzzleSystem] Evidence bag opened.");
-        onEvidenceBagOpened?.Invoke();
-    }
-
-    // Called when the hidden phone number is found behind the wall frame.
-    // Requires the evidence bag first.
-    public void FindPhoneNumber()
-    {
-        if (!_evidenceBagOpened)
-        {
-            ShowBlocked("You need to uncover the evidence first.");
-            return;
-        }
-
-        if (_phoneNumberFound) return;
-
-        _phoneNumberFound = true;
-        Debug.Log("[Level2PuzzleSystem] Phone number found: 916-2847.");
-        onPhoneNumberFound?.Invoke();
-    }
-
-    // Called after the player enters the phone number and hears Isla's message.
+    // Called after the player uses the SIM card with the phone and hears the message.
     public void HearPhoneMessage()
     {
-        if (!_phoneNumberFound)
+        if (!_simCardFound)
         {
-            ShowBlocked("You do not know the number yet.");
+            ShowBlocked("You need the SIM card first.");
             return;
         }
 
         if (_phoneMessageHeard) return;
 
         _phoneMessageHeard = true;
-        Debug.Log("[Level2PuzzleSystem] Isla phone message heard.");
+        Debug.Log("[Level2PuzzleSystem] Phone message heard.");
         onPhoneMessageHeard?.Invoke();
     }
 
@@ -189,7 +151,7 @@ public class Level2PuzzleSystem : MonoBehaviour
         if (_clockCodeFound) return;
 
         _clockCodeFound = true;
-        Debug.Log("[Level2PuzzleSystem] Clock code found: 1143.");
+        Debug.Log("[Level2PuzzleSystem] Clock code found.");
         onClockCodeFound?.Invoke();
     }
 
