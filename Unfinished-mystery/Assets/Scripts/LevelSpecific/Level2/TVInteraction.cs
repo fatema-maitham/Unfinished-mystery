@@ -27,7 +27,7 @@ public class TVInteraction : MonoBehaviour
     [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Timing")]
-    [SerializeField] private float staticDuration = 1.5f;
+    [SerializeField] private float staticDuration = 1.2f;
     [SerializeField] private float typingSpeed = 0.05f;
 
     private bool playerInside;
@@ -44,11 +44,16 @@ public class TVInteraction : MonoBehaviour
     private void Update()
     {
         if (!playerInside) return;
-        if (hasPlayed || isPlaying) return;
+        if (isPlaying) return;
 
-        if (Input.GetKeyDown(interactKey))
+        if (!hasPlayed)
         {
-            promptUI.HidePrompt();
+            promptUI?.ShowPrompt(label, subLabel);
+        }
+
+        if (Input.GetKeyDown(interactKey) && !hasPlayed)
+        {
+            promptUI?.HidePrompt();
             StartCoroutine(PlayTVSequence());
         }
     }
@@ -57,10 +62,11 @@ public class TVInteraction : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         if (!Level2PuzzleSystem.Instance.FirstNoteRead) return;
-        if (hasPlayed) return;
 
         playerInside = true;
-        promptUI.ShowPrompt(label, subLabel);
+
+        if (!hasPlayed && !isPlaying)
+            promptUI?.ShowPrompt(label, subLabel);
     }
 
     private void OnTriggerExit(Collider other)
@@ -68,7 +74,7 @@ public class TVInteraction : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         playerInside = false;
-        promptUI.HidePrompt();
+        promptUI?.HidePrompt();
     }
 
     private IEnumerator PlayTVSequence()
@@ -79,15 +85,6 @@ public class TVInteraction : MonoBehaviour
         if (tvStatic != null) tvStatic.SetActive(true);
         if (tvMessage != null) tvMessage.SetActive(false);
         if (messageText != null) messageText.text = "";
-
-        // Do not restart the static sound here.
-        // The static sound already starts after the first note.
-
-        // if (staticSound != null)
-        // {
-        //     staticSound.Stop();
-        //     staticSound.Play();
-        // }
 
         yield return new WaitForSeconds(staticDuration);
 
@@ -102,10 +99,8 @@ public class TVInteraction : MonoBehaviour
         if (staticSound != null) staticSound.Stop();
         if (tvStatic != null) tvStatic.SetActive(false);
 
-        Level2PuzzleSystem.Instance.SeeTVMessage();
+        Level2PuzzleSystem.Instance?.SeeTVMessage();
 
         isPlaying = false;
-
-        if (staticSound != null) staticSound.Stop();
     }
 }

@@ -2,23 +2,13 @@
 - Project name: Unfinished-mystery
 - Unity version: Unity 6000.1.13f1
 - Active scene:
-  - Name: Level2ـFinal
-  - Name: Level4
+  - Name: LevelSummary2
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
-  - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Ground
-- Active game object:
-  - Name: DrawingBook
-  - Tag: Untagged
-  - Layer: Default
-  - Name: Level23
-  - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: NoteCanvas
+  - Name: LevelSummaryManager
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
