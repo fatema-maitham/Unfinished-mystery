@@ -1,61 +1,81 @@
 using UnityEngine;
 
-/// <summary>
-/// Attach to the Player. Detects nearby IActivatable objects and drives the UI prompt.
-/// Scalable: teammates never touch this — they only implement IActivatable on their objects.
-/// </summary>
 public class PlayerActivationDetector : MonoBehaviour
 {
     [Header("Detection Settings")]
-    [Tooltip("How far the player can reach to interact")]
-    [SerializeField] private float interactionRadius = 2.5f;
-
-    [Tooltip("Layers that can contain activatables (set to your Interactable layer)")]
-    [SerializeField] private LayerMask interactableLayer = ~0;
-
-    [Tooltip("Max number of colliders checked per frame (keep low for performance)")]
-    [SerializeField] private int maxColliders = 8;
+    [SerializeField] private float interactionRadius = 10f;
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private int maxColliders = 32;
 
     [Header("Input")]
-    [Tooltip("Key to trigger activation")]
     [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("References")]
     [SerializeField] private ActivationPromptUI promptUI;
 
-    // ── Runtime State ────────────────────────────────────────────────────────
-    private IActivatable _currentTarget;
-    private IActivatable _previousTarget;
-    private readonly Collider[] _overlapResults = new Collider[8];
+    [Header("Debug")]
+    [SerializeField] private bool showDebugLogs = true;
 
-    // ── Unity ────────────────────────────────────────────────────────────────
+    private IActivatable _currentTarget;
+    private Collider[] _overlapResults;
+
+    private void Awake()
+    {
+        _overlapResults = new Collider[maxColliders];
+    }
+
     private void Update()
     {
         FindClosestActivatable();
         HandleInput();
     }
 
-    // ── Detection ────────────────────────────────────────────────────────────
     private void FindClosestActivatable()
     {
         int count = Physics.OverlapSphereNonAlloc(
             transform.position,
-            interactionRadius,   // still used as the max possible radius
+            interactionRadius,
             _overlapResults,
-            interactableLayer
+            interactableLayer,
+            QueryTriggerInteraction.Collide
         );
+
+        if (showDebugLogs)
+        {
+            Debug.Log("Found colliders: " + count);
+        }
 
         IActivatable closest = null;
         float closestDist = float.MaxValue;
 
         for (int i = 0; i < count; i++)
         {
-            var activatable = _overlapResults[i].GetComponentInParent<IActivatable>();
-            if (activatable == null || !activatable.CanActivate) continue;
+            if (_overlapResults[i] == null) continue;
 
-            float dist = Vector3.Distance(transform.position, _overlapResults[i].transform.position);
+            IActivatable activatable = _overlapResults[i].GetComponentInParent<IActivatable>();
 
-            // ← each object uses its own radius
+            if (showDebugLogs)
+            {
+                Debug.Log(
+                    "Hit: " + _overlapResults[i].name +
+                    " | Layer: " + LayerMask.LayerToName(_overlapResults[i].gameObject.layer) +
+                    " | Activatable: " + (activatable != null)
+                );
+            }
+
+            if (activatable == null) continue;
+            if (!activatable.CanActivate) continue;
+
+            float dist = Vector3.Distance(
+                transform.position,
+                _overlapResults[i].ClosestPoint(transform.position)
+            );
+
+            if (showDebugLogs)
+            {
+                Debug.Log("Distance to activatable: " + dist + " | Allowed radius: " + activatable.ActivationRadius);
+            }
+
             if (dist > activatable.ActivationRadius) continue;
 
             if (dist < closestDist)
@@ -73,36 +93,49 @@ public class PlayerActivationDetector : MonoBehaviour
         if (newTarget == _currentTarget) return;
 
         _currentTarget?.OnActivatableBlur();
-
         _currentTarget = newTarget;
 
         if (_currentTarget != null)
         {
+            if (showDebugLogs)
+            {
+                Debug.Log("CURRENT TARGET FOUND: " + _currentTarget.ActivationHint);
+            }
+
             _currentTarget.OnActivatableFocus();
-            promptUI?.ShowPrompt(_currentTarget.ActivationLabel, _currentTarget.ActivationHint);
+
+            if (promptUI != null)
+            {
+                promptUI.ShowPrompt(_currentTarget.ActivationLabel, _currentTarget.ActivationHint);
+            }
+            else
+            {
+                Debug.LogError("Prompt UI is NOT assigned on PlayerActivationDetector.");
+            }
         }
         else
         {
-            promptUI?.HidePrompt();
+            if (promptUI != null)
+            {
+                promptUI.HidePrompt();
+            }
         }
     }
 
-    // ── Input ────────────────────────────────────────────────────────────────
     private void HandleInput()
     {
         if (_currentTarget == null) return;
-        if (!Input.GetKeyDown(interactKey)) return;
-        if (!_currentTarget.CanActivate) return;
 
-        _currentTarget.OnActivate(gameObject);
+        if (Input.GetKeyDown(interactKey))
+        {
+            Debug.Log("Pressed E on target: " + _currentTarget.ActivationHint);
+            _currentTarget.OnActivate(gameObject);
+        }
     }
 
-    // ── Gizmos ───────────────────────────────────────────────────────────────
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(1f, 0.85f, 0f, 0.25f);
-        Gizmos.DrawSphere(transform.position, interactionRadius);
-        Gizmos.color = new Color(1f, 0.85f, 0f, 0.85f);
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
 }
