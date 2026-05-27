@@ -6,9 +6,8 @@ using TMPro;
 /// <summary>
 /// Drives the full laptop screen UI.
 /// Opened by ActivatableLaptop when the player presses E.
-/// Shows a desktop with a file explorer window.
-/// Clicking ForYourEyes.txt opens a password window.
-/// Connects to Level1PuzzleSystem on success.
+/// Shows a desktop with a file explorer containing only ForYourEyes.txt.
+/// Clicking it opens a password window. Correct password connects to Level1PuzzleSystem.
 /// </summary>
 public class LaptopScreenUI : MonoBehaviour
 {
@@ -27,49 +26,43 @@ public class LaptopScreenUI : MonoBehaviour
 
     // ── File Explorer Window ──────────────────────────────────────────────────
     [Header("File Explorer Window")]
-    [Tooltip("window_bw type 1 sprite as the window background")]
     [SerializeField] private GameObject fileExplorerWindow;
-    [SerializeField] private Image      fileWindowBackground;  // window_bw type 1
-    [SerializeField] private Image      fileWindowTopBar;      // min_window bw
-    [SerializeField] private TMP_Text   fileWindowTitle;       // "Kyrell_Flins_Evidence"
-    [SerializeField] private Button     closeFileWindowButton; // close bw type 1
-    [SerializeField] private Image      closeFileWindowIcon;   // close bw type 1 sprite
+    [SerializeField] private Image      fileWindowBackground;
+    [SerializeField] private Image      fileWindowTopBar;
+    [SerializeField] private TMP_Text   fileWindowTitle;
+    [SerializeField] private Button     closeFileWindowButton;
+    [SerializeField] private Image      closeFileWindowIcon;
 
-    [Header("File List — inside the explorer window")]
-    [Tooltip("Assign one FileItemUI prefab per file row — see hierarchy guide below")]
-    [SerializeField] private Transform  fileListContainer;     // vertical layout group
-    [SerializeField] private GameObject fileItemPrefab;        // prefab: icon + filename button
+    [Header("File List")]
+    [SerializeField] private Transform  fileListContainer;
+    [SerializeField] private GameObject fileItemPrefab;
 
     [Header("File Icons")]
-    [Tooltip("icon from icons bw — document icon for regular files")]
-    [SerializeField] private Sprite documentIconSprite;
-    [Tooltip("icon from icons bw — use a different icon for the locked file")]
+    [Tooltip("Icon shown next to ForYourEyes.txt — use lock or settings icon from icons bw")]
     [SerializeField] private Sprite lockedIconSprite;
 
     // ── Password Window ───────────────────────────────────────────────────────
     [Header("Password Window")]
-    [Tooltip("window_bw type 2 sprite as window background")]
-    [SerializeField] private GameObject passwordWindow;
-    [SerializeField] private Image      passwordWindowBackground; // window_bw type 2
-    [SerializeField] private Image      passwordWindowTopBar;     // min_window bw
-    [SerializeField] private TMP_Text   passwordWindowTitle;      // "ForYourEyes.txt"
-    [SerializeField] private Button     closePasswordButton;      // close bw type 1
-    [SerializeField] private Image      closePasswordIcon;        // close bw type 1 sprite
-    [SerializeField] private TMP_Text   passwordPromptText;       // "Enter password:"
-    [SerializeField] private Image      inputFieldBackground;     // field bw / input bw
+    [SerializeField] private GameObject     passwordWindow;
+    [SerializeField] private Image          passwordWindowBackground;
+    [SerializeField] private Image          passwordWindowTopBar;
+    [SerializeField] private TMP_Text       passwordWindowTitle;
+    [SerializeField] private Button         closePasswordButton;
+    [SerializeField] private Image          closePasswordIcon;
+    [SerializeField] private TMP_Text       passwordPromptText;
+    [SerializeField] private Image          inputFieldBackground;
     [SerializeField] private TMP_InputField passwordInputField;
-    [SerializeField] private Button     submitButton;
-    [SerializeField] private Image      submitButtonImage;        // button type 1 grey / white
-    [SerializeField] private TMP_Text   submitButtonText;         // "Unlock"
-    [SerializeField] private TMP_Text   feedbackText;             // "Incorrect." or empty
+    [SerializeField] private Button         submitButton;
+    [SerializeField] private Image          submitButtonImage;
+    [SerializeField] private TMP_Text       submitButtonText;
+    [SerializeField] private TMP_Text       feedbackText;
 
     // ── Decrypted File Window ─────────────────────────────────────────────────
     [Header("Decrypted File Window")]
-    [Tooltip("Shown after correct password — window_bw type 3")]
     [SerializeField] private GameObject decryptedWindow;
     [SerializeField] private Image      decryptedWindowBackground;
     [SerializeField] private Image      decryptedWindowTopBar;
-    [SerializeField] private TMP_Text   decryptedWindowTitle;     // "ForYourEyes.txt — Unlocked"
+    [SerializeField] private TMP_Text   decryptedWindowTitle;
     [SerializeField] private Button     closeDecryptedButton;
     [SerializeField] private TMP_Text   decryptedBodyText;
     [TextArea(3, 6)]
@@ -78,25 +71,17 @@ public class LaptopScreenUI : MonoBehaviour
 
     // ── Settings ──────────────────────────────────────────────────────────────
     [Header("Settings")]
-    [SerializeField] private string correctPassword = "58";
-    [SerializeField] private float  fadeSpeed       = 6f;
-    [SerializeField] private KeyCode exitKey        = KeyCode.Escape;
+    [SerializeField] private string  correctPassword = "58";
+    [SerializeField] private float   fadeSpeed       = 6f;
+    [SerializeField] private KeyCode exitKey         = KeyCode.Escape;
 
-    [Header("File List Contents")]
-    [Tooltip("These appear as regular files in the explorer — not clickable for puzzle")]
-    [SerializeField] private string[] decoyFileNames = new string[]
-    {
-        "Thesis_Draft_Final.pdf",
-        "GradeSheet_Spring2003.xlsx",
-        "StudentRecords_Backup.zip",
-        "CorrespondenceLog.txt"
-    };
-    [Tooltip("The locked file that triggers the password window")]
+    [Header("File")]
+    [Tooltip("The single file shown in the explorer — clicking it opens the password window")]
     [SerializeField] private string lockedFileName = "ForYourEyes.txt";
 
     // ── State ─────────────────────────────────────────────────────────────────
-    private bool _isOpen      = false;
-    private bool _decrypted   = false;
+    private bool _isOpen    = false;
+    private bool _decrypted = false;
     private Coroutine _fadeRoutine;
 
     // ── Unity ─────────────────────────────────────────────────────────────────
@@ -113,21 +98,18 @@ public class LaptopScreenUI : MonoBehaviour
 
     private void Start()
     {
-        // Wire close buttons
         closeFileWindowButton?.onClick.AddListener(CloseFileExplorer);
         closePasswordButton?.onClick.AddListener(ClosePasswordWindow);
         closeDecryptedButton?.onClick.AddListener(CloseDecryptedWindow);
         submitButton?.onClick.AddListener(OnSubmitPassword);
 
-        // Build the file list dynamically
         BuildFileList();
 
-        // Start with only the file explorer open
         fileExplorerWindow?.SetActive(true);
         passwordWindow?.SetActive(false);
         decryptedWindow?.SetActive(false);
 
-        feedbackText.text = "";
+        if (feedbackText != null) feedbackText.text = "";
     }
 
     private void Update()
@@ -137,11 +119,8 @@ public class LaptopScreenUI : MonoBehaviour
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
-
-    /// <summary>Called by ActivatableLaptop to open the screen.</summary>
     public void Open()
     {
-        // If already decrypted, show the decrypted window directly
         if (Level1PuzzleSystem.Instance != null && Level1PuzzleSystem.Instance.FileDecrypted)
         {
             _decrypted = true;
@@ -174,58 +153,31 @@ public class LaptopScreenUI : MonoBehaviour
     {
         if (fileListContainer == null || fileItemPrefab == null) return;
 
-        // Clear existing children
         foreach (Transform child in fileListContainer)
             Destroy(child.gameObject);
 
-        // Spawn decoy files first
-        foreach (string fileName in decoyFileNames)
-            SpawnFileItem(fileName, false);
-
-        // Spawn the locked file last — highlighted differently
-        SpawnFileItem(lockedFileName, true);
-    }
-
-    private void SpawnFileItem(string fileName, bool isLocked)
-    {
+        // Spawn only ForYourEyes.txt
         GameObject item = Instantiate(fileItemPrefab, fileListContainer);
 
-        // Icon
         var icon = item.transform.Find("Icon")?.GetComponent<Image>();
-        if (icon != null)
-            icon.sprite = isLocked ? lockedIconSprite : documentIconSprite;
+        if (icon != null) icon.sprite = lockedIconSprite;
 
-        // Label
         var label = item.transform.Find("FileName")?.GetComponent<TMP_Text>();
         if (label != null)
         {
-            label.text = fileName;
-            if (isLocked) label.color = new Color(0.2f, 0.2f, 0.2f); // darker to stand out
+            label.text  = lockedFileName;
+            label.color = new Color(0.2f, 0.2f, 0.2f);
         }
 
-        // Click — only the locked file opens the password window
         var btn = item.GetComponent<Button>();
-        if (btn != null)
-        {
-            if (isLocked)
-                btn.onClick.AddListener(OpenPasswordWindow);
-            else
-                btn.onClick.AddListener(() => OnDecoyFileClicked(fileName));
-        }
-    }
-
-    private void OnDecoyFileClicked(string fileName)
-    {
-        // Decoy files just show a small feedback — no puzzle relevance
-        feedbackText.text = $"Cannot open {fileName}.";
+        btn?.onClick.AddListener(OpenPasswordWindow);
     }
 
     // ── Windows ───────────────────────────────────────────────────────────────
     private void CloseFileExplorer()
     {
         fileExplorerWindow?.SetActive(false);
-        // If no windows left open, close the whole screen
-        if (passwordWindow != null && !passwordWindow.activeSelf &&
+        if (passwordWindow  != null && !passwordWindow.activeSelf &&
             decryptedWindow != null && !decryptedWindow.activeSelf)
             Close();
     }
@@ -239,21 +191,13 @@ public class LaptopScreenUI : MonoBehaviour
         }
 
         passwordWindow?.SetActive(true);
-        if (passwordInputField != null) passwordInputField.text = "";
-        if (feedbackText       != null) feedbackText.text       = "";
-        if (passwordWindowTitle != null)
-            passwordWindowTitle.text = lockedFileName;
+        if (passwordInputField  != null) passwordInputField.text  = "";
+        if (feedbackText        != null) feedbackText.text        = "";
+        if (passwordWindowTitle != null) passwordWindowTitle.text = lockedFileName;
     }
 
-    private void ClosePasswordWindow()
-    {
-        passwordWindow?.SetActive(false);
-    }
-
-    private void CloseDecryptedWindow()
-    {
-        decryptedWindow?.SetActive(false);
-    }
+    private void ClosePasswordWindow()  => passwordWindow?.SetActive(false);
+    private void CloseDecryptedWindow() => decryptedWindow?.SetActive(false);
 
     // ── Password ──────────────────────────────────────────────────────────────
     private void OnSubmitPassword()
@@ -269,17 +213,14 @@ public class LaptopScreenUI : MonoBehaviour
 
             passwordWindow?.SetActive(false);
 
-            if (decryptedBodyText != null)
-                decryptedBodyText.text = decryptedContent;
-            if (decryptedWindowTitle != null)
-                decryptedWindowTitle.text = lockedFileName + " — Unlocked";
+            if (decryptedBodyText    != null) decryptedBodyText.text    = decryptedContent;
+            if (decryptedWindowTitle != null) decryptedWindowTitle.text = lockedFileName + " — Unlocked";
 
             decryptedWindow?.SetActive(true);
         }
         else
         {
-            if (feedbackText != null)
-                feedbackText.text = "Incorrect password.";
+            if (feedbackText != null) feedbackText.text = "Incorrect password.";
         }
     }
 

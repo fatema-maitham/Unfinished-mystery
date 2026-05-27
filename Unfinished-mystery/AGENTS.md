@@ -4,11 +4,11 @@
 - Active scene:
   - Name: Level1
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: Level1PuzzleSystem
+  - Name: LaptopScreen
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
