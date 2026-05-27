@@ -1,28 +1,35 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class ActivatableDrawer : MonoBehaviour
 {
-    [Header("Prompt UI")]
-    [SerializeField] private InteractionPromptUI promptUI;
+    [Header("New HUD Prompt")]
+    [SerializeField] private GameObject promptPanel;
+    [SerializeField] private TMP_Text keyHintText;
+    [SerializeField] private TMP_Text labelText;
+    [SerializeField] private TMP_Text subLabelText;
+
+    [Header("Prompt Text")]
+    [SerializeField] private string keyText = "E";
     [SerializeField] private string promptText = "OPEN";
     [SerializeField] private string promptSubLabel = "Drawer";
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Detection")]
     [SerializeField] private Transform player;
     [SerializeField] private float interactDistance = 3.5f;
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Drawer Movement")]
     [SerializeField] private Transform drawerToMove;
-    [SerializeField] private float openSpeed = 3f;
+    [SerializeField] private Vector3 openOffset = new Vector3(0f, 0f, 0.45f);
+    [SerializeField] private float openSpeed = 2.5f;
 
     [Header("Key")]
     [SerializeField] private GameObject keyObject;
 
     private bool isOpen;
     private bool showingPrompt;
-
     private Vector3 closedLocalPosition;
     private Vector3 openLocalPosition;
 
@@ -38,49 +45,67 @@ public class ActivatableDrawer : MonoBehaviour
                 player = playerObject.transform;
         }
 
-        if (promptUI == null)
-            promptUI = FindFirstObjectByType<InteractionPromptUI>();
-
         closedLocalPosition = drawerToMove.localPosition;
-        openLocalPosition = closedLocalPosition + new Vector3(0f, 0f, 0.18f);
+        openLocalPosition = closedLocalPosition + openOffset;
 
         if (keyObject != null)
             keyObject.SetActive(false);
+
+        HidePrompt();
     }
 
     private void Update()
     {
-        if (isOpen || player == null || promptUI == null)
+        if (isOpen || player == null)
             return;
 
         float distance = Vector3.Distance(player.position, transform.position);
 
         if (distance <= interactDistance)
         {
-            promptUI.ShowPrompt(promptText, promptSubLabel);
-            showingPrompt = true;
+            ShowPrompt();
 
             if (Input.GetKeyDown(interactKey))
                 OpenDrawer();
         }
         else
         {
-            if (showingPrompt)
-            {
-                promptUI.HidePrompt();
-                showingPrompt = false;
-            }
+            HidePrompt();
         }
+    }
+
+    private void ShowPrompt()
+    {
+        if (showingPrompt)
+            return;
+
+        if (promptPanel != null)
+            promptPanel.SetActive(true);
+
+        if (keyHintText != null)
+            keyHintText.text = keyText;
+
+        if (labelText != null)
+            labelText.text = promptText;
+
+        if (subLabelText != null)
+            subLabelText.text = promptSubLabel;
+
+        showingPrompt = true;
+    }
+
+    private void HidePrompt()
+    {
+        if (promptPanel != null)
+            promptPanel.SetActive(false);
+
+        showingPrompt = false;
     }
 
     private void OpenDrawer()
     {
         isOpen = true;
-        showingPrompt = false;
-
-        if (promptUI != null)
-            promptUI.HidePrompt();
-
+        HidePrompt();
         StartCoroutine(OpenRoutine());
     }
 

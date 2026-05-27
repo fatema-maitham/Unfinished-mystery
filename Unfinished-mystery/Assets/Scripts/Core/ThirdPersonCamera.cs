@@ -35,7 +35,7 @@ public class ThirdPersonCamera : MonoBehaviour
         if (!_uiMode)
             HandleCameraRotation();
 
-        HandleCursorToggle();
+        // HandleCursorToggle();
     }
 
     void HandleCameraRotation()
