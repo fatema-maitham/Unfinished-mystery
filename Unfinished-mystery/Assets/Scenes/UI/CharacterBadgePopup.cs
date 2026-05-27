@@ -8,21 +8,24 @@ public class CharacterBadgePopup : MonoBehaviour
 
     private bool canClose;
 
-    void Start()
+    private void Start()
     {
-        Time.timeScale = 0f;
-
         if (badgePanel != null)
             badgePanel.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         StartCoroutine(AllowCloseAfterDelay());
     }
 
-    void Update()
+    private void Update()
     {
         if (!canClose) return;
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetMouseButtonDown(0) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.Return))
         {
             CloseBadge();
         }
@@ -39,14 +42,7 @@ public class CharacterBadgePopup : MonoBehaviour
         if (badgePanel != null)
             badgePanel.SetActive(false);
 
-        Time.timeScale = 1f;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    private void OnDisable()
-    {
-        Time.timeScale = 1f;
     }
 }

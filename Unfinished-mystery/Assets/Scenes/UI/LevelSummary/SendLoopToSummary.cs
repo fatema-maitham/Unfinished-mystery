@@ -1,26 +1,35 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SendLoopToSummary : MonoBehaviour
 {
-    [SerializeField] private TMP_Text loopCounterText;
-    [SerializeField] private string summarySceneName = "LevelSummary1";
+    [Header("Summary Scene")]
+    [SerializeField] private string summarySceneName = "Level2Summary";
 
-    public void OpenSummary()
+    [Header("Loop Settings")]
+    [SerializeField] private int maxLoops = 5;
+
+    private bool triggered = false;
+
+    private void OnTriggerEnter(Collider other)
     {
-        int loopNumber = 1;
+        if (triggered) return;
+        if (!other.CompareTag("Player")) return;
 
-        if (loopCounterText != null)
-            int.TryParse(loopCounterText.text, out loopNumber);
+        triggered = true;
 
-        if (loopNumber < 1)
-            loopNumber = 1;
+        LoopChangeSystem loopSystem = FindFirstObjectByType<LoopChangeSystem>();
 
-        if (loopNumber > 5)
-            loopNumber = 5;
+        int finalLoops = 1;
 
-        LevelLoopResultData.loopsUsed = loopNumber;
+        if (loopSystem != null)
+            finalLoops = loopSystem.currentLoop;
+
+        finalLoops = Mathf.Clamp(finalLoops, 1, maxLoops);
+
+        LevelResultData.loopsUsed = finalLoops;
+        LevelResultData.LoopsUsed = finalLoops;
+        LevelResultData.MaxLoops = maxLoops;
 
         SceneManager.LoadScene(summarySceneName);
     }
