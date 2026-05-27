@@ -71,6 +71,18 @@ public class BookCanvasController : MonoBehaviour
             backButton.onClick.AddListener(PreviousSpread);
     }
 
+    private void Update()
+{
+    if (bookPanel == null || !bookPanel.gameObject.activeSelf)
+        return;
+
+    if (Input.GetKeyDown(KeyCode.RightArrow))
+        NextSpread();
+
+    if (Input.GetKeyDown(KeyCode.LeftArrow))
+        PreviousSpread();
+}
+
     public void OpenBook()
     {
         Debug.Log("[BookCanvasController] OpenBook called");
