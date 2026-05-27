@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class KeypadUI : MonoBehaviour
+public class KeypadUI : MonoBehaviour, ILoopResettable
 {
     [Header("Code")]
     [SerializeField] private string correctCode = "258";
@@ -22,24 +22,28 @@ public class KeypadUI : MonoBehaviour
     [SerializeField] private MonoBehaviour drawerInteractableUI;
 
     private string currentCode = "";
-    private bool solved = false;
+    private bool solvedThisLoop = false;
 
     private void OnEnable()
     {
-        if (solved)
+        if (solvedThisLoop)
         {
             gameObject.SetActive(false);
             return;
         }
 
         currentCode = "";
-        displayText.text = "";
-        resultText.text = "";
+
+        if (displayText != null)
+            displayText.text = "";
+
+        if (resultText != null)
+            resultText.text = "";
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
 
     private void Update()
@@ -50,11 +54,16 @@ public class KeypadUI : MonoBehaviour
 
     public void PressKey(string number)
     {
-        if (currentCode.Length >= maxDigits) return;
+        if (currentCode.Length >= maxDigits)
+            return;
 
         currentCode += number;
-        displayText.text = currentCode;
-        resultText.text = "";
+
+        if (displayText != null)
+            displayText.text = currentCode;
+
+        if (resultText != null)
+            resultText.text = "";
 
         PlaySound(buttonClickSound);
     }
@@ -62,8 +71,12 @@ public class KeypadUI : MonoBehaviour
     public void ClearCode()
     {
         currentCode = "";
-        displayText.text = "";
-        resultText.text = "";
+
+        if (displayText != null)
+            displayText.text = "";
+
+        if (resultText != null)
+            resultText.text = "";
 
         PlaySound(buttonClickSound);
     }
@@ -72,32 +85,33 @@ public class KeypadUI : MonoBehaviour
     {
         if (currentCode == correctCode)
         {
-            solved = true;
+            solvedThisLoop = true;
 
-            resultText.text = "GRANTED";
-            resultText.color = Color.green;
+            if (resultText != null)
+            {
+                resultText.text = "GRANTED";
+                resultText.color = Color.green;
+            }
 
             PlaySound(grantedSound);
-
-            Time.timeScale = 1f;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
 
             if (drawerAnimator != null)
                 drawerAnimator.SetTrigger("Open");
 
-            if (drawerInteractableUI != null)
-                drawerInteractableUI.enabled = false;
-
-            gameObject.SetActive(false);
+            CloseKeypad();
         }
         else
         {
-            resultText.text = "DENIED";
-            resultText.color = Color.red;
+            if (resultText != null)
+            {
+                resultText.text = "DENIED";
+                resultText.color = Color.red;
+            }
 
             currentCode = "";
-            displayText.text = "";
+
+            if (displayText != null)
+                displayText.text = "";
 
             PlaySound(deniedSound);
         }
@@ -105,10 +119,29 @@ public class KeypadUI : MonoBehaviour
 
     public void CloseKeypad()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         Time.timeScale = 1f;
+
+        gameObject.SetActive(false);
+    }
+
+    public void ResetState()
+    {
+        solvedThisLoop = false;
+        currentCode = "";
+
+        if (displayText != null)
+            displayText.text = "";
+
+        if (resultText != null)
+            resultText.text = "";
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        Time.timeScale = 1f;
 
         gameObject.SetActive(false);
     }
