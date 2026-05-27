@@ -5691,7 +5691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -8.625427
+      value: -8.625488
       objectReference: {fileID: 0}
     - target: {fileID: 248049254526301440, guid: 105840b01df93c848b96501da8b92472, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12518,7 +12518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -211.7, y: -61.3}
+  m_AnchoredPosition: {x: -211.69995, y: -61.30005}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &815868622
@@ -13439,7 +13439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44637fad698e45b2ba3f3d41be10a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Level1
+  nextSceneName: LevelSummary2
 --- !u!65 &856020249
 BoxCollider:
   m_ObjectHideFlags: 0
