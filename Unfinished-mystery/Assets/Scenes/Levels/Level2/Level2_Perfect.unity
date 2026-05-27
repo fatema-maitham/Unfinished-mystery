@@ -5465,13 +5465,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7974f3d0ac541398f859f67f93d15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptUI: {fileID: 533129714}
+  promptPanel: {fileID: 0}
+  keyHintText: {fileID: 0}
+  labelText: {fileID: 0}
+  subLabelText: {fileID: 0}
+  keyText: E
   promptText: OPEN
   promptSubLabel: Drawer
-  interactKey: 101
   player: {fileID: 0}
   interactDistance: 2.5
+  interactKey: 101
   drawerToMove: {fileID: 427216896}
+  openOffset: {x: 0, y: 0, z: 0.45}
   openSpeed: 2.5
   keyObject: {fileID: 0}
 --- !u!65 &427216900
@@ -7065,6 +7070,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+  footstepAudioSource: {fileID: 0}
 --- !u!114 &603546225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7094,7 +7100,7 @@ MonoBehaviour:
   interactionRadius: 2.2
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   maxColliders: 3
   interactKey: 101
   promptUI: {fileID: 503856320}
@@ -19741,8 +19747,8 @@ MonoBehaviour:
     Now I think they only
     teach us how to hide.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3b109dc8c4db24cfe9402a63fb786f36, type: 2}
-  m_sharedMaterial: {fileID: -3892201136396286592, guid: 3b109dc8c4db24cfe9402a63fb786f36, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a5a33bd52faab45c6810c1959ff7e167, type: 2}
+  m_sharedMaterial: {fileID: 1494977411554356024, guid: a5a33bd52faab45c6810c1959ff7e167, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33566,8 +33572,8 @@ MonoBehaviour:
     Now I think they only
     teach us how to hide.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3b109dc8c4db24cfe9402a63fb786f36, type: 2}
-  m_sharedMaterial: {fileID: -3892201136396286592, guid: 3b109dc8c4db24cfe9402a63fb786f36, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a5a33bd52faab45c6810c1959ff7e167, type: 2}
+  m_sharedMaterial: {fileID: 1494977411554356024, guid: a5a33bd52faab45c6810c1959ff7e167, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
