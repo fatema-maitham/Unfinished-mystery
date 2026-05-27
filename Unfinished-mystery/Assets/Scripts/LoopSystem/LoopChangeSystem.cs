@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class LoopChangeSystem : MonoBehaviour
 {
@@ -27,9 +26,6 @@ public class LoopChangeSystem : MonoBehaviour
     public int currentLoop = 1;
     public int maxLoops = 5;
 
-    [Header("UI Text")]
-    public TMP_Text loopText;
-
     [Header("Objects That Change Each Loop")]
     public List<LoopObject> loopObjects = new List<LoopObject>();
 
@@ -37,7 +33,6 @@ public class LoopChangeSystem : MonoBehaviour
     {
         currentLoop = Mathf.Clamp(currentLoop, 1, maxLoops);
         ApplyLoopChanges();
-        UpdateLoopUI();
     }
 
     public void GoToNextLoop()
@@ -48,15 +43,12 @@ public class LoopChangeSystem : MonoBehaviour
             currentLoop = maxLoops;
 
         ApplyLoopChanges();
-        UpdateLoopUI();
     }
 
     public void SetLoop(int loopNumber)
     {
         currentLoop = Mathf.Clamp(loopNumber, 1, maxLoops);
-
         ApplyLoopChanges();
-        UpdateLoopUI();
     }
 
     private void ApplyLoopChanges()
@@ -69,9 +61,7 @@ public class LoopChangeSystem : MonoBehaviour
                 continue;
 
             if (item.loopActiveStates != null && item.loopActiveStates.Length > loopIndex)
-            {
                 item.target.SetActive(item.loopActiveStates[loopIndex]);
-            }
 
             if (item.loopPositions != null && item.loopPositions.Length > loopIndex)
             {
@@ -88,14 +78,6 @@ public class LoopChangeSystem : MonoBehaviour
                 else
                     item.target.transform.rotation = Quaternion.Euler(item.loopRotations[loopIndex]);
             }
-        }
-    }
-
-    private void UpdateLoopUI()
-    {
-        if (loopText != null)
-        {
-            loopText.text = "Loop " + currentLoop + " / " + maxLoops;
         }
     }
 }
