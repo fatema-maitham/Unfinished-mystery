@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 20
+  loopDuration: 300
   maxLoops: 5
   timerText: {fileID: 414703377}
   loopCounterText: {fileID: 464534625}
@@ -18739,7 +18739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueSceneName: LevelsBook
-  replaySceneName: Level1
+  replaySceneName: Level3
 --- !u!65 &819359274
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -49552,6 +49552,8 @@ GameObject:
   - component: {fileID: 1924398302}
   - component: {fileID: 1924398303}
   - component: {fileID: 1924398304}
+  - component: {fileID: 1924398306}
+  - component: {fileID: 1924398305}
   m_Layer: 0
   m_Name: L3_ExitToSummaryTrigger
   m_TagString: Untagged
@@ -49607,9 +49609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635b1387b975941258b244a3f74a0dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  summarySceneName: LevelSummary
+  summarySceneName: LevelSummary3
   replaySceneName: Level3
-  nextSceneName: Level4
+  nextSceneName: LevelsBook
   levelTitle: LEVEL COMPLETE
   levelName: LEVEL 3
   characterName: Detective Ethan Cole
@@ -49617,6 +49619,33 @@ MonoBehaviour:
   loopsUsed: 1
   level3Portrait: {fileID: 21300000, guid: 434847cbfe59a4d78bac2fc93bf2b346, type: 3}
   resultMessage: "The final reel revealed Maya\u2019s fate."
+--- !u!114 &1924398305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924398301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7e956fb31354216ac608514794e62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  summarySceneName: LevelSummary3
+  maxLoops: 5
+--- !u!114 &1924398306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924398301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44637fad698e45b2ba3f3d41be10a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: LevelSummary3
 --- !u!1 &1925359999
 GameObject:
   m_ObjectHideFlags: 0
