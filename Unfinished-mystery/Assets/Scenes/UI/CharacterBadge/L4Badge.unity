@@ -677,6 +677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSummaryCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6281455145262849074, guid: c64632e374e0944daa9534c98cbee914, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1448
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
