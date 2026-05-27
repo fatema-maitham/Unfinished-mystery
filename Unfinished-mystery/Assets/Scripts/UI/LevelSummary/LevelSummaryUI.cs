@@ -16,10 +16,11 @@ public class LevelSummaryUI : MonoBehaviour
 
     private void Start()
     {
-        int loopsUsed = Mathf.Clamp(LevelLoopResultData.loopsUsed, 1, maxLoops);
+        int savedMaxLoops = LevelResultData.MaxLoops > 0 ? LevelResultData.MaxLoops : maxLoops;
+        int loopsUsed = Mathf.Clamp(LevelResultData.loopsUsed, 1, savedMaxLoops);
 
         if (loopsText != null)
-            loopsText.text = "Loops Used: " + loopsUsed + " / " + maxLoops;
+            loopsText.text = "Loops Used: " + loopsUsed + " / " + savedMaxLoops;
 
         ResetAllStars();
         StartCoroutine(PlayStarsRoutine(GetStarCount(loopsUsed)));
@@ -27,7 +28,7 @@ public class LevelSummaryUI : MonoBehaviour
 
     private int GetStarCount(int loopsUsed)
     {
-        if (loopsUsed == 1) return 3;
+        if (loopsUsed <= 1) return 3;
         if (loopsUsed <= 3) return 2;
         return 1;
     }
