@@ -9,22 +9,29 @@ public class LoopChangeSystem : MonoBehaviour
         public string objectName;
         public GameObject target;
 
+        [Header("Use Local Transform")]
+        public bool useLocalPosition = true;
+
         [Header("Position for Each Loop")]
-        public Vector3[] loopPositions = new Vector3[10];
+        public Vector3[] loopPositions = new Vector3[5];
+
+        [Header("Rotation for Each Loop")]
+        public Vector3[] loopRotations = new Vector3[5];
 
         [Header("Active / Hidden for Each Loop")]
-        public bool[] loopActiveStates = new bool[10];
+        public bool[] loopActiveStates = new bool[5];
     }
 
     [Header("Loop Settings")]
     public int currentLoop = 1;
-    public int maxLoops = 10;
+    public int maxLoops = 5;
 
     [Header("Objects That Change Each Loop")]
     public List<LoopObject> loopObjects = new List<LoopObject>();
 
     private void Start()
     {
+        currentLoop = Mathf.Clamp(currentLoop, 1, maxLoops);
         ApplyLoopChanges();
     }
 
@@ -50,17 +57,26 @@ public class LoopChangeSystem : MonoBehaviour
 
         foreach (LoopObject item in loopObjects)
         {
-            if (item.target == null)
+            if (item == null || item.target == null)
                 continue;
+
+            if (item.loopActiveStates != null && item.loopActiveStates.Length > loopIndex)
+                item.target.SetActive(item.loopActiveStates[loopIndex]);
 
             if (item.loopPositions != null && item.loopPositions.Length > loopIndex)
             {
-                item.target.transform.position = item.loopPositions[loopIndex];
+                if (item.useLocalPosition)
+                    item.target.transform.localPosition = item.loopPositions[loopIndex];
+                else
+                    item.target.transform.position = item.loopPositions[loopIndex];
             }
 
-            if (item.loopActiveStates != null && item.loopActiveStates.Length > loopIndex)
+            if (item.loopRotations != null && item.loopRotations.Length > loopIndex)
             {
-                item.target.SetActive(item.loopActiveStates[loopIndex]);
+                if (item.useLocalPosition)
+                    item.target.transform.localRotation = Quaternion.Euler(item.loopRotations[loopIndex]);
+                else
+                    item.target.transform.rotation = Quaternion.Euler(item.loopRotations[loopIndex]);
             }
         }
     }

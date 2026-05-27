@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class StarBounceUI : MonoBehaviour
 {
-    [Header("Animation")]
     public float moveDistance = 120f;
     public float moveDuration = 0.25f;
     public float bounceScale = 1.15f;
     public float bounceDuration = 0.12f;
 
-    [Header("Sound")]
     public AudioSource audioSource;
     public AudioClip starSound;
 
@@ -36,9 +34,7 @@ public class StarBounceUI : MonoBehaviour
         gameObject.SetActive(true);
 
         if (audioSource != null && starSound != null)
-        {
             audioSource.PlayOneShot(starSound);
-        }
 
         Vector2 startPos = finalPosition + new Vector2(-moveDistance, 0f);
         Vector2 endPos = finalPosition;
@@ -71,6 +67,7 @@ public class StarBounceUI : MonoBehaviour
         }
 
         time = 0f;
+
         while (time < bounceDuration)
         {
             time += Time.unscaledDeltaTime;

@@ -43,10 +43,14 @@ public class LoopingLevelTimer : MonoBehaviour
     Coroutine pulseRoutine;
     Vector3 originalPos;
 
+    PlayerLoopReset playerReset;
+
     void Start()
     {
         timeLeft = loopDuration;
         originalPos = timerText.transform.localPosition;
+
+        playerReset = FindFirstObjectByType<PlayerLoopReset>();
 
         if (redPulseOverlay != null)
             redPulseOverlay.alpha = 0f;
@@ -196,6 +200,10 @@ public class LoopingLevelTimer : MonoBehaviour
     IEnumerator ShowLoopEnded()
     {
         isBusy = true;
+
+        if (playerReset != null)
+            playerReset.SetMovementEnabled(false);
+
         StopPulse();
 
         if (loopEndedPanel != null)
@@ -230,12 +238,19 @@ public class LoopingLevelTimer : MonoBehaviour
         if (loopEndedPanel != null)
             loopEndedPanel.SetActive(false);
 
+        if (playerReset != null)
+            playerReset.SetMovementEnabled(true);
+
         isBusy = false;
     }
 
     IEnumerator ShowGameOver()
     {
         isBusy = true;
+
+        if (playerReset != null)
+            playerReset.SetMovementEnabled(false);
+
         StopPulse();
 
         if (gameOverPanel != null)
@@ -284,7 +299,7 @@ public class LoopingLevelTimer : MonoBehaviour
 
     void ApplyLoopChange()
     {
-        LoopChangeSystem loopChangeSystem = FindObjectOfType<LoopChangeSystem>();
+        LoopChangeSystem loopChangeSystem = FindFirstObjectByType<LoopChangeSystem>();
 
         if (loopChangeSystem != null)
         {

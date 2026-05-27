@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Keypad
   - Interactable
+  - CinemachineTarget
   - Door
   layers:
   - Default
@@ -14,10 +15,10 @@ TagManager:
   - Interactable
   - Water
   - UI
+  - 
   - Interactable
   - Ground
-  - BookObject
-  - UV_Secret
+  - 
   - 
   - 
   - 
