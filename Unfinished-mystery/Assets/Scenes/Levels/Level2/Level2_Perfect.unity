@@ -1049,7 +1049,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5358234478470009456, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
   m_PrefabInstance: {fileID: 785511182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &61208669
+--- !u!114 &61208663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1061,10 +1061,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35008bfbbab6945eda6578ac7bad4440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hintPanel: {fileID: 61208662}
-  hintBodyText: {fileID: 1361833945}
-  puzzleSystem: {fileID: 1140133400}
-  autoHideTime: 5
+  label: Ask for Hint
+  subLabel: Hint
+  activationRadius: 2
+  speakerName: Inner Voice
+  hint_Start: Something in this room feels unfinished. Start with what was left behind.
+  hint_FirstNoteRead: The room is quiet, but not completely silent. Follow the sound.
+  hint_TVMessageSeen: The message should lead you toward the library area.
+  hint_BookshelfFound: Old stories can lead to old voices. Look for something that
+    can play a recording.
+  hint_GramophonePlayed: The recording points to something hidden away. Check what
+    can be opened.
+  hint_SimCardFound: A small missing piece can make a silent device speak again.
+  hint_PhoneMessageHeard: After the message, pay attention to time.
+  hint_ClockClueSeen: Use the stopped time as the door code.
+  hint_KeypadCodeEntered: The keypad should open the way out.
+  hint_DoorUnlocked: You have everything you need to leave.
+  hint_Complete: The truth is no longer trapped here.
+--- !u!65 &61208670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61208662}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 22.492252, y: 32.493435, z: 7.555843}
+  m_Center: {x: 0.033070557, y: -0.8530058, z: 2.5894215}
 --- !u!1 &63262786 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4927999958042579405, guid: e615122bb5348c64cb2acfeb537bf738, type: 3}
@@ -11629,7 +11663,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5358234478470009456, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 61208669}
+      addedObject: {fileID: 61208663}
+    - targetCorrespondingSourceObject: {fileID: 5358234478470009456, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 61208670}
   m_SourcePrefab: {fileID: 100100000, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
 --- !u!1 &789916498 stripped
 GameObject:
@@ -17061,6 +17098,7 @@ MonoBehaviour:
   _gramophonePlayed: 0
   _simCardFound: 0
   _phoneMessageHeard: 0
+  _clockClueSeen: 0
   _keypadCodeEntered: 0
   _doorUnlocked: 0
   _levelComplete: 0
@@ -17092,6 +17130,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onPhoneMessageHeard:
+    m_PersistentCalls:
+      m_Calls: []
+  onClockClueSeen:
     m_PersistentCalls:
       m_Calls: []
   onKeypadCodeEntered:
@@ -19558,17 +19599,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.34261802, y: 0.40294075, z: 0.08665421}
   m_Center: {x: -0.00000023841858, y: 0.20123577, z: 0.0000009536743}
---- !u!114 &1361833945 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6916737146343185071, guid: 5ea64fdf9b1250240896ef36e31f95b3, type: 3}
-  m_PrefabInstance: {fileID: 1545286563}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1365731351
 GameObject:
   m_ObjectHideFlags: 0
