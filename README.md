@@ -68,17 +68,12 @@ Items disappear between loops. Everything else—clues, codes, patterns, story d
 5. **Memory Journal System**  
 Writing things down keeps you sane. Your journal captures discoveries, clues, codes, patterns, and story beats. Press Tab to open it and cross-reference what you learned three loops ago. The journal persists. Your inventory doesn't. What you know is what you keep.
 
-6. **Flicker Lights and Visual Escalation**  
-As the timer winds down, the environment turns hostile. Lights flicker—subtle at first, then aggressive. The screen tints red. Audio builds in layers. Your footsteps sound heavier. The room itself is pushing you toward the exit. It's not just a timer. It's dread made visible.
-
-7. **Performance Scoring System**  
-After beating a level, you see how many loops you burned through and get a star rating. Five loops or fewer? You dominated. Ten loops? You survived. Finish all five levels and unlock a completion badge. It measures progress, not perfection.
-
-8. **Drawing Book**  
+6. **Drawing Book**  
 A notebook appears in the levels where you can actually draw your notes. It's like the memory journal but gives you freedom to sketch floor plans, draw suspect faces, or write fake clues to test theories. Everything saves to your profile and persists across playthroughs.
 
-9. **Feature Notes After Each Loop**  
-After escaping or timing out, the game briefly highlights what changed, what you learned, and what remains unsolved. It's not solving the puzzle for you. It's acknowledging your progress and pointing toward what's next. New players get orientation. Veterans skip it.
+7. **Performance Scoring System**  
+At the end of each level, players receive a Level Summary showing loops used and stars earned: 1–2 loops = 3 stars, 3–4 loops = 2 stars, and 5 loops = 1 star.
+
 
 ### Core Features
 
