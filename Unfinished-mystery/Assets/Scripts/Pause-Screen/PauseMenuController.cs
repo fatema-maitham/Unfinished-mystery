@@ -9,6 +9,10 @@ public class PauseMenuController : MonoBehaviour
     [Header("Pause UI")]
     public GameObject pauseCanvas;
 
+    [Header("Player Controls To Restore")]
+    public CharacterMovement characterMovement;
+    public ThirdPersonCamera thirdPersonCamera;
+
     [Header("Icon Images")]
     public Image soundIconImage;
     public Image musicIconImage;
@@ -32,9 +36,9 @@ public class PauseMenuController : MonoBehaviour
     [Header("Optional Levels Scene")]
     public string levelsSceneName = "";
 
-    private bool isPaused = false;
-    private bool soundMuted = false;
-    private bool musicMuted = false;
+    private bool isPaused    = false;
+    private bool soundMuted  = false;
+    private bool musicMuted  = false;
 
     private void Start()
     {
@@ -50,39 +54,57 @@ public class PauseMenuController : MonoBehaviour
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (isPaused)
-                ResumeGame();
-            else
-                PauseGame();
+            if (isPaused) ResumeGame();
+            else          PauseGame();
         }
     }
 
-    
+    // ── Pause / Resume ────────────────────────────────────────────────────────
+
     public void PauseGame()
-{
-    if (pauseCanvas != null)
-        pauseCanvas.SetActive(true);
+    {
+        if (pauseCanvas != null)
+            pauseCanvas.SetActive(true);
 
-    isPaused = true;
-    Time.timeScale = 0f;
+        isPaused       = true;
+        Time.timeScale = 0f;
 
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
-}
+        UIStateManager.Instance.OpenPause();   // ← cursor handled here
 
-public void ResumeGame()
-{
-    if (pauseCanvas != null)
-        pauseCanvas.SetActive(false);
+        if (backgroundMusicSource != null && !musicMuted)
+            backgroundMusicSource.Pause();
+    }
 
-    isPaused = false;
-    Time.timeScale = 1f;
+    public void ResumeGame()
+    {
+        StartCoroutine(ResumeGameRoutine());
+    }
 
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
-}
+    private IEnumerator ResumeGameRoutine()
+    {
+        if (pauseCanvas != null)
+            pauseCanvas.SetActive(false);
 
-   
+        isPaused       = false;
+        Time.timeScale = 1f;
+
+        // Wait until the mouse button that clicked Resume is released
+        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
+            yield return null;
+
+        yield return new WaitForEndOfFrame();
+
+        UIStateManager.Instance.ClosePause();  // ← cursor handled here
+
+        if (thirdPersonCamera != null)
+            thirdPersonCamera.ExitUIMode();
+
+        if (backgroundMusicSource != null && !musicMuted)
+            backgroundMusicSource.UnPause();
+    }
+
+    // ── Navigation ────────────────────────────────────────────────────────────
+
     public void RestartLevel()
     {
         StartCoroutine(RestartLevelAfterClick());
@@ -90,19 +112,18 @@ public void ResumeGame()
 
     private IEnumerator RestartLevelAfterClick()
     {
-        // wait using REAL TIME (works even when paused)
         yield return new WaitForSecondsRealtime(0.15f);
 
-        Time.timeScale = 1f;
+        Time.timeScale   = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-   
     public void GoToLevels()
     {
         if (!string.IsNullOrWhiteSpace(levelsSceneName))
         {
             Time.timeScale = 1f;
+            UIStateManager.Instance.ClosePause();
             SceneManager.LoadScene(levelsSceneName);
         }
         else
@@ -118,10 +139,12 @@ public void ResumeGame()
         Debug.Log("Quit Game");
     }
 
-    
+    // ── Audio ─────────────────────────────────────────────────────────────────
+
     public void ToggleSound()
     {
-        soundMuted = !soundMuted;
+        soundMuted            = !soundMuted;
+        AudioListener.volume  = soundMuted ? 0f : 1f;
         UpdateAudioIcons();
     }
 
@@ -129,32 +152,25 @@ public void ResumeGame()
     {
         musicMuted = !musicMuted;
 
-        if (backgroundMusicSource != null)
-        {
-            backgroundMusicSource.mute = musicMuted;
-        }
+        AudioSource[] all = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (AudioSource a in all)
+            if (a != null) a.mute = musicMuted;
 
         UpdateAudioIcons();
     }
 
-   
     public void PlayHoverSound()
     {
         if (!soundMuted && uiAudioSource != null && hoverClip != null)
-        {
             uiAudioSource.PlayOneShot(hoverClip);
-        }
     }
 
     public void PlayClickSound()
     {
         if (!soundMuted && uiAudioSource != null && clickClip != null)
-        {
             uiAudioSource.PlayOneShot(clickClip);
-        }
     }
 
-   
     private void UpdateAudioIcons()
     {
         if (soundIconImage != null)
