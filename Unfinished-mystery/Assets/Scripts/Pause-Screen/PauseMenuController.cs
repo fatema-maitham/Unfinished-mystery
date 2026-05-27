@@ -120,24 +120,25 @@ public class PauseMenuController : MonoBehaviour
 
     public void GoToLevels()
     {
-        if (!string.IsNullOrWhiteSpace(levelsSceneName))
-        {
-            Time.timeScale = 1f;
+        Time.timeScale = 1f;
+
+        if (UIStateManager.Instance != null)
             UIStateManager.Instance.ClosePause();
-            SceneManager.LoadScene(levelsSceneName);
-        }
-        else
-        {
-            Debug.Log("Levels scene not assigned yet.");
-        }
+
+        SceneManager.LoadScene("LevelsBook");
     }
 
-    public void ExitGame()
+
+        public void ExitGame()
     {
         Time.timeScale = 1f;
-        Application.Quit();
-        Debug.Log("Quit Game");
+
+        if (UIStateManager.Instance != null)
+            UIStateManager.Instance.ClosePause();
+
+        SceneManager.LoadScene("MainMenu");
     }
+
 
     // ── Audio ─────────────────────────────────────────────────────────────────
 
