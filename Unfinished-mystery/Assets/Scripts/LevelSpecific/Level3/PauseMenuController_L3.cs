@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class PauseMenuController : MonoBehaviour
+public class PauseMenuController_L3 : MonoBehaviour
 {
     [Header("Pause UI")]
     public GameObject pauseCanvas;
@@ -13,17 +13,11 @@ public class PauseMenuController : MonoBehaviour
     public CharacterMovement characterMovement;
     public ThirdPersonCamera thirdPersonCamera;
 
-    [Header("Icon Images")]
-    public Image soundIconImage;
-    public Image musicIconImage;
-
-    [Header("Sound Icons")]
-    public Sprite soundOnIcon;
-    public Sprite soundOffIcon;
-
-    [Header("Music Icons")]
-    public Sprite musicOnIcon;
-    public Sprite musicOffIcon;
+    [Header("Icon Objects")]
+    public GameObject soundIconOnObject;
+    public GameObject soundIconMuteObject;
+    public GameObject musicIconOnObject;
+    public GameObject musicIconMuteObject;
 
     [Header("UI Audio")]
     public AudioSource uiAudioSource;
@@ -33,12 +27,9 @@ public class PauseMenuController : MonoBehaviour
     [Header("Optional Level Music")]
     public AudioSource backgroundMusicSource;
 
-    [Header("Optional Levels Scene")]
-    public string levelsSceneName = "";
-
-    private bool isPaused    = false;
-    private bool soundMuted  = false;
-    private bool musicMuted  = false;
+    private bool isPaused = false;
+    private bool soundMuted = false;
+    private bool musicMuted = false;
 
     private void Start()
     {
@@ -54,22 +45,34 @@ public class PauseMenuController : MonoBehaviour
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (isPaused) ResumeGame();
-            else          PauseGame();
+            if (isPaused)
+                ResumeGame();
+            else
+                PauseGame();
         }
     }
 
-    // ── Pause / Resume ────────────────────────────────────────────────────────
+    private void LateUpdate()
+    {
+        if (!isPaused) return;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
     public void PauseGame()
     {
         if (pauseCanvas != null)
             pauseCanvas.SetActive(true);
 
-        isPaused       = true;
+        isPaused = true;
         Time.timeScale = 0f;
 
-        UIStateManager.Instance.OpenPause();   // ← cursor handled here
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (UIStateManager.Instance != null)
+            UIStateManager.Instance.OpenPause();
 
         if (backgroundMusicSource != null && !musicMuted)
             backgroundMusicSource.Pause();
@@ -85,16 +88,16 @@ public class PauseMenuController : MonoBehaviour
         if (pauseCanvas != null)
             pauseCanvas.SetActive(false);
 
-        isPaused       = false;
+        isPaused = false;
         Time.timeScale = 1f;
 
-        // Wait until the mouse button that clicked Resume is released
         while (Mouse.current != null && Mouse.current.leftButton.isPressed)
             yield return null;
 
         yield return new WaitForEndOfFrame();
 
-        UIStateManager.Instance.ClosePause();  // ← cursor handled here
+        if (UIStateManager.Instance != null)
+            UIStateManager.Instance.ClosePause();
 
         if (thirdPersonCamera != null)
             thirdPersonCamera.ExitUIMode();
@@ -102,8 +105,6 @@ public class PauseMenuController : MonoBehaviour
         if (backgroundMusicSource != null && !musicMuted)
             backgroundMusicSource.UnPause();
     }
-
-    // ── Navigation ────────────────────────────────────────────────────────────
 
     public void RestartLevel()
     {
@@ -114,7 +115,7 @@ public class PauseMenuController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.15f);
 
-        Time.timeScale   = 1f;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -128,8 +129,7 @@ public class PauseMenuController : MonoBehaviour
         SceneManager.LoadScene("LevelsBook");
     }
 
-
-        public void ExitGame()
+    public void ExitGame()
     {
         Time.timeScale = 1f;
 
@@ -139,25 +139,41 @@ public class PauseMenuController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-
-    // ── Audio ─────────────────────────────────────────────────────────────────
-
     public void ToggleSound()
-    {
-        soundMuted            = !soundMuted;
-        AudioListener.volume  = soundMuted ? 0f : 1f;
-        UpdateAudioIcons();
-    }
+{
+    soundMuted = !soundMuted;
+
+    if (uiAudioSource != null)
+        uiAudioSource.mute = soundMuted;
+
+    UpdateAudioIcons();
+}
 
     public void ToggleMusic()
     {
         musicMuted = !musicMuted;
 
-        AudioSource[] all = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (AudioSource a in all)
-            if (a != null) a.mute = musicMuted;
+        if (backgroundMusicSource != null)
+        {
+            backgroundMusicSource.mute = musicMuted;
+        }
 
         UpdateAudioIcons();
+    }
+
+    private void UpdateAudioIcons()
+    {
+        if (soundIconOnObject != null)
+            soundIconOnObject.SetActive(!soundMuted);
+
+        if (soundIconMuteObject != null)
+            soundIconMuteObject.SetActive(soundMuted);
+
+        if (musicIconOnObject != null)
+            musicIconOnObject.SetActive(!musicMuted);
+
+        if (musicIconMuteObject != null)
+            musicIconMuteObject.SetActive(musicMuted);
     }
 
     public void PlayHoverSound()
@@ -170,14 +186,5 @@ public class PauseMenuController : MonoBehaviour
     {
         if (!soundMuted && uiAudioSource != null && clickClip != null)
             uiAudioSource.PlayOneShot(clickClip);
-    }
-
-    private void UpdateAudioIcons()
-    {
-        if (soundIconImage != null)
-            soundIconImage.sprite = soundMuted ? soundOffIcon : soundOnIcon;
-
-        if (musicIconImage != null)
-            musicIconImage.sprite = musicMuted ? musicOffIcon : musicOnIcon;
     }
 }
