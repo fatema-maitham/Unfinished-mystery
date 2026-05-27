@@ -8360,6 +8360,19 @@ MonoBehaviour:
   maxColliders: 3
   interactKey: 101
   promptUI: {fileID: 503856320}
+--- !u!114 &603546228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603546210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715839f5f4848f2469f43599dd3f0caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 658389545}
 --- !u!1 &605063764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
@@ -9558,6 +9571,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &658389544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 658389545}
+  m_Layer: 0
+  m_Name: PlayerRespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &658389545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658389544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6, y: 0.100000024, z: 2.585}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &659781178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7917174004208409577, guid: 94ec54e2975e5af46b82ad1b45e2cea6, type: 3}
@@ -19889,7 +19933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 300
+  loopDuration: 10
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -29067,6 +29111,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 603546226}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b783f2acaba114725867f7195adba35f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 603546228}
   m_SourcePrefab: {fileID: 100100000, guid: b783f2acaba114725867f7195adba35f, type: 3}
 --- !u!1 &1716205606 stripped
 GameObject:
@@ -37637,6 +37684,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1134993008}
   - {fileID: 1576354098}
+  - {fileID: 1292505874}
   - {fileID: 1662073406}
   - {fileID: 2035111235}
   - {fileID: 213792966}
@@ -37651,7 +37699,7 @@ SceneRoots:
   - {fileID: 843170283}
   - {fileID: 1974804226}
   - {fileID: 875616561}
-  - {fileID: 1292505874}
   - {fileID: 1140133399}
   - {fileID: 272722682}
   - {fileID: 785511182}
+  - {fileID: 658389545}
