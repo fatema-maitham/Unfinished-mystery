@@ -54,43 +54,69 @@ Unfinished Mystery is a narrative-driven puzzle game where players are trapped i
 ### Advanced Features
 
 1. **Time Loop Reset System**  
-   The environment resets every 5 minutes when the player fails to escape. Instead of allowing items to carry over between attempts, the system encourages players to learn from each loop and progress through observation, memory, and understanding.
+The environment resets every five minutes when you fail to escape. Instead of letting items carry over between attempts, the game forces you to learn from each loop. Knowledge sticks around. Inventory doesn't. You build understanding through observation, memory, and pattern recognition across multiple runs.
 
-2. **Hint System**  
-   The hint system changes according to the number of loops the player has used. Early attempts provide no hints so that players can explore independently. Later attempts offer subtle guidance, while the final loops provide more direct help to support progression without removing the challenge completely.
+2. **The Grimoire Hint Book**  
+You find a hint book early in Level 1 that becomes progressively useful as you discover clues throughout the game. Early pages are vague and cryptic. But every code you crack, every name you uncover, every image that matters gets recorded in here automatically. Later playthroughs, you flip through and look things up. It's reference material you've earned, not answers handed to you.
 
+3. **Dynamic Loop Change System**  
+Objects move, rotate, appear, and disappear between loops. Each time you restart, the room is slightly different. You notice a desk has shifted. A lamp isn't where it was. A photo is missing from the wall. This forces you to actually look at what's changing rather than just replaying the same script. You learn the space by comparing what was there before.
+
+4. **Progress Through Memory**  
+Items disappear between loops. Everything else—clues, codes, patterns, story details, visual moments, dialogue fragments—lives in your memory. You retain it across resets. The only way forward is remembering what you learned and applying it differently next time.
+
+5. **Memory Journal System**  
+Writing things down keeps you sane. Your journal captures discoveries, clues, codes, patterns, and story beats. Press Tab to open it and cross-reference what you learned three loops ago. The journal persists. Your inventory doesn't. What you know is what you keep.
+
+6. **Flicker Lights and Visual Escalation**  
+As the timer winds down, the environment turns hostile. Lights flicker—subtle at first, then aggressive. The screen tints red. Audio builds in layers. Your footsteps sound heavier. The room itself is pushing you toward the exit. It's not just a timer. It's dread made visible.
+
+7. **Performance Scoring System**  
+After beating a level, you see how many loops you burned through and get a star rating. Five loops or fewer? You dominated. Ten loops? You survived. Finish all five levels and unlock a completion badge. It measures progress, not perfection.
+
+8. **Drawing Book**  
+A notebook appears in the levels where you can actually draw your notes. It's like the memory journal but gives you freedom to sketch floor plans, draw suspect faces, or write fake clues to test theories. Everything saves to your profile and persists across playthroughs.
+
+9. **Feature Notes After Each Loop**  
+After escaping or timing out, the game briefly highlights what changed, what you learned, and what remains unsolved. It's not solving the puzzle for you. It's acknowledging your progress and pointing toward what's next. New players get orientation. Veterans skip it.
 
 ### Core Features
 
-1. **Rotating Character Roles**  
-   Each level places the player in a different role, such as a professor, detective, projectionist, photographer, or doctor. Every character has a unique story, hidden truth, and puzzle style.
+1. **Five Levels, Five Characters**  
+The professor works in an office solving mathematics. The detective investigates an apartment looking for evidence. The projectionist reconstructs events through cinema footage. The photographer analyzes manipulated images in an archive. The doctor exposes unethical research in a lab. Each character has a distinct mystery, environment, and puzzle logic to master.
 
-2. **5-Minute Timer**  
-   A visible countdown timer creates constant pressure during gameplay. The player must explore, discover clues, and solve puzzles before time runs out and the loop resets.
+2. **5-Minute Countdown Timer**  
+The visible countdown sits in the corner, ticking away relentlessly. Fifty-eight minutes left? Still early. Three minutes remaining? You're cutting corners. Ten seconds? Pure adrenaline. The pressure never stops.
 
 3. **Limited Attempts**  
-   Each level gives the player a fixed number of loops. This prevents players from relying on endless retries and encourages more careful and strategic decision-making.
+Each level gives you five loops maximum. That's your budget. No endless retries. No grinding until something clicks. You have to think strategically and use your attempts wisely.
 
 4. **Interactive Object System**  
-   Players can interact with drawers, books, papers, devices, cabinets, and other objects in the environment to reveal clues and move the mystery forward.
+The world is full of things to interact with: books, notebooks, scattered notes, filing cabinets, locked drawers, phones, computers, photographs, film reels, locked boxes, tools, and strange knick-knacks. Press E to interact. Some open. Some contain clues. Some are red herrings. Some do nothing until you've solved something else first.
 
-5. **Connected Puzzle Chain**  
-   The puzzles are designed as a sequence of linked steps. Solving one part reveals the next clue, creating a natural and structured progression through the mystery.
+5. **Connected Puzzle Chains**  
+Puzzles don't exist in isolation. Solving the first part reveals the next clue. Cracking that clue unlocks a new door. One puzzle feeds into the next in a natural sequence. You're always climbing toward understanding the full picture.
 
-6. **Memory Journal**  
-   Clues and discoveries from previous loops are recorded in a memory journal that the player can review at any time. This allows progress to carry forward through knowledge rather than physical items.
+6. **Temporary Items**  
+Grab something during a loop and it stays in your inventory (slots 0–7 on your keyboard). Use it, carry it, reference it. When the loop resets, it vanishes. This reinforces the core mechanic: items don't matter. Knowledge does.
 
-7. **Temporary Items**  
-   Some items can be collected and used during the current loop, but they disappear when the room resets. This reinforces the idea that learning, not inventory, is the main form of progression.
+7. **Environmental Storytelling**  
+The story lives everywhere. In photographs hung on walls. In the half-empty coffee cup on the desk. In how books are arranged on shelves. In ambient sounds—a projector whirring, fluorescent hum, a radio playing in another room. In light patterns. In what's missing. You have to look at everything and listen carefully.
 
-8. **Escalating Tension**  
-   As the timer approaches zero, visual and audio effects become more intense. This increases pressure and makes the final moments of each loop feel more urgent.
+8. **Role-Matched Puzzles**  
+Every character solves puzzles relevant to who they are. The professor doesn't pick locks. He solves equations. The detective doesn't analyze film. She reads evidence. The projectionist doesn't perform surgery. He stitches footage together. Puzzles match the role.
 
-9. **Performance Scoring**  
-   After completing a level, the player is shown the number of loops used and receives a star rating based on performance. Finishing the full game unlocks a completion badge.
+9. **Escalating Tension Effects**  
+As the five-minute loop closes, pressure mounts. Lights flicker more aggressively. Audio cues pile up. Visual effects intensify. The screen distorts. Your heartbeat climbs. The final minutes feel genuinely claustrophobic. The game creates dread through sensory overload.
 
 10. **Final Action Escape**  
-   Escaping a level is not always achieved by simply opening a door. In some levels, the player must perform a final action or make an important choice to properly break the loop and conclude the story.
+In some levels solving the puzzle isn't enough. To actually escape, you have to do something. Make a phone call. Send evidence. Expose truth to someone. Press a hidden button. The escape feels like a choice and an action, not just a level completion screen.
+
+11. **Flicker Light, Particles, and VFX System**  
+The game uses flickering lights, particles, and visual effects during gameplay to create a tense mystery atmosphere. These effects can appear when time is running out, when important objects need attention, or when the level becomes more intense. This supports immersion and makes the player feel pressure inside the loop.
+
+12. **How to Play Guide**  
+The game includes a How to Play screen that explains the controls, objective, interaction key, timer, loop system, temporary inventory, Memory Journal, and hint system. This helps new players understand how to play before entering the level.
 
 ---
 
@@ -135,9 +161,11 @@ Unfinished Mystery is a narrative-driven puzzle game where players are trapped i
 ```bash
 git clone https://github.com/fatima-ali97/Unfinished-mystery.git
 ```
-2. Open the project in 6000.1.13f1   
+
+2. Open the project in Unity 6000.1.13f1   
 3. Load scene: MainMenu  
 4. Press Play  
+
 ---
 
 ## 🎮 How to Play
@@ -162,7 +190,7 @@ Controls are designed for keyboard and mouse.
 - Escape each level before the loop ends  
 - Solve interconnected puzzle chains  
 - Discover hidden clues  
-- Understand each character’s story  
+- Understand each character's story  
 - Progress using knowledge from previous loops  
 
 ---
@@ -279,8 +307,7 @@ Assets/                                      // main Unity project folder; every
 ```
  
 ---
- 
 
 ## 🎯 Vision
 
-Unfinished Mystery delivers a tense and immersive experience where players rely on logic, observation, and memory to uncover hidden truths.
+Unfinished Mystery delivers a tense and immersive experience where players rely on logic, observation, and memory to uncover hidden truths. Every decision matters. Every loop teaches you something new. Time is your enemy. Knowledge is your weapon.
