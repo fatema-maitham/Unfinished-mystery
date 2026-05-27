@@ -8,10 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: PauseManager
+  - Name: BackgroundMusic
   - Tag: Untagged
   - Layer: Default
-  - Name: L2BadgePopup
-  - Tag: Untagged
-  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
