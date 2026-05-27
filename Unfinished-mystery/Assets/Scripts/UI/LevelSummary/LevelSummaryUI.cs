@@ -14,16 +14,32 @@ public class LevelSummaryUI : MonoBehaviour
     [SerializeField] private StarBounceUI star3;
     [SerializeField] private float delayBetweenStars = 0.2f;
 
+    private void Awake()
+    {
+        // This scene is pure UI — cursor must always be visible and free.
+        // Set it in Awake so it's applied before any button hover/click.
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
+        Time.timeScale   = 1f; // safety: in case player died while paused
+    }
+
     private void Start()
     {
         int savedMaxLoops = LevelResultData.MaxLoops > 0 ? LevelResultData.MaxLoops : maxLoops;
-        int loopsUsed = Mathf.Clamp(LevelResultData.loopsUsed, 1, savedMaxLoops);
+        int loopsUsed     = Mathf.Clamp(LevelResultData.loopsUsed, 1, savedMaxLoops);
 
         if (loopsText != null)
             loopsText.text = "Loops Used: " + loopsUsed + " / " + savedMaxLoops;
 
         ResetAllStars();
         StartCoroutine(PlayStarsRoutine(GetStarCount(loopsUsed)));
+    }
+
+    // Re-assert cursor on every Enable in case another script touched it
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
     }
 
     private int GetStarCount(int loopsUsed)

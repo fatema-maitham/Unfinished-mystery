@@ -7,6 +7,11 @@ using UnityEngine;
 /// The phoneGlowVFX (your StarBlink prefab) activates at the same moment.
 /// Sending the evidence fires CompleteLevel() and ends the loop.
 /// </summary>
+
+
+
+
+
 public class ActivatablePhone : MonoBehaviour, IActivatable
 {
     [Header("Prompt")]
@@ -15,7 +20,6 @@ public class ActivatablePhone : MonoBehaviour, IActivatable
     [SerializeField] private float  activationRadius = 1.5f;
 
     [Header("Content")]
-    [Tooltip("Optional image of the phone screen — Send Lynnette evidence to the university board")]
     [SerializeField] private Sprite phoneScreenImage;
     [TextArea(2, 4)]
     [SerializeField] private string completionText =
@@ -23,32 +27,29 @@ public class ActivatablePhone : MonoBehaviour, IActivatable
         "Loop broken.\n\nLevel complete.";
 
     [Header("Glow VFX")]
-    [Tooltip("Assign your StarBlink prefab here — it enables when the phone becomes active")]
     [SerializeField] private GameObject phoneGlowVFX;
 
-    // ── State ─────────────────────────────────────────────────────────────────
+    [Header("Summary Transition")]
+    [SerializeField] private string summarySceneName = "LevelSummary1";
+    [SerializeField] private int    maxLoops         = 5;
+    [SerializeField] private float  sceneLoadDelay   = 2f; // seconds after dialog shows
+
     private bool _sent = false;
 
-    // ── IActivatable ──────────────────────────────────────────────────────────
     public string ActivationLabel  => label;
     public string ActivationHint   => subLabel;
-
-    // No prompt appears at all until the file is decrypted
     public bool   CanActivate      => Level1PuzzleSystem.Instance != null
                                    && Level1PuzzleSystem.Instance.FileDecrypted;
     public float  ActivationRadius => activationRadius;
 
-    // ── Unity ─────────────────────────────────────────────────────────────────
     private void Start()
     {
-        // Make sure glow is off at start
         if (phoneGlowVFX != null)
             phoneGlowVFX.SetActive(false);
     }
 
     private void Update()
     {
-        // Sync glow VFX with phone unlock state
         if (phoneGlowVFX != null)
         {
             bool shouldGlow = Level1PuzzleSystem.Instance != null
@@ -69,10 +70,28 @@ public class ActivatablePhone : MonoBehaviour, IActivatable
         _sent = true;
         Level1PuzzleSystem.Instance?.CompleteLevel();
 
+        // Store loop data for the summary scene
+        LoopChangeSystem loopSystem = FindFirstObjectByType<LoopChangeSystem>();
+        int finalLoops = loopSystem != null ? loopSystem.currentLoop : 1;
+        finalLoops = Mathf.Clamp(finalLoops, 1, maxLoops);
+
+        LevelResultData.loopsUsed = finalLoops;
+        LevelResultData.LoopsUsed = finalLoops;
+        LevelResultData.MaxLoops  = maxLoops;
+
+        // Show dialog, then load summary after delay
         if (phoneScreenImage != null)
             ActivationDialogUI.ShowImage(phoneScreenImage);
         else
             ActivationDialogUI.ShowText(completionText, "Phone");
+
+        StartCoroutine(LoadSummaryAfterDelay());
+    }
+
+    private System.Collections.IEnumerator LoadSummaryAfterDelay()
+    {
+        yield return new WaitForSeconds(sceneLoadDelay);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(summarySceneName);
     }
 
     public void OnActivatableFocus() { }
