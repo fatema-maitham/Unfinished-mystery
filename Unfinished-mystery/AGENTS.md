@@ -4,19 +4,11 @@
 - Active scene:
   - Name: Level2_Perfect
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget
-  - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
-- Active game object:
-  - Name: GameManager (1)
-  - Tag: Untagged
-  - Layer: Default
-  - Name: L2BadgePopup
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: HUD_Canvas(DrawerOpen)
+  - Name: RoleText
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

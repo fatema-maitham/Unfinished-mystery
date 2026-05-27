@@ -9,6 +9,9 @@ public class LoopChangeSystem : MonoBehaviour
         public string objectName;
         public GameObject target;
 
+        [Header("Use Local Transform")]
+        public bool useLocalPosition = true;
+
         [Header("Position for Each Loop")]
         public Vector3[] loopPositions = new Vector3[5];
 
@@ -28,6 +31,7 @@ public class LoopChangeSystem : MonoBehaviour
 
     private void Start()
     {
+        currentLoop = Mathf.Clamp(currentLoop, 1, maxLoops);
         ApplyLoopChanges();
     }
 
@@ -53,17 +57,27 @@ public class LoopChangeSystem : MonoBehaviour
 
         foreach (LoopObject item in loopObjects)
         {
-            if (item.target == null)
+            if (item == null || item.target == null)
                 continue;
-
-            if (item.loopPositions != null && item.loopPositions.Length > loopIndex)
-                item.target.transform.position = item.loopPositions[loopIndex];
-
-            if (item.loopRotations != null && item.loopRotations.Length > loopIndex)
-                item.target.transform.rotation = Quaternion.Euler(item.loopRotations[loopIndex]);
 
             if (item.loopActiveStates != null && item.loopActiveStates.Length > loopIndex)
                 item.target.SetActive(item.loopActiveStates[loopIndex]);
+
+            if (item.loopPositions != null && item.loopPositions.Length > loopIndex)
+            {
+                if (item.useLocalPosition)
+                    item.target.transform.localPosition = item.loopPositions[loopIndex];
+                else
+                    item.target.transform.position = item.loopPositions[loopIndex];
+            }
+
+            if (item.loopRotations != null && item.loopRotations.Length > loopIndex)
+            {
+                if (item.useLocalPosition)
+                    item.target.transform.localRotation = Quaternion.Euler(item.loopRotations[loopIndex]);
+                else
+                    item.target.transform.rotation = Quaternion.Euler(item.loopRotations[loopIndex]);
+            }
         }
     }
 }
