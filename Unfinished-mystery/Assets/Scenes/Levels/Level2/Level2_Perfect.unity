@@ -7520,7 +7520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04950d15108ef64984ae50f9b18603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 2.2
+  interactionRadius: 1.33
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -11629,7 +11629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.802
+      value: 0.749
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalRotation.w
