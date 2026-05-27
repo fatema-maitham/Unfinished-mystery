@@ -6993,7 +6993,6 @@ MonoBehaviour:
   closeFileWindowIcon: {fileID: 1212159596}
   fileListContainer: {fileID: 1149946167}
   fileItemPrefab: {fileID: 6090273745736614130, guid: dac1abe67eaab65489f07bdda8935213, type: 3}
-  documentIconSprite: {fileID: 21300000, guid: 1c79ce0b62525284cb25463ccfeb8f70, type: 3}
   lockedIconSprite: {fileID: 21300000, guid: 1e2f695dc97ded9488e88178e27affca, type: 3}
   passwordWindow: {fileID: 733168343}
   passwordWindowBackground: {fileID: 733168345}
@@ -7019,11 +7018,6 @@ MonoBehaviour:
   correctPassword: 58
   fadeSpeed: 6
   exitKey: 27
-  decoyFileNames:
-  - Thesis_Draft_Final.pdf
-  - GradeSheet_Spring2003.xlsx
-  - StudentRecords_Backup.zip
-  - CorrespondenceLog.txt
   lockedFileName: ForYourEyes.txt
 --- !u!225 &393377102
 CanvasGroup:
@@ -13221,6 +13215,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4424025867033143712, guid: bcfdaa50a9848604694fb216f84a3174, type: 3}
   m_PrefabInstance: {fileID: 689425268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &690505257
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 827163783}
+    m_Modifications:
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728933001361004484, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_Name
+      value: particle Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728933001361004484, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+--- !u!4 &690505258 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3777453958945271694, guid: 038bf28966382e946b4171dfb2df43ec, type: 3}
+  m_PrefabInstance: {fileID: 690505257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &692216216
 GameObject:
   m_ObjectHideFlags: 0
@@ -15625,7 +15685,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 690505258}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
       insertIndex: -1
@@ -15651,8 +15714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941a3fa3c98210f4e84026ebdadb18bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: Examine
-  subLabel: Laptop
+  label: open Laptop
+  subLabel: 
   activationRadius: 1.2
   blockedNoUSB: The laptop won't turn on. It needs something to boot from.
   blockedNoDrawer: You can't do anything with it yet. You haven't found what makes
@@ -15678,6 +15741,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &827163783 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a9bd099a8c983245b381b47f6c84026, type: 3}
+  m_PrefabInstance: {fileID: 827163778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833919031
 GameObject:
   m_ObjectHideFlags: 0
