@@ -14659,7 +14659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 15
+  loopDuration: 300
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -14721,10 +14721,10 @@ MonoBehaviour:
     target: {fileID: 1811983236}
     loopPositions:
     - {x: -1.715, y: -0.083, z: -0.8119}
-    - {x: -1.715, y: -0.643, z: -0.8119}
-    - {x: -1.108, y: -0.083, z: -2.54}
-    - {x: -1.108, y: -0.083, z: -2.54}
-    - {x: -1.108, y: -0.083, z: -2.54}
+    - {x: -1.715, y: -0.616, z: -0.8119}
+    - {x: -1.715, y: -0.2, z: -5}
+    - {x: -1.715, y: -0.2, z: -5}
+    - {x: -1.715, y: -0.2, z: -5}
     loopActiveStates: 0101010100
 --- !u!1 &1028859716 stripped
 GameObject:
