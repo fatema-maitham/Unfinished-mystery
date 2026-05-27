@@ -7,10 +7,14 @@ public class PhoneSimCardInteraction : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float interactDistance = 1.2f;
 
-    [Header("Audio")]
+    [Header("Phone Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip ringtoneClip;
     [SerializeField] private AudioClip phoneMessageClip;
+
+    [Header("Clock Audio After Phone Message")]
+    [SerializeField] private AudioSource clockAudioSource;
+    [SerializeField] private AudioClip clockSoundClip;
 
     [Header("Inventory Icon To Hide")]
     [SerializeField] private GameObject simCardInventoryIconToHide;
@@ -46,7 +50,9 @@ public class PhoneSimCardInteraction : MonoBehaviour
     private IEnumerator PhoneSequence()
     {
         if (audioSource != null && ringtoneClip != null)
+        {
             audioSource.PlayOneShot(ringtoneClip);
+        }
 
         yield return new WaitForSeconds(7f);
 
@@ -59,6 +65,11 @@ public class PhoneSimCardInteraction : MonoBehaviour
         if (Level2PuzzleSystem.Instance != null)
         {
             Level2PuzzleSystem.Instance.HearPhoneMessage();
+        }
+
+        if (clockAudioSource != null && clockSoundClip != null)
+        {
+            clockAudioSource.PlayOneShot(clockSoundClip);
         }
     }
 }

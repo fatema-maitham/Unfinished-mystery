@@ -7523,7 +7523,7 @@ MonoBehaviour:
   interactionRadius: 2.2
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   maxColliders: 3
   interactKey: 101
   promptUI: {fileID: 503856320}
@@ -11621,7 +11621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.713
+      value: 1.718
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11629,7 +11629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.802
+      value: 1.385
       objectReference: {fileID: 0}
     - target: {fileID: 8937142800183615587, guid: 12f058f45894b7d48aa7a2287917e537, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11862,43 +11862,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.763
+      value: -2.20325
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.231
+      value: -0.8822988
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.608
+      value: -3.7992802
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.76438874
+      value: -0.5613698
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0049720835
+      value: 0.004675771
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6447358
+      value: 0.82703406
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0008998503
+      value: 0.029269941
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.502
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -80.294
+      value: -89.983
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.289
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866188851930244280, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_Name
@@ -11938,11 +11938,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.04, y: 2.06, z: 1.14}
+  m_Size: {x: 0.3655578, y: 0.72139615, z: 0.1075153}
   m_Center: {x: 3.2200154e-13, y: -0.010762095, z: 0.053758133}
 --- !u!82 &829272415
 AudioSource:
@@ -15171,6 +15171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1028774496}
   - component: {fileID: 1028774495}
+  - component: {fileID: 1028774497}
   - component: {fileID: 1028774498}
   m_Layer: 0
   m_Name: GameManager
@@ -15191,7 +15192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 300
+  loopDuration: 10
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -15225,6 +15226,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028774497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028774494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fd39526175d49e482c53c5524c3229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLoop: 1
+  maxLoops: 5
+  loopObjects:
+  - objectName: Police Cap
+    target: {fileID: 1405800863}
+    loopPositions:
+    - {x: -2.804, y: -1.527, z: 6.237}
+    - {x: -3.078, y: -1.859, z: 3.938}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    loopRotations:
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    loopActiveStates: 0101000000
 --- !u!114 &1028774498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27972,7 +28003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7029948723529949830, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -7029948723529949830, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_IsActive
@@ -28016,7 +28047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb414797eadc844ccb178b6e41652485, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
