@@ -73,7 +73,7 @@ public class FilmProjectorUse : MonoBehaviour
     public AudioClip reelLoadClip;
 
     [Header("Final Code Reveal")]
-    [SerializeField] private KeypadZoomInteract finalKeypadPrompt;
+   [SerializeField] private L3KeypadZoomInteract finalKeypadPrompt;
     [SerializeField] private Texture finalCodeTexture;
     [SerializeField] private float glitchDelay = 0.6f;
 

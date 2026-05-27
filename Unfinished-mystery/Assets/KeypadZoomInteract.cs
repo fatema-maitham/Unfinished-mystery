@@ -1,18 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
-using TMPro;
+
 public class KeypadZoomInteract : MonoBehaviour
 {
-
-[Header("Final Unlock")]
-public bool requiresFinalReel = true;
-public bool keypadUnlocked = false;
-
     [Header("Player")]
     public Transform player;
     public MonoBehaviour playerMovementScript;
-    public ThirdPersonCamera thirdPersonCamera;
 
     [Header("Cameras")]
     public CinemachineCamera keypadCamera;
@@ -20,228 +14,73 @@ public bool keypadUnlocked = false;
     public Camera mainCamera;
 
     [Header("Interaction")]
-    public float interactDistance = 3f;
+    public float interactDistance = 2f;
     public float clickDistance = 100f;
 
-    [Header("Prompt")]
-    public InteractionPromptUI interactPrompt;
-    public string promptAction = "ENTER";
-    public string promptSubLabel = "Keypad";
-    public TMP_Text keypadKeyText;
-    private bool isZoomed = false;
-    private bool keypadPromptShowing = false;
+    private bool isZoomed;
 
-    [SerializeField] private L3EvidenceBoardUI evidenceBoardUI;
-    private bool pendingEvidenceBoard = false;
+    private void Start()
+    {
+        if (keypadCamera != null)
+            keypadCamera.Priority = 0;
 
-private void Start()
-{
-    requiresFinalReel = true;
-    keypadUnlocked = false;
-    keypadPromptShowing = false;
-}
+        if (playerCamera != null)
+            playerCamera.Priority = 10;
 
-//     private void Update()
-//     {
-//         if (player == null || keypadCamera == null || playerCamera == null || mainCamera == null)
-//             return;
-
-//         float distance = Vector3.Distance(player.position, transform.position);
-//         bool canInteract = distance <= interactDistance;
-
-//         if (!keypadUnlocked)
-//             return;
-
-
-//                 if (isZoomed)
-//         {
-//             if (thirdPersonCamera != null)
-//                 thirdPersonCamera.enabled = false;
-
-//             Cursor.lockState = CursorLockMode.None;
-//             Cursor.visible = true;
-
-//             if (interactPrompt != null && keypadPromptShowing)
-//             {
-//                 interactPrompt.HidePrompt();
-//                 keypadPromptShowing = false;
-//             }
-//         }
-//         else
-//         {
-//             if (thirdPersonCamera != null)
-//             {
-//                 thirdPersonCamera.enabled = true;
-//                 thirdPersonCamera.ExitUIMode();
-//             }
-
-//             Cursor.lockState = CursorLockMode.Locked;
-//             Cursor.visible = false;
-//         }
-
-//         if (!isZoomed)
-//         {
-//             if (canInteract)
-//             {
-//                 if (interactPrompt != null)
-// {
-//     interactPrompt.ShowPrompt(promptAction, promptSubLabel);
-
-//     if (keypadKeyText != null)
-//         keypadKeyText.text = "Z";
-
-//     keypadPromptShowing = true;
-// }
-//             }
-//             else
-//             {
-//                 if (interactPrompt != null && keypadPromptShowing)
-//                 {
-//                     interactPrompt.HidePrompt();
-//                     keypadPromptShowing = false;
-//                 }
-//             }
-//         }
-
-//         if (canInteract && Keyboard.current.zKey.wasPressedThisFrame)
-//             ToggleZoom();
-
-//         if (isZoomed && Mouse.current.leftButton.wasPressedThisFrame)
-//             ClickKeypadButton();
-//     }
-
-    // private void ToggleZoom()
-    // {
-    //     isZoomed = !isZoomed;
-
-    //     keypadCamera.Priority = isZoomed ? 100 : 0;
-    //     playerCamera.Priority = isZoomed ? 0 : 10;
-
-    //     if (playerMovementScript != null)
-    //         playerMovementScript.enabled = !isZoomed;
-
-    //     if (isZoomed)
-    //     {
-    //         Cursor.lockState = CursorLockMode.None;
-    //         Cursor.visible = true;
-
-    //         if (interactPrompt != null && keypadPromptShowing)
-    //         {
-    //             interactPrompt.HidePrompt();
-    //             keypadPromptShowing = false;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Cursor.lockState = CursorLockMode.Locked;
-    //         Cursor.visible = false;
-    //     }
-    // }
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Update()
-{
-    if (player == null || keypadCamera == null || playerCamera == null || mainCamera == null)
-        return;
-
-    if (!keypadUnlocked)
-        return;
-
-    float distance = Vector3.Distance(player.position, transform.position);
-    bool canInteract = distance <= interactDistance;
-
-    if (!isZoomed)
     {
-        if (canInteract)
+        if (player == null || keypadCamera == null || playerCamera == null || mainCamera == null)
+            return;
+
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool nearKeypad = distance <= interactDistance;
+
+        if (!isZoomed)
         {
-            if (interactPrompt != null)
-            {
-                interactPrompt.ShowPrompt(promptAction, promptSubLabel);
-
-                if (keypadKeyText != null)
-                    keypadKeyText.text = "Z";
-
-                keypadPromptShowing = true;
-            }
+            if (nearKeypad && Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
+                EnterZoom();
         }
         else
         {
-            if (interactPrompt != null && keypadPromptShowing)
-            {
-                interactPrompt.HidePrompt();
-                keypadPromptShowing = false;
-            }
+            if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
+                ExitZoom();
+
+            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+                ClickKeypadButton();
         }
     }
 
-    if (canInteract && Keyboard.current.zKey.wasPressedThisFrame)
+    private void EnterZoom()
     {
-        ToggleZoom();
-    }
+        isZoomed = true;
 
-    if (isZoomed && Mouse.current.leftButton.wasPressedThisFrame)
-    {
-        ClickKeypadButton();
-    }
-}
+        keypadCamera.Priority = 100;
+        playerCamera.Priority = 0;
 
-private void LateUpdate()
-{
-    if (!isZoomed)
-        return;
-
-    if (Time.timeScale == 0f)
-        return;
-
-    if (Cursor.lockState != CursorLockMode.None)
-        Cursor.lockState = CursorLockMode.None;
-
-    if (!Cursor.visible)
-        Cursor.visible = true;
-}
-
-
-private void ToggleZoom()
-{
-    isZoomed = !isZoomed;
-
-    keypadCamera.Priority = isZoomed ? 100 : 0;
-    playerCamera.Priority = isZoomed ? 0 : 10;
-
-    if (playerMovementScript != null)
-        playerMovementScript.enabled = !isZoomed;
-
-   if (isZoomed)
-    {
-        if (thirdPersonCamera != null)
-            thirdPersonCamera.EnterUIMode();
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        if (interactPrompt != null && keypadPromptShowing)
-        {
-            interactPrompt.HidePrompt();
-            keypadPromptShowing = false;
-        }
     }
-    else
-            {
-                if (thirdPersonCamera != null)
-                    thirdPersonCamera.ExitUIMode();
 
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+    private void ExitZoom()
+    {
+        isZoomed = false;
 
-                if (pendingEvidenceBoard && evidenceBoardUI != null)
-                {
-                    pendingEvidenceBoard = false;
-                    evidenceBoardUI.ShowEvidenceBoard();
-                }
-                
-            }
-            
-}
+        keypadCamera.Priority = 0;
+        playerCamera.Priority = 10;
+
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void ClickKeypadButton()
     {
@@ -267,14 +106,4 @@ private void ToggleZoom()
             }
         }
     }
-        public void UnlockKeypadPrompt()
-        {
-            keypadUnlocked = true;
-            Debug.Log("Keypad prompt unlocked after Reel 3.");
-        }
-
-        public void TriggerEvidenceBoard()
-        {
-            pendingEvidenceBoard = true;
-        }
 }
