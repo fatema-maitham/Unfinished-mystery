@@ -4898,15 +4898,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a5a840b6a557b4fffac12d258e568589, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.895
+      value: -2.804
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5a840b6a557b4fffac12d258e568589, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.839
+      value: -1.527
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5a840b6a557b4fffac12d258e568589, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.476001
+      value: 6.237
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5a840b6a557b4fffac12d258e568589, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16047,7 +16047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 300
+  loopDuration: 10
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -16099,11 +16099,17 @@ MonoBehaviour:
   - objectName: Police Cap
     target: {fileID: 1405800863}
     loopPositions:
-    - {x: 3.014, y: 0.207, z: 12.296677}
-    - {x: 2.916, y: 0.03, z: 11.477}
-    - {x: 2.916, y: 0.03, z: 11.477}
-    - {x: 2.916, y: 0.03, z: 11.477}
-    - {x: 2.916, y: 0.03, z: 11.477}
+    - {x: -2.804, y: -1.527, z: 6.237}
+    - {x: -3.078, y: -1.859, z: 3.938}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    - {x: -5.628, y: -1.205, z: 2.605}
+    loopRotations:
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
     loopActiveStates: 0101000000
 --- !u!114 &1028774498
 MonoBehaviour:

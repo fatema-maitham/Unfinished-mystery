@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: Level2PuzzleSystem
+  - Name: Directional Light Sun
   - Tag: Untagged
-  - Layer: Default
+  - Layer: 9
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
