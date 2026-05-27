@@ -11,4 +11,7 @@
   - Name: PauseManager
   - Tag: Untagged
   - Layer: Default
+  - Name: L2BadgePopup
+  - Tag: Untagged
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
