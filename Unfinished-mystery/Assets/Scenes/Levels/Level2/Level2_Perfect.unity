@@ -11132,17 +11132,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 58495716}
   m_SourcePrefab: {fileID: 100100000, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
---- !u!114 &730374097 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6404680166234365381, guid: b4dd3d9cdd9e1473684688f02c61229c, type: 3}
-  m_PrefabInstance: {fileID: 272722682}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &743064985
 GameObject:
   m_ObjectHideFlags: 0
@@ -19900,7 +19889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 4
+  loopDuration: 300
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -19948,7 +19937,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLoop: 1
   maxLoops: 5
-  loopText: {fileID: 730374097}
   loopObjects:
   - objectName: Cap
     target: {fileID: 1405800863}
@@ -19965,7 +19953,39 @@ MonoBehaviour:
     - {x: -90, y: 0, z: 96.793}
     - {x: -90, y: 0, z: 96.793}
     - {x: -90, y: 0, z: 96.793}
-    loopActiveStates: 
+    loopActiveStates: 0101010100
+  - objectName: CLOCK
+    target: {fileID: 37255624}
+    useLocalPosition: 1
+    loopPositions:
+    - {x: 1.763, y: -0.231, z: 4.6}
+    - {x: 1.763, y: -0.231, z: 4.6}
+    - {x: -6.532, y: -0.138, z: -4.51}
+    - {x: -6.532, y: -0.138, z: -4.51}
+    - {x: -6.532, y: -0.138, z: -4.51}
+    loopRotations:
+    - {x: -0.502, y: -80.294, z: 0.289}
+    - {x: -0.502, y: -80.294, z: 0.289}
+    - {x: -0.502, y: 90, z: 0.289}
+    - {x: -0.502, y: 90, z: 0.289}
+    - {x: -0.502, y: 90, z: 0.289}
+    loopActiveStates: 0101000101
+  - objectName: FIRST_NOTE
+    target: {fileID: 758293191}
+    useLocalPosition: 1
+    loopPositions:
+    - {x: -4.61, y: -1.68, z: -1.041}
+    - {x: -4.61, y: -1.68, z: -1.041}
+    - {x: -2.55, y: -1.68, z: 1.9}
+    - {x: -2.55, y: -1.68, z: 1.9}
+    - {x: -2.55, y: -1.68, z: 1.9}
+    loopRotations:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    loopActiveStates: 0101010000
 --- !u!1 &1283050395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2995478641262511802, guid: 6e69a5098029cc848b508bc93d870d9a, type: 3}
