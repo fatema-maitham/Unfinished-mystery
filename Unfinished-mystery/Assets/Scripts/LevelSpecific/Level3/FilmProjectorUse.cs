@@ -73,7 +73,7 @@ public class FilmProjectorUse : MonoBehaviour
     public AudioClip reelLoadClip;
 
     [Header("Final Code Reveal")]
-    [SerializeField] private KeypadZoomInteract finalKeypadPrompt;
+   [SerializeField] private L3KeypadZoomInteract finalKeypadPrompt;
     [SerializeField] private Texture finalCodeTexture;
     [SerializeField] private float glitchDelay = 0.6f;
 
@@ -82,6 +82,15 @@ public class FilmProjectorUse : MonoBehaviour
     [Header("Smart Loop Hints")]
     [SerializeField] private L3SmartLoopHints smartLoopHints;
 
+
+    [Header("Memory Echo")]
+    [SerializeField] private L3Reel1Echo reel1Echo;
+    [SerializeField] private L3Reel2Echo reel2Echo;
+
+    [SerializeField] private L3Reel3Echo reel3Echo;
+
+    [SerializeField] private L3ProjectorBreakdown projectorBreakdown;
+
     [TextArea(2, 3)]
     [SerializeField] private string finalCodeMessage = "The final frame reveals a code.";
 
@@ -89,6 +98,8 @@ public class FilmProjectorUse : MonoBehaviour
     private bool videoPlaying = false;
     private bool isReplay = false;
     private int currentReelNumber = 0;
+
+    private bool finalCodeShowing = false;
 
     private void Start()
     {
@@ -127,6 +138,7 @@ public class FilmProjectorUse : MonoBehaviour
         {
             screenRenderer.material.mainTexture = finalCodeTexture;
             screenRenderer.material.SetTexture("_BaseMap", finalCodeTexture);
+            finalCodeShowing = true;
         }
 
         if (exitRedWarningLight != null)
@@ -203,10 +215,10 @@ public class FilmProjectorUse : MonoBehaviour
 
 
 
-        if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
-        {
-            HandleProjectorUse();
-        }
+        // if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     HandleProjectorUse();
+        // }
     }
 
     private void HandleProjectorUse()
@@ -358,9 +370,12 @@ public class FilmProjectorUse : MonoBehaviour
         {
             reel1Watched = true;
 
-
             if (smartLoopHints != null)
             smartLoopHints.ApplyLoopHints();
+
+
+            if (reel1Echo != null)
+            reel1Echo.PlayEcho();
 
             // if (exitRedWarningLight != null)
             // {
@@ -396,6 +411,10 @@ public class FilmProjectorUse : MonoBehaviour
                 smartLoopHints.ApplyLoopHints();
 
 
+            if (reel2Echo != null)
+                reel2Echo.PlayEcho();
+
+
             StartCoroutine(ShowDiscoveryThenPrompt(
                 "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
             ));
@@ -410,13 +429,30 @@ public class FilmProjectorUse : MonoBehaviour
             if (mirrorHintLight != null)
                 mirrorHintLight.SetActive(false);
 
-            StartCoroutine(FinalReelEndingSequence());
-        }
+
+            if (reel3Echo != null)
+                reel3Echo.PlayEcho();
+
+                StartCoroutine(Reel3EchoThenFinalSequence());        }
         else
         {
             UpdatePrompt();
         }
     }
+
+
+    private IEnumerator Reel3EchoThenFinalSequence()
+{
+    if (reel3Echo != null)
+        reel3Echo.PlayEcho();
+
+    yield return new WaitForSeconds(2f);
+
+    if (projectorBreakdown != null)
+    projectorBreakdown.PlayBreakdown();
+
+    yield return StartCoroutine(FinalReelEndingSequence());
+}
 
     private IEnumerator ShowDiscoveryThenPrompt(string message)
     {
@@ -504,6 +540,12 @@ public class FilmProjectorUse : MonoBehaviour
 
 public IEnumerator ShowLoopGlitch(float duration){
     Debug.Log("ShowLoopGlitch called");
+
+    Debug.Log("ShowLoopGlitch called");
+
+    if (finalCodeShowing)
+        yield break;
+
 
     if (screenRenderer == null || glitchScreenTexture == null)
     {
