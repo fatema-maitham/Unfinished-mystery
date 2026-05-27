@@ -2201,8 +2201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce79578997f340fcae13c2ff952ecb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiresFinalReel: 1
-  keypadUnlocked: 0
   player: {fileID: 698624460}
   playerMovementScript: {fileID: 1546910978}
   keypadCamera: {fileID: 1445420932}
@@ -2210,10 +2208,6 @@ MonoBehaviour:
   mainCamera: {fileID: 1230677072}
   interactDistance: 21.7
   clickDistance: 10
-  interactPrompt: {fileID: 0}
-  promptAction: ENTER
-  promptSubLabel: Keypad
-  keypadKeyText: {fileID: 0}
 --- !u!65 &523398906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5682,6 +5676,7 @@ GameObject:
   - component: {fileID: 1367576607}
   - component: {fileID: 1367576606}
   - component: {fileID: 1367576605}
+  - component: {fileID: 1367576608}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5750,6 +5745,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1367576608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367576604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61bed51590db0d148aa2365484f4f41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1370397304
 GameObject:
   m_ObjectHideFlags: 0
