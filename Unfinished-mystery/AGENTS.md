@@ -12,6 +12,11 @@
   - Tag: Untagged
   - Layer: Default
   - Name: L2BadgePopup
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
+  - Layers:
+    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+- Active game object:
+  - Name: HUD_Canvas(DrawerOpen)
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
