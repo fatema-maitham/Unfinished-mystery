@@ -11132,6 +11132,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 58495716}
   m_SourcePrefab: {fileID: 100100000, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
+--- !u!114 &730374097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6404680166234365381, guid: b4dd3d9cdd9e1473684688f02c61229c, type: 3}
+  m_PrefabInstance: {fileID: 272722682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &743064985
 GameObject:
   m_ObjectHideFlags: 0
@@ -19857,6 +19868,7 @@ GameObject:
   - component: {fileID: 1274052880}
   - component: {fileID: 1274052879}
   - component: {fileID: 1274052878}
+  - component: {fileID: 1274052881}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -19888,7 +19900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac70708a662cc014481e076500649355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 300
+  loopDuration: 4
   maxLoops: 5
   timerText: {fileID: 4791657}
   loopCounterText: {fileID: 236464974}
@@ -19922,6 +19934,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1274052881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274052877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fd39526175d49e482c53c5524c3229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLoop: 1
+  maxLoops: 5
+  loopText: {fileID: 730374097}
+  loopObjects:
+  - objectName: Cap
+    target: {fileID: 1405800863}
+    useLocalPosition: 1
+    loopPositions:
+    - {x: -2.804, y: -1.527, z: 6.237}
+    - {x: -2.804, y: -1.867, z: 4.73}
+    - {x: -1.908, y: -1.292, z: 3.307}
+    - {x: -1.908, y: -1.292, z: 3.307}
+    - {x: -1.908, y: -1.292, z: 3.307}
+    loopRotations:
+    - {x: -90, y: 0, z: 96}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    - {x: -90, y: 0, z: 96.793}
+    loopActiveStates: 
 --- !u!1 &1283050395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2995478641262511802, guid: 6e69a5098029cc848b508bc93d870d9a, type: 3}
