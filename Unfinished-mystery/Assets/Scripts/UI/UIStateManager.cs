@@ -16,11 +16,16 @@ public class UIStateManager : MonoBehaviour
 
     public bool IsAnyUIOpen => _pauseOpen || _notebookOpen;
 
-    void Awake()
+  void Awake()
+{
+    if (Instance != null && Instance != this)
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
+        Destroy(this);
+        return;
     }
+
+    Instance = this;
+}
 
     void Start()
     {
