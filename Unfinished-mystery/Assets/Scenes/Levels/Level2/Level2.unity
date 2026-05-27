@@ -1852,10 +1852,12 @@ MonoBehaviour:
   - leftImage: {fileID: 0}
     leftText: 'Badge 259
 
-      The drawing was never random.
+      Chief Inspector Adrian Cooper
 
-      She was trying
-      to tell us who he was.'
+      The drawing
+      was never random.
+
+      She was trying to tell us who he was.'
     rightText: 'The department called it procedural error.
 
       Missing evidence.
@@ -11365,11 +11367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.110000014
+      value: -0.107
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.250001
+      value: 4.724
       objectReference: {fileID: 0}
     - target: {fileID: 5994050747724274685, guid: a4b1276aff9e45d40818904c02bf6545, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14717,15 +14719,6 @@ MonoBehaviour:
     - {x: 2.916, y: 0.03, z: 11.477}
     - {x: 2.916, y: 0.03, z: 11.477}
     loopActiveStates: 0101000000
-  - objectName: Painting
-    target: {fileID: 1811983236}
-    loopPositions:
-    - {x: -1.715, y: -0.083, z: -0.8119}
-    - {x: -1.715, y: -0.616, z: -0.8119}
-    - {x: -1.715, y: -0.2, z: -5}
-    - {x: -1.715, y: -0.2, z: -5}
-    - {x: -1.715, y: -0.2, z: -5}
-    loopActiveStates: 0101010100
 --- !u!1 &1028859716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6403040386252038518, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
