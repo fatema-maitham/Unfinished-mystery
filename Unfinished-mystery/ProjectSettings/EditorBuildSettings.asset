@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/LevelSummary/LevelSummary1.unity
     guid: 4417d59346e624762add03ad1dc1595d
   - enabled: 1
-    path: Assets/Scenes/Levels/Level2/Level2_Perfect.unity
+    path: Assets/Scenes/Levels/Level2/oldddd/Level2_Perfect_i_though.unity
     guid: 26cc992ac76b849748864556b53262a9
   - enabled: 1
     path: Assets/Scenes/UI/LevelSummary/LevelSummary2.unity
