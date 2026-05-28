@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class ActivatableDrawer : MonoBehaviour
+public class ActivatableDrawer : MonoBehaviour, ILoopResettable
 {
     [Header("New HUD Prompt")]
     [SerializeField] private GameObject promptPanel;
@@ -17,7 +17,7 @@ public class ActivatableDrawer : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] private Transform player;
-    [SerializeField] private float interactDistance = 3.5f;
+    [SerializeField] private float interactDistance = 2.5f;
     [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Drawer Movement")]
@@ -32,12 +32,19 @@ public class ActivatableDrawer : MonoBehaviour
     private bool showingPrompt;
     private Vector3 closedLocalPosition;
     private Vector3 openLocalPosition;
+    private Coroutine openCoroutine;
 
-    private void Start()
+    private void Awake()
     {
         if (drawerToMove == null)
             drawerToMove = transform;
 
+        closedLocalPosition = drawerToMove.localPosition;
+        openLocalPosition = closedLocalPosition + openOffset;
+    }
+
+    private void Start()
+    {
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -45,13 +52,7 @@ public class ActivatableDrawer : MonoBehaviour
                 player = playerObject.transform;
         }
 
-        closedLocalPosition = drawerToMove.localPosition;
-        openLocalPosition = closedLocalPosition + openOffset;
-
-        if (keyObject != null)
-            keyObject.SetActive(false);
-
-        HidePrompt();
+        ResetDrawerClosed();
     }
 
     private void Update()
@@ -104,9 +105,16 @@ public class ActivatableDrawer : MonoBehaviour
 
     private void OpenDrawer()
     {
+        if (isOpen)
+            return;
+
         isOpen = true;
         HidePrompt();
-        StartCoroutine(OpenRoutine());
+
+        if (openCoroutine != null)
+            StopCoroutine(openCoroutine);
+
+        openCoroutine = StartCoroutine(OpenRoutine());
     }
 
     private IEnumerator OpenRoutine()
@@ -126,5 +134,30 @@ public class ActivatableDrawer : MonoBehaviour
 
         if (keyObject != null)
             keyObject.SetActive(true);
+    }
+
+    public void ResetState()
+    {
+        ResetDrawerClosed();
+    }
+
+    private void ResetDrawerClosed()
+    {
+        if (openCoroutine != null)
+        {
+            StopCoroutine(openCoroutine);
+            openCoroutine = null;
+        }
+
+        isOpen = false;
+        showingPrompt = false;
+
+        if (drawerToMove != null)
+            drawerToMove.localPosition = closedLocalPosition;
+
+        if (keyObject != null)
+            keyObject.SetActive(false);
+
+        HidePrompt();
     }
 }
