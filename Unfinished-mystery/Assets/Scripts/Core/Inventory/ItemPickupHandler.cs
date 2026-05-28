@@ -15,35 +15,39 @@ namespace InventoryFramework
                 return;
             }
 
-            if (hotbar == null)
+            if (inventory == null)
             {
-                Debug.LogError("ItemPickupHandler: Hotbar is not assigned!");
+                Debug.LogError("ItemPickupHandler: Inventory is not assigned!");
                 return;
             }
 
             Debug.Log("Trying to pick up: " + item.name + " amount: " + amount);
 
-            bool addedToHotbar = hotbar.AddItem(item, amount);
-            Debug.Log("Added to hotbar? " + addedToHotbar);
+            bool addedToInventory = inventory.AddItem(item, amount);
+            Debug.Log("Added to inventory? " + addedToInventory);
 
-            if (!addedToHotbar && inventory != null)
+            if (!addedToInventory && hotbar != null)
             {
-                bool addedToInventory = inventory.AddItem(item, amount);
-                Debug.Log("Added to inventory? " + addedToInventory);
+                bool addedToHotbar = hotbar.AddItem(item, amount);
+                Debug.Log("Added to hotbar? " + addedToHotbar);
 
-                if (!addedToInventory)
+                if (!addedToHotbar)
                 {
-                    Debug.Log("Both hotbar and inventory full!");
+                    Debug.Log("Both inventory and hotbar are full!");
                 }
             }
 
             HotbarUI hotbarUI = FindAnyObjectByType<HotbarUI>();
             if (hotbarUI != null)
+            {
                 hotbarUI.RefreshUI();
+            }
 
             InventoryUI inventoryUI = FindAnyObjectByType<InventoryUI>();
             if (inventoryUI != null)
+            {
                 inventoryUI.RefreshUI();
+            }
         }
     }
 }
