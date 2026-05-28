@@ -23,6 +23,10 @@ public class LoopingLevelTimer : MonoBehaviour
     public GameObject gameOverPanel;
     public Button exitButton;
 
+    [Header("Optional Player Respawn")]
+    public Transform player;
+    public Transform playerSpawnPoint;
+
     public float pulseMaxAlpha = 0.3f;
     public float pulseFadeInDuration = 0.35f;
     public float pulseFadeOutDuration = 0.45f;
@@ -278,6 +282,19 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         timeLeft = loopDuration;
         hasShaken = false;
+
+        if (player != null && playerSpawnPoint != null)
+{
+    CharacterController controller = player.GetComponent<CharacterController>();
+
+    if (controller != null)
+        controller.enabled = false;
+
+    player.SetPositionAndRotation(playerSpawnPoint.position, playerSpawnPoint.rotation);
+
+    if (controller != null)
+        controller.enabled = true;
+}
 
         timerText.color = Color.white;
         timerText.transform.localPosition = originalPos;
