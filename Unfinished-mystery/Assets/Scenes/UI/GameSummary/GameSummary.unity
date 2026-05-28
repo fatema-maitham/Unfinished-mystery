@@ -1571,8 +1571,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5d6c36760de4748b670249ba55cf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLoopsText: {fileID: 276300868}
+  star1: {fileID: 1642670094}
+  star2: {fileID: 1446166311}
+  star3: {fileID: 2061724072}
   mainMenuSceneName: MainMenu
-  playAgainSceneName: LevelSummary
+  playAgainSceneName: Level1
 --- !u!4 &1588872047
 Transform:
   m_ObjectHideFlags: 0

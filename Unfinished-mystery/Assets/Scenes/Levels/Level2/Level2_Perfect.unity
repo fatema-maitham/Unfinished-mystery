@@ -13279,6 +13279,7 @@ GameObject:
   - component: {fileID: 856020249}
   - component: {fileID: 856020248}
   - component: {fileID: 856020250}
+  - component: {fileID: 856020251}
   m_Layer: 0
   m_Name: LevelExitTrigger
   m_TagString: Untagged
@@ -13348,6 +13349,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summarySceneName: LevelSummary2
+  maxLoops: 5
+--- !u!114 &856020251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856020246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06fe77d099cf24000a425d3b2c8f55e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNumber: 1
   maxLoops: 5
 --- !u!1001 &857058546
 PrefabInstance:
