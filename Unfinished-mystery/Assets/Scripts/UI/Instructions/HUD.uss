@@ -1,0 +1,53 @@
+/*
+    HUD.uss  (partial – ? help button styles)
+    ==========================================
+    Merge into your existing HUD stylesheet.
+*/
+
+.hud-top-bar {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: rgba(0,0,0,0.45);
+}
+
+.hud-spacer {
+    flex-grow: 1;
+}
+
+.hud-right-buttons {
+    flex-direction: row;
+    align-items: center;
+}
+
+/* The ? circular button */
+.btn-help {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.30);
+    border-width: 2px;
+    color: rgba(255,255,255,0.90);
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    cursor: link;
+    transition-duration: 0.15s;
+    transition-property: background-color, border-color;
+}
+
+.btn-help:hover {
+    background-color: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.60);
+}
+
+.btn-help:active {
+    background-color: rgba(255,255,255,0.35);
+}
+
+.hud-label {
+    color: white;
+    font-size: 16px;
+    -unity-font-style: bold;
+}

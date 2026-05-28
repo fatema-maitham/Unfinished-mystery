@@ -1,0 +1,47 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+
+    <!--
+        InstructionCarousel.uxml
+        ========================
+        Full-screen dimmed overlay containing the carousel panel.
+        Set UIDocument Sort Order higher than your HUD so it draws on top.
+    -->
+
+    <!-- Dim backdrop + carousel root -->
+    <ui:VisualElement name="carousel-overlay" class="carousel-overlay">
+
+        <!-- Centred card panel -->
+        <ui:VisualElement name="carousel-panel" class="carousel-panel">
+
+            <!-- Close (×) button – top-right corner -->
+            <ui:Button name="btn-close" class="btn-close" text="✕" />
+
+            <!-- Slide illustration area -->
+            <ui:VisualElement name="slide-image" class="slide-image" />
+
+            <!-- Slide title -->
+            <ui:Label name="slide-title" class="slide-title" text="Slide Title" />
+
+            <!-- Slide description -->
+            <ui:Label name="slide-desc" class="slide-desc"
+                      text="Description goes here." />
+
+            <!-- Bottom row: prev arrow · dots · next arrow -->
+            <ui:VisualElement class="carousel-controls">
+
+                <ui:Button name="btn-prev" class="arrow-btn" text="&#8249;" />
+
+                <ui:VisualElement class="dots-row">
+                    <ui:VisualElement name="dots-container" class="dots-container" />
+                    <ui:Label name="slide-counter" class="slide-counter" text="1 / 5" />
+                </ui:VisualElement>
+
+                <ui:Button name="btn-next" class="arrow-btn" text="&#8250;" />
+
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

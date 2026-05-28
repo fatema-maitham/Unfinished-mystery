@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <!--
+        HUD.uxml  (partial – top bar only)
+        ===================================
+        Add this to your existing HUD UXML, or merge into it.
+        The btn-help Button is what HUDManager listens to.
+    -->
+
+    <ui:VisualElement name="hud-top-bar" class="hud-top-bar">
+
+        <!-- Left side: score, level label, etc. -->
+        <ui:Label name="lbl-score" class="hud-label" text="Score: 0" />
+
+        <!-- Spacer -->
+        <ui:VisualElement class="hud-spacer" />
+
+        <!-- Right side: help / pause buttons -->
+        <ui:VisualElement class="hud-right-buttons">
+            <ui:Button name="btn-help" class="btn-help" text="?" />
+            <!-- add more HUD buttons here if needed -->
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

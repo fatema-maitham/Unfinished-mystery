@@ -1,0 +1,179 @@
+/*
+    InstructionCarousel.uss
+    =======================
+    Dark, cinematic style matching the Amazing Bomberman reference screenshot.
+    Colours use CSS-style hex; Unity USS supports these in UI Toolkit 2021+.
+*/
+
+/* ── Tokens ─────────────────────────────────────────────────────────────── */
+:root {
+    --bg-overlay:     rgba(0,0,0,0.72);
+    --panel-bg:       rgba(20,22,35,0.94);
+    --panel-border:   rgba(255,255,255,0.10);
+    --accent:         rgba(255,255,255,0.85);
+    --accent-dim:     rgba(255,255,255,0.35);
+    --dot-inactive:   rgba(255,255,255,0.28);
+    --dot-active:     rgba(255,255,255,0.90);
+    --arrow-hover-bg: rgba(255,255,255,0.12);
+    --close-hover-bg: rgba(255,80,80,0.30);
+    --title-color:    rgba(255,255,255,1.0);
+    --desc-color:     rgba(200,208,230,1.0);
+    --counter-color:  rgba(160,168,190,1.0);
+}
+
+/* ── Full-screen overlay ─────────────────────────────────────────────────── */
+.carousel-overlay {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: var(--bg-overlay);
+    align-items: center;
+    justify-content: center;
+    /* opacity animated in C# */
+}
+
+.carousel-overlay.hidden {
+    display: none;
+}
+
+/* ── Card panel ──────────────────────────────────────────────────────────── */
+.carousel-panel {
+    width: 680px;
+    background-color: var(--panel-bg);
+    border-color: var(--panel-border);
+    border-width: 1px;
+    border-radius: 18px;
+    padding: 32px 36px 28px 36px;
+    align-items: center;
+    /* blur-like depth via a subtle inner shadow trick */
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+/* ── Close button ────────────────────────────────────────────────────────── */
+.btn-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.12);
+    border-width: 1px;
+    color: var(--accent);
+    font-size: 18px;
+    -unity-font-style: bold;
+    cursor: link;
+    transition-duration: 0.15s;
+    transition-property: background-color;
+}
+
+.btn-close:hover {
+    background-color: var(--close-hover-bg);
+}
+
+/* ── Illustration area ───────────────────────────────────────────────────── */
+.slide-image {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    background-color: rgba(40,45,65,0.6);
+    margin-bottom: 24px;
+    -unity-background-scale-mode: scale-to-fit;
+    overflow: hidden;
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────── */
+.slide-title {
+    color: var(--title-color);
+    font-size: 22px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: 10px;
+}
+
+/* ── Description ─────────────────────────────────────────────────────────── */
+.slide-desc {
+    color: var(--desc-color);
+    font-size: 15px;
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: 26px;
+    max-width: 520px;
+}
+
+/* ── Controls row (prev | dots | next) ──────────────────────────────────── */
+.carousel-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* ── Arrow buttons ───────────────────────────────────────────────────────── */
+.arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.14);
+    border-width: 1px;
+    color: var(--accent);
+    font-size: 26px;
+    -unity-text-align: middle-center;
+    cursor: link;
+    transition-duration: 0.15s;
+    transition-property: background-color, opacity;
+}
+
+.arrow-btn:hover {
+    background-color: var(--arrow-hover-bg);
+}
+
+.arrow-btn:active {
+    background-color: rgba(255,255,255,0.20);
+}
+
+.arrow-disabled {
+    opacity: 0.28;
+    cursor: arrow;
+}
+
+/* ── Dots row ────────────────────────────────────────────────────────────── */
+.dots-row {
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.dots-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--dot-inactive);
+    margin-left: 5px;
+    margin-right: 5px;
+    transition-duration: 0.2s;
+    transition-property: background-color, width;
+}
+
+.dot-active {
+    background-color: var(--dot-active);
+    width: 22px;              /* pill-shaped active dot */
+    border-radius: 4px;
+}
+
+/* ── Slide counter (1 / 5) ───────────────────────────────────────────────── */
+.slide-counter {
+    color: var(--counter-color);
+    font-size: 12px;
+    -unity-text-align: middle-center;
+}
