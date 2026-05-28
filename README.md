@@ -176,12 +176,15 @@ Controls are designed for keyboard and mouse.
 
 | Action | Key |
 |--------|-----|
-| Move | W / A / S / D or Arrow Keys|
+| Move | W / A / S / D |
 | Look Around | Mouse |
 | Interact / Inspect / Read | E |
 | Open Memory Journal | Tab |
 | Pause Menu | Esc |
-| Inventory Slots (Temporary Items) | 0 – 9 |
+| Inventory Slots (Temporary Items) | 0 – 7 |
+| Open Writing Notebook | Left Ctrl |
+| Move in Book / Notebook | Arrow Keys/ Mouse Up / Down |
+| Interact / Use Keypad | Z |
 
 ---
 
