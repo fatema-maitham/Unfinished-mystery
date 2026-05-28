@@ -13037,7 +13037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7e956fb31354216ac608514794e62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  summarySceneName: Level2Summary
+  summarySceneName: LevelSummary2
   maxLoops: 5
 --- !u!1001 &857058546
 PrefabInstance:
@@ -22592,7 +22592,7 @@ MonoBehaviour:
   playKey: 101
   promptUI: {fileID: 503856320}
   audioSource: {fileID: 3315813323909784079}
-  gramophoneMessage: {fileID: 8300000, guid: f5d1b4066544b407aa3cdeeec32107c4, type: 3}
+  gramophoneMessage: {fileID: 8300000, guid: 3daf6f2fdf6534fbcbb64b1c92d48c89, type: 3}
   label: Play
   subLabel: Gramophone
 --- !u!1 &1423923729 stripped
