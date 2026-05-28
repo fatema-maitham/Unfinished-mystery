@@ -5132,6 +5132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionPromptPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2243712631846826481, guid: 86966c54a6afc4f04b277a6cbaa6b258, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5454733572419152667, guid: 86966c54a6afc4f04b277a6cbaa6b258, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -6033,7 +6037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E to interact
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
@@ -6365,7 +6369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sublabel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
@@ -9614,7 +9618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bee55585ea297d4f9d96efd160c4024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPanel: {fileID: 0}
+  interactionPanel: {fileID: 1980910325}
   moveOffset: {x: 0, y: 0, z: -2}
   moveSpeed: 1.5
   interactKey: 101
@@ -9637,8 +9641,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.07, y: 0.42, z: 0.77009547}
-  m_Center: {x: -0.05616595, y: 1.7433228, z: -0.59340894}
+  m_Size: {x: 1.4717035, y: 0.9390742, z: 1.4166363}
+  m_Center: {x: -0.257018, y: 2.0028596, z: -0.5878319}
 --- !u!1 &1603995449
 GameObject:
   m_ObjectHideFlags: 0
@@ -11721,13 +11725,14 @@ GameObject:
   - component: {fileID: 1980910329}
   - component: {fileID: 1980910328}
   - component: {fileID: 1980910327}
+  - component: {fileID: 1980910330}
   m_Layer: 5
   m_Name: BoxPromptCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1980910326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11814,6 +11819,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1980910330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980910325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df29dc1d20d74934885b177b67ea2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptPanel: {fileID: 2380403323826639052, guid: 95d919c54e52a4946a91b9886411ca85, type: 3}
+  keyText: {fileID: 1830909033}
+  actionText: {fileID: 2034975499}
+  subLabelText: {fileID: 1154252110}
+  interactionKey: E
 --- !u!1001 &2008878555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12145,7 +12167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Move
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
@@ -12281,7 +12303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sublabel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
