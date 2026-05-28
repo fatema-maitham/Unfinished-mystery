@@ -3287,17 +3287,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511917253}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.69, y: 3.23, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6.18192}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1870356684}
-  m_Father: {fileID: 1535933155}
+  m_Father: {fileID: 1471085910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -126, y: -102}
+  m_AnchoredPosition: {x: -1914.6855, y: -1079.2546}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511917255
@@ -10076,6 +10076,8 @@ MonoBehaviour:
   loopEndedMessage: {fileID: 1884690509}
   gameOverPanel: {fileID: 1693379626}
   exitButton: {fileID: 0}
+  player: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
   pulseMaxAlpha: 0.3
   pulseFadeInDuration: 0.35
   pulseFadeOutDuration: 0.45
@@ -11158,6 +11160,7 @@ RectTransform:
   - {fileID: 875594161}
   - {fileID: 970875435}
   - {fileID: 763304711}
+  - {fileID: 511917254}
   m_Father: {fileID: 1223577266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11258,7 +11261,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 511917254}
   - {fileID: 613981383}
   m_Father: {fileID: 1223577266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
