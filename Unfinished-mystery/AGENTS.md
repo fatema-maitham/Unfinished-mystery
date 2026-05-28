@@ -2,12 +2,14 @@
 - Project name: Unfinished-mystery
 - Unity version: Unity 6000.1.13f1
 - Active scene:
+  - Name: Level1
   - Name: GameSummary
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
+  - Name: PasswordWindow
   - Name: LevelSummaryPanel
   - Tag: Untagged
   - Layer: UI
