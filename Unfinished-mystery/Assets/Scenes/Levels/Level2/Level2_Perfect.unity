@@ -5780,13 +5780,13 @@ MonoBehaviour:
   keyText: E
   promptText: OPEN
   promptSubLabel: Drawer
-  player: {fileID: 0}
+  player: {fileID: 603546215}
   interactDistance: 2.5
   interactKey: 101
   drawerToMove: {fileID: 427216896}
-  openOffset: {x: 0, y: 0, z: 0.45}
+  openOffset: {x: 0, y: 0, z: 0.18}
   openSpeed: 2.5
-  keyObject: {fileID: 0}
+  keyObject: {fileID: 132257662}
 --- !u!65 &427216900
 BoxCollider:
   m_ObjectHideFlags: 0
