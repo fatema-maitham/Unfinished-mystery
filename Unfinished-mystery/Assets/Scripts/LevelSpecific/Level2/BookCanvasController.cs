@@ -3,28 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Controls the Level 2 clue book UI.
-/// Shows book pages, handles next/back buttons, page sounds, and reports
-/// the bookshelf clue only after the player closes the book on the final spread.
-/// </summary>
 public class BookCanvasController : MonoBehaviour
 {
     [System.Serializable]
     public class BookSpread
     {
-        [Header("Left Page Image")]
         public Sprite leftImage;
 
-        [Header("Left Page Text")]
         [TextArea(3, 10)]
         public string leftText;
 
-        [Header("Right Page Text")]
         [TextArea(3, 10)]
         public string rightText;
 
-        [Header("Style")]
         public bool bigText;
     }
 
@@ -71,22 +62,68 @@ public class BookCanvasController : MonoBehaviour
             backButton.onClick.AddListener(PreviousSpread);
     }
 
-    private void Update()
+    // private void Update()
+    // {
+    //     if (bookPanel == null || !bookPanel.gameObject.activeSelf)
+    //         return;
+
+    //     if (Input.GetKeyDown(KeyCode.RightArrow))
+    //         NextSpread();
+
+    //     if (Input.GetKeyDown(KeyCode.LeftArrow))
+    //         PreviousSpread();
+
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         if (ClickedButton(nextButton))
+    //         {
+    //             NextSpread();
+    //             return;
+    //         }
+
+    //         if (ClickedButton(backButton))
+    //         {
+    //             PreviousSpread();
+    //             return;
+    //         }
+    //     }
+    // }
+private void Update()
 {
     if (bookPanel == null || !bookPanel.gameObject.activeSelf)
         return;
+
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
 
     if (Input.GetKeyDown(KeyCode.RightArrow))
         NextSpread();
 
     if (Input.GetKeyDown(KeyCode.LeftArrow))
         PreviousSpread();
+
+    if (Input.mouseScrollDelta.y < 0f)
+        NextSpread();
+
+    if (Input.mouseScrollDelta.y > 0f)
+        PreviousSpread();
 }
+    private bool ClickedButton(Button button)
+    {
+        if (button == null || !button.gameObject.activeInHierarchy || !button.interactable)
+            return false;
+
+        RectTransform rect = button.GetComponent<RectTransform>();
+
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            rect,
+            Input.mousePosition,
+            null
+        );
+    }
 
     public void OpenBook()
     {
-        Debug.Log("[BookCanvasController] OpenBook called");
-
         currentSpreadIndex = 0;
         reachedFinalSpread = false;
 
@@ -113,10 +150,13 @@ public class BookCanvasController : MonoBehaviour
             bookPanel.anchoredPosition = new Vector2(0f, 80f);
             bookPanel.sizeDelta = new Vector2(1055f, 623f);
             bookPanel.localScale = Vector3.one;
-
-            for (int i = 0; i < bookPanel.childCount; i++)
-                bookPanel.GetChild(i).gameObject.SetActive(true);
         }
+
+        if (nextButton != null)
+            nextButton.transform.SetAsLastSibling();
+
+        if (backButton != null)
+            backButton.transform.SetAsLastSibling();
 
         UpdatePages();
         StartCoroutine(OpenAnimation());
@@ -136,11 +176,8 @@ public class BookCanvasController : MonoBehaviour
 
     public void NextSpread()
     {
-        if (isAnimating)
-            return;
-
-        if (spreads == null || currentSpreadIndex >= spreads.Length - 1)
-            return;
+        if (isAnimating) return;
+        if (spreads == null || currentSpreadIndex >= spreads.Length - 1) return;
 
         currentSpreadIndex++;
         StartCoroutine(PageChangeAnimation());
@@ -148,11 +185,8 @@ public class BookCanvasController : MonoBehaviour
 
     public void PreviousSpread()
     {
-        if (isAnimating)
-            return;
-
-        if (currentSpreadIndex <= 0)
-            return;
+        if (isAnimating) return;
+        if (currentSpreadIndex <= 0) return;
 
         currentSpreadIndex--;
         StartCoroutine(PageChangeAnimation());
@@ -167,15 +201,8 @@ public class BookCanvasController : MonoBehaviour
 
         if (leftImage != null)
         {
-            if (spread.leftImage != null)
-            {
-                leftImage.gameObject.SetActive(true);
-                leftImage.sprite = spread.leftImage;
-            }
-            else
-            {
-                leftImage.gameObject.SetActive(false);
-            }
+            leftImage.gameObject.SetActive(spread.leftImage != null);
+            leftImage.sprite = spread.leftImage;
         }
 
         if (leftText != null)
@@ -233,15 +260,9 @@ public class BookCanvasController : MonoBehaviour
         if (audioSource != null && pageTurnSound != null)
             audioSource.PlayOneShot(pageTurnSound);
 
-        if (bookPanel != null)
-            bookPanel.localScale = new Vector3(0.96f, 0.96f, 1f);
-
-        yield return new WaitForSecondsRealtime(pageBounceTime);
-
         UpdatePages();
 
-        if (bookPanel != null)
-            bookPanel.localScale = Vector3.one;
+        yield return new WaitForSecondsRealtime(pageBounceTime);
 
         isAnimating = false;
     }
