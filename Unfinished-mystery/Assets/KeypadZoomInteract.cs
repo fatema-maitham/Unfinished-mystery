@@ -5,28 +5,23 @@ using Unity.Cinemachine;
 
 public class KeypadZoomInteract : MonoBehaviour
 {
-    [Header("Player")]
     public Transform player;
-
-    [Header("Keypad")]
     public NavKeypad.Keypad keypad;
 
-    [Header("Cameras")]
     public CinemachineCamera keypadCamera;
     public CinemachineCamera playerCamera;
     public Camera mainCamera;
 
-    [Header("Interaction")]
     public float interactDistance = 3f;
     public float clickDistance = 100f;
     public LayerMask keypadButtonLayer = ~0;
 
     private bool isZoomed;
-    private bool ignoreMouseThisFrame;
+    private bool exiting;
 
     private void Start()
     {
-        ForceNormalCamera();
+        NormalCamera();
     }
 
     private void Update()
@@ -51,27 +46,24 @@ public class KeypadZoomInteract : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (Keyboard.current != null &&
+        if (!exiting &&
+            Keyboard.current != null &&
             (Keyboard.current.zKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame))
         {
-            ExitZoom();
+            StartCoroutine(ExitZoomSafe());
             return;
         }
 
-        if (!ignoreMouseThisFrame &&
-            Mouse.current != null &&
-            Mouse.current.leftButton.wasPressedThisFrame)
+        if (!exiting && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             ClickKeypadButton();
         }
-
-        ignoreMouseThisFrame = false;
     }
 
     private void EnterZoom()
     {
+        exiting = false;
         isZoomed = true;
-        ignoreMouseThisFrame = true;
 
         keypadCamera.Priority = 100;
         playerCamera.Priority = 0;
@@ -80,13 +72,9 @@ public class KeypadZoomInteract : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void ExitZoom()
+    private IEnumerator ExitZoomSafe()
     {
-        StartCoroutine(ExitZoomRoutine());
-    }
-
-    private IEnumerator ExitZoomRoutine()
-    {
+        exiting = true;
         isZoomed = false;
 
         if (keypadCamera != null)
@@ -95,18 +83,22 @@ public class KeypadZoomInteract : MonoBehaviour
         if (playerCamera != null)
             playerCamera.Priority = 10;
 
+        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
+            yield return null;
+
         yield return null;
         yield return null;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        ignoreMouseThisFrame = true;
+        exiting = false;
     }
 
-    private void ForceNormalCamera()
+    private void NormalCamera()
     {
         isZoomed = false;
+        exiting = false;
 
         if (keypadCamera != null)
             keypadCamera.Priority = 0;
