@@ -21,6 +21,9 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
     [SerializeField] private Animator drawerAnimator;
     [SerializeField] private MonoBehaviour drawerInteractableUI;
 
+    [Header("Key Reset")]
+    [SerializeField] private InventoryKeyLoopReset keyReset;
+
     private string currentCode = "";
     private bool solvedThisLoop = false;
 
@@ -98,6 +101,9 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
             if (drawerAnimator != null)
                 drawerAnimator.SetTrigger("Open");
 
+            if (keyReset != null)
+                keyReset.MakeKeyPickupAvailable();
+
             CloseKeypad();
         }
         else
@@ -119,11 +125,7 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
 
     public void CloseKeypad()
     {
-       // Cursor.visible = false;
-       // Cursor.lockState = CursorLockMode.Locked;
-
         Time.timeScale = 1f;
-
         gameObject.SetActive(false);
     }
 
@@ -138,11 +140,7 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
         if (resultText != null)
             resultText.text = "";
 
-        //Cursor.visible = false;
-       // Cursor.lockState = CursorLockMode.Locked;
-
         Time.timeScale = 1f;
-
         gameObject.SetActive(false);
     }
 

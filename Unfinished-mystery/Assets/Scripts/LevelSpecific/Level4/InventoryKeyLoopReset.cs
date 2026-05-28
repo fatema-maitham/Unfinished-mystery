@@ -12,18 +12,38 @@ public class InventoryKeyLoopReset : MonoBehaviour, ILoopResettable
     [SerializeField] private Inventory inventory;
     [SerializeField] private Hotbar hotbar;
 
-    
-    private Vector3 keyStartLocalPosition;
-    private Quaternion keyStartLocalRotation;
-    private Vector3 keyStartLocalScale;
+    [Header("UI Refresh")]
+    [SerializeField] private MonoBehaviour hotbarUI;
+    [SerializeField] private MonoBehaviour inventoryUI;
+
+    private Vector3 startLocalPosition;
+    private Quaternion startLocalRotation;
+    private Vector3 startLocalScale;
+
+    private bool keyHidden = false;
 
     private void Awake()
     {
         if (keySceneObject != null)
         {
-            keyStartLocalPosition = keySceneObject.transform.localPosition;
-            keyStartLocalRotation = keySceneObject.transform.localRotation;
-            keyStartLocalScale = keySceneObject.transform.localScale;
+            startLocalPosition = keySceneObject.transform.localPosition;
+            startLocalRotation = keySceneObject.transform.localRotation;
+            startLocalScale = keySceneObject.transform.localScale;
+        }
+    }
+
+    private void Update()
+    {
+        if (keyHidden || keySceneObject == null)
+            return;
+
+        if (HasKey())
+        {
+            keyHidden = true;
+            HideKeyObject();
+            RefreshUI();
+
+            Debug.Log("KEY HIDDEN AFTER PICKUP");
         }
     }
 
@@ -34,18 +54,112 @@ public class InventoryKeyLoopReset : MonoBehaviour, ILoopResettable
         RemoveKeyFromSlots(inventory != null ? inventory.slots : null);
         RemoveKeyFromSlots(hotbar != null ? hotbar.slots : null);
 
+        keyHidden = false;
+
         if (keySceneObject != null)
         {
             keySceneObject.SetActive(true);
 
-            keySceneObject.transform.localPosition = keyStartLocalPosition;
-            keySceneObject.transform.localRotation = keyStartLocalRotation;
-            keySceneObject.transform.localScale = keyStartLocalScale;
+            keySceneObject.transform.localPosition = startLocalPosition;
+            keySceneObject.transform.localRotation = startLocalRotation;
+            keySceneObject.transform.localScale = startLocalScale;
+
+            ShowKeyVisuals();
+            SetKeyPickupEnabled(false);
         }
 
-        
+        RefreshUI();
 
         Debug.Log("KEY RESET FINISHED");
+    }
+
+    public void MakeKeyPickupAvailable()
+    {
+        if (keySceneObject == null)
+            return;
+
+        keySceneObject.SetActive(true);
+
+        ShowKeyVisuals();
+        SetKeyPickupEnabled(true);
+
+        Debug.Log("KEY PICKUP ENABLED");
+    }
+
+    private void HideKeyObject()
+    {
+        if (keySceneObject == null)
+            return;
+
+        SetKeyPickupEnabled(false);
+        HideKeyVisuals();
+        keySceneObject.SetActive(false);
+    }
+
+    private void ShowKeyVisuals()
+    {
+        foreach (Renderer rend in keySceneObject.GetComponentsInChildren<Renderer>(true))
+        {
+            if (rend != null)
+                rend.enabled = true;
+        }
+    }
+
+    private void HideKeyVisuals()
+    {
+        foreach (Renderer rend in keySceneObject.GetComponentsInChildren<Renderer>(true))
+        {
+            if (rend != null)
+                rend.enabled = false;
+        }
+    }
+
+    private void SetKeyPickupEnabled(bool enabled)
+    {
+        foreach (Collider col in keySceneObject.GetComponentsInChildren<Collider>(true))
+        {
+            if (col != null)
+                col.enabled = enabled;
+        }
+
+        foreach (MonoBehaviour script in keySceneObject.GetComponentsInChildren<MonoBehaviour>(true))
+        {
+            if (script == this)
+                continue;
+
+            string scriptName = script.GetType().Name;
+
+            if (scriptName.Contains("Pickup") || scriptName.Contains("ItemPickup"))
+                script.enabled = enabled;
+        }
+    }
+
+    private bool HasKey()
+    {
+        if (keyItem == null)
+            return false;
+
+        if (ContainsKey(inventory != null ? inventory.slots : null))
+            return true;
+
+        if (ContainsKey(hotbar != null ? hotbar.slots : null))
+            return true;
+
+        return false;
+    }
+
+    private bool ContainsKey(List<InventorySlot> slots)
+    {
+        if (slots == null)
+            return false;
+
+        foreach (InventorySlot slot in slots)
+        {
+            if (slot != null && !slot.IsEmpty && slot.item == keyItem)
+                return true;
+        }
+
+        return false;
     }
 
     private void RemoveKeyFromSlots(List<InventorySlot> slots)
@@ -63,4 +177,12 @@ public class InventoryKeyLoopReset : MonoBehaviour, ILoopResettable
         }
     }
 
+    private void RefreshUI()
+    {
+        if (hotbarUI != null)
+            hotbarUI.Invoke("RefreshUI", 0f);
+
+        if (inventoryUI != null)
+            inventoryUI.Invoke("RefreshUI", 0f);
+    }
 }
