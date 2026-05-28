@@ -2939,6 +2939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce79578997f340fcae13c2ff952ecb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalUnlock: 0
+  requiresFinalReel: 1
+  keypadUnlocked: 0
   player: {fileID: 698624460}
   playerMovementScript: {fileID: 1546910978}
   keypadCamera: {fileID: 1445420932}
@@ -2946,6 +2949,10 @@ MonoBehaviour:
   mainCamera: {fileID: 1230677072}
   interactDistance: 2
   clickDistance: 10
+  interactPrompt: {fileID: 0}
+  promptAction: ENTER
+  promptSubLabel: Keypad
+  keypadKeyText: {fileID: 0}
 --- !u!65 &523398906
 BoxCollider:
   m_ObjectHideFlags: 0

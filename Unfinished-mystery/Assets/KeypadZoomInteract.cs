@@ -1,9 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using TMPro; // Added for your text fields
 
 public class KeypadZoomInteract : MonoBehaviour
 {
+    [Header("Keypad State")]
+    public bool finalUnlock;
+    public bool requiresFinalReel = true;
+    public bool keypadUnlocked;
+
     [Header("Player")]
     public Transform player;
     public MonoBehaviour playerMovementScript;
@@ -13,9 +19,15 @@ public class KeypadZoomInteract : MonoBehaviour
     public CinemachineCamera playerCamera;
     public Camera mainCamera;
 
-    [Header("Interaction")]
+    [Header("Interaction Settings")]
     public float interactDistance = 2f;
     public float clickDistance = 100f;
+
+    [Header("Prompt UI")]
+    public GameObject interactPrompt; // Drag your PromptPanel UI object here
+    public string promptAction = "ENTER";
+    public string promptSubLabel = "Keypad";
+    public TMP_Text keypadKeyText;
 
     private bool isZoomed;
 
@@ -39,6 +51,13 @@ public class KeypadZoomInteract : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearKeypad = distance <= interactDistance;
 
+        // FIX 1: Auto-manage your UI Prompt pop-up panel visibility
+        if (interactPrompt != null)
+        {
+            // Show only if the player is near the keypad AND not currently zoomed into it
+            interactPrompt.SetActive(nearKeypad && !isZoomed);
+        }
+
         if (!isZoomed)
         {
             if (nearKeypad && Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
@@ -46,6 +65,11 @@ public class KeypadZoomInteract : MonoBehaviour
         }
         else
         {
+            // FIX 2: Force the cursor to stay unlocked every frame while zoomed.
+            // This stops the NavKeypad asset from stealing and locking your mouse on click!
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
                 ExitZoom();
 
