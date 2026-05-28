@@ -333,15 +333,22 @@ FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
         UpdateLoopCounterUI();
     }
 
-    void ApplyLoopChange()
-    {
-        LoopChangeSystem loopChangeSystem = FindFirstObjectByType<LoopChangeSystem>();
+   void ApplyLoopChange()
+{
+    LoopChangeSystem loopChangeSystem = FindFirstObjectByType<LoopChangeSystem>();
 
-        if (loopChangeSystem != null)
-        {
-            loopChangeSystem.SetLoop(currentLoop);
-        }
+    if (loopChangeSystem != null)
+    {
+        loopChangeSystem.SetLoop(currentLoop);
     }
+
+    L3SmartLoopHints smartLoopHints = FindFirstObjectByType<L3SmartLoopHints>();
+
+    if (smartLoopHints != null)
+    {
+        smartLoopHints.SetCurrentLoop(currentLoop);
+    }
+}
 
     void ExitGame()
     {
