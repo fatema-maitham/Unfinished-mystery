@@ -8,8 +8,7 @@ public class WritingBookKeyboard : MonoBehaviour
     [SerializeField] private TMP_InputField writingInputField;
 
     [Header("Key")]
-    [SerializeField] private KeyCode openCloseKey = KeyCode.N;
-
+[SerializeField] private KeyCode openCloseKey = KeyCode.LeftControl;
     private bool isOpen;
 
     private void Start()
