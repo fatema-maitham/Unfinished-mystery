@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
-  - Name: L4BadgePopup
+  - Name: Key
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Interactable
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -119,8 +119,8 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
 
     public void CloseKeypad()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
+       // Cursor.lockState = CursorLockMode.Locked;
 
         Time.timeScale = 1f;
 
@@ -138,8 +138,8 @@ public class KeypadUI : MonoBehaviour, ILoopResettable
         if (resultText != null)
             resultText.text = "";
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+       // Cursor.lockState = CursorLockMode.Locked;
 
         Time.timeScale = 1f;
 

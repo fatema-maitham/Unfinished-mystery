@@ -53,8 +53,8 @@ public class DrawerKeypadInteraction : MonoBehaviour, IActivatable
         if (keypadCanvas != null)
             keypadCanvas.SetActive(false);
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ResetDrawerPuzzle()
@@ -65,8 +65,8 @@ public class DrawerKeypadInteraction : MonoBehaviour, IActivatable
     if (keypadCanvas != null)
         keypadCanvas.SetActive(false);
 
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
+    //Cursor.visible = false;
+   // Cursor.lockState = CursorLockMode.Locked;
 
     if (drawerAnimator != null)
     {
