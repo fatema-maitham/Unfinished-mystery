@@ -2911,9 +2911,6 @@ PrefabInstance:
       addedObject: {fileID: 523398910}
     - targetCorrespondingSourceObject: {fileID: 2303921294396319335, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 523398913}
-    - targetCorrespondingSourceObject: {fileID: 2303921294396319335, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 523398914}
   m_SourcePrefab: {fileID: 100100000, guid: 2cf8072ebed1149479d25d30c324125c, type: 3}
 --- !u!1 &523398903 stripped
@@ -2940,7 +2937,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523398903}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ce79578997f340fcae13c2ff952ecb7, type: 3}
   m_Name: 
@@ -3012,27 +3009,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &523398913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523398903}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 592989437f9ac77408430cc36fc6cd33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 698624460}
-  interactDistance: 2.5
-  playKey: 122
-  promptUI: {fileID: 0}
-  label: Unlock
-  subLabel: Safe
-  clueCheckPanel: {fileID: 0}
-  successAudio: {fileID: 0}
-  rewardObject: {fileID: 0}
 --- !u!114 &523398914
 MonoBehaviour:
   m_ObjectHideFlags: 0
