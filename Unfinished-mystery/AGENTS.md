@@ -9,6 +9,7 @@
     - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
 - Active game object:
   - Name: Text (TMP)
+  - Name: KeypadCloseUpCamera
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

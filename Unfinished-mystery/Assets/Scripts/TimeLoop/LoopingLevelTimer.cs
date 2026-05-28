@@ -26,6 +26,10 @@ public class LoopingLevelTimer : MonoBehaviour
     [Header("Freeze On Game Over")]
     public MonoBehaviour[] disableWhenGameOver;
 
+    [Header("Optional Player Respawn")]
+    public Transform player;
+    public Transform playerSpawnPoint;
+
     public float pulseMaxAlpha = 0.3f;
     public float pulseFadeInDuration = 0.35f;
     public float pulseFadeOutDuration = 0.45f;
@@ -107,7 +111,9 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timeLeft / 60f);
         int seconds = Mathf.FloorToInt(timeLeft % 60f);
-        timerText.text = minutes + ":" + seconds.ToString("00");
+
+        if (timerText != null)
+            timerText.text = minutes + ":" + seconds.ToString("00");
     }
 
     void UpdateLoopCounterUI()
@@ -118,6 +124,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     void HandleEffects()
     {
+        if (timerText == null)
+            return;
+
         if (timeLeft <= 60f)
         {
             timerText.color = Color.red;
@@ -146,6 +155,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     IEnumerator ShakeOnce()
     {
+        if (timerText == null)
+            yield break;
+
         float elapsed = 0f;
         float duration = 1f;
 
@@ -311,8 +323,24 @@ public class LoopingLevelTimer : MonoBehaviour
         timeLeft = loopDuration;
         hasShaken = false;
 
-        timerText.color = Color.white;
-        timerText.transform.localPosition = originalPos;
+        if (player != null && playerSpawnPoint != null)
+        {
+            CharacterController controller = player.GetComponent<CharacterController>();
+
+            if (controller != null)
+                controller.enabled = false;
+
+            player.SetPositionAndRotation(playerSpawnPoint.position, playerSpawnPoint.rotation);
+
+            if (controller != null)
+                controller.enabled = true;
+        }
+
+        if (timerText != null)
+        {
+            timerText.color = Color.white;
+            timerText.transform.localPosition = originalPos;
+        }
 
         ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
             .OfType<ILoopResettable>()
@@ -338,6 +366,13 @@ public class LoopingLevelTimer : MonoBehaviour
         if (loopChangeSystem != null)
         {
             loopChangeSystem.SetLoop(currentLoop);
+        }
+
+        L3SmartLoopHints smartLoopHints = FindFirstObjectByType<L3SmartLoopHints>();
+
+        if (smartLoopHints != null)
+        {
+            smartLoopHints.SetCurrentLoop(currentLoop);
         }
     }
 
