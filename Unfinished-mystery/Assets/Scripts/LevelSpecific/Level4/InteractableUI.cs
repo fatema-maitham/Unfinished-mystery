@@ -20,8 +20,7 @@ public class InteractableUI : MonoBehaviour
     {
         if (player == null) return;
 
-        float distance = Vector3.Distance(
-            player.position, transform.position);
+        float distance = Vector3.Distance(player.position, transform.position);
         bool playerInRange = distance <= interactDistance;
 
         if (playerInRange && !isOpen)
@@ -33,6 +32,17 @@ public class InteractableUI : MonoBehaviour
         {
             isOpen = !isOpen;
             uiCanvas.SetActive(isOpen);
+
+            if (isOpen)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 }

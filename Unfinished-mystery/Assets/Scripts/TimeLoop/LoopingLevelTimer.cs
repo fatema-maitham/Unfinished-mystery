@@ -8,7 +8,7 @@ using System.Linq;
 public class LoopingLevelTimer : MonoBehaviour
 {
     public float loopDuration = 300f;
-    public int maxLoops = 10;
+    public int maxLoops = 5;
 
     public TMP_Text timerText;
     public TMP_Text loopCounterText;
@@ -22,6 +22,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     public GameObject gameOverPanel;
     public Button exitButton;
+
+    [Header("Freeze On Game Over")]
+    public MonoBehaviour[] disableWhenGameOver;
 
     [Header("Optional Player Respawn")]
     public Transform player;
@@ -108,7 +111,9 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timeLeft / 60f);
         int seconds = Mathf.FloorToInt(timeLeft % 60f);
-        timerText.text = minutes + ":" + seconds.ToString("00");
+
+        if (timerText != null)
+            timerText.text = minutes + ":" + seconds.ToString("00");
     }
 
     void UpdateLoopCounterUI()
@@ -119,6 +124,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     void HandleEffects()
     {
+        if (timerText == null)
+            return;
+
         if (timeLeft <= 60f)
         {
             timerText.color = Color.red;
@@ -147,6 +155,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     IEnumerator ShakeOnce()
     {
+        if (timerText == null)
+            yield break;
+
         float elapsed = 0f;
         float duration = 1f;
 
@@ -266,6 +277,15 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         isBusy = true;
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        foreach (MonoBehaviour script in disableWhenGameOver)
+        {
+            if (script != null)
+                script.enabled = false;
+        }
+
         if (playerReset != null)
             playerReset.SetMovementEnabled(false);
 
@@ -282,6 +302,9 @@ public class LoopingLevelTimer : MonoBehaviour
         if (cg != null)
         {
             cg.alpha = 0f;
+            cg.interactable = true;
+            cg.blocksRaycasts = true;
+
             float t = 0f;
 
             while (t < 2f)
@@ -301,20 +324,23 @@ public class LoopingLevelTimer : MonoBehaviour
         hasShaken = false;
 
         if (player != null && playerSpawnPoint != null)
-{
-    CharacterController controller = player.GetComponent<CharacterController>();
+        {
+            CharacterController controller = player.GetComponent<CharacterController>();
 
-    if (controller != null)
-        controller.enabled = false;
+            if (controller != null)
+                controller.enabled = false;
 
-    player.SetPositionAndRotation(playerSpawnPoint.position, playerSpawnPoint.rotation);
+            player.SetPositionAndRotation(playerSpawnPoint.position, playerSpawnPoint.rotation);
 
-    if (controller != null)
-        controller.enabled = true;
-}
+            if (controller != null)
+                controller.enabled = true;
+        }
 
-        timerText.color = Color.white;
-        timerText.transform.localPosition = originalPos;
+        if (timerText != null)
+        {
+            timerText.color = Color.white;
+            timerText.transform.localPosition = originalPos;
+        }
 
         ILoopResettable[] resettableObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
             .OfType<ILoopResettable>()
@@ -327,35 +353,31 @@ public class LoopingLevelTimer : MonoBehaviour
 
         ApplyLoopChange();
 
-FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
+        FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
 
         UpdateTimerUI();
         UpdateLoopCounterUI();
     }
 
-   void ApplyLoopChange()
-{
-    LoopChangeSystem loopChangeSystem = FindFirstObjectByType<LoopChangeSystem>();
-
-    if (loopChangeSystem != null)
+    void ApplyLoopChange()
     {
-        loopChangeSystem.SetLoop(currentLoop);
+        LoopChangeSystem loopChangeSystem = FindFirstObjectByType<LoopChangeSystem>();
+
+        if (loopChangeSystem != null)
+        {
+            loopChangeSystem.SetLoop(currentLoop);
+        }
+
+        L3SmartLoopHints smartLoopHints = FindFirstObjectByType<L3SmartLoopHints>();
+
+        if (smartLoopHints != null)
+        {
+            smartLoopHints.SetCurrentLoop(currentLoop);
+        }
     }
 
-    L3SmartLoopHints smartLoopHints = FindFirstObjectByType<L3SmartLoopHints>();
-
-    if (smartLoopHints != null)
-    {
-        smartLoopHints.SetCurrentLoop(currentLoop);
-    }
-}
-
-    void ExitGame()
+    public void ExitGame()
     {
         SceneManager.LoadScene("LevelsBook");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
     }
 }
