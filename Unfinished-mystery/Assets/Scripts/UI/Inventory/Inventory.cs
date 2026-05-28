@@ -46,54 +46,6 @@ namespace InventoryFramework
             return false;
         }
 
-        public bool RemoveItem(Item itemToRemove, int amount = 1)
-        {
-            if (itemToRemove == null)
-                return false;
-
-            foreach (var slot in slots)
-            {
-                if (!slot.IsEmpty && slot.item == itemToRemove)
-                {
-                    if (slot.count >= amount)
-                    {
-                        slot.count -= amount;
-
-                        if (slot.count <= 0)
-                        {
-                            slot.item = null;
-                            slot.count = 0;
-                        }
-
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        public bool HasItem(Item itemToCheck, int amount = 1)
-        {
-            if (itemToCheck == null)
-                return false;
-
-            int total = 0;
-
-            foreach (var slot in slots)
-            {
-                if (!slot.IsEmpty && slot.item == itemToCheck)
-                {
-                    total += slot.count;
-
-                    if (total >= amount)
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
         public void MoveOrSwap(int from, int to)
         {
             if (from == to) return;

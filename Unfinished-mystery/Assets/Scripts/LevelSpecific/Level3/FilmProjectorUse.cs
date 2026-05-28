@@ -28,7 +28,6 @@ public class FilmProjectorUse : MonoBehaviour
     public Item reel2Item;
     public Item reel3Item;
     public Hotbar hotbar;
-    public Inventory inventory;
 
     [Header("Mirror Hint")]
     [SerializeField] private GameObject mirrorHintLight;
@@ -45,6 +44,7 @@ public class FilmProjectorUse : MonoBehaviour
 
     [Header("Loop Glitch Screen")]
     public Texture glitchScreenTexture;
+
 
     [Header("Loop Glitch Sound")]
     public AudioSource loopGlitchAudioSource;
@@ -73,17 +73,22 @@ public class FilmProjectorUse : MonoBehaviour
     public AudioClip reelLoadClip;
 
     [Header("Final Code Reveal")]
-    [SerializeField] private L3KeypadZoomInteract finalKeypadPrompt;
+   [SerializeField] private L3KeypadZoomInteract finalKeypadPrompt;
     [SerializeField] private Texture finalCodeTexture;
     [SerializeField] private float glitchDelay = 0.6f;
+
+
 
     [Header("Smart Loop Hints")]
     [SerializeField] private L3SmartLoopHints smartLoopHints;
 
+
     [Header("Memory Echo")]
     [SerializeField] private L3Reel1Echo reel1Echo;
     [SerializeField] private L3Reel2Echo reel2Echo;
+
     [SerializeField] private L3Reel3Echo reel3Echo;
+
     [SerializeField] private L3ProjectorBreakdown projectorBreakdown;
 
     [TextArea(2, 3)]
@@ -166,105 +171,114 @@ public class FilmProjectorUse : MonoBehaviour
     }
 
     public void NotifyReelCollected(int reelNumber)
+{
+    Debug.Log("REEL COLLECTED NOTIFY: " + reelNumber);
+
+    if (reelNumber == 1) reel1Collected = true;
+
+    if (reelNumber == 2)
     {
-        Debug.Log("REEL COLLECTED NOTIFY: " + reelNumber);
+        reel2Collected = true;
 
-        if (reelNumber == 1) reel1Collected = true;
-
-        if (reelNumber == 2)
-        {
-            reel2Collected = true;
-
-            if (smartLoopHints != null)
-                smartLoopHints.ApplyLoopHints();
-        }
-
-        if (reelNumber == 3)
-        {
-            reel3Collected = true;
-
-            if (smartLoopHints != null)
-                smartLoopHints.ApplyLoopHints();
-        }
-
-        UpdatePrompt();
+        if (smartLoopHints != null)
+            smartLoopHints.ApplyLoopHints();
     }
+
+    if (reelNumber == 3)
+    {
+        reel3Collected = true;
+
+        if (smartLoopHints != null)
+            smartLoopHints.ApplyLoopHints();
+    }
+
+    UpdatePrompt();
+}
 
     private void Update()
     {
+
+
         if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
         {
             HandleProjectorUse();
         }
+
+
+
+        // if (Input.GetKeyDown(KeyCode.G))
+        // {
+        //     Debug.Log("G pressed - testing screen glitch");
+        //     StartCoroutine(ShowLoopGlitch(1f));
+        // }
+
+
+
+
+        // if (playerInRange && !videoPlaying && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     HandleProjectorUse();
+        // }
     }
 
-   private void HandleProjectorUse()
-{
-    int reelToUse = GetBestReelAction();
-
-    if (reelToUse == 0)
-        return;
-
-    if (reelToUse == 2 && !reel1Watched)
+    private void HandleProjectorUse()
     {
-        StartCoroutine(ShowErrorMessage(
-            "This reel does not belong here yet.\nFind the missing scene first."
-        ));
-        return;
+        int reelToUse = GetBestReelAction();
+
+        if (reelToUse == 0)
+            return;
+
+        if (reelToUse == 2 && !reel1Watched)
+        {
+            StartCoroutine(ShowErrorMessage(
+                "This reel does not belong here yet.\nFind the missing scene first."
+            ));
+            return;
+        }
+
+        if (reelToUse == 3 && !reel2Watched)
+        {
+            StartCoroutine(ShowErrorMessage(
+                "The reel stutters...\nThis ending does not make sense yet."
+            ));
+            return;
+        }
+
+        bool alreadyWatched = IsReelWatched(reelToUse);
+
+        if (alreadyWatched)
+        {
+            isReplay = true;
+            PlayReel(reelToUse);
+            return;
+        }
+
+        Item itemToRemove = GetReelItem(reelToUse);
+
+        if (itemToRemove == null || hotbar == null)
+            return;
+
+        bool removed = hotbar.RemoveItem(itemToRemove, 1);
+
+        if (removed)
+        {
+            isReplay = false;
+            SetReelCollected(reelToUse, false);
+
+            if (reelToUse == 3 && tvStaticController != null)
+                tvStaticController.StopStaticPermanently();
+
+            HotbarUI hotbarUI = FindAnyObjectByType<HotbarUI>();
+            if (hotbarUI != null)
+                hotbarUI.RefreshUI();
+
+            PlayReel(reelToUse);
+        }
+        else
+        {
+            StartCoroutine(ShowErrorMessage("You need the correct film reel first."));
+        }
     }
-
-    if (reelToUse == 3 && !reel2Watched)
-    {
-        StartCoroutine(ShowErrorMessage(
-            "The reel stutters...\nThis ending does not make sense yet."
-        ));
-        return;
-    }
-
-    bool alreadyWatched = IsReelWatched(reelToUse);
-
-    if (alreadyWatched)
-    {
-        isReplay = true;
-        PlayReel(reelToUse);
-        return;
-    }
-
-    Item itemToRemove = GetReelItem(reelToUse);
-
-    if (itemToRemove == null)
-        return;
-
-    bool removed = RemoveReelFromInventoryOrHotbar(itemToRemove);
-
-    if (!removed && IsReelCollected(reelToUse))
-    {
-        removed = true;
-    }
-
-    if (removed)
-    {
-        isReplay = false;
-        SetReelCollected(reelToUse, false);
-
-        if (reelToUse == 3 && tvStaticController != null)
-            tvStaticController.StopStaticPermanently();
-
-        HotbarUI hotbarUI = FindAnyObjectByType<HotbarUI>();
-        if (hotbarUI != null)
-            hotbarUI.RefreshUI();
-
-        InventoryUI inventoryUI = FindAnyObjectByType<InventoryUI>();
-        if (inventoryUI != null)
-            inventoryUI.RefreshUI();
-
-        PlayReel(reelToUse);
-    }
-    else
-    {
-        StartCoroutine(ShowErrorMessage("You need the correct film reel first."));
-    }
-}
 
     private int GetBestReelAction()
     {
@@ -306,15 +320,6 @@ public class FilmProjectorUse : MonoBehaviour
         if (reelNumber == 2) reel2Collected = value;
         if (reelNumber == 3) reel3Collected = value;
     }
-
-
-    private bool IsReelCollected(int reelNumber)
-{
-    if (reelNumber == 1) return reel1Collected;
-    if (reelNumber == 2) return reel2Collected;
-    if (reelNumber == 3) return reel3Collected;
-    return false;
-}
 
     private void PlayReel(int reelNumber)
     {
@@ -366,10 +371,19 @@ public class FilmProjectorUse : MonoBehaviour
             reel1Watched = true;
 
             if (smartLoopHints != null)
-                smartLoopHints.ApplyLoopHints();
+            smartLoopHints.ApplyLoopHints();
+
 
             if (reel1Echo != null)
-                reel1Echo.PlayEcho();
+            reel1Echo.PlayEcho();
+
+            // if (exitRedWarningLight != null)
+            // {
+            //     if (!HasReelAvailable(2) && !reel2Watched)
+            //         exitRedWarningLight.StartFlicker();
+            //     else
+            //         exitRedWarningLight.ForceOff();
+            // }
 
             StartCoroutine(ShowDiscoveryThenPrompt(
                 "Scene 1 discovered: The girl was inside the cinema before closing."
@@ -380,14 +394,26 @@ public class FilmProjectorUse : MonoBehaviour
             reel2Watched = true;
 
             if (tvStaticController != null)
-            {
-            }
+            // {
+            //     if (!reel3Collected && !reel3Watched)
+            //         tvStaticController.StartStatic();
+            //     else
+            //         tvStaticController.StopStaticPermanently();
+            // }
+
+
+
+            // if (mirrorHintLight != null && !reel3Collected && !reel3Watched)
+            //     mirrorHintLight.SetActive(true);
+
 
             if (smartLoopHints != null)
                 smartLoopHints.ApplyLoopHints();
 
+
             if (reel2Echo != null)
                 reel2Echo.PlayEcho();
+
 
             StartCoroutine(ShowDiscoveryThenPrompt(
                 "Scene 2 discovered: Someone blocked the exit that night. Find the final reel."
@@ -403,29 +429,30 @@ public class FilmProjectorUse : MonoBehaviour
             if (mirrorHintLight != null)
                 mirrorHintLight.SetActive(false);
 
+
             if (reel3Echo != null)
                 reel3Echo.PlayEcho();
 
-            StartCoroutine(Reel3EchoThenFinalSequence());
-        }
+                StartCoroutine(Reel3EchoThenFinalSequence());        }
         else
         {
             UpdatePrompt();
         }
     }
 
+
     private IEnumerator Reel3EchoThenFinalSequence()
-    {
-        if (reel3Echo != null)
-            reel3Echo.PlayEcho();
+{
+    if (reel3Echo != null)
+        reel3Echo.PlayEcho();
 
-        yield return new WaitForSeconds(2f);
+    yield return new WaitForSeconds(2f);
 
-        if (projectorBreakdown != null)
-            projectorBreakdown.PlayBreakdown();
+    if (projectorBreakdown != null)
+    projectorBreakdown.PlayBreakdown();
 
-        yield return StartCoroutine(FinalReelEndingSequence());
-    }
+    yield return StartCoroutine(FinalReelEndingSequence());
+}
 
     private IEnumerator ShowDiscoveryThenPrompt(string message)
     {
@@ -509,36 +536,39 @@ public class FilmProjectorUse : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowLoopGlitch(float duration)
+
+
+public IEnumerator ShowLoopGlitch(float duration){
+    Debug.Log("ShowLoopGlitch called");
+
+    Debug.Log("ShowLoopGlitch called");
+
+    if (finalCodeShowing)
+        yield break;
+
+
+    if (screenRenderer == null || glitchScreenTexture == null)
     {
-        Debug.Log("ShowLoopGlitch called");
-
-        if (finalCodeShowing)
-            yield break;
-
-        if (screenRenderer == null || glitchScreenTexture == null)
-        {
-            Debug.LogWarning("Glitch failed: screenRenderer or glitchScreenTexture is missing.");
-            yield break;
-        }
-
-        screenRenderer.material.mainTexture = glitchScreenTexture;
-        screenRenderer.material.SetTexture("_BaseMap", glitchScreenTexture);
-
-        if (loopGlitchAudioSource != null && loopGlitchClip != null)
-        {
-            loopGlitchAudioSource.PlayOneShot(loopGlitchClip, loopGlitchVolume);
-        }
-
-        yield return new WaitForSeconds(duration);
-
-        ShowIdleScreen();
-
-        if (loopGlitchAudioSource != null)
-        {
-            loopGlitchAudioSource.Stop();
-        }
+        Debug.LogWarning("Glitch failed: screenRenderer or glitchScreenTexture is missing.");
+        yield break;
     }
+
+    screenRenderer.material.mainTexture = glitchScreenTexture;
+    screenRenderer.material.SetTexture("_BaseMap", glitchScreenTexture);
+
+    if (loopGlitchAudioSource != null && loopGlitchClip != null)
+    {
+        loopGlitchAudioSource.PlayOneShot(loopGlitchClip, loopGlitchVolume);
+    }
+
+    yield return new WaitForSeconds(duration);
+
+    ShowIdleScreen();
+    if (loopGlitchAudioSource != null)
+    {
+        loopGlitchAudioSource.Stop();
+    }
+}
 
     private void UpdatePrompt()
     {
@@ -585,38 +615,10 @@ public class FilmProjectorUse : MonoBehaviour
 
     private bool InventoryHasItem(Item item)
     {
-        if (item == null)
+        if (hotbar == null || item == null)
             return false;
 
-        if (ObjectHasItem(inventory, item))
-            return true;
-
-        if (ObjectHasItem(hotbar, item))
-            return true;
-
-        return false;
-    }
-
-    private bool RemoveReelFromInventoryOrHotbar(Item item)
-    {
-        if (item == null)
-            return false;
-
-        if (ObjectRemoveItem(inventory, item, 1))
-            return true;
-
-        if (ObjectRemoveItem(hotbar, item, 1))
-            return true;
-
-        return false;
-    }
-
-    private bool ObjectHasItem(object target, Item item)
-    {
-        if (target == null || item == null)
-            return false;
-
-        MethodInfo[] methods = target.GetType().GetMethods();
+        MethodInfo[] methods = hotbar.GetType().GetMethods();
 
         foreach (MethodInfo method in methods)
         {
@@ -626,13 +628,13 @@ public class FilmProjectorUse : MonoBehaviour
 
                 if (p.Length == 2)
                 {
-                    object result = method.Invoke(target, new object[] { item, 1 });
+                    object result = method.Invoke(hotbar, new object[] { item, 1 });
                     if (result is bool hasItem) return hasItem;
                 }
 
                 if (p.Length == 1)
                 {
-                    object result = method.Invoke(target, new object[] { item });
+                    object result = method.Invoke(hotbar, new object[] { item });
                     if (result is bool hasItem) return hasItem;
                 }
             }
@@ -643,7 +645,7 @@ public class FilmProjectorUse : MonoBehaviour
 
                 if (p.Length == 1)
                 {
-                    object result = method.Invoke(target, new object[] { item });
+                    object result = method.Invoke(hotbar, new object[] { item });
                     if (result is bool hasItem) return hasItem;
                 }
             }
@@ -654,38 +656,8 @@ public class FilmProjectorUse : MonoBehaviour
 
                 if (p.Length == 1)
                 {
-                    object result = method.Invoke(target, new object[] { item });
+                    object result = method.Invoke(hotbar, new object[] { item });
                     if (result is int count) return count > 0;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private bool ObjectRemoveItem(object target, Item item, int amount)
-    {
-        if (target == null || item == null)
-            return false;
-
-        MethodInfo[] methods = target.GetType().GetMethods();
-
-        foreach (MethodInfo method in methods)
-        {
-            if (method.Name == "RemoveItem")
-            {
-                ParameterInfo[] p = method.GetParameters();
-
-                if (p.Length == 2)
-                {
-                    object result = method.Invoke(target, new object[] { item, amount });
-                    if (result is bool removed) return removed;
-                }
-
-                if (p.Length == 1)
-                {
-                    object result = method.Invoke(target, new object[] { item });
-                    if (result is bool removed) return removed;
                 }
             }
         }
