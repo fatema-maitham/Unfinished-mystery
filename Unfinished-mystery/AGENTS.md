@@ -3,6 +3,8 @@
 - Unity version: Unity 6000.1.13f1
 - Active scene:
   - Name: Level4
+  - Name: Level1
+  - Name: GameSummary
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
   - Layers:
@@ -11,4 +13,8 @@
   - Name: Key
   - Tag: Untagged
   - Layer: Interactable
+  - Name: PasswordWindow
+  - Name: LevelSummaryPanel
+  - Tag: Untagged
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
