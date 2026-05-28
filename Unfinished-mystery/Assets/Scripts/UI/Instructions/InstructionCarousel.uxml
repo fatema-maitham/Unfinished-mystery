@@ -1,47 +1,19 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-
-    <!--
-        InstructionCarousel.uxml
-        ========================
-        Full-screen dimmed overlay containing the carousel panel.
-        Set UIDocument Sort Order higher than your HUD so it draws on top.
-    -->
-
-    <!-- Dim backdrop + carousel root -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Instructions/InstructionCarousel.uss?fileID=7433441132597879392&amp;guid=0735dc2b933f4db4286ac938bf0d5186&amp;type=3#InstructionCarousel" />
     <ui:VisualElement name="carousel-overlay" class="carousel-overlay">
-
-        <!-- Centred card panel -->
         <ui:VisualElement name="carousel-panel" class="carousel-panel">
-
-            <!-- Close (×) button – top-right corner -->
-            <ui:Button name="btn-close" class="btn-close" text="✕" />
-
-            <!-- Slide illustration area -->
+            <ui:Button name="btn-close" text="✕" class="btn-close" />
             <ui:VisualElement name="slide-image" class="slide-image" />
-
-            <!-- Slide title -->
-            <ui:Label name="slide-title" class="slide-title" text="Slide Title" />
-
-            <!-- Slide description -->
-            <ui:Label name="slide-desc" class="slide-desc"
-                      text="Description goes here." />
-
-            <!-- Bottom row: prev arrow · dots · next arrow -->
+            <ui:Label name="slide-title" text="Slide Title" class="slide-title" />
+            <ui:Label name="slide-desc" text="Description goes here." class="slide-desc" />
             <ui:VisualElement class="carousel-controls">
-
-                <ui:Button name="btn-prev" class="arrow-btn" text="&#8249;" />
-
+                <ui:Button name="btn-prev" text="‹" class="arrow-btn" />
                 <ui:VisualElement class="dots-row">
                     <ui:VisualElement name="dots-container" class="dots-container" />
-                    <ui:Label name="slide-counter" class="slide-counter" text="1 / 5" />
+                    <ui:Label name="slide-counter" text="1 / 5" class="slide-counter" />
                 </ui:VisualElement>
-
-                <ui:Button name="btn-next" class="arrow-btn" text="&#8250;" />
-
+                <ui:Button name="btn-next" text="›" class="arrow-btn" />
             </ui:VisualElement>
-
         </ui:VisualElement>
-
     </ui:VisualElement>
-
 </ui:UXML>
