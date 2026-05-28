@@ -1572,7 +1572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuSceneName: MainMenu
-  playAgainSceneName: LevelSummary
+  playAgainSceneName: Level1
 --- !u!4 &1588872047
 Transform:
   m_ObjectHideFlags: 0
