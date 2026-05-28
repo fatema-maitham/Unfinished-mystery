@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueSceneName: LevelsBook
-  replaySceneName: Level1
+  replaySceneName: Level4
 --- !u!114 &216146569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,8 +1212,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 216146569}
-        m_TargetAssemblyTypeName: LevelSummaryUI, Assembly-CSharp
+      - m_Target: {fileID: 216146568}
+        m_TargetAssemblyTypeName: LevelSummaryButtons, Assembly-CSharp
         m_MethodName: ReplayLevel
         m_Mode: 1
         m_Arguments:
@@ -1396,9 +1396,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 216146569}
-        m_TargetAssemblyTypeName: LevelSummaryUI, Assembly-CSharp
-        m_MethodName: Continue
+      - m_Target: {fileID: 216146568}
+        m_TargetAssemblyTypeName: LevelSummaryButtons, Assembly-CSharp
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
