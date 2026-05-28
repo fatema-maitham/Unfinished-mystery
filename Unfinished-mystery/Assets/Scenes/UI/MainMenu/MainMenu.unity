@@ -6483,9 +6483,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "W / A / S / D or Arrow Keys \u2013 Move\nMouse \u2013 Look Around\nE \u2013
-    Interact / Inspect / Read\nTAB \u2013 Memory Notes\nESC \u2013 Pause Menu\n0
-    \u2013 9 \u2013 Inventory Slots"
+  m_text: "W / A / S / D \u2013 Move\nMouse \u2013 Look Around\nE \u2013 Interact
+    / Inspect / Read\nTAB \u2013 Memory Notes\nESC \u2013 Pause Menu\n0 \u2013 9
+    \u2013 Inventory Slots\nLeft Ctrl \u2013 Open Writing Notebook"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
   m_sharedMaterial: {fileID: -1858144287779687364, guid: e91fa4ad399e14dd6914ef91944dbdc5, type: 2}
