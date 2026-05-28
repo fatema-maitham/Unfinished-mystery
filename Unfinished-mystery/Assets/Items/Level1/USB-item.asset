@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de710cc37b178ac41bdc90fbef7a5c3b, type: 3}
-  m_Name: FilmReel_Item
+  m_Name: USB-item
   m_EditorClassIdentifier: 
   id: 0
   itemName: ReelIcon
