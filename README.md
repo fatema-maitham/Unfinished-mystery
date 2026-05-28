@@ -74,6 +74,11 @@ A notebook appears in the levels where you can actually draw your notes. It's li
 7. **Performance Scoring System**  
 At the end of each level, players receive a Level Summary showing loops used and stars earned: 1–2 loops = 3 stars, 3–4 loops = 2 stars, and 5 loops = 1 star.
 
+8. **Writing Notebook System**
+Players can open a writing notebook during the game and type their own notes, clues, codes, or theories. This helps players keep track of important information across loops and supports the memory-based gameplay system.
+
+9. **Fake LLM Message System**
+The game includes a fake AI-style message system that shows loop-based messages to guide or confuse the player. These messages change depending on the loop and create a mysterious feeling, as if the game is reacting to the player’s progress.
 
 ### Core Features
 
@@ -171,12 +176,15 @@ Controls are designed for keyboard and mouse.
 
 | Action | Key |
 |--------|-----|
-| Move | W / A / S / D or Arrow Keys|
+| Move | W / A / S / D |
 | Look Around | Mouse |
 | Interact / Inspect / Read | E |
 | Open Memory Journal | Tab |
 | Pause Menu | Esc |
-| Inventory Slots (Temporary Items) | 0 – 9 |
+| Inventory Slots (Temporary Items) | 0 – 7 |
+| Open Writing Notebook | Left Ctrl |
+| Move in Book / Notebook | Arrow Keys/ Mouse Up / Down |
+| Interact / Use Keypad | Z |
 
 ---
 
