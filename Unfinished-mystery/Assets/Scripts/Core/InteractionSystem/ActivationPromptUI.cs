@@ -73,6 +73,21 @@ public class ActivationPromptUI : MonoBehaviour
     // ── Animation ────────────────────────────────────────────────────────────
     private void Animate(bool show)
     {
+        if (show)
+        {
+            // SAFETY FIX 1: Force the GameObject to be active before starting the show animation
+            gameObject.SetActive(true);
+        }
+        else if (!gameObject.activeInHierarchy)
+        {
+            // SAFETY FIX 2: If the object is already inactive, don't try to start a coroutine 
+            // (it will crash Unity). Just set it to hidden states and exit safely.
+            canvasGroup.alpha = 0f;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            return;
+        }
+
         if (_animCoroutine != null) StopCoroutine(_animCoroutine);
         _animCoroutine = StartCoroutine(AnimateRoutine(show));
     }

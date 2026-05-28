@@ -1,110 +1,112 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using TMPro;
 
 public class KeypadZoomInteract : MonoBehaviour
 {
-    public Transform player;
-    public NavKeypad.Keypad keypad;
+    [Header("Keypad State")]
+    public bool finalUnlock;
+    public bool requiresFinalReel = true;
+    public bool keypadUnlocked;
 
+    [Header("Player & Controls")]
+    public Transform player;
+    public MonoBehaviour playerMovementScript;
+    // NEW: Drag the script that controls your camera looking/rotation here (e.g., ThirdPersonController or LookScript)
+    public MonoBehaviour playerCameraLookScript;
+
+    [Header("Cameras")]
     public CinemachineCamera keypadCamera;
     public CinemachineCamera playerCamera;
     public Camera mainCamera;
 
-    public float interactDistance = 3f;
+    [Header("Interaction Settings")]
+    public float interactDistance = 2f;
     public float clickDistance = 100f;
-    public LayerMask keypadButtonLayer = ~0;
+
+    [Header("Prompt UI")]
+    public GameObject interactPrompt;
+    public string promptAction = "ENTER";
+    public string promptSubLabel = "Keypad";
+    public TMP_Text keypadKeyText;
 
     private bool isZoomed;
-    private bool exiting;
 
     private void Start()
     {
-        NormalCamera();
+        if (keypadCamera != null)
+            keypadCamera.Priority = 0;
+
+        if (playerCamera != null)
+            playerCamera.Priority = 10;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        if (player == null || keypadCamera == null || playerCamera == null)
+        if (player == null || keypadCamera == null || playerCamera == null || mainCamera == null)
             return;
+
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool nearKeypad = distance <= interactDistance;
+
+        if (interactPrompt != null)
+        {
+            interactPrompt.SetActive(nearKeypad && !isZoomed);
+        }
 
         if (!isZoomed)
         {
-            float distance = Vector3.Distance(player.position, transform.position);
-
-            if (distance <= interactDistance &&
-                Keyboard.current != null &&
-                Keyboard.current.zKey.wasPressedThisFrame)
-            {
+            if (nearKeypad && Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
                 EnterZoom();
-            }
-
-            return;
         }
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        if (!exiting &&
-            Keyboard.current != null &&
-            (Keyboard.current.zKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame))
+        else
         {
-            StartCoroutine(ExitZoomSafe());
-            return;
-        }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
-        if (!exiting && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            ClickKeypadButton();
+            if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame)
+                ExitZoom();
+
+            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+                ClickKeypadButton();
         }
     }
 
     private void EnterZoom()
     {
-        exiting = false;
         isZoomed = true;
 
         keypadCamera.Priority = 100;
         playerCamera.Priority = 0;
 
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = false;
+
+        // NEW: Disable the camera look script so clicks don't warp the mouse
+        if (playerCameraLookScript != null)
+            playerCameraLookScript.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    private IEnumerator ExitZoomSafe()
-    {
-        exiting = true;
-        isZoomed = false;
-
-        if (keypadCamera != null)
-            keypadCamera.Priority = 0;
-
-        if (playerCamera != null)
-            playerCamera.Priority = 10;
-
-        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
-            yield return null;
-
-        yield return null;
-        yield return null;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        exiting = false;
-    }
-
-    private void NormalCamera()
+    private void ExitZoom()
     {
         isZoomed = false;
-        exiting = false;
 
-        if (keypadCamera != null)
-            keypadCamera.Priority = 0;
+        keypadCamera.Priority = 0;
+        playerCamera.Priority = 10;
 
-        if (playerCamera != null)
-            playerCamera.Priority = 10;
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = true;
+
+        // NEW: Re-enable the camera look script when leaving the keypad
+        if (playerCameraLookScript != null)
+            playerCameraLookScript.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -112,20 +114,8 @@ public class KeypadZoomInteract : MonoBehaviour
 
     private void ClickKeypadButton()
     {
-        if (mainCamera == null)
-            mainCamera = Camera.main;
-
-        if (mainCamera == null || Mouse.current == null)
-            return;
-
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        RaycastHit[] hits = Physics.RaycastAll(
-            ray,
-            clickDistance,
-            keypadButtonLayer,
-            QueryTriggerInteraction.Collide
-        );
+        RaycastHit[] hits = Physics.RaycastAll(ray, clickDistance, ~0, QueryTriggerInteraction.Collide);
 
         if (hits.Length == 0)
             return;
