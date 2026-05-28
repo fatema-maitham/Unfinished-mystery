@@ -2947,6 +2947,7 @@ MonoBehaviour:
   keypadUnlocked: 0
   player: {fileID: 698624460}
   playerMovementScript: {fileID: 1546910978}
+  playerCameraLookScript: {fileID: 0}
   keypadCamera: {fileID: 1445420932}
   playerCamera: {fileID: 1793024408}
   mainCamera: {fileID: 1230677072}

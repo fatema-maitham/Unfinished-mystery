@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
-using TMPro; // Added for your text fields
+using TMPro;
 
 public class KeypadZoomInteract : MonoBehaviour
 {
@@ -10,9 +10,11 @@ public class KeypadZoomInteract : MonoBehaviour
     public bool requiresFinalReel = true;
     public bool keypadUnlocked;
 
-    [Header("Player")]
+    [Header("Player & Controls")]
     public Transform player;
     public MonoBehaviour playerMovementScript;
+    // NEW: Drag the script that controls your camera looking/rotation here (e.g., ThirdPersonController or LookScript)
+    public MonoBehaviour playerCameraLookScript;
 
     [Header("Cameras")]
     public CinemachineCamera keypadCamera;
@@ -24,7 +26,7 @@ public class KeypadZoomInteract : MonoBehaviour
     public float clickDistance = 100f;
 
     [Header("Prompt UI")]
-    public GameObject interactPrompt; // Drag your PromptPanel UI object here
+    public GameObject interactPrompt;
     public string promptAction = "ENTER";
     public string promptSubLabel = "Keypad";
     public TMP_Text keypadKeyText;
@@ -51,10 +53,8 @@ public class KeypadZoomInteract : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         bool nearKeypad = distance <= interactDistance;
 
-        // FIX 1: Auto-manage your UI Prompt pop-up panel visibility
         if (interactPrompt != null)
         {
-            // Show only if the player is near the keypad AND not currently zoomed into it
             interactPrompt.SetActive(nearKeypad && !isZoomed);
         }
 
@@ -65,8 +65,6 @@ public class KeypadZoomInteract : MonoBehaviour
         }
         else
         {
-            // FIX 2: Force the cursor to stay unlocked every frame while zoomed.
-            // This stops the NavKeypad asset from stealing and locking your mouse on click!
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -88,6 +86,10 @@ public class KeypadZoomInteract : MonoBehaviour
         if (playerMovementScript != null)
             playerMovementScript.enabled = false;
 
+        // NEW: Disable the camera look script so clicks don't warp the mouse
+        if (playerCameraLookScript != null)
+            playerCameraLookScript.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -101,6 +103,10 @@ public class KeypadZoomInteract : MonoBehaviour
 
         if (playerMovementScript != null)
             playerMovementScript.enabled = true;
+
+        // NEW: Re-enable the camera look script when leaving the keypad
+        if (playerCameraLookScript != null)
+            playerCameraLookScript.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
