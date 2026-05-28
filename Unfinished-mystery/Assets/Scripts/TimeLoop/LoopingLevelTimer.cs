@@ -8,7 +8,7 @@ using System.Linq;
 public class LoopingLevelTimer : MonoBehaviour
 {
     public float loopDuration = 300f;
-    public int maxLoops = 10;
+    public int maxLoops = 5;
 
     public TMP_Text timerText;
     public TMP_Text loopCounterText;
@@ -22,6 +22,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     public GameObject gameOverPanel;
     public Button exitButton;
+
+    [Header("Freeze On Game Over")]
+    public MonoBehaviour[] disableWhenGameOver;
 
     public float pulseMaxAlpha = 0.3f;
     public float pulseFadeInDuration = 0.35f;
@@ -262,6 +265,15 @@ public class LoopingLevelTimer : MonoBehaviour
     {
         isBusy = true;
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        foreach (MonoBehaviour script in disableWhenGameOver)
+        {
+            if (script != null)
+                script.enabled = false;
+        }
+
         if (playerReset != null)
             playerReset.SetMovementEnabled(false);
 
@@ -278,6 +290,9 @@ public class LoopingLevelTimer : MonoBehaviour
         if (cg != null)
         {
             cg.alpha = 0f;
+            cg.interactable = true;
+            cg.blocksRaycasts = true;
+
             float t = 0f;
 
             while (t < 2f)
@@ -310,7 +325,7 @@ public class LoopingLevelTimer : MonoBehaviour
 
         ApplyLoopChange();
 
-FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
+        FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
 
         UpdateTimerUI();
         UpdateLoopCounterUI();
@@ -326,12 +341,8 @@ FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
         }
     }
 
-    void ExitGame()
+    public void ExitGame()
     {
         SceneManager.LoadScene("LevelsBook");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
     }
 }
