@@ -164,6 +164,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     IEnumerator PulseWarning()
     {
+        if (redPulseOverlay == null)
+            yield break;
+
         redPulseOverlay.alpha = 0f;
 
         while (true)
@@ -176,6 +179,9 @@ public class LoopingLevelTimer : MonoBehaviour
 
     IEnumerator FadeOverlay(float from, float to, float duration)
     {
+        if (redPulseOverlay == null)
+            yield break;
+
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -218,11 +224,15 @@ public class LoopingLevelTimer : MonoBehaviour
         while (t < loopFadeIn)
         {
             t += Time.deltaTime;
-            loopEndedCanvasGroup.alpha = Mathf.Lerp(0f, 1f, t / loopFadeIn);
+
+            if (loopEndedCanvasGroup != null)
+                loopEndedCanvasGroup.alpha = Mathf.Lerp(0f, 1f, t / loopFadeIn);
+
             yield return null;
         }
 
-        loopEndedCanvasGroup.alpha = 1f;
+        if (loopEndedCanvasGroup != null)
+            loopEndedCanvasGroup.alpha = 1f;
 
         yield return new WaitForSeconds(loopStay);
 
@@ -233,11 +243,15 @@ public class LoopingLevelTimer : MonoBehaviour
         while (t < loopFadeOut)
         {
             t += Time.deltaTime;
-            loopEndedCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t / loopFadeOut);
+
+            if (loopEndedCanvasGroup != null)
+                loopEndedCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t / loopFadeOut);
+
             yield return null;
         }
 
-        loopEndedCanvasGroup.alpha = 0f;
+        if (loopEndedCanvasGroup != null)
+            loopEndedCanvasGroup.alpha = 0f;
 
         if (loopEndedPanel != null)
             loopEndedPanel.SetActive(false);
@@ -260,7 +274,10 @@ public class LoopingLevelTimer : MonoBehaviour
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
-        CanvasGroup cg = gameOverPanel.GetComponent<CanvasGroup>();
+        CanvasGroup cg = null;
+
+        if (gameOverPanel != null)
+            cg = gameOverPanel.GetComponent<CanvasGroup>();
 
         if (cg != null)
         {
@@ -309,6 +326,8 @@ public class LoopingLevelTimer : MonoBehaviour
         }
 
         ApplyLoopChange();
+
+FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
 
         UpdateTimerUI();
         UpdateLoopCounterUI();

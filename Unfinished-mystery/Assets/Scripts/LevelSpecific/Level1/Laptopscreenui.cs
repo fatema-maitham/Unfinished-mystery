@@ -2,29 +2,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Drives the full laptop screen UI.
 /// Opened by ActivatableLaptop when the player presses E.
-/// Shows a desktop with a file explorer containing only ForYourEyes.txt.
-/// Clicking it opens a password window. Correct password connects to Level1PuzzleSystem.
 /// </summary>
 public class LaptopScreenUI : MonoBehaviour
 {
     public static LaptopScreenUI Instance { get; private set; }
 
-    // ── Root ──────────────────────────────────────────────────────────────────
     [Header("Root")]
     [SerializeField] private CanvasGroup rootCanvas;
 
-    // ── Desktop ───────────────────────────────────────────────────────────────
     [Header("Desktop")]
-    [Tooltip("wallpaper bw sprite — the grey desktop background")]
     [SerializeField] private Image wallpaperImage;
-    [Tooltip("task bar bw sprite — bottom bar")]
     [SerializeField] private Image taskbarImage;
 
-    // ── File Explorer Window ──────────────────────────────────────────────────
     [Header("File Explorer Window")]
     [SerializeField] private GameObject fileExplorerWindow;
     [SerializeField] private Image      fileWindowBackground;
@@ -38,10 +32,8 @@ public class LaptopScreenUI : MonoBehaviour
     [SerializeField] private GameObject fileItemPrefab;
 
     [Header("File Icons")]
-    [Tooltip("Icon shown next to ForYourEyes.txt — use lock or settings icon from icons bw")]
     [SerializeField] private Sprite lockedIconSprite;
 
-    // ── Password Window ───────────────────────────────────────────────────────
     [Header("Password Window")]
     [SerializeField] private GameObject     passwordWindow;
     [SerializeField] private Image          passwordWindowBackground;
@@ -57,7 +49,6 @@ public class LaptopScreenUI : MonoBehaviour
     [SerializeField] private TMP_Text       submitButtonText;
     [SerializeField] private TMP_Text       feedbackText;
 
-    // ── Decrypted File Window ─────────────────────────────────────────────────
     [Header("Decrypted File Window")]
     [SerializeField] private GameObject decryptedWindow;
     [SerializeField] private Image      decryptedWindowBackground;
@@ -69,22 +60,20 @@ public class LaptopScreenUI : MonoBehaviour
     [SerializeField] private string decryptedContent =
         "I'll expose you on 8th March if you don't come clean yourself.\n\n— Nadia Orin";
 
-    // ── Settings ──────────────────────────────────────────────────────────────
     [Header("Settings")]
     [SerializeField] private string  correctPassword = "58";
     [SerializeField] private float   fadeSpeed       = 6f;
     [SerializeField] private KeyCode exitKey         = KeyCode.Escape;
 
     [Header("File")]
-    [Tooltip("The single file shown in the explorer — clicking it opens the password window")]
     [SerializeField] private string lockedFileName = "ForYourEyes.txt";
 
-    // ── State ─────────────────────────────────────────────────────────────────
     private bool _isOpen    = false;
     private bool _decrypted = false;
     private Coroutine _fadeRoutine;
 
     // ── Unity ─────────────────────────────────────────────────────────────────
+
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -106,7 +95,7 @@ public class LaptopScreenUI : MonoBehaviour
         BuildFileList();
 
         fileExplorerWindow?.SetActive(true);
-        passwordWindow?.SetActive(false);
+        passwordWindow?.SetActive(true);   // always visible
         decryptedWindow?.SetActive(false);
 
         if (feedbackText != null) feedbackText.text = "";
@@ -115,40 +104,68 @@ public class LaptopScreenUI : MonoBehaviour
     private void Update()
     {
         if (!_isOpen) return;
-        if (Input.GetKeyDown(exitKey)) Close();
+
+        if (Input.GetKeyDown(exitKey))
+            Close();
+
+        if (passwordWindow != null && passwordWindow.activeSelf)
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                OnSubmitPassword();
+
+        // Continuously re-assert cursor while laptop is open.
+        // This counteracts anything else trying to lock it.
+        EnsureCursor();
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
+
     public void Open()
     {
         if (Level1PuzzleSystem.Instance != null && Level1PuzzleSystem.Instance.FileDecrypted)
         {
             _decrypted = true;
             fileExplorerWindow?.SetActive(true);
-            passwordWindow?.SetActive(false);
+            passwordWindow?.SetActive(true);   // always visible
             decryptedWindow?.SetActive(true);
         }
         else
         {
             fileExplorerWindow?.SetActive(true);
-            passwordWindow?.SetActive(false);
+            passwordWindow?.SetActive(true);   // always visible
             decryptedWindow?.SetActive(false);
         }
 
         _isOpen = true;
         gameObject.SetActive(true);
         Fade(1f);
+
+        UIStateManager.Instance?.OpenNotebook();
+        EnsureCursor();
         Time.timeScale = 0f;
+        if (!_decrypted) StartCoroutine(FocusInputNextFrame());
     }
 
     public void Close()
     {
         _isOpen = false;
+        UIStateManager.Instance?.CloseNotebook();
         Time.timeScale = 1f;
         Fade(0f, () => gameObject.SetActive(false));
     }
 
+    // ── Cursor ────────────────────────────────────────────────────────────────
+
+    /// Explicitly re-asserts cursor every time a window opens or in Update.
+    /// Needed because ActivateInputField and Button clicks can steal
+    /// Unity's EventSystem focus and hide the cursor under timeScale = 0.
+    private void EnsureCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
+    }
+
     // ── File List ─────────────────────────────────────────────────────────────
+
     private void BuildFileList()
     {
         if (fileListContainer == null || fileItemPrefab == null) return;
@@ -156,7 +173,6 @@ public class LaptopScreenUI : MonoBehaviour
         foreach (Transform child in fileListContainer)
             Destroy(child.gameObject);
 
-        // Spawn only ForYourEyes.txt
         GameObject item = Instantiate(fileItemPrefab, fileListContainer);
 
         var icon = item.transform.Find("Icon")?.GetComponent<Image>();
@@ -174,6 +190,7 @@ public class LaptopScreenUI : MonoBehaviour
     }
 
     // ── Windows ───────────────────────────────────────────────────────────────
+
     private void CloseFileExplorer()
     {
         fileExplorerWindow?.SetActive(false);
@@ -187,19 +204,47 @@ public class LaptopScreenUI : MonoBehaviour
         if (_decrypted)
         {
             decryptedWindow?.SetActive(true);
+            EnsureCursor();
             return;
         }
 
         passwordWindow?.SetActive(true);
-        if (passwordInputField  != null) passwordInputField.text  = "";
-        if (feedbackText        != null) feedbackText.text        = "";
+        EnsureCursor();
+
+        if (passwordInputField != null) passwordInputField.text = "";
+        if (feedbackText       != null) feedbackText.text       = "";
         if (passwordWindowTitle != null) passwordWindowTitle.text = lockedFileName;
+
+        // Delay focus by one unscaled frame so the EventSystem doesn't
+        // swallow the cursor when timeScale is 0
+        StartCoroutine(FocusInputNextFrame());
     }
 
-    private void ClosePasswordWindow()  => passwordWindow?.SetActive(false);
-    private void CloseDecryptedWindow() => decryptedWindow?.SetActive(false);
+    private IEnumerator FocusInputNextFrame()
+    {
+        yield return new WaitForSecondsRealtime(0.05f);
+        EnsureCursor(); // re-assert AFTER the yield, before activating field
+        if (passwordInputField != null)
+        {
+            EventSystem.current?.SetSelectedGameObject(passwordInputField.gameObject);
+            passwordInputField.ActivateInputField();
+        }
+    }
+
+    private void ClosePasswordWindow()
+    {
+        passwordWindow?.SetActive(true);   // always visible
+        EnsureCursor();
+    }
+
+    private void CloseDecryptedWindow()
+    {
+        decryptedWindow?.SetActive(false);
+        EnsureCursor();
+    }
 
     // ── Password ──────────────────────────────────────────────────────────────
+
     private void OnSubmitPassword()
     {
         if (passwordInputField == null) return;
@@ -211,20 +256,28 @@ public class LaptopScreenUI : MonoBehaviour
             _decrypted = true;
             Level1PuzzleSystem.Instance?.DecryptFile();
 
-            passwordWindow?.SetActive(false);
+            passwordWindow?.SetActive(true);   // always visible
 
             if (decryptedBodyText    != null) decryptedBodyText.text    = decryptedContent;
             if (decryptedWindowTitle != null) decryptedWindowTitle.text = lockedFileName + " — Unlocked";
 
             decryptedWindow?.SetActive(true);
+            EnsureCursor();
         }
         else
         {
             if (feedbackText != null) feedbackText.text = "Incorrect password.";
+
+            if (passwordInputField != null)
+            {
+                passwordInputField.text = "";
+                StartCoroutine(FocusInputNextFrame());
+            }
         }
     }
 
     // ── Fade ──────────────────────────────────────────────────────────────────
+
     private void Fade(float target, System.Action onComplete = null)
     {
         if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);

@@ -1021,12 +1021,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 603546215}
-  playerMovementScript: {fileID: 603546222}
+  keypad: {fileID: 0}
   keypadCamera: {fileID: 1974804225}
   playerCamera: {fileID: 1422144505}
   mainCamera: {fileID: 1134993007}
   interactDistance: 2
   clickDistance: 10
+  keypadButtonLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &58495716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9786,6 +9789,8 @@ MonoBehaviour:
   audioSource: {fileID: 673595713}
   ringtoneClip: {fileID: 8300000, guid: 16430867915ea484bb878bc4bd856c56, type: 3}
   phoneMessageClip: {fileID: 8300000, guid: 746d2d47cbf5f4c119d008e0a0af4706, type: 3}
+  clockAudioSource: {fileID: 0}
+  clockSoundClip: {fileID: 0}
   simCardInventoryIconToHide: {fileID: 1860001637}
 --- !u!65 &673595715
 BoxCollider:
@@ -15987,12 +15992,19 @@ MonoBehaviour:
   loopObjects:
   - objectName: Police Cap
     target: {fileID: 1405800863}
+    useLocalPosition: 1
     loopPositions:
     - {x: 3.014, y: 0.207, z: 12.296677}
     - {x: 2.916, y: 0.03, z: 11.477}
     - {x: 2.916, y: 0.03, z: 11.477}
     - {x: 2.916, y: 0.03, z: 11.477}
     - {x: 2.916, y: 0.03, z: 11.477}
+    loopRotations:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
     loopActiveStates: 0101000000
 --- !u!1 &1028859716 stripped
 GameObject:
@@ -17979,6 +17991,7 @@ MonoBehaviour:
   _gramophonePlayed: 0
   _simCardFound: 0
   _phoneMessageHeard: 0
+  _clockClueSeen: 0
   _keypadCodeEntered: 0
   _doorUnlocked: 0
   _levelComplete: 0
@@ -18010,6 +18023,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onPhoneMessageHeard:
+    m_PersistentCalls:
+      m_Calls: []
+  onClockClueSeen:
     m_PersistentCalls:
       m_Calls: []
   onKeypadCodeEntered:
