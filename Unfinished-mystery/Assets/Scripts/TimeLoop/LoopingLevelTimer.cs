@@ -310,6 +310,8 @@ public class LoopingLevelTimer : MonoBehaviour
 
         ApplyLoopChange();
 
+FindFirstObjectByType<FakeLLMNoteSystem>()?.ShowFakeMessageForNextLoop();
+
         UpdateTimerUI();
         UpdateLoopCounterUI();
     }
