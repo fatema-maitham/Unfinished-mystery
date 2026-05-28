@@ -10,6 +10,7 @@
 - Active game object:
   - Name: Text (TMP)
   - Name: KeypadCloseUpCamera
+  - Name: Level4Manager
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
