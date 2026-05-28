@@ -2950,7 +2950,7 @@ MonoBehaviour:
   keypadCamera: {fileID: 1445420932}
   playerCamera: {fileID: 1793024408}
   mainCamera: {fileID: 1230677072}
-  interactDistance: 2
+  interactDistance: 2.5
   clickDistance: 10
   interactPrompt: {fileID: 0}
   promptAction: ENTER
