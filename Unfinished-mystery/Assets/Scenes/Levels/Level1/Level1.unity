@@ -13815,6 +13815,10 @@ MonoBehaviour:
   loopEndedMessage: {fileID: 0}
   gameOverPanel: {fileID: 0}
   exitButton: {fileID: 0}
+  disableWhenGameOver:
+  - {fileID: 1660319116}
+  player: {fileID: 1660319117}
+  playerSpawnPoint: {fileID: 1660319117}
   pulseMaxAlpha: 0.3
   pulseFadeInDuration: 0.45
   pulseFadeOutDuration: 0.45
@@ -37951,20 +37955,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754361512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1644114369}
   - {fileID: 1769739748}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1989689698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1759538223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45230,6 +45234,7 @@ RectTransform:
   - {fileID: 321114534}
   - {fileID: 362504614}
   - {fileID: 1851870515}
+  - {fileID: 1754361517}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -46799,6 +46804,9 @@ MonoBehaviour:
   loopEndedMessage: {fileID: 1609660348}
   gameOverPanel: {fileID: 2013922344}
   exitButton: {fileID: 0}
+  disableWhenGameOver: []
+  player: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
   pulseMaxAlpha: 0.3
   pulseFadeInDuration: 0.35
   pulseFadeOutDuration: 0.45
@@ -49751,4 +49759,3 @@ SceneRoots:
   - {fileID: 1795493703}
   - {fileID: 1598856555}
   - {fileID: 1801908551}
-  - {fileID: 1754361517}
