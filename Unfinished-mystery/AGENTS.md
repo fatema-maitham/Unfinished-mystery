@@ -3,14 +3,12 @@
 - Unity version: Unity 6000.1.13f1
 - Active scene:
   - Name: Level1
-  - Name: Level2_Perfect
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Keypad, Interactable, CinemachineTarget, Door
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Interactable, Water, UI, Interactable, Ground
+    - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: GameSystems
-  - Name: Walls
+  - Name: Level1PuzzleSystem
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

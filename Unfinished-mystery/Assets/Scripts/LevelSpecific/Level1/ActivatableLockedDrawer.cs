@@ -2,17 +2,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// PUZZLE 3 — Locked Desk Drawer
-// Blocked until bookshelf phase is complete.
-// Player must enter code 433. On success, reveals USB + sticky note.
-// Uses a simple 3-digit UI panel driven by ActivationDialogUI's image panel
-// swapped for a custom code-entry panel.
-// ═══════════════════════════════════════════════════════════════════════════════
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-
 /// <summary>
 /// Puzzle 3 — Locked Desk Drawer
 /// Two gate checks: desk phase AND bookshelf phase must both be complete.
@@ -66,8 +55,8 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
 
     private void Start()
     {
-        if (submitButton    != null) submitButton.onClick.AddListener(OnSubmitCode);
-        if (codeEntryPanel  != null) codeEntryPanel.SetActive(false);
+        if (submitButton   != null) submitButton.onClick.AddListener(OnSubmitCode);
+        if (codeEntryPanel != null) codeEntryPanel.SetActive(false);
     }
 
     public void OnActivate(GameObject source)
@@ -98,9 +87,21 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
         if (codeEntryPanel != null)
         {
             codeEntryPanel.SetActive(true);
+
+            // Tell UIStateManager a UI panel is open —
+            // this unlocks the cursor and stops character movement.
+            UIStateManager.Instance?.OpenNotebook();
+
             Time.timeScale = 0f;
-            if (feedbackText  != null) feedbackText.text  = "";
-            if (codeInputField != null) codeInputField.text = "";
+
+            if (feedbackText   != null) feedbackText.text   = "";
+            if (codeInputField != null)
+            {
+                codeInputField.text = "";
+                // Activate the input field so the player can type immediately
+                // without having to click it first.
+                codeInputField.ActivateInputField();
+            }
         }
         else
         {
@@ -128,6 +129,13 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
         {
             if (feedbackText != null)
                 feedbackText.text = "Wrong combination. Try again.";
+
+            // Clear and re-focus so player can retype immediately
+            if (codeInputField != null)
+            {
+                codeInputField.text = "";
+                codeInputField.ActivateInputField();
+            }
         }
     }
 
@@ -135,6 +143,10 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
     {
         if (codeEntryPanel != null)
             codeEntryPanel.SetActive(false);
+
+        // Release UI state — re-locks cursor and re-enables movement
+        UIStateManager.Instance?.CloseNotebook();
+
         Time.timeScale = 1f;
     }
 
@@ -148,9 +160,16 @@ public class ActivatableLockedDrawer : MonoBehaviour, IActivatable
 
     private void Update()
     {
+        // Use unscaled time check because timeScale is 0 while panel is open
         if (codeEntryPanel != null && codeEntryPanel.activeSelf)
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
                 CloseCodeEntry();
+
+            // Also allow Enter/Return to submit without clicking the button
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                OnSubmitCode();
+        }
     }
 
     public void OnActivatableFocus() { }
