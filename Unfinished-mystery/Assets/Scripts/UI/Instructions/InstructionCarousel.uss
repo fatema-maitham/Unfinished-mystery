@@ -1,24 +1,33 @@
 /*
     InstructionCarousel.uss
     =======================
-    Dark, cinematic style matching the Amazing Bomberman reference screenshot.
-    Colours use CSS-style hex; Unity USS supports these in UI Toolkit 2021+.
+    Warm parchment / linen theme — matches the Kyryll Flins character-card reference.
+    Fonts: Cinzel (titles/headers)  ·  HY Wenhei (body/description)
 */
 
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 :root {
-    --bg-overlay:     rgba(0,0,0,0.72);
-    --panel-bg:       rgba(20,22,35,0.94);
-    --panel-border:   rgba(255,255,255,0.10);
-    --accent:         rgba(255,255,255,0.85);
-    --accent-dim:     rgba(255,255,255,0.35);
-    --dot-inactive:   rgba(255,255,255,0.28);
-    --dot-active:     rgba(255,255,255,0.90);
-    --arrow-hover-bg: rgba(255,255,255,0.12);
-    --close-hover-bg: rgba(255,80,80,0.30);
-    --title-color:    rgba(255,255,255,1.0);
-    --desc-color:     rgba(200,208,230,1.0);
-    --counter-color:  rgba(160,168,190,1.0);
+    /* Parchment palette */
+    --bg-overlay:       rgba(44,35,24,0.68);       /* warm dim backdrop        */
+    --panel-bg:         rgb(237,232,223);           /* #EDE8DF linen card       */
+    --panel-border:     rgb(196,186,170);           /* #C4BAAA subtle edge      */
+    --mission-box-bg:   rgb(212,207,198);           /* #D4CFC6 inset box        */
+    --mission-box-border: rgb(180,170,155);
+
+    /* Text */
+    --title-color:      rgb(44,35,24);              /* #2C2318 deep brown       */
+    --subtitle-color:   rgb(100,82,62);             /* #64523E medium brown     */
+    --mission-label:    rgb(44,35,24);              /* bold label inside box    */
+    --desc-color:       rgb(80,65,50);              /* #504132 body text        */
+    --quote-color:      rgb(50,40,30);              /* slightly darker quote    */
+    --counter-color:    rgb(140,120,95);            /* #8C785F muted tan        */
+
+    /* Interactive */
+    --dot-inactive:     rgb(180,168,150);
+    --dot-active:       rgb(80,65,50);
+    --arrow-color:      rgb(80,65,50);
+    --arrow-hover-bg:   rgba(44,35,24,0.10);
+    --close-hover-bg:   rgba(160,60,40,0.18);
 }
 
 /* ── Full-screen overlay ─────────────────────────────────────────────────── */
@@ -28,7 +37,6 @@
     background-color: var(--bg-overlay);
     align-items: center;
     justify-content: center;
-    /* opacity animated in C# */
 }
 
 .carousel-overlay.hidden {
@@ -37,15 +45,13 @@
 
 /* ── Card panel ──────────────────────────────────────────────────────────── */
 .carousel-panel {
-    width: 680px;
+    width: 700px;
     background-color: var(--panel-bg);
     border-color: var(--panel-border);
     border-width: 1px;
-    border-radius: 18px;
-    padding: 32px 36px 28px 36px;
+    border-radius: 6px;
+    padding: 36px 40px 30px 40px;
     align-items: center;
-    /* blur-like depth via a subtle inner shadow trick */
-    -unity-background-scale-mode: scale-and-crop;
 }
 
 /* ── Close button ────────────────────────────────────────────────────────── */
@@ -53,14 +59,14 @@
     position: absolute;
     top: 14px;
     right: 14px;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background-color: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.12);
+    background-color: rgba(44,35,24,0.06);
+    border-color: var(--panel-border);
     border-width: 1px;
-    color: var(--accent);
-    font-size: 18px;
+    color: var(--subtitle-color);
+    font-size: 16px;
     -unity-font-style: bold;
     cursor: link;
     transition-duration: 0.15s;
@@ -74,33 +80,56 @@
 /* ── Illustration area ───────────────────────────────────────────────────── */
 .slide-image {
     width: 100%;
-    height: 280px;
-    border-radius: 12px;
-    background-color: rgba(40,45,65,0.6);
-    margin-bottom: 24px;
+    height: 260px;
+    border-radius: 4px;
+    background-color: rgb(212,207,198);
+    margin-bottom: 22px;
     -unity-background-scale-mode: scale-to-fit;
     overflow: hidden;
 }
 
-/* ── Title ───────────────────────────────────────────────────────────────── */
+/* ── Slide title (Cinzel) ────────────────────────────────────────────────── */
 .slide-title {
     color: var(--title-color);
-    font-size: 22px;
+    font-size: 24px;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
+    -unity-font: resource("Fonts/Cinzel-SemiBold SDF");
     white-space: normal;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
 }
 
-/* ── Description ─────────────────────────────────────────────────────────── */
+/* ── Mission / instruction label box ────────────────────────────────────── */
+.mission-box {
+    width: 100%;
+    background-color: var(--mission-box-bg);
+    border-color: var(--mission-box-border);
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.mission-label {
+    color: var(--mission-label);
+    font-size: 13px;
+    -unity-font-style: bold;
+    -unity-font: resource("Fonts/Cinzel-SemiBold SDF");
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* ── Description / quote (HY Wenhei) ────────────────────────────────────── */
 .slide-desc {
     color: var(--desc-color);
-    font-size: 15px;
+    font-size: 14px;
     -unity-font-style: normal;
+    -unity-font: resource("Fonts/HY Wenhei (zh-cn) 2 SDF");
     -unity-text-align: middle-center;
     white-space: normal;
-    margin-bottom: 26px;
-    max-width: 520px;
+    margin-bottom: 24px;
+    max-width: 540px;
 }
 
 /* ── Controls row (prev | dots | next) ──────────────────────────────────── */
@@ -113,13 +142,13 @@
 
 /* ── Arrow buttons ───────────────────────────────────────────────────────── */
 .arrow-btn {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background-color: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.14);
+    background-color: transparent;
+    border-color: var(--panel-border);
     border-width: 1px;
-    color: var(--accent);
+    color: var(--arrow-color);
     font-size: 26px;
     -unity-text-align: middle-center;
     cursor: link;
@@ -132,11 +161,11 @@
 }
 
 .arrow-btn:active {
-    background-color: rgba(255,255,255,0.20);
+    background-color: rgba(44,35,24,0.16);
 }
 
 .arrow-disabled {
-    opacity: 0.28;
+    opacity: 0.25;
     cursor: arrow;
 }
 
@@ -155,8 +184,8 @@
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background-color: var(--dot-inactive);
     margin-left: 5px;
@@ -167,7 +196,7 @@
 
 .dot-active {
     background-color: var(--dot-active);
-    width: 22px;              /* pill-shaped active dot */
+    width: 20px;
     border-radius: 4px;
 }
 
@@ -175,5 +204,6 @@
 .slide-counter {
     color: var(--counter-color);
     font-size: 12px;
+    -unity-font: resource("Fonts/HY Wenhei (zh-cn) 2 SDF");
     -unity-text-align: middle-center;
 }

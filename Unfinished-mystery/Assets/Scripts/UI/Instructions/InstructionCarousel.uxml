@@ -3,9 +3,12 @@
     <ui:VisualElement name="carousel-overlay" class="carousel-overlay">
         <ui:VisualElement name="carousel-panel" class="carousel-panel">
             <ui:Button name="btn-close" text="✕" class="btn-close" />
+            <ui:Label name="slide-title" text="SLIDE TITLE" class="slide-title" />
             <ui:VisualElement name="slide-image" class="slide-image" />
-            <ui:Label name="slide-title" text="Slide Title" class="slide-title" />
-            <ui:Label name="slide-desc" text="Description goes here." class="slide-desc" />
+            <ui:VisualElement class="mission-box">
+                <ui:Label text="INSTRUCTION" class="mission-label" />
+                <ui:Label name="slide-desc" text="Slide description goes here." class="slide-desc" />
+            </ui:VisualElement>
             <ui:VisualElement class="carousel-controls">
                 <ui:Button name="btn-prev" text="‹" class="arrow-btn" />
                 <ui:VisualElement class="dots-row">
