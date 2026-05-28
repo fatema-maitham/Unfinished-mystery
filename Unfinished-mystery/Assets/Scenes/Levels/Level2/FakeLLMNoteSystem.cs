@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class FakeLLMNoteSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class FakeLLMNoteSystem : MonoBehaviour
 
     private void Start()
     {
+        levelNumber = GetLevelNumberFromScene();
+        currentLoop = 1;
+
         if (fakeLLMMessagePanel != null)
             fakeLLMMessagePanel.SetActive(false);
     }
@@ -35,6 +39,19 @@ public class FakeLLMNoteSystem : MonoBehaviour
     {
         if (fakeLLMMessagePanel != null)
             fakeLLMMessagePanel.SetActive(false);
+    }
+
+    private int GetLevelNumberFromScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName.Contains("Level1")) return 1;
+        if (sceneName.Contains("Level2")) return 2;
+        if (sceneName.Contains("Level3")) return 3;
+        if (sceneName.Contains("Level4")) return 4;
+        if (sceneName.Contains("Level5")) return 5;
+
+        return levelNumber;
     }
 
     private string GetMessage(int level, int loop)
