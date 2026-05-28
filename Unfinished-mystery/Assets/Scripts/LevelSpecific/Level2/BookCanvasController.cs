@@ -66,34 +66,6 @@ public class BookCanvasController : MonoBehaviour
             backButton.onClick.AddListener(PreviousSpread);
     }
 
-    // Old mouse click button checking code kept disabled
-    // private void Update()
-    // {
-    //     if (bookPanel == null || !bookPanel.gameObject.activeSelf)
-    //         return;
-
-    //     if (Input.GetKeyDown(KeyCode.RightArrow))
-    //         NextSpread();
-
-    //     if (Input.GetKeyDown(KeyCode.LeftArrow))
-    //         PreviousSpread();
-
-    //     if (Input.GetMouseButtonDown(0))
-    //     {
-    //         if (ClickedButton(nextButton))
-    //         {
-    //             NextSpread();
-    //             return;
-    //         }
-
-    //         if (ClickedButton(backButton))
-    //         {
-    //             PreviousSpread();
-    //             return;
-    //         }
-    //     }
-    // }
-
     private void Update()
     {
         // Stop if book is not open
